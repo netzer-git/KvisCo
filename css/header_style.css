@@ -1,0 +1,221 @@
+:root{
+    --primary-color: #52d6edff;
+    --secondary-color: #ffe1f0ff;
+    --font-color: #484848ff;
+    --secondary-font-color: #767676ff;
+    --bg-color: #ffffffff;
+}
+
+body{
+    color: var(--font-color);
+}
+
+
+#footer{
+    background-color: rgb(194, 194, 194); /* temporary color for highlighting */
+}
+
+.header{
+    background-color: #FA6648; /* temporary color for highlighting */
+    padding: 0px;
+}
+
+#new_header {
+    background-color: var(--secondary-color); /* temporary color for highlighting */
+    color: var(--secondary-font-color);
+    /* position: sticky;
+    top: 0; */
+    text-align: center;
+    font-family: sans-serif, sans-serif;
+}
+
+#nav-bar
+{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar
+{
+    padding: 0;
+}
+
+.navbar-nav li{
+    padding: 0 10px;
+}
+
+.navbar-nav li a{
+    color: var(--font-color);
+    font-weight: 600;
+}
+
+.fa-bars{
+    color: var(--font-color);
+    font-size: 30px;
+}
+
+.navbar-toggler{
+    outline: none;
+}
+
+.dropdown-menu{
+    background-color: var(--primary-color);
+}
+
+.dropdown-item li a{
+    color: var(--font-color);
+}
+
+.navbar-brand img{
+    height: 40;
+    padding-left: 100;
+} /* Logo button/*
+
+/* this class make elements stick to the top of the page on scroll */
+.sticky_to_top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+}
+
+.stay_in_bottom {
+    position: relative;
+}
+
+.helloworld{
+    /* Bg  */
+
+position: absolute;
+left: 0%;
+right: 0%;
+top: 0%;
+bottom: 7.41%;
+
+/* Palet 1 / 5 */
+background: #FFBD12;
+/* Main / Black */
+border: 1px solid #1C1C1D;
+box-sizing: border-box;
+/* Button */
+box-shadow: 0px 4px 0px #202020;
+border-radius: 10px;
+
+}
+
+.dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .ddmenu{
+    width: 50px;  
+    height: auto; 
+  }
+  
+  .dropdown-content a:hover {background-color: #FFB0BC;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+.button1 {
+    /* Bg  */
+margin-top: 3px;
+/* Palet 2 / 4 */
+background: #FFC636;
+/* Main / Black */
+border: 1px solid #1C1C1D;
+box-sizing: border-box;
+/* Button */
+box-shadow: 0px 4px 0px #202020;
+border-radius: 10px;
+height: 30px;
+width: 180px;
+font-family: 'Montserrat', sans-serif;
+font-size: 15px;
+font-style: normal;
+font-weight: 900;
+line-height: 25px;
+letter-spacing: 0.44999998807907104px;
+text-align: center;
+
+}
+
+.search {
+    height: 90px;
+    width: 1000px;
+    left: 37px;
+    top: 396px;
+    border-radius: 20px;
+    background: rgba(255, 176, 188, 1);
+    border: 2px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 8px 0px 0px rgba(32, 32, 32, 1);
+}
+
+.choose_location{
+    background: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+    height: 40.65306091308594px;
+    width: 200px;
+    left: 0px;
+    top: -0.6530606746673584px;
+    border-radius: 10px;
+
+}
+
+.box select{
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+    height: 40.65306091308594px;
+    width: 200px;
+    left: 0px;
+    top: -0.6530606746673584px;
+    border-radius: 10px;
+
+}
+
+table {
+    height: 26px;
+    width: 68px;
+    margin-left: 30px;
+    top: -33px;
+    border-radius: nullpx;
+}
+
+td, th {
+    text-align: left;
+    padding: 4px;
+  }
+
+  
+a { color: inherit; } /* removing the awful blue color of the links */
+a:hover { color: inherit; } /* remove the awful blue color on hovernig */
+
+.search_btn {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
