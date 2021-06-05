@@ -39,7 +39,7 @@ function authStateObserver(user) {
   if (user) { // User is signed-in
     console.log("in " + getUserToken());
 
-    myOnlyOneElement.innerHTML = "IIIINNNNNN";
+    myOnlyOneElement.innerHTML = "Out";
 
   } else { // User is signed out!
     console.log("out " + getUserToken());
