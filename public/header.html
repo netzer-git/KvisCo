@@ -26,40 +26,77 @@
         <script scr="/js/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <div class="container">
-            <!-- Header starts here-->
-            <div class="header"> 
+            <!--Header starts here-->
+            <div class="header">
                 <div class="row">
                     <div class="col-9">
                         <a class="navbar-brand" href="#"><img src="../logo.png"></a> <!--The logo button-->
                     </div>
                     <div class="col-1">
-                        <div class="dropdown">
+                        <div class="dropdown"> <!-- drop down menu-->
                             <a class="dropbtn" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../Menu.png" width="35px">
+                                <img src="../Menu.png" width="35px"> 
                             </a>
-                            <div class="dropdown-content">
-                              <a href="#">My laundries</a>
-                              <a href="#">New order</a>
-                              <a href="#">Log out</a>
+                            <div class="dropdown-content"> 
+                                <a href="#">My laundries</a>
+                                <a href="#">New order</a>
+                                <a href="#">Log out</a>
                             </div>
                         </div>
                     </div>    
                     <div class="col-2">
-                        <button class="button1">Become a washer</button>
+                        <button class="button1">Become a washer</button> <!-- Yellow generic button-->
                     </div>
                 </div>
             </div>
             <!-- Header ends here-->
+
+            <!--Profile Details header starts here-->
+            <div class="second_header">
+                    <div class="row">
+                        <div class="col-1"> <!--space from edge-->
+                        </div>
+                        <div class="col-1">
+                            <div class="profile_pic"> <!--Profile picture-->
+                                <a href="#"><img src="../Profile-yellow.png"></a>
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <table class="table-search">
+                                <tr>
+                                    <h2>Netzer Epstein</h2></tr> <!--Washer name-->
+                                </tr>
+                                <tr>
+                                    <div class="description"> <!--Description-->
+                                        Mechabes esh megil shesh (description)
+                                    </div>
+                                </tr>
+                            </table>
+                            <div class="row"> <!--Location and rating row-->
+                                <div class="col-3">
+                                    <div class="location">Hapalmach 7, Jerusalem</div> <!--Adress (location)-->
+                                </div>
+                                <div class="col-1">
+                                    <div class="location"><img style="margin-bottom:8px; margin-right: 5px;" src="../Star 2 (2).png">4.5</div> <!--Star pic & rating score-->
+                                </div>
+                                <div class="col-8"> <!--TBD-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--Profile Details header starts here-->
+
+            <!-- Search Bar starts here-->
+        <div class="container">
             <div class="row">
-                <!-- Search Bar starts here-->
                 <div class="col-1">
                 </div>
                 <div class="col-9">
-                    <div class="Search">
+                    <div class="Search"> <!-- Search Bar style is the pink box-->
                         <div class="row">
-                            <div class="col-10">
-                                <table>
+                            <div class="col-10"> 
+                                <table class="table-search">
                                     <tr>
                                         <td>Where?</td>
                                         <td>When?</td>
@@ -67,11 +104,11 @@
                                         <td>Duration</td>
                                     </tr>
                                     <tr>
-                                        <td><input class="choose_location" type="text"></td>
-                                        <td><input class="choose_location" type="date" id="myDate" value="2021-07-09"></td>
-                                        <td><input class="choose_location" type="number" value="1"></td>
+                                        <td><input class="choose_location" type="text"></td> <!-- Location -->
+                                        <td><input class="choose_location" type="date" id="myDate" value="2021-07-09"></td> <!-- Date -->
+                                        <td><input class="choose_location" type="number" value="1"></td> <!-- Loads -->
                                         <td>
-                                            <div class="box">
+                                            <div class="box"> <!-- Duration -->
                                                 <select>
                                                 <option>24 hours</option>
                                                 <option>8 hours</option>
@@ -84,14 +121,96 @@
                                 </table>
                             </div>
                             <div class="col-2">
-                                <div class="search_btn">
-                                    <a class="search_btn" href="#"><img src="../search-btn.png"></a>
+                                <div class="search_btn"> <!-- Magnifying Glass button-->
+                                    <a href="#"><img class="shrink" src="../search-btn.png"></a>
                                 </div> 
                             </div>
                         </div>
                     </div>
                     </div>
                 </div>
-            <!-- Search Bar ends here-->
             </div>
-        </div>
+            <!-- Search Bar ends here-->
+
+            <div class="row">
+
+                <!-- working hours-->
+                <div class="col-1"> <!-- space form edge-->
+                </div>
+                <div class="col-5"> <!-- Component range-->
+                    <h3>Working Hours</h3> <!-- Title-->
+                    <table>
+                        <tr> <!-- top row-->
+                            <td>Day</td>
+                            <td>From</td>
+                            <td>To</td>
+                            <td>Keep weekly</td>
+                        </tr>
+                        <tr>
+                            <td> <!-- Date -->
+                                <input class="set-date" type="date" id="myDate" value="2021-07-09">
+                            </td>
+                            <td> <!-- Start time -->
+                                <input class="set-time" type="time" id="startTime" value="08:00">
+                            </td>
+                            <td> <!-- End time -->
+                                <input class="set-time" type="time" id="startTime" value="19:00">
+                            </td>
+                            <td> <!-- Weekly time checkbox -->
+                                <input id="cbx" type="checkbox"/>
+                                <label class="cbx" for="cbx">
+                                <div class="flip">
+                                    <div class="front"></div>
+                                    <div class="back">
+                                    <svg width="16" height="14" viewBox="0 0 16 14">
+                                        <path d="M2 8.5L6 12.5L14 1.5"></path>
+                                    </svg>
+                                    </div>
+                                </div>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <a href="#"><img class="plus" src="../plus.png"></a>
+                </div>
+                <!-- End of Working hours -->
+
+                <!-- Replace Order Box -->
+                <div class="col-5">
+                    <div class="order-box">
+                        <h1>PLACE ORDER</h1>
+                        <div class="instructions"> <!--Few instructions-->
+                            Send in your laundry prefrences to the washer. The more specific you are, the better your laundry will come out! 
+                        </div>
+                        <table>
+                            <tr style="color: black;">
+                                <td>Drop off time</td>
+                                <td>Wash settings</td>
+                            </tr>
+                            <tr>
+                                <td><input class="choose_location" type="time" id="startTime" value="08:00"></td>
+                                <td>
+                                    <div class="box"> <!-- Duration -->
+                                                <select>
+                                                    <div class="wash-settings"> 
+                                                        <option c>Default</option>
+                                                        <option>30°C Wash</option>
+                                                        <option>60°C Wash</option>
+                                                        <option>Fast Wash</option>
+                                                        <option>Whites Only</option>
+                                                        <option>Delicates</option>
+                                                </select>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+            
+
+            
+    </body>
+</html>
