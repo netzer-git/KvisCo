@@ -162,7 +162,6 @@ font-weight: 900;
 line-height: 25px;
 letter-spacing: 0.44999998807907104px;
 text-align: center;
-
 }
 
 .search {
@@ -211,7 +210,7 @@ text-align: center;
 
 
 
-td, th {
+.table-search td, th {
     text-align: left;
     padding: 4px;
   }
@@ -251,6 +250,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
 .profile_pic {
     margin-top: 15px;
 }
+
 h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 34px;
@@ -261,7 +261,6 @@ h2 {
     text-align: left;
     color: black;
     white-space: nowrap;
-
 }
 
 .description {
@@ -291,7 +290,6 @@ h2 {
 
     color: #1C1C1D;
     white-space: nowrap;
-
 }
 
 h3 {
