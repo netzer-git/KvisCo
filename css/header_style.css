@@ -144,7 +144,8 @@ border-radius: 10px;
   
 .button1 {
     /* Bg  */
-margin-top: 3px;
+margin-top: 5px;
+margin-bottom: 10px;
 /* Palet 2 / 4 */
 background: #FFC636;
 /* Main / Black */
@@ -310,7 +311,7 @@ h3 {
     line-height: 32px;
     /* or 160% */
 
-    text-align: center;
+     
     padding: 15px;
     letter-spacing: 0.625px;
 

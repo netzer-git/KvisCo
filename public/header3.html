@@ -125,10 +125,10 @@
 
     <!-- main section starts here-->
     <div class="container-fluid">
-        <div class="row" id = "main_profile">
+        <div class="row" id="main_profile">
             <!-- favorites starts here-->
-            <div class="col-lg-6" id = "favorite_washers">
-                <div class="row text-center">
+            <div class="col-lg-6" id="favorite_washers">
+                <div class="row text-center with_padd">
                     <h3> favorites washers</h3>
                 </div>
                 <div class="row">
@@ -136,10 +136,10 @@
                     <script>insert_favorites_washers("all_washers", user7)</script>
                 </div>
             </div>
-            
+
             <!-- Orders starts here-->
             <div class="col-lg-6">
-                <div class="row text-center">
+                <div class="row text-center with_padd">
                     <h3> Laundries in process</h3>
                 </div>
                 <div class="container testimonial-group">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="row text-center">
+                <div class="row text-center with_padd">
                     <h3> Laundry History</h3>
                 </div>
                 <div class="container testimonial-group">
@@ -161,14 +161,23 @@
             </div>
         </div>
         <!-- Reviews starts here-->
-        <div class="row">
-            <div class="row text-center">
-                <h3> Reviews</h3>
+        <div class="row text-center">
+            <div class="col-lg-6">
+                <div class="row with_padd">
+                    <h3> Reviews</h3>
+                </div>
+                <div class="overflow-auto">
+                    <div id="my_reviews"></div>
+                    <!-- function that get the reviews by loop -->
+                    <script>get_user_reviews("my_reviews", "user7")</script>
+                </div>
             </div>
-            <div class="overflow-auto">
-                <div id="my_reviews"></div>
-                <!-- function that get the reviews by loop -->
-                <script>get_user_reviews("my_reviews", "user7")</script> 
+            <div class="col-lg-6">
+                <div class="with_padd">
+                    <!-- function to get washer details -->
+                    <div id="my_detailes"></div>
+                    <script>get_detailes("my_detailes", washer1)</script>
+                </div>
             </div>
         </div>
     </div>
@@ -176,43 +185,6 @@
 
 
 
-
-    <!-- <table class="machine_details">
-                    <tr>
-                    <tr>
-                        <th>Model Name</th>
-                    </tr>
-                    <tr>
-                        <td>LG345</td>
-                    </tr>
-                    <tr>
-                        <th>Capacity</th>
-                    </tr>
-                    <tr>
-                        <td>7 kg</td>
-                    </tr>
-                    <tr>
-                        <th>Purchasing Year</th>
-                    </tr>
-                    <tr>
-                        <td>2015</td>
-                    </tr>
-                    <tr>
-                        <th>Special Services</th>
-                    </tr>
-                    <tr>
-                    <tr>
-                        <td><img src="../check.png" alt="">Ironing</td>
-                    </tr>
-                    <tr>
-                        <td><img src="../check.png" alt="">Door 2 Door</td>
-                    </tr>
-                    <tr>
-                        <td><img src="../check.png" alt="">Dryer</td>
-                    </tr>
-                    </tr>
-                    </tr>
-                </table> -->
 
 
 
