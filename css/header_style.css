@@ -144,7 +144,8 @@ border-radius: 10px;
   
 .button1 {
     /* Bg  */
-margin-top: 3px;
+margin-top: 5px;
+margin-bottom: 10px;
 /* Palet 2 / 4 */
 background: #FFC636;
 /* Main / Black */
@@ -162,7 +163,6 @@ font-weight: 900;
 line-height: 25px;
 letter-spacing: 0.44999998807907104px;
 text-align: center;
-
 }
 
 .search {
@@ -211,7 +211,7 @@ text-align: center;
 
 
 
-td, th {
+.table-search td, th {
     text-align: left;
     padding: 4px;
   }
@@ -251,6 +251,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
 .profile_pic {
     margin-top: 15px;
 }
+
 h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 34px;
@@ -261,7 +262,6 @@ h2 {
     text-align: left;
     color: black;
     white-space: nowrap;
-
 }
 
 .description {
@@ -291,7 +291,6 @@ h2 {
 
     color: #1C1C1D;
     white-space: nowrap;
-
 }
 
 h3 {
@@ -312,7 +311,7 @@ h3 {
     line-height: 32px;
     /* or 160% */
 
-    text-align: center;
+     
     padding: 15px;
     letter-spacing: 0.625px;
 

@@ -18,8 +18,8 @@ table.machine_details th{
     letter-spacing: 0.625px;
 
     color: #1C1C1D;
-    
 }
+
 
 table.machine_details tr{
     /* position: absolute; */
@@ -45,6 +45,7 @@ table.machine_details tr{
 }
 
 .Background_box{
+    
     /* Rectangle 1256 */
     /* position: absolute; */
     left: 0%;
@@ -59,6 +60,7 @@ table.machine_details tr{
     border-radius: 10px;
     width: 120%;
 }
+
 
 table.Background_box th{
     /* position: absolute; */
@@ -104,6 +106,76 @@ text-align: center;
 letter-spacing: 0.5px;
 
 color: #000000;
-
 }
 
+table.Background_box td{
+    /* position: absolute; */
+    left: 9.71%;
+    right: 7.55%;
+    top: 53.74%;
+    bottom: 34.8%;
+    
+    /* Text / Medium 18 */
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 145.4%;
+    /* identical to box height, or 26px */
+    
+    text-align: center;
+    letter-spacing: 0.5px;
+    
+    color: #000000;
+    }
+
+.testimonial-group {
+    overflow-x: auto;
+    }
+      
+/* The heart of the matter */
+.testimonial-group > .row {
+    display: flex;
+    overflow-x: auto;
+    /* white-space: nowrap; */
+    flex-wrap: nowrap;
+  }
+.testimonial-group > .row > .col-xs-3 {
+    display: inline-block;
+    float: none;
+}
+
+.col_with_padd {
+    margin:10px; 
+    padding:10px;
+}
+
+
+.overflow-auto {
+    border: 2px solid #1C1C1D;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 0px #202020;
+    border-radius: 20px;
+    padding: 15px;
+    width: 100%;
+    height: 200px;
+    overflow: scroll;
+  }
+
+  h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 51px;
+    letter-spacing: 0.44999998807907104px;
+    text-align: left;
+    color: black;
+    white-space: nowrap;
+}
+
+.with_padd {
+    margin:10px; 
+    padding:10px;
+}
