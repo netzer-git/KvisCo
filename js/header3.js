@@ -1,15 +1,25 @@
-status_option = ["in_process", "need_to_review", "finished"]
 
 washer1 = {name: "Amitay Rachman", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-profile_pic: "../Profile.png", img_src: "../images/washer1.png", pics: ["../Profile.png", "../Profile.png"],
+profile_pic: "../images/amitay_pic.jpg", pics: ["../images/miele.png", "../Profile.png"],
 location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
 num_of_reviews: "12", machine_year : "2012",
 model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
 commit: "48 hours", opening_times: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
 clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
 };
+
+
 washer2 = {name: "Tal Eliram", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-profile_pic: "../Profile.png", img_src: "../images/washer1.png", pics: ["../Profile.png", "../Profile.png"],
+profile_pic: "../images/tal_e_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/laundry-room-1.jpg", "../Profile.png"],
+location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
+num_of_reviews: "12", machine_year : "2012",
+model_name : "bosch", capacity : "9KG", description: "Hello! I’m Tal, and I love to Fold laundry perfectly!", 
+commit: "48 hours", opening_times: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
+clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
+};
+
+washer3 = {name: "Tal Rozentzvi", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
+profile_pic: "../images/tal_r_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/tal_r_laundry.jpg", "../Profile.png"],
 location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
 num_of_reviews: "12", machine_year : "2012",
 model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
@@ -19,7 +29,7 @@ clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_d
 
 user7 = {name: "Netzer Epstein", drop_off_time: [11,14], rating: 4.5, location: {lat: 31.773610027001155, lng: 35.215351837826255},
 wash_setting: {degree: 50, smell: "icy pear"},
-favorites: [washer1, washer2,washer2, washer2, washer2, washer2],
+favorites: [washer1, washer2,washer3, washer2, washer2, washer2],
 img: "../images/netzer pic.png", description: "Hi, my name is Netzer and I don't do any sport so my clothes smell OK :)",
 prefer_properties : {white: true, door_2_door : false, ironing : true, access : true}
 };
@@ -101,10 +111,11 @@ all_orders = [order111, order122, order155, order111, order122, order123, order1
 
 
 function get_order_block(order) {
-    block = "<div class='col-xs-3'>";
+    block = "";
+    block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
-    block += "<tr><th scope='col' colspan='2'><img src= " + order.washer.profile_pic + " alt=''> </th></tr>";
+    block += "<tr><th scope='col' colspan='2'>'<img class='rounded-circle' src=" + order.washer.profile_pic + " alt=''> </th></tr>";
     block += "<tr><th scope='col' colspan='2'>"+ order.washer.name +"</th></tr>";
     block += "<tr><td scope='col' colspan='2'>"+ order.orderID +"</td></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
@@ -132,7 +143,7 @@ function get_order_block(order) {
 function insert_orders_blocks(tag, user, status) {
     all_blocks = "";
     // to fix?
-    let max_orders = Math.min(20, all_orders.length);
+    let max_orders = Math.min(7, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
         if (all_orders[i].user == user && all_orders[i].status == status) {
             all_blocks += get_order_block(all_orders[i]);
@@ -142,29 +153,35 @@ function insert_orders_blocks(tag, user, status) {
     document.getElementById(tag).innerHTML = all_blocks;
 }
 
-function get_favorite_washer(washer) {
+function get_favorite_washer(washer, counter) {
     washer_block = "<div class='row with_padd'>";
     washer_block += "<div class='col-lg-2'>";
-    washer_block += "<div class='profile_pic'><a href='#'><img src=" + washer.profile_pic + "></a></div>";
-    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../Star 2 (2).png'>" + washer.rating + "</div></div>";
-    washer_block += "<div class='col-lg-8'>";
+    washer_block += "<div class='profile_pic'><a href='#'><img class='rounded-circle' src=" + washer.profile_pic + "></a></div>";
+    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../Star 2 (2).png'>" + washer.rating + "</div>";
+    washer_block += "</div>"; 
+    washer_block += "<div class='col-lg-6'>";
     washer_block += "<h2>" + washer.name + "</h2>";
     washer_block += "<div class='description'>" + washer.description + "</div>";
     washer_block += "<div class='location'>" + washer.location_str + "</div>";
-    washer_block += "</div><div class='col-lg-2'>";
-    let max_pics = Math.min(2, washer.pics.length);
+    washer_block += "</div><div class='col-lg-3'>";
+    let max_pics = Math.min(1, washer.pics.length);
     for (let k = 0; k < max_pics; k++) {
         washer_block += '<img class="img-rounded" src="'+ washer.pics[k] +'" alt="Mister Washer" aria-hidden="true">';
     }
+    washer_block += "</div><div class='col-lg-1'>";
+    washer_block += '<span id = heart'+ counter+ '><i class="fa fa-heart fa-2x" ></i> </span>';
+    washer_block += '<div class="row" d-flex align-itemns-baseline>';
     if (check_if_open(7)) {
-        washer_block += "<i class='fa fa-check' style='color:green' aria-hidden='true'>open</i>";
+        washer_block += "<i class='fa fa-check' style='color:green'  aria-hidden='true'>open</i>";
     }
     else {
         washer_block += "<i class='fa fa-check' style='color:red' aria-hidden='true'>close</i>";
     }
     washer_block += "</div>";
+    washer_block += "</div>";
+    washer_block += "</div>";
     washer_block += "</div>"; 
-    washer_block += '<hr style="border: 2px solid #000000">';
+    washer_block += '<hr style="border: 1px solid #000000">';
     return washer_block
     // document.getElementById(tag).innerHTML = washer_block;   
 }
@@ -174,7 +191,7 @@ function insert_favorites_washers(tag, user) {
     all_washers = "";
     let max_reviews = Math.min(3, user.favorites.length);
     for (var i = 0; i < max_reviews; i++) {
-        all_washers += get_favorite_washer(user.favorites[i]);
+        all_washers += get_favorite_washer(user.favorites[i], i);
     } 
     document.getElementById(tag).innerHTML = all_washers;
 }
@@ -231,38 +248,23 @@ function get_detailes(tag, washer) {
     details_table += "<tr><td><img src='../check.png' alt=''>Door 2 Door</td></tr>";
     details_table += "<tr><td><img src='../check.png' alt=''>Dryer</td></tr>";
     details_table += "</tr></table>";
-    // return details_table  
     document.getElementById(tag).innerHTML = details_table;             
 
 }
 
-// function get_user_header(tag,user) {
-//     header = "<div class='col-10'><table class='table-search'>";
-//     header += "<tr><h2>Netzer Epstein</h2></tr>"       
+$(document).ready(function(){
+    heart_range = ["#heart0","#heart1","#heart2"]
+    for (let j = 0; j < heart_range.length; j++) {
+        $(heart_range[j]).click(function(){
+            if($(heart_range[j]).hasClass("liked")){
+              $(heart_range[j]).html('<i class="fa fa-heart" fa-2x aria-hidden="true"></i>');
+              $(heart_range[j]).removeClass("liked");
+            }else{
+              $(heart_range[j]).html('<i class="fa fa-heart-o" fa-2x aria-hidden="true"></i>');
+              $(heart_range[j]).addClass("liked");
+            }
+          });
+    }
+  });
 
 
-//         </tr>
-//         <tr>
-//             <div class="description">
-//                 <!--Description-->
-//                 Mechabes esh megil shesh (description)
-//             </div>
-//         </tr>
-//     </table>
-//     <div class="row">
-//         <!--Location and rating row-->
-//         <div class="col-3">
-//             <div class="location">Hapalmach 7, Jerusalem</div>
-//             <!--Adress (location)-->
-//         </div>
-//         <div class="col-1">
-//             <div class="location"><img style="margin-bottom:8px; margin-right: 5px;"
-//                     src="../Star 2 (2).png">4.5</div>
-//             <!--Star pic & rating score-->
-//         </div>
-//         <div class="col-8">
-//             <!--TBD-->
-//         </div>
-//     </div>
-// </div>
-// }

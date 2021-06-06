@@ -1,0 +1,37 @@
+.rounded-circle {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  
+    object-fit: cover;
+}
+
+.rounded-circle-big {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+  
+    object-fit: cover;
+}
+
+.img-rounded {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+  
+    object-fit: cover;
+}
+
+.fa-heart-o {
+    color: red;
+    cursor: pointer;
+
+  }
+  
+  .fa-heart {
+    color: red;
+    cursor: pointer;
+  }
+  
