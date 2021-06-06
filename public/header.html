@@ -23,7 +23,9 @@
         <!-- this tag connects the header-page to the appropriate css -->
         <link rel="stylesheet" href="../css/header_style.css">
         <script src="../js/header.js"></script>
-        <script scr="/js/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
     </head>
     <body>
             <!--Header starts here-->
@@ -38,8 +40,8 @@
                                 <img src="../Menu.png" width="35px"> 
                             </a>
                             <div class="dropdown-content"> 
-                                <a href="#">My laundries</a>
-                                <a href="#">New order</a>
+                                <a href="#">Profile page</a>
+                                <a href="#">New search</a>
                                 <a href="#">Log out</a>
                             </div>
                         </div>
@@ -171,46 +173,84 @@
                             </td>
                         </tr>
                     </table>
-                    <a href="#"><img class="plus" src="../plus.png"></a>
+                    <a href="#"><img class="plus-left" src="../plus.png"></a>
                 </div>
                 <!-- End of Working hours -->
 
-                <!-- Replace Order Box -->
+                <!-- Place Order Box -->
                 <div class="col-5">
                     <div class="order-box">
                         <h1>PLACE ORDER</h1>
                         <div class="instructions"> <!--Few instructions-->
                             Send in your laundry prefrences to the washer. The more specific you are, the better your laundry will come out! 
                         </div>
-                        <table>
+                        <table style="margin: 20px;">
                             <tr style="color: black;">
                                 <td>Drop off time</td>
-                                <td>Wash settings</td>
+                                <td style="padding-left: 50px;">Wash settings</td>
                             </tr>
                             <tr>
                                 <td><input class="choose_location" type="time" id="startTime" value="08:00"></td>
-                                <td>
-                                    <div class="box"> <!-- Duration -->
-                                                <select>
-                                                    <div class="wash-settings"> 
-                                                        <option c>Default</option>
-                                                        <option>30°C Wash</option>
-                                                        <option>60°C Wash</option>
-                                                        <option>Fast Wash</option>
-                                                        <option>Whites Only</option>
-                                                        <option>Delicates</option>
-                                                </select>
+                                <td style="padding-left: 50px;">
+                                    <div class="box select"> <!-- Wash settings -->
+                                        <select>
+                                            <option>Default</option>
+                                            <option>30°C Wash</option>
+                                            <option>60°C Wash</option>
+                                            <option>Fast Wash</option>
+                                            <option>Whites Only</option>
+                                            <option>Delicates</option>
+                                        </select>
                                     </div>
                                 </td>
                             </tr>
+                            <tr style="color: black;"> <!-- Special Services-->
+                                <td>Special services</td>
+                                <td style="padding-left: 50px;">Loads</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="box select"> <!-- Special Services dropdwn-->
+                                        <select>
+                                            <option>None</option>
+                                            <option>Ironing</option>
+                                            <option>Door-2-Door</option>
+                                            <option>Hanging Drying</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td style="padding-left: 50px;"><input class="choose_location" type="number" value="1"></td> <!-- Loads -->
+                            </tr>
+                            <tr>
+                                <td><a href="#"><img class="plus" src="../plus.png"></a></td> <!-- to add more services-->
+                            </tr>
                         </table>
+                        <textarea class="note" id="note" name="note" rows="4" cols="50">Here you can leave any message to your washer.
+Tell him about you and share with him your expectations. 
+                        </textarea> <!-- Personal note-->
+                        <label class="cont">I agree to terms an conditions <!--checkbox-->
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="row">
+                            <div class="col-6">
+                                <table style="margin-left: 50px;">
+                                    <tr>
+                                        <td>Usually costs:</td>
+                                    </tr>
+                                    <tr>
+                                        <td><div class="small-box">40 NIS</div></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <div style="margin-top: 15px; margin-left: 50px;">
+                                    <button class="button1-big">SEND REQUEST</button>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
-            </div>
-
-            
-            
-
-            
+            </div>  
     </body>
 </html>
