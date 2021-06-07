@@ -2,6 +2,8 @@
 
 const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
+const storage = firebase.storage();
+
 
 /*
 * the function takes docID and collection name and resolve a promise of the document.
@@ -53,6 +55,7 @@ function promiseUserLoaderById(documentID) {
 * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
 */
 function promiseUserLoaderByCurrentUserID() {
+    console.log(getUserToken());
     return promiseLoaderByCollectionAndId('users', getUserToken());
 }
 
@@ -70,4 +73,42 @@ function promiseWasherLoaderByCurrentUserID() {
 */
 function getWasherRatingFromDoc(doc) {
     return doc.data().rating_sum / doc.data().rating_num;
+}
+
+
+// Saves a new message containing an image in Firebase.
+// This first saves the image in Firebase storage.
+function saveImageToUser(file) {
+
+    let filePath = getUserToken() + '/' + file.name;
+
+    storage.ref(filePath).put(file).then((fileSnapshot) => {
+        fileSnapshot.ref.getDownloadURL().then((url) => {
+            db.collection('users').doc(getUserToken()).update({
+                imageUrl: url,
+                storageUrl: fileSnapshot.metadata.fullPath
+            })
+        });
+    }).catch(function(error) {
+        console.error('There was an error uploading a file to Cloud Storage:', error);
+      });
+  }
+
+function onMediaFileSelected(event) {
+  event.preventDefault();
+  var file = event.target.files[0];
+
+  // Clear the selection in the file picker input.
+  imageFormElement.reset();
+
+  // Check if the file is an image.
+  if (!file.type.match('image.*')) {
+    console.log("That's not an image");
+  }
+  else if (isUserSignedIn()) {
+    saveImageToUser(file);
+  }
+  else {
+    console.log("You are not connected");
+  }
 }
