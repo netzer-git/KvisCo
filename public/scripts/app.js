@@ -24,7 +24,7 @@ function initFirebaseAuth() {
   firebase.auth().onAuthStateChanged(authStateObserver);
 }
 
-// Returns the signed-in user's display name.
+// Returns the signed-in user's ID token.
 function getUserToken() {
   return isUserSignedIn() ? firebase.auth().currentUser.uid : null;
 }
