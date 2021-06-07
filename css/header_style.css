@@ -146,7 +146,8 @@ border-radius: 10px;
   
 .button1 {
     /* Bg  */
-margin-top: 3px;
+margin-top: 5px;
+margin-bottom: 10px;
 /* Palet 2 / 4 */
 background: #FFC636;
 /* Main / Black */
@@ -159,6 +160,28 @@ height: 30px;
 width: 180px;
 font-family: 'Montserrat', sans-serif;
 font-size: 15px;
+font-style: normal;
+font-weight: 900;
+line-height: 25px;
+letter-spacing: 0.44999998807907104px;
+text-align: center;
+}
+
+.button1-big {
+    /* Bg  */
+margin-top: 3px;
+/* Palet 2 / 4 */
+background: #FFC636;
+/* Main / Black */
+border: 1px solid #1C1C1D;
+box-sizing: border-box;
+/* Button */
+box-shadow: 0px 4px 0px #202020;
+border-radius: 10px;
+height: 60px;
+width: 200px;
+font-family: 'Montserrat', sans-serif;
+font-size: 22px;
 font-style: normal;
 font-weight: 900;
 line-height: 25px;
@@ -179,7 +202,19 @@ text-align: center;
     box-shadow: 0px 8px 0px 0px rgba(32, 32, 32, 1);
 }
 
+.input-box {
+    height: 50.65306091308594px;
+    width: 277px;
+    left: 0px;
+    top: -0.6530606746673584px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+}
+
 .choose_location{
+
     background: rgba(255, 255, 255, 1);
 	border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
@@ -213,7 +248,7 @@ text-align: center;
 
 
 
-td, th {
+.table-search td, th {
     text-align: left;
     padding: 4px;
   }
@@ -234,11 +269,16 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     margin-top: 10px;
 }
 
-.plus {
+.plus-left {
     width: 25px;
     height: auto;
     margin-top: 10px;
     margin-left: 200px;
+}
+
+.plus {
+    width: 25px;
+    height: auto;
 }
 
 .second_header{
@@ -253,6 +293,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
 .profile_pic {
     margin-top: 15px;
 }
+
 h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 34px;
@@ -263,7 +304,6 @@ h2 {
     text-align: left;
     color: black;
     white-space: nowrap;
-
 }
 
 .description {
@@ -293,7 +333,6 @@ h2 {
 
     color: #1C1C1D;
     white-space: nowrap;
-
 }
 
 h3 {
@@ -314,7 +353,7 @@ h3 {
     line-height: 32px;
     /* or 160% */
 
-    text-align: center;
+     
     padding: 15px;
     letter-spacing: 0.625px;
 
@@ -334,26 +373,8 @@ h3 {
     border-radius: 10px;
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
-    
-    /*width: 86px;
-    height: 26px;
-    left: 20px;
-    top: 12px;*/
-
-    /* Text / Medium 18 
-
-    font-family: Montserrat;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 145.4%;
-    /* or 26px */
 
     letter-spacing: 0.5px;
-
-    /* Main / Black
-
-    color: #1C1C1D;*/
 }
 
 .set-time {
@@ -476,4 +497,108 @@ h3 {
     font-size: 18px;
     padding-left: 30px;
     padding-top: 15px;
+  }
+
+
+.note {
+    height: 109px;
+    width: 585px;
+    left: 758px;
+    top: 492px;
+    margin-left: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+}
+
+.cont {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-top: 15px;
+    margin-left: 50px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .cont input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    margin-top: 5px;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background: rgba(255, 255, 255, 1);
+    border: 2px solid rgba(28, 28, 29, 1);
+    border-radius: 10px;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .cont:hover input ~ .checkmark {
+    background-color: rgba(25, 255, 227, 1);
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .cont input:checked ~ .checkmark {
+    background: rgba(255, 189, 18, 1);
+  
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .cont input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .cont .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: 1px solid rgba(28, 28, 29, 1);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .small-box {
+    background: rgba(255, 255, 255, 1);
+	border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+    height: 40.65306091308594px;
+    width: 100px;
+    left: 0px;
+    top: -0.6530606746673584px;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 32px;
   }
