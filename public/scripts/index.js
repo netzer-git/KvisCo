@@ -33,3 +33,32 @@ function exampleGettingUserDataIntoHTML() {
         myOnlyOneElement.innerHTML = newContent;
     })
 }
+
+
+/* ======================================================================== */
+var imageButtonElement = document.getElementById('submitImage');
+var imageFormElement = document.getElementById('image-form');
+var mediaCaptureElement = document.getElementById('mediaCapture');
+var imageAreaElement = document.getElementById('img-area');
+// Events for image upload.
+imageButtonElement.addEventListener('click', function(e) {
+    e.preventDefault();
+    mediaCaptureElement.click();
+  });
+mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+
+function displayImage() {
+    if (isUserSignedIn()) {
+        promiseUserLoaderByCurrentUserID().then((doc) => {            
+            console.log('in!');
+            console.log(JSON.stringify(doc.data()));
+            newContent = '<img src="' +
+            doc.data().imageUrl + '" alt="Girl in a jacket" width="500" height="600">';            
+            console.log(newContent);
+            imageAreaElement.innerHTML = newContent;
+        });
+    }
+    else {
+        console.log("You are not connected");
+    }
+}
