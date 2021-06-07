@@ -7,12 +7,11 @@ h1{
     height: 151px;
     left: 330px;
     top: 182px;
-    margin-left: 4%;
-    margin-top: 3%;
-    margin-bottom: -3%;
     font-family: 'Permanent Marker';
     font-style: normal;
     font-weight: normal;
+    
+    /* changed font size */
     font-size: 60px;
     line-height: 75px;
     /* or 108% */
@@ -237,6 +236,12 @@ h2{
 
 }
 
+
+.header_11{
+    margin-left: 4%;
+    margin-top: 3%;
+    margin-bottom: -3%;
+}
 
 .header_21{
     margin-left: 10%;
