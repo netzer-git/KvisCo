@@ -60,7 +60,7 @@ rating_on_washer: 3,
 review_on_washer: "great lemon smell, very soft and also handsome bag! I'm reccomending",
 rating_on_user: 4, 
 review_on_user: "a lot of socks which can be hard to connect toghther",
-laundry_pics: ["../Profile.png","../Profile.png"]
+laundry_pics: ["../images/Profile.png","../Profile.png"]
 }
 
 order144 = {
@@ -74,7 +74,7 @@ order144 = {
     review_on_washer: "great laundry",
     rating_on_user: 4, 
     review_on_user: "orgnaize guy, came excactly on time",    
-    laundry_pics: ["../Profile.png","../Profile.png"]
+    laundry_pics: ["../images/Profile.png","../Profile.png"]
 }
 
 order155 = {
@@ -88,7 +88,7 @@ order155 = {
     review_on_washer: "amazing",
     rating_on_user: 0, 
     review_on_user: "",
-    laundry_pics: ["../Profile.png","../Profile.png"]
+    laundry_pics: ["../images/Profile.png","../Profile.png"]
 }
 
 order122 = {
@@ -157,7 +157,7 @@ function get_favorite_washer(washer, counter) {
     washer_block = "<div class='row with_padd'>";
     washer_block += "<div class='col-lg-2'>";
     washer_block += "<div class='profile_pic'><a href='#'><img class='rounded-circle' src=" + washer.profile_pic + "></a></div>";
-    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../Star 2 (2).png'>" + washer.rating + "</div>";
+    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src="../images/Star 2 (2).png">" + washer.rating + "</div>";
     washer_block += "</div>"; 
     washer_block += "<div class='col-lg-6'>";
     washer_block += "<h2>" + washer.name + "</h2>";
@@ -214,7 +214,7 @@ function get_user_reviews(tag, user) {
             all_reviews += "<div class='col-lg-2'>";
             all_reviews += " <h4>" + all_orders[j].washer.name + "</h4>";
             all_reviews += "<h5>" + all_orders[j].orderID + "</h5>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../Star 2 (2).png'>" + all_orders[j].rating_on_user + "</div></div>";
+            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src="../images/Star 2 (2).png">" + all_orders[j].rating_on_user + "</div></div>";
             all_reviews += "<div class='col-lg-5'>";
             all_reviews += "<p>" + all_orders[j].review_on_user + "</p>";
             all_reviews += '</div>';
@@ -244,9 +244,9 @@ function get_detailes(tag, washer) {
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
     details_table += "<td>" + washer.machine_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    details_table += "<tr><td><img src='../check.png' alt=''>Ironing</td></tr>";
-    details_table += "<tr><td><img src='../check.png' alt=''>Door 2 Door</td></tr>";
-    details_table += "<tr><td><img src='../check.png' alt=''>Dryer</td></tr>";
+    details_table += "<tr><td><img src="../images/check.png" alt=''>Ironing</td></tr>";
+    details_table += "<tr><td><img src="../images/check.png" alt=''>Door 2 Door</td></tr>";
+    details_table += "<tr><td><img src="../images/check.png" alt=''>Dryer</td></tr>";
     details_table += "</tr></table>";
     document.getElementById(tag).innerHTML = details_table;             
 
