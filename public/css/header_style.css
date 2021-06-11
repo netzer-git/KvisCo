@@ -299,6 +299,11 @@ text-align: center;
 
 }
 
+.rating-star {
+  margin-bottom: 3%;
+  margin-right: 2%;
+}
+
 .search {
     height: 90px;
     width: 1000px;
