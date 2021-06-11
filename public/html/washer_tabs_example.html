@@ -34,48 +34,48 @@
 </head>
 
 <body>
-<div class="row text-center">
-    <div class="col-lg-6">
-        <ul class="nav nav-pills nav-fill">
-            <li class="nav-item active">
-                <a href="#1" data-toggle="tab">Working hours</a>
-            </li>
-            <li class="nav-item">
-                <a href="#2" data-toggle="tab">Detailes</a>
-            </li>
-            <li class="nav-item">
-                <a href="#3" data-toggle="tab">Reviews</a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="1">
-                <section class="openinghours">
-                    <div class="openinghourscontent section">
-                        <div id="openorclosedColor"></div>
-                        <script>checkOpeningTimes("openorclosedColor", washer1)</script>
-                        <div id="openorclosed"></div>
-                        <script>get_opening_hours_table("openorclosed", washer1)</script>
-                        <script>color_today()</script>
-                    </div>
-                </section>
-            </div>
-            <div class="tab-pane" id="2">
-                <div class="with_padd">
-                    <!-- function to get washer details -->
-                    <div id="my_detailes"></div>
-                    <script>get_washer_detailes("my_detailes", washer1)</script>
+    <div class="row text-center">
+        <div class="col-lg-6">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item active">
+                    <a href="#1" data-toggle="tab">Working hours</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#2" data-toggle="tab">Detailes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#3" data-toggle="tab">Reviews</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="1">
+                    <section class="openinghours">
+                        <div class="openinghourscontent section">
+                            <div id="openorclosedColor"></div>
+                            <script>checkOpeningTimes("openorclosedColor", washer1)</script>
+                            <div id="openorclosed"></div>
+                            <script>get_opening_hours_table("openorclosed", washer1)</script>
+                            <script>color_today()</script>
+                        </div>
+                    </section>
                 </div>
-            </div>
-            <div class="tab-pane" id="3">
-                <div class="overflow-auto">
-                    <div id="my_reviews"></div>
-                    <!-- function that get the reviews by loop -->
-                    <script>get_reviews_on_washer("my_reviews", washer1)</script>
+                <div class="tab-pane" id="2">
+                    <div class="with_padd">
+                        <!-- function to get washer details -->
+                        <div id="my_detailes"></div>
+                        <script>get_washer_detailes("my_detailes", washer1)</script>
+                    </div>
+                </div>
+                <div class="tab-pane" id="3">
+                    <div class="overflow-auto">
+                        <div id="my_reviews"></div>
+                        <!-- function that get the reviews by loop -->
+                        <script>get_reviews_on_washer("my_reviews", washer1)</script>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 </body>
