@@ -1,0 +1,33 @@
+.image-1 {
+    width: 200px;
+    height: 260px;
+    margin-top: 3%;
+    margin-left: 0%;
+}
+
+.image-2 {
+    width: 200px;
+    height: 260px;
+    margin-top: 3%;
+    margin-left: 5%;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+    /* for Firefox */
+    -moz-appearance: none;
+    background-color: rgba(25, 255, 227, 1);
+    border-color:rgba(25, 255, 227, 1);
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 5%;
+    text-align: center;
+    font-size: 110%;
+    line-height: 32px;
+    /* for Chrome */
+    -webkit-appearance: none;
+  }
