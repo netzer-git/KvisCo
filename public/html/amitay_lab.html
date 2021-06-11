@@ -19,160 +19,21 @@
         <script src="scripts/firestore_tools.js"></script>
     </head>
     <body>
-            <!--Header starts here-->
-            <div class="header">
-                <div class="row">
-                    <div class="col-9">
-                        <a class="navbar-brand" href="#"><img src="../images/logo.png"></a> <!--The logo button-->
-                    </div>
-                    <div class="col-1">
-                        <div class="dropdown"> <!-- drop down menu-->
-                            <a class="dropbtn" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="../images/Menu.png" width="45%"> 
-                            </a>
-                            <div class="dropdown-content"> 
-                                <a href="#">Profile page</a>
-                                <a href="#">New search</a>
-                                <a href="#">Log out</a>
-                            </div>
-                        </div>
-                    </div>    
-                    <div class="col-2">
-                        <button class="button1">Become a washer</button> <!-- Yellow generic button-->
-                    </div>
-                </div>
-            </div>
-            <!-- Header ends here-->
-
-            <!--Profile Details header starts here-->
-            <div class="second_header">
-                    <div class="row">
-                        <div class="col-1"> <!--space from edge-->
-                        </div>
-                        <div class="col-1">
-                            <div class="profile_pic"> <!--Profile picture-->
-                                <a href="#"><img src="../images/Profile-yellow.png"></a>
-                            </div>
-                        </div>
-                        <div class="col-10">
-                            <table class="table-search">
-                                <tr>
-                                    <h4>Netzer Epstein</h4></tr> <!--Washer name-->
-                                </tr>
-                                <tr>
-                                    <div class="description"> <!--Description-->
-                                        Mechabes esh megil shesh (description)
-                                    </div>
-                                </tr>
-                            </table>
-                            <div class="row"> <!--Location and rating row-->
-                                <div class="col-3">
-                                    <div class="location">Hapalmach 7, Jerusalem</div> <!--Adress (location)-->
-                                </div>
-                                <div class="col-1">
-                                    <div class="location"><img style="margin-bottom:8px; margin-right: 5px;" src="../images/Star 2 (2).png">4.5</div> <!--Star pic & rating score-->
-                                </div>
-                                <div class="col-8"> <!--TBD-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            <!--Profile Details header ends here-->
-
-        <!-- Search Bar starts here-->
-        <div class="container">
+        <!--Header starts here-->
+        <div class="header">
             <div class="row">
-                <div class="col-1">
-                </div>
                 <div class="col-9">
-                    <div class="Search"> <!-- Search Bar style is the pink box-->
-                        <div class="row">
-                            <div class="col-10"> 
-                                <table class="table-search">
-                                    <tr>
-                                        <td>Where?</td>
-                                        <td>When?</td>
-                                        <td>Loads</td>
-                                        <td>Duration</td>
-                                    </tr>
-                                    <tr>
-                                        <td><input class="choose_location" type="text"></td> <!-- Location -->
-                                        <td><input class="choose_location" type="date" id="myDate" value="2021-07-09"></td> <!-- Date -->
-                                        <td><input class="choose_location" type="number" value="1"></td> <!-- Loads -->
-                                        <td>
-                                            <div class="box"> <!-- Duration -->
-                                                <select>
-                                                <option>24 hours</option>
-                                                <option>8 hours</option>
-                                                <option>48 hours</option>
-                                                <option>72 hours</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-2">
-                                <div class="search_btn"> <!-- Magnifying Glass button-->
-                                    <a href="#"><img class="shrink" src="../images/search-btn.png"></a>
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                    </div>
+                    <a class="navbar-brand" href="#"><img src="../images/logo.png"></a> <!--The logo button-->
                 </div>
-            </div>
-            <!-- Search Bar ends here-->
-
-            <div class="row">
-
-                <!-- working hours-->
-                <div class="col-1"> <!-- space form edge-->
-                </div>
-                <div class="col-5"> <!-- Component range-->
-                    <h3>Working Hours</h3> <!-- Title-->
-                    <table>
-                        <tr> <!-- top row-->
-                            <td>Day</td>
-                            <td>From</td>
-                            <td>To</td>
-                            <td>Keep weekly</td>
-                        </tr>
-                        <tr>
-                            <td> <!-- Date -->
-                                <input class="set-date" type="date" id="myDate" value="2021-07-09">
-                            </td>
-                            <td> <!-- Start time -->
-                                <input class="set-time" type="time" id="startTime" value="08:00">
-                            </td>
-                            <td> <!-- End time -->
-                                <input class="set-time" type="time" id="startTime" value="19:00">
-                            </td>
-                            <td> <!-- Weekly time checkbox -->
-                                <input id="cbx" type="checkbox"/>
-                                <label class="cbx" for="cbx">
-                                <div class="flip">
-                                    <div class="front"></div>
-                                    <div class="back">
-                                    <svg width="16" height="14" viewBox="0 0 16 14">
-                                        <path d="M2 8.5L6 12.5L14 1.5"></path>
-                                    </svg>
-                                    </div>
-                                </div>
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
-                    <a href="#"><img class="plus-left" src="../images/plus.png"></a>
-                </div>
-                <!-- End of Working hours -->
-
-                <!-- Place Order Box -->
-                <div class="col-5">
-                    <div class="order-box">
-                        <h5>PLACE ORDER</h5>
-                        <div class="instructions"> <!--Few instructions-->The more specific you are, the better your laundry will come out! 
+                <div class="col-1">
+                    <div class="dropdown"> <!-- drop down menu-->
+                        <a class="dropbtn" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="../images/Menu.png" width="45%"> 
+                        </a>
+                        <div class="dropdown-content"> 
+                            <a href="#">Profile page</a>
+                            <a href="#">New search</a>
+                            <a href="#">Log out</a>
                         </div>
                         <table style="margin-left: 5%; margin-top: -5%; margin-bottom: 2%;">
                             <tr style="color: black;">
@@ -237,8 +98,12 @@
                             </div>
 
                     </div>
+                </div>    
+                <div class="col-2">
+                    <button class="button1">Become a washer</button> <!-- Yellow generic button-->
                 </div>
-                <!--Place order box ends-->
-            </div>  
+            </div>
+        </div>
+        <!-- Header ends here-->  
     </body>
 </html>
