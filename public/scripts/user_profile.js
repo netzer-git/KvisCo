@@ -4,7 +4,7 @@ profile_pic: "../images/amitay_pic.jpg", pics: ["../images/miele.png", "../Profi
 location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
 num_of_reviews: "12", machine_year : "2012",
 model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
-commit: "48 hours", opening_times: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
+commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
 clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
 };
 
@@ -14,7 +14,7 @@ profile_pic: "../images/tal_e_pic.png", img_src: "../images/laundry-room-1.jpg",
 location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
 num_of_reviews: "12", machine_year : "2012",
 model_name : "bosch", capacity : "9KG", description: "Hello! I’m Tal, and I love to Fold laundry perfectly!", 
-commit: "48 hours", opening_times: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
+commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [13, 20],Saturday: [10, 18]}, 
 clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
 };
 
@@ -23,7 +23,7 @@ profile_pic: "../images/tal_r_pic.png", img_src: "../images/laundry-room-1.jpg",
 location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
 num_of_reviews: "12", machine_year : "2012",
 model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
-commit: "48 hours", opening_times: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
+commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
 clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
 };
 
@@ -60,7 +60,7 @@ rating_on_washer: 3,
 review_on_washer: "great lemon smell, very soft and also handsome bag! I'm reccomending",
 rating_on_user: 4, 
 review_on_user: "a lot of socks which can be hard to connect toghther",
-laundry_pics: ["../images/Profile.png","../Profile.png"]
+laundry_pics: ["../images/folded/folded1.jpg","../images/folded/folded2.jpg"]
 }
 
 order144 = {
@@ -74,7 +74,7 @@ order144 = {
     review_on_washer: "great laundry",
     rating_on_user: 4, 
     review_on_user: "orgnaize guy, came excactly on time",    
-    laundry_pics: ["../images/Profile.png","../Profile.png"]
+    laundry_pics: ["../images/folded/folded2.jpg"]
 }
 
 order155 = {
@@ -87,8 +87,8 @@ order155 = {
     rating_on_washer: 5, 
     review_on_washer: "amazing",
     rating_on_user: 0, 
-    review_on_user: "",
-    laundry_pics: ["../images/Profile.png","../Profile.png"]
+    review_on_user: "amazing",
+    laundry_pics: ["../images/folded/folded4.jpg"]
 }
 
 order122 = {
@@ -157,7 +157,7 @@ function get_favorite_washer(washer, counter) {
     washer_block = "<div class='row with_padd'>";
     washer_block += "<div class='col-lg-2'>";
     washer_block += "<div class='profile_pic'><a href='#'><img class='rounded-circle' src=" + washer.profile_pic + "></a></div>";
-    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src="../images/Star 2 (2).png">" + washer.rating + "</div>";
+    washer_block += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src= '../images/Star.png'>" + washer.rating + "</div>";
     washer_block += "</div>"; 
     washer_block += "<div class='col-lg-6'>";
     washer_block += "<h2>" + washer.name + "</h2>";
@@ -171,7 +171,7 @@ function get_favorite_washer(washer, counter) {
     washer_block += "</div><div class='col-lg-1'>";
     washer_block += '<span id = heart'+ counter+ '><i class="fa fa-heart fa-2x" ></i> </span>';
     washer_block += '<div class="row" d-flex align-itemns-baseline>';
-    if (check_if_open(7)) {
+    if (check_if_open(washer)) {
         washer_block += "<i class='fa fa-check' style='color:green'  aria-hidden='true'>open</i>";
     }
     else {
@@ -197,60 +197,50 @@ function insert_favorites_washers(tag, user) {
 }
 
 
-// create function
-function check_if_open(hour) {
-    if (hour < 8) {
-        return true
-    }
-    return false
-}
-
-function get_user_reviews(tag, user) {
-    all_reviews = "";
-    for (let j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].user == user && all_orders[j].status == "finished" && all_orders[j].rating_on_user != "") {
-            // here start block of review
-            all_reviews += "<div class='row'>";
-            all_reviews += "<div class='col-lg-2'>";
-            all_reviews += " <h4>" + all_orders[j].washer.name + "</h4>";
-            all_reviews += "<h5>" + all_orders[j].orderID + "</h5>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src="../images/Star 2 (2).png">" + all_orders[j].rating_on_user + "</div></div>";
-            all_reviews += "<div class='col-lg-5'>";
-            all_reviews += "<p>" + all_orders[j].review_on_user + "</p>";
-            all_reviews += '</div>';
-            all_reviews += "<div class='col-lg-5'>";
-            for (let k = 0; k < all_orders[j].laundry_pics.length; k++) {
-                all_reviews += '<img class="img-rounded" src="'+ all_orders[j].laundry_pics[k] +'" alt="Mister Washer" aria-hidden="true">';
+function check_if_open(washer) {
+    let date = new Date(); // current time
+    let hours = date.getHours();
+    let day = date.getDay();
+    switch(day) {
+        case 0:
+            if (washer.working_hours.Sunday[0] <= hours && washer.working_hours.Sunday[1] >= hours) {
+                return true;            
             }
-            all_reviews += '</div>';
-            all_reviews += '</div>';
-            all_reviews += '<hr style="border: 2px solid #000000">';
-        }
-    }
-    if (all_reviews == "") {
-        all_reviews += "<h4> there are no reviews yet </h4>";
-    }
-    all_reviews += '</div>'; 
-    document.getElementById(tag).innerHTML = all_reviews;
+            break; 
+        case 1:
+            if (washer.working_hours.Monday[0] <= hours && washer.working_hours.Monday[1] >= hours) {
+                return true;            
+            }
+            break; 
+        case 2:
+            if (washer.working_hours.Tuesday[0] <= hours && washer.working_hours.Tuesday[1] >= hours) {
+                return true;            
+            }
+            break;  
+        case 3:
+            if (washer.working_hours.Wednesday[0] <= hours && washer.working_hours.Wednesday[1] >= hours) {
+                return true;            
+            }
+            break; 
+        case 4:
+            if (washer.working_hours.Thursday[0] <= hours && washer.working_hours.Thursday[1] >= hours) {
+                return true;            
+            }
+            break; 
+        case 5:
+            if (washer.working_hours.Friday[0] <= hours && washer.working_hours.Friday[1] >= hours) {
+                return true;            
+            }
+            break; 
+        case 6:
+            if (washer.working_hours.Saturday[0] <= hours && washer.working_hours.Saturday[1] >= hours) {
+                return true;            
+            }
+            break; 
+      }
+      return false
 }
 
-
-function get_detailes(tag, washer) {
-    let details_table = "<table class = machine_details>";
-    details_table += "<tr><tr><th>Model Name</th></tr><tr>";
-    details_table += "<td>" + washer.model_name + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Capacity</th></tr><tr>";
-    details_table += "<td>" + washer.capacity + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
-    details_table += "<td>" + washer.machine_year + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    details_table += "<tr><td><img src="../images/check.png" alt=''>Ironing</td></tr>";
-    details_table += "<tr><td><img src="../images/check.png" alt=''>Door 2 Door</td></tr>";
-    details_table += "<tr><td><img src="../images/check.png" alt=''>Dryer</td></tr>";
-    details_table += "</tr></table>";
-    document.getElementById(tag).innerHTML = details_table;             
-
-}
 
 $(document).ready(function(){
     heart_range = ["#heart0","#heart1","#heart2"]
@@ -266,5 +256,3 @@ $(document).ready(function(){
           });
     }
   });
-
-
