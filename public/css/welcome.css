@@ -7,11 +7,12 @@ h1{
     height: 151px;
     left: 330px;
     top: 182px;
-
     font-family: 'Permanent Marker';
     font-style: normal;
     font-weight: normal;
-    font-size: 70px;
+    
+    /* changed font size */
+    font-size: 60px;
     line-height: 75px;
     /* or 108% */
 
@@ -57,6 +58,32 @@ h2{
 
     /* Text / Regular 18 */
 
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 150%;
+    margin-top: -15%;
+    margin-left: 10%;
+
+    /* or 27px */
+
+    letter-spacing: 0.45px;
+
+    /* Main / Gray */
+
+    color: #474A57;
+}
+
+.small_headline_2{
+    /* position: absolute; */
+    width: 380px;
+    height: 162px;
+    left: 120px;
+    top: 188px;
+
+    /* Text / Regular 18 */
+
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
@@ -65,6 +92,9 @@ h2{
     /* or 27px */
 
     letter-spacing: 0.45px;
+    margin-top: -55%;
+    margin-left: 10%;
+
 
     /* Main / Gray */
 
@@ -108,12 +138,21 @@ h2{
     background: #FFB0BC;
 }
 
+.white-section-2{
+    width: 1440px;
+    height: 562px;
+    left: 0px;
+    top: 1924px;
+    background: #FFFFFF;
+}
+
 .rope_img{
     /* position: absolute; */
     width: 1440px;
-    height: 307px;
+    height: 290px;
     left: -1px;
     top: 537px;
+    margin-bottom: 3%;
 
 }
 
@@ -124,15 +163,92 @@ h2{
     left: 829px;
     top: 90px;
     right: 0px;
+    margin-left: 60%;
+    margin-top: 60%;
 
 }
+
 
 .cards{
     /* position: absolute; */
-    width: 278px;
+    width: 1199px;
     height: 411px;
-    left: 427px;
+    left: 120px;
     top: 83px;
+    margin-top:70px;
+    margin-left: 5%;
 
 }
 
+.leptop{
+    /* position: absolute; */
+    width: 652px;
+    height: 382px;
+    left: 606px;
+    top: 82px;    
+    margin-top: 85px;
+}
+
+.red_button{
+    /* position: absolute; */
+    width: 200px;
+    height: 50px;
+    left: 120px;
+    top: 400px;
+    /* left: 0%;
+    right: 0%;
+    top: 0%; */
+    bottom: 7.41%;
+
+    /* Palet 1 / 1 */
+
+    background: #F95A2C;
+    /* Main / Black */
+
+    border: 1px solid #1C1C1D;
+    box-sizing: border-box;
+    /* Button */
+
+    box-shadow: 0px 4px 0px #202020;
+    border-radius: 10px;
+    margin-top:-15%;
+    /* height: 16px; */
+    /* left: 11.64%;
+    right: 11.64%;
+    top: calc(50% - 16px/2 - 1.5px); */
+
+    /* Button/Black 16 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 100%;
+    /* or 18px */
+
+    text-align: center;
+    letter-spacing: 0.45px;
+
+    /* Main / White */
+
+    color: #FFFFFF;
+    margin-left: 10%;
+
+}
+
+
+.header_11{
+    margin-left: 4%;
+    margin-top: 3%;
+    margin-bottom: -3%;
+}
+
+.header_21{
+    margin-left: 10%;
+
+}
+
+.header_22{
+    margin-top: -25%;
+    margin-left: 10%;
+}
