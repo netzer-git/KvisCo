@@ -415,7 +415,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: 10%;
+    /* line-height: 10%; */
     letter-spacing: 0.5px;
     text-align: left;
     color: rgba(71, 74, 87, 1);
