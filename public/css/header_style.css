@@ -12,9 +12,119 @@ body{
     color: var(--font-color);
 }
 
+h1{
+  /* position: absolute; */
+  width: 778px;
+  height: 151px;
+  left: 330px;
+  top: 182px;
 
-#footer{
-    background-color: rgb(194, 194, 194); /* temporary color for highlighting */
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 70px;
+  line-height: 75px;
+  /* or 108% */
+
+  text-align: center;
+  letter-spacing: 2px;
+
+  /* Main / White */
+
+  color: #FFFFFF;
+
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h2{
+  /* position: absolute; */
+  width: 558px;
+  height: 146px;
+  left: 120px;
+  top: 80px;
+
+  /* Headline / H2 */
+
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 45px;
+  line-height: 48px;
+  /* or 108% */
+
+  letter-spacing: 2px;
+
+  /* Main / Black */
+
+  color: #1C1C1D;
+}
+
+
+h3 {
+  height: 66.30784606933594px;
+  width: 311.2183837890625px;
+  left: 0px;
+  top: 0px;
+  border-radius: 25px;
+  background: #FFFFFF;
+  border: 2px solid #1C1C1D;
+  margin-left: 50px;
+  margin-top: 20px;
+  text-align: center;
+  /* Font ptoperties */
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 32px;
+  /* or 160% */
+
+   
+  padding: 15px;
+  letter-spacing: 0.625px;
+
+  /* Main / Black */
+
+  color: #1C1C1D;
+  white-space: nowrap;
+
+}
+
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 34px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 51px;
+  letter-spacing: 0.44999998807907104px;
+  text-align: left;
+  color: black;
+  white-space: nowrap;
+}
+
+
+h5 {
+  width: 289px;
+  height: 49px;
+  left: 758px;
+  top: 190px;
+  padding-left: 5%;
+
+  /* Headline / H5 */
+
+  font-family: 'Permanent Marker', cursive;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 200%;
+  line-height: 48px;
+  /* identical to box height, or 108% */
+
+  letter-spacing: 2px;
+
+  /* Main / Black */
+
+  color: #1C1C1D;
+  white-space: nowrap;
 }
 
 .header{
@@ -155,11 +265,11 @@ border: 1px solid #1C1C1D;
 box-sizing: border-box;
 /* Button */
 box-shadow: 0px 4px 0px #202020;
-border-radius: 10px;
+border-radius: 15px;
 height: 30px;
 width: 180px;
 font-family: 'Montserrat', sans-serif;
-font-size: 15px;
+font-size: 100%;
 font-style: normal;
 font-weight: 900;
 line-height: 25px;
@@ -168,8 +278,6 @@ text-align: center;
 }
 
 .button1-big {
-    /* Bg  */
-margin-top: 3px;
 /* Palet 2 / 4 */
 background: #FFC636;
 /* Main / Black */
@@ -178,10 +286,10 @@ box-sizing: border-box;
 /* Button */
 box-shadow: 0px 4px 0px #202020;
 border-radius: 10px;
-height: 60px;
+height: 80%;
 width: 200px;
 font-family: 'Montserrat', sans-serif;
-font-size: 22px;
+font-size: 120%;
 font-style: normal;
 font-weight: 900;
 line-height: 25px;
@@ -216,13 +324,14 @@ text-align: center;
 .choose_location{
 
     background: rgba(255, 255, 255, 1);
-	border: 1px solid rgba(28, 28, 29, 1);
+	  border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
-    height: 40.65306091308594px;
+    height: 30px;
     width: 200px;
     left: 0px;
     top: -0.6530606746673584px;
     border-radius: 10px;
+    font-size: 100%;
 
 }
 
@@ -230,7 +339,7 @@ text-align: center;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
-    height: 40.65306091308594px;
+    height: 30px;
     width: 200px;
     left: 0px;
     top: -0.6530606746673584px;
@@ -241,8 +350,6 @@ text-align: center;
 .table-search {
     height: 26px;
     width: 68px;
-    margin-left: 30px;
-    top: -33px;
     border-radius: nullpx;
 }
 
@@ -294,24 +401,14 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     margin-top: 15px;
 }
 
-h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 34px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 51px;
-    letter-spacing: 0.44999998807907104px;
-    text-align: left;
-    color: black;
-    white-space: nowrap;
-}
+
 
 .description {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: 26px;
+    line-height: 10%;
     letter-spacing: 0.5px;
     text-align: left;
     color: rgba(71, 74, 87, 1);
@@ -333,35 +430,6 @@ h2 {
 
     color: #1C1C1D;
     white-space: nowrap;
-}
-
-h3 {
-    height: 66.30784606933594px;
-    width: 311.2183837890625px;
-    left: 0px;
-    top: 0px;
-    border-radius: 25px;
-    background: #FFFFFF;
-    border: 2px solid #1C1C1D;
-    margin-left: 50px;
-    margin-top: 20px;
-    /* Font ptoperties */
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 32px;
-    /* or 160% */
-
-     
-    padding: 15px;
-    letter-spacing: 0.625px;
-
-    /* Main / Black */
-
-    color: #1C1C1D;
-    white-space: nowrap;
-
 }
 
 .set-date {
@@ -453,38 +521,14 @@ h3 {
   }
 
   .order-box {
-    height: 611px;
-    width: 667px;
+    height: 90%;
+    width: 90%;
     left: 718px;
     top: 164px;
-    margin-top: 20px;
+    margin-top: 3.4%;
     border-radius: 10px;
     background: rgba(255, 176, 188, 1);
     border: 2px solid rgba(28, 28, 29, 1);    
-  }
-
-  h1 {
-    width: 289px;
-    height: 49px;
-    left: 758px;
-    top: 190px;
-    padding-left: 30px;
-
-    /* Headline / H2 */
-
-    font-family: 'Permanent Marker', cursive;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 45px;
-    line-height: 48px;
-    /* identical to box height, or 108% */
-
-    letter-spacing: 2px;
-
-    /* Main / Black */
-
-    color: #1C1C1D;
-    white-space: nowrap;
   }
 
   .instructions {
@@ -494,18 +538,17 @@ h3 {
     top: 264px;
     border-radius: nullpx;
     color: rgba(71, 74, 87, 1);
-    font-size: 18px;
-    padding-left: 30px;
-    padding-top: 15px;
+    font-size: 100%;
+    padding-left: 5%;
   }
 
 
 .note {
-    height: 109px;
-    width: 585px;
+    height: 20%;
+    width: 90%;
     left: 758px;
     top: 492px;
-    margin-left: 30px;
+    margin-left: 5%;
     border-radius: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
@@ -515,12 +558,12 @@ h3 {
 .cont {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    margin-top: 15px;
-    margin-left: 50px;
+    padding-left: 5%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    margin-left: 5%;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 80%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -539,11 +582,10 @@ h3 {
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    margin-top: 5px;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     background: rgba(255, 255, 255, 1);
     border: 2px solid rgba(28, 28, 29, 1);
     border-radius: 10px;
@@ -574,10 +616,10 @@ h3 {
   
   /* Style the checkmark/indicator */
   .cont .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
+    left: 3px;
+    top: 3px;
+    width: 10px;
+    height: 7px;
     border: 1px solid rgba(28, 28, 29, 1);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
@@ -589,13 +631,13 @@ h3 {
     background: rgba(255, 255, 255, 1);
 	border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
-    height: 40.65306091308594px;
-    width: 100px;
+    height: 20%;
+    width: 100%;
     left: 0px;
     top: -0.6530606746673584px;
     border-radius: 10px;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
