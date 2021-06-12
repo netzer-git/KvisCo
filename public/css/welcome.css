@@ -180,7 +180,7 @@ h6{
 
 .white-section{
     /* position: absolute; */
-    width: 1440px;
+    width: 100%;
     height: 468px;
     left: 0px;
     top: 882px;
@@ -302,9 +302,8 @@ h6{
 
 
 .header_11{
-    margin-left: 4%;
+    margin-left: 17%;
     margin-top: 3%;
-    margin-bottom: -3%;
 }
 
 .header_21{
