@@ -49,6 +49,70 @@ h2{
     color: #1C1C1D;
 }
 
+h3{
+    width: 535px;
+    height: 153px;
+    left: 448px;
+    top: 287px;
+
+    /* Headline/Title/Samibold 34 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 150%;
+    /* or 51px */
+
+    text-align: center;
+    letter-spacing: 0.45px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+}
+
+h4{
+    left: 37.04%;
+    right: 21.31%;
+    top: 7.42%;
+    bottom: 84.7%;
+
+    /* Headline/Title/Samibold 34 */
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 150%;
+    /* or 51px */
+
+    letter-spacing: 0.45px;
+}
+
+h6{
+    left: 18.04%;
+    right: 45.06%;
+    top: 22.51%;
+    bottom: 72.37%;
+
+    /* Headline/Title/Bold 20 */
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 32px;
+    /* or 160% */
+
+    letter-spacing: 0.625px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+
+}
+
 .small_headline{
     /* position: absolute; */
     width: 527px;
