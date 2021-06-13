@@ -75,6 +75,37 @@ function getWasherRatingFromDoc(doc) {
     return doc.data().rating_sum / doc.data().rating_num;
 }
 
+/*
+* the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
+* USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
+*/
+function promiseOrderArrayByWasherIdAndStatus(washerID, status) {
+    return new Promise((resolve, reject) => {
+        // to look for doc-ref field, you have to get the ref
+        const washerRef = db.collection("washers").doc(washerID);
+        var query = db.collection('orders').where("washer", "==", washerRef).where('status', '==', status).orderBy("created_at");
+
+        query.get().then((docArray) => {
+            const orderArray = [];
+            //console.log("docArray");
+            //console.log(docArray);
+            docArray.forEach((doc) => {
+                if (doc.exists) {
+                    console.log("doc")
+                    console.log(doc.data())
+                    orderArray.push(doc);
+                } else {
+                    // doc.data() will be undefined in this case
+                    console.log("No such document!");
+                }
+            })
+            resolve(orderArray);
+        }).catch((error) => {
+            console.log("Error getting document:", error);
+        });
+    });
+}
+
 
 // Saves a new message containing an image in Firebase.
 // This first saves the image in Firebase storage.
