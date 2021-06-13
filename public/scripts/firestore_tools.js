@@ -71,7 +71,7 @@ function promiseWasherLoaderByCurrentUserID() {
 /*
 * the function takes doc from washers collection (the resolve of a promise!), and gets the washer rating
 */
-function getWasherRatingFromDoc(doc) {
+function getRatingFromDoc(doc) {
     return doc.data().rating_sum / doc.data().rating_num;
 }
 
