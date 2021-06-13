@@ -81,11 +81,11 @@ function getRatingFromDoc(doc) {
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByFieldIdAndStatus(field, washerID, status) {
+function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
         // to look for doc-ref field, you have to get the ref
-        const washerRef = db.collection(collection).doc(washerID);
+        const washerRef = db.collection(collection).doc(docID);
         if (status === "all") {
             var query = db.collection('orders').where(field, "==", washerRef).orderBy("created_at");
         } else if (status === "processing") {
@@ -115,12 +115,44 @@ function promiseOrderArrayByFieldIdAndStatus(field, washerID, status) {
     });
 }
 
+/*
+ * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
+ * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
+ */
 function promiseOrderArrayByWasherIdAndStatus(washerID, status) {
-    return promiseOrderArrayByCollectionFieldIdAndStatus("washer", washerID, status);
+    return promiseOrderArrayByFieldIdAndStatus("washer", washerID, status);
 }
 
-function promiseOrderArrayByUserIdAndStatus(washerID, status) {
-    return promiseOrderArrayByCollectionFieldIdAndStatus("user", washerID, status);
+/*
+ * the function takes userID and resolves a promise of multiple orders (of the current washer) by specific given status
+ * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
+ */
+function promiseOrderArrayByUserIdAndStatus(userID, status) {
+    return promiseOrderArrayByFieldIdAndStatus("user", userID, status);
+}
+
+/**
+ * creates new order from order object and saves it to firestore server.
+ */
+function createNewOrder(order) {
+    db.collection("orders").add({
+        user: null,
+        washer: null,
+        due_to: null,
+        created_at: new Date(),
+        price: order.price,
+        status: order.status,
+        loads: order.loads,
+        rating_washer: null,
+        rating_user: null,
+        review_washer: null,
+        review_user: null,
+        properties: order.properties,
+        laundry_pic: null,
+        comments: null,
+    }).then((docRef) => {
+        console.log("New order added: " + docRef);
+    })
 }
 
 
