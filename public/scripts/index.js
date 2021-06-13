@@ -51,9 +51,7 @@ function displayImage() {
     if (isUserSignedIn()) {
         promiseUserLoaderByCurrentUserID().then((doc) => {            
             console.log('in!');
-            console.log(JSON.stringify(doc.data()));
-            newContent = '<img src="' +
-            doc.data().imageUrl + '" alt="Girl in a jacket" width="500" height="600">';            
+            newContent = '<img src="' + doc.data().imageUrl + '" width="500" height="600">';            
             console.log(newContent);
             imageAreaElement.innerHTML = newContent;
         });
