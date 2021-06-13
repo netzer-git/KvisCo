@@ -16,16 +16,29 @@ select::-ms-expand {
     display: none;
 }
 
+.plus-btn {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 25%;
+  }
+
 select {
     /* for Firefox */
     -moz-appearance: none;
+    display: block;
     background-color: rgba(25, 255, 227, 1);
+    overflow: hidden;
     border-color:rgba(25, 255, 227, 1);
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
     padding-top: 5%;
-    text-align: center;
+    padding-left: 8%;
+    border-radius: 10px;
     font-size: 110%;
     line-height: 32px;
     /* for Chrome */
