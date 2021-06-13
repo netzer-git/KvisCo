@@ -4,6 +4,11 @@
         <!-- this tag connects the header-page to the appropriate css -->
         <link rel="stylesheet" href="../css/header_style.css">
         <link rel="stylesheet" href="../css/washer-profile-style.css">
+        <link rel="stylesheet" href="../css/user-profile.css">
+        <link rel="stylesheet" href="../css/washer_properties.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Add icon library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
         <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
@@ -13,8 +18,9 @@
         <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
         <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
         <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+        <script src="../scripts/washer-profile-script.js"></script>
         <script src="/__/firebase/init.js"></script>
-
+        <script src="../scripts/order-blocks.js"></script>
         <script src="scripts/app.js"></script>
         <script src="scripts/tools.js"></script>
         <script src="scripts/firestore_tools.js"></script>
@@ -46,7 +52,6 @@
         <!-- Header ends here-->
 
         <!--Profile Details header starts here-->
-        <!--<div class="second_header">-->
             <div class="row">
                 <div class="col-6">
                     <div class="row">
@@ -95,7 +100,7 @@
                         </div>
                         <div class="col-10"> <!-- Component range-->
                             <h3>Working Hours</h3> <!-- Title-->
-                            <table>
+                            <table id="working-hours">
                                 <tr> <!-- top row-->
                                     <td>Day</td>
                                     <td>From</td>
@@ -137,13 +142,43 @@
                                     </td>
                                 </tr>
                             </table>
-                            <a href="#"><img class="plus-left" src="../images/plus.png"></a>
+                            <button onclick="duplicate()" class="plus-btn"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <!-- Place Order Box -->
-                <div class="col-5">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <h3>Laundry in Proccess</h3>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="in_process_orders">
+                            <script>insert_orders_blocks_of_user("in_process_orders", user7, "in_process")</script>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                        </div>
+                        <div class="col-8">
+                            <h3>Laundries History</h3>
+                        </div>
+                        <div class="col-2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="history_orders">
+                            <script>insert_orders_blocks_of_washer("history_orders", washer1, "finished")</script>
+                        </div>
+                    </div>
+                                
                 </div>
+                
     </body>
 
 
