@@ -81,16 +81,17 @@ function getRatingFromDoc(doc) {
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByWasherIdAndStatus(washerID, status) {
+function promiseOrderArrayByFieldIdAndStatus(field, washerID, status) {
     return new Promise((resolve, reject) => {
+        const collection = field + "s";
         // to look for doc-ref field, you have to get the ref
-        const washerRef = db.collection("washers").doc(washerID);
+        const washerRef = db.collection(collection).doc(washerID);
         if (status === "all") {
-            var query = db.collection('orders').where("washer", "==", washerRef).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", washerRef).orderBy("created_at");
         } else if (status === "processing") {
-            var query = db.collection('orders').where("washer", "==", washerRef).where('status', '!=', "finished").orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", washerRef).where('status', '!=', "finished").orderBy("created_at");
         } else {
-            var query = db.collection('orders').where("washer", "==", washerRef).where('status', '==', status).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", washerRef).where('status', '==', status).orderBy("created_at");
         }
 
         query.get().then((docArray) => {
@@ -112,6 +113,14 @@ function promiseOrderArrayByWasherIdAndStatus(washerID, status) {
             console.log("Error getting document:", error);
         });
     });
+}
+
+function promiseOrderArrayByWasherIdAndStatus(washerID, status) {
+    return promiseOrderArrayByCollectionFieldIdAndStatus("washer", washerID, status);
+}
+
+function promiseOrderArrayByUserIdAndStatus(washerID, status) {
+    return promiseOrderArrayByCollectionFieldIdAndStatus("user", washerID, status);
 }
 
 
