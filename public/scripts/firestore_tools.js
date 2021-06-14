@@ -43,10 +43,20 @@ function promiseWasherLoaderById(documentID) {
 /*
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
- * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
+ * USAGE: promiseUserLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
+
+}
+
+/*
+ * the function takes docID - the id of the order - and resolve a promise of the document of the order.
+ * the function does not return the doc, it returns the promise.
+ * USAGE: promiseOrderLoaderById(docID).then(doc => { // do something with.doc.data })
+ */
+function promiseOrderLoaderById(documentID) {
+    return promiseLoaderByCollectionAndId('orders', documentID);
 
 }
 
@@ -136,12 +146,12 @@ function promiseOrderArrayByUserIdAndStatus(userID, status) {
  */
 function createNewOrder(order) {
     db.collection("orders").add({
-        user: null,
-        washer: null,
-        due_to: null,
+        user: db.doc('users/' + order.userID),
+        washer: db.doc('washers/' + order.washerID),
+        due_to: order.due_to,
         created_at: new Date(),
         price: order.price,
-        status: order.status,
+        status: "pending",
         loads: order.loads,
         rating_washer: null,
         rating_user: null,
