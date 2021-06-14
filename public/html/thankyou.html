@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <!-- this tag connects the header-page to the appropriate css -->
         <link rel="stylesheet" href="../css/thankyou.css">
@@ -8,7 +9,9 @@
         <script scr="/js/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <div include-html= "includes/header.html"></div>
+    <!-- ======= Header ======= -->
+    <div id="includedContent"></div>
+
         <div class= "thank_pink">
             <table>
                 <tr>
@@ -17,15 +20,10 @@
                     </h2>
                 </tr>
                 <tr>
-                    <div class= "small_headline_3">
-                        Order number: 123456
-                    </div>
-                </tr>
-                <tr>
                     <th>
-                    <h3 class="header_31">
+                    <div class="header_31">
                         Your order has been sent to <br/> the washer and is waiting to be confirmed.  
-                    </h3>
+                    </div>
                     </th>
                 </tr>
                 <tr>
@@ -35,9 +33,9 @@
                 </tr>
                 <tr>
                     <th>
-                    <h3 class="header_32">
+                    <div class="header_32">
                         After confirming, the washer will contact you directly.  
-                    </h3>
+                    </div>
                     </th>
                 </tr>
                 <tr>
@@ -48,3 +46,7 @@
             </table>
         </div>
     </body>
+
+    <script>
+        $("#includedContent").load("includes/header.html");
+    </script>

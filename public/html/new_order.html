@@ -6,9 +6,10 @@
         <link rel="stylesheet" href="../css/welcome.css">
         <script src="../js/header.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
     </head>
     <body>
-        <div include-html= "includes/header.html"></div>
+        <div id="includedContent"></div>
         <div class= "order_pink">
             <table>
                 <tr>
@@ -114,3 +115,7 @@
                 </table>
             </div>
         </body>
+
+        <script>
+            $("#includedContent").load("includes/header.html");
+        </script>
