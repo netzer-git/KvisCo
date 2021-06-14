@@ -142,8 +142,8 @@ function get_order_block_of_user(order) {
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
-    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src=" + order.user.profile_pic + " alt='netzer'> </th></tr>";
-    block += "<tr><th scope='col' colspan='2'>"+ order.user.name +"</th></tr>";
+    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src=" + order.data().user.imageUrl + " alt='netzer'> </th></tr>";
+    block += "<tr><th scope='col' colspan='2'>"+ order.data().user.name +"</th></tr>";
     block += "<tr><td scope='col' colspan='2'>"+ order.orderID +"</td></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
     block += "<tr><td>"+ order.dueTO +"</td><td>"+ order.Price +" nis</td></tr>"
@@ -168,24 +168,24 @@ function get_order_block_of_user(order) {
 
 
 
-function insert_orders_blocks_of_washer(tag, washer, status) {
+function insert_orders_blocks_of_washer(tag, washerID, status) {
+    const washer_doc = await promiseWasherLoaderById(washerID);
+    all_orders = promiseOrderArrayByWasherIdAndStatus(washerID, status);
     all_blocks = "";
     // to fix?
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
-        if (all_orders[i].washer == washer && all_orders[i].status == status) {
             all_blocks += get_order_block_of_washer(all_orders[i]);
-        }
     }
-    // all_blocks += "</div>";
     document.getElementById(tag).innerHTML = all_blocks;
 }
 
 
 function insert_orders_blocks_of_user(tag, user, status) {
+    all_orders = promiseOrderArrayByWasherIdAndStatus(washerID, status);
     all_blocks = "";
     // to fix?
-    let max_orders = Math.min(7, all_orders.length);
+    let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
         if (all_orders[i].user == user && all_orders[i].status == status) {
             all_blocks += get_order_block_of_user(all_orders[i]);
@@ -211,4 +211,12 @@ function duplicate() {
     cell3.innerHTML = "<input class='set-time' type='time' id='startTime' value='08:00'>";
     cell4.innerHTML = "<input id='cbx"+clicks+"' type='checkbox'/><label class='cbx"+clicks+"' for='cbx"+clicks+"'><div class='flip'><div class='front'></div><div class='back'><svg width='16' height='14' viewBox='0 0 16 14'><path d='M2 8.5L6 12.5L14 1.5'></path></svg></div></div></label>";
     clicks += 1
+}
+
+
+async function load_order_blocks_of_washer(washerID) {
+    const washer_doc = await promiseWasherLoaderById(washerID);
+    console.log(washer_doc);
+    // insert_orders_blocks_of_user("in_process_orders", washer_doc, "processing");
+    insert_orders_blocks_of_user("in_process_orders", washerID, "process");
 }
