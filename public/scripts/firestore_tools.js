@@ -138,6 +138,7 @@ function onMediaFileSelected(event) {
   }
   else if (isUserSignedIn()) {
     saveImageToUser(file);
+    console.log('out!')
   }
   else {
     console.log("You are not connected");
