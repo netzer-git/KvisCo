@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <!-- this tag connects the header-page to the appropriate css -->
+        <link rel="stylesheet" href="../css/washer_regist.css">
+        <link rel="stylesheet" href="../css/welcome.css">
+        <script src="../js/header.js"></script>
+        <script scr="/js/jquery-3.6.0.min.js"></script>
+    </head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <div id="includedContent"></div>
+        <div class= "regist_pink">
+            <table>
+                <tr>
+                    <h2 class="header_25">
+                        EDIT YOUR PROFILE
+                    </h2>
+                </tr>
+                <tr>
+                    <td>
+                        <img class="user_profile_2" src="../images/Profile-yellow.png">
+                    </td>
+                    <td>
+                        <h4>
+                            Netzer Epstein
+                        </h4>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                    <div class= "header_53">
+                        Your Location
+                    </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <form action="/action_page.php">
+                        <label for="city">City: </label>
+                        <input class= "regist_input" type="text" id="city" name="city"><br>
+                        <label for="street">Street: </label>
+                        <input class= "regist_input" type="text" id="street" name="street"><br>
+                        <label for="number">Number: </label>
+                        <input class= "regist_input" type="text" id="number" name="number"><br>
+                      </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <div class= "header_53">
+                        Phone Number
+                    </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <form action="/action_page.php">
+                        <label for="city">Phone Number:  </label>
+                        <input class= "regist_input" type="text" id="phone" name="phone"><br>
+                    </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <div class= "header_53">
+                        Laundry Machine Details
+                    </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <form action="/action_page.php">
+                        <label for="module_name">Module Name: </label>
+                        <input class= "regist_input" type="text" id="mudule" name="module"><br>
+                        <label for="capacity">Capacity: </label>
+                        <input class= "regist_input" type="text" id="capacity" name="capacity"><br>
+                        <label for="year">Year Purchased: </label>
+                        <input class= "regist_input" type="text" id="year" name="year"><br>
+                      </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class= "header_53">
+                            Add Photos of Your Laundry Machine & Environment
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <form id="image-form" action="#">
+                            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
+                            <button id="submitImage2" title="Add an image">
+                                Upload Photos
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+
+                
+
+
+
+
+
+
+            </table>
+        
+        </div>
+</body>
+
+<script>
+    $("#includedContent").load("includes/header.html");
+</script>
+
