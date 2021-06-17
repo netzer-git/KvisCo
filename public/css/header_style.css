@@ -401,7 +401,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     left: 0px;
     top: 90px;
     border-radius: 0px;
-    background: #FFB0BC;
+    /* background: #FFB0BC; */
 }
 
 .profile_pic {
