@@ -163,7 +163,7 @@
                             <tr>
                                 <td> <!-- Date -->
                                     <div class="set-date">
-                                        <select>
+                                        <select id="day">
                                             <option>Sunday</option>
                                             <option>Monday</option>
                                             <option>Tuesday</option>
@@ -178,7 +178,7 @@
                                     <input class="set-time" type="time" id="startTime" value="08:00">
                                 </td>
                                 <td> <!-- End time -->
-                                    <input class="set-time" type="time" id="startTime" value="19:00">
+                                    <input class="set-time" type="time" id="endTime" value="19:00">
                                 </td>
                                 <td> <!-- Weekly time checkbox -->
                                     <input id="cbx" type="checkbox"/>
@@ -196,6 +196,12 @@
                             </tr>
                         </table>
                         <button onclick="duplicate()" class="plus-btn"><i class="fa fa-plus"></i></button>
+                        <div class="row">
+                            <div style="margin-left: 15%;">
+                                <p id="demo"></p>
+                                <button class="button1" onclick="saveHour()">Save</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
