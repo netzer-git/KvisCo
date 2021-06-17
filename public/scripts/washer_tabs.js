@@ -162,14 +162,29 @@ function get_reviews_on_washer(tag, washer) {
         if (all_orders[j].washer == washer && all_orders[j].status == "finished" && all_orders[j].rating_on_washer != "") {
             // here start block of review
             all_reviews += "<div class='row'>";
-            all_reviews += "<div class='col-lg-2'>";
+            all_reviews += "<div class='col-6'>";
+            all_reviews += "<div class='row'>";
+            all_reviews += "<div class='col-1'>";
+            all_reviews += "</div>";
+            all_reviews += "<div class='col-2'>";
             all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + all_orders[j].user.profile_pic + "></a></div>";
-            all_reviews += "<h5>" + all_orders[j].user.name + "</h5>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star.png'>" + all_orders[j].rating_on_washer + "</div></div>";
-            all_reviews += "<div class='col-lg-4'>";
-            all_reviews += "<p>" + all_orders[j].review_on_washer + "</p>";
             all_reviews += '</div>';
-            all_reviews += "<div class='col-lg-6'>";
+            all_reviews += "<div class='col-6'>";
+            all_reviews += "<div class='location'>" + all_orders[j].user.name + "</div>";
+            all_reviews += '</div>';
+            all_reviews += "<div class='col-3'>";
+            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star_yellow.png'>" + all_orders[j].rating_on_washer + "</div>";
+            all_reviews += '</div>';
+            all_reviews += '</div>';
+            all_reviews += "<div class='row'>";
+            all_reviews += "<div class='col-3'>"
+            all_reviews += '</div>';
+            all_reviews += "<div class='col-9'>";
+            all_reviews += "<div class='reviews_text'>" + all_orders[j].review_on_washer + "</div>";
+            all_reviews += '</div>';
+            all_reviews += '</div>';
+            all_reviews += '</div>';
+            all_reviews += "<div class='col-6'>";
             for (let k = 0; k < all_orders[j].laundry_pics.length; k++) {
                 all_reviews += '<img class="img-rounded-small" src="' + all_orders[j].laundry_pics[k] + '" alt="Mister Washer" aria-hidden="true">';
             }
