@@ -34,7 +34,7 @@ async function display_new_order_for_user(orderID) {
         order_header = washer_doc.name + "will see your order soon...";
     }
     if (order.data().status == "process") {
-        order_header = "you get approved! see you!!";
+        order_header = "your laundry approved! see you!!";
     }
     if (order.data().status == "declined") {
         order_header = "sorry...the washer can't take your laundry...";
@@ -52,6 +52,8 @@ async function display_new_order_for_user(orderID) {
     order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+order.data().wash_settings+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+order.data().property+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order.data().comments+'<br/></div></tr>';
+    order_block += '<tr><th scope="col" colspan="2"><a href="../html/final_pages/user_profile_final.html" class="btn btn-info">get back to profile</a></th>';
+    order_block += '';
     document.getElementById("user_order").innerHTML = order_block;
 }
 

@@ -48,7 +48,6 @@ async function get_order_block_of_washer(order) {
 
 async function insert_orders_blocks_of_washer(tag, washerID, status) {
     all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
-    console.log(all_orders[0].data());
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {

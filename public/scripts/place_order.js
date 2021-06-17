@@ -11,8 +11,8 @@ const FAST_PTICE = 10;
 /*
 * order variable - will change according to place order section 
 */
-var due_to_date = "18/06";
-var due_to_hour ="12:00";
+var due_to_date = new Date();
+var due_to_hour = new Date().hour;
 var full_date = toTimestamp(due_to_date,due_to_hour);
 var loads = 1;
 var property = "deafult";
@@ -37,9 +37,9 @@ async function load_place_order_page(washerID) {
  * @returns timstamp in a seconds format
  */
 function toTimestamp(date,time){
-    year = "2021";
-    month = date.substring(3,5);
-    day = date.substring(0,2);
+    year = date.substring(0,4);
+    month = date.substring(5,7);
+    day = date.substring(8,10);
     hour = time.substring(0,2);
     minute = time.substring(3,5);
     second = "00";
@@ -79,8 +79,7 @@ function compute_price(loads, property, wash_settings) {
  * this function called in every change and update the memory and price so we can use the properties  
  */
 function update_properties_and_price() {
-    // due_to_date = document.getElementById("due_to_date").value;
-    due_to_date = "18/05";
+    due_to_date = document.getElementById("date").value;
     due_to_hour = document.getElementById("startTime").value;
     full_date = toTimestamp(due_to_date,due_to_hour);
     loads = document.getElementById("loads").value;
@@ -104,6 +103,7 @@ function create_order(washerID, userID) {
     const cb = document.getElementById('terms');
     if (cb.checked != true) {
         alert("please accept our terms");
+        return;
     }
     order123 = {
         comments: comments,
@@ -122,8 +122,31 @@ function create_order(washerID, userID) {
         laundry_pics: []
     }
     console.log(order123);
+    // cur_order = create order in firebase and return it(order123);
+    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); // cur_order
+    document.getElementById("overlay").style.display = "block";
     // add_to_firebase_order_df(order123);
     // overlay thank you page
 }
+
+
+  
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+
+// main function of place order page!!!!
+async function load_place_order_page(washerID) {
+    const washer_doc = await promiseWasherLoaderById(washerID);
+    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
+    console.log(all_orders);
+    load_profile_header_of_washer(washerID);
+    f_checkOpeningTimes(washer_doc);
+    f_get_opening_hours_table(washer_doc);
+    f_display_washer_detailes(washer_doc);
+    f_display_washer_reviews(all_orders);
+}
+
 
 

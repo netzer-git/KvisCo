@@ -1,29 +1,3 @@
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("user_order");
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-
-
 async function get_order_block_of_user(order) {
     const washer_doc = await order.data().washer.get()
     block = "";
@@ -45,11 +19,11 @@ async function get_order_block_of_user(order) {
     var formattedTime = hours + ':' + minutes.substr(-2);
     block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" nis</td></tr>"
     switch (order.data().status) {
-        case 'pending':
-            block += "</tr><th scope='col' colspan='2'><button class='button1'> Detailes </button></th></tr>";
-          break;
-        case 'process':
-            block += "</tr><th scope='col' colspan='2'><button class='button1'> Detailes </button></th></tr>";
+        case 'pending', 'process':
+            block += "</tr><th scope='col' colspan='2'>";
+            block += "<div id='overlay' onclick='off()'>";
+            block += "<div id='user_order'></div></div><div>";
+            block += "<div><button onclick='display_order()' class='button1'> Detailes </button></div></th></tr>";
           break;
         case 'finished':
             if (order.data().review_on_washer == "") {
@@ -82,3 +56,16 @@ async function load_order_blocks_of_user(userID) {
     insert_orders_blocks_of_user("in_process_orders", userID, "process");
     insert_orders_blocks_of_user("finished_orders", userID, "finished");
 }
+
+
+function display_order() {
+    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); // cur_order
+    document.getElementById("overlay").style.display = "block";
+    // add_to_firebase_order_df(order123);
+    // overlay thank you page
+}
+
+  
+function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
