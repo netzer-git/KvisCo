@@ -1,9 +1,9 @@
 .overflow-auto {
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 5px;
     padding: 15px;
-    width: 100%;
-    height: 350px;
+    width: 1000px;
+    height: 380px;
     overflow: scroll;
   }
 
@@ -31,6 +31,8 @@ h2 {
     text-align:center;
     float:center;
     display:block;
+    color: rgba(28, 28, 29, 1);
+    ;
 }
 
 .openorclosed {
@@ -42,7 +44,7 @@ h2 {
     padding:10px 10px 10px 10px;
     overflow: hidden;
     display: inline-block;
-    text-align:center;
+    text-align: left;
     padding:5px;
 }
 
@@ -51,6 +53,17 @@ h2 {
     text-align:center;
 } 
 
+.reviews_text {
+    
+    height: 54px;
+    width: 585px;
+    left: 758px;
+    top: 264px;
+    border-radius: nullpx;
+    color: rgba(71, 74, 87, 1);
+    font-size: 100%;
+    text-align: left;
+}
 
 .opening-hours--le {
     margin-left:auto;
@@ -115,7 +128,8 @@ table.machine_details tr{
 
     /* Main / Black */
 
-    color: #1C1C1D;
+    color:rgba(28, 28, 29, 1);
+    ;
 }
 
 .col_with_padd {

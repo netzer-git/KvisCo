@@ -184,8 +184,8 @@ h5 {
 }
 
 .navbar-brand img{
-    height: 40;
-    padding-left: 100;
+  height: 40;
+  padding-left: 100;
 } /* Logo button/*
 
 /* this class make elements stick to the top of the page on scroll */
@@ -270,12 +270,16 @@ border-radius: 15px;
 height: 30px;
 width: 180px;
 font-family: 'Montserrat', sans-serif;
-font-size: 100%;
+font-size: 15px;
 font-style: normal;
 font-weight: 900;
 line-height: 25px;
 letter-spacing: 0.44999998807907104px;
 text-align: center;
+}
+
+.button1:active {
+  transform: scale(0.98);
 }
 
 .button1-big {
@@ -458,6 +462,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     left: 0px;
     top: -0.6530609130859375px;
     margin-left: 5px;
+    margin-bottom: 5%;
     border-radius: 10px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
@@ -713,11 +718,11 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
   }
 
   .order-box {
-    height: 90%;
+    height: 490px;
     width: 90%;
     left: 718px;
     top: 164px;
-    margin-top: 3.4%;
+    margin-top: 5%;
     border-radius: 10px;
     background: rgba(255, 176, 188, 1);
     border: 2px solid rgba(28, 28, 29, 1);    
@@ -732,6 +737,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     color: rgba(71, 74, 87, 1);
     font-size: 100%;
     padding-left: 5%;
+    margin-top: 2%;
   }
 
 
@@ -755,7 +761,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     margin-top: 2%;
     margin-left: 5%;
     cursor: pointer;
-    font-size: 80%;
+    font-size: 100%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -823,8 +829,8 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     background: rgba(255, 255, 255, 1);
 	border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
-    height: 20%;
-    width: 100%;
+    height: 25%;
+    width: 115%;
     left: 0px;
     top: -0.6530606746673584px;
     border-radius: 10px;
