@@ -278,6 +278,10 @@ letter-spacing: 0.44999998807907104px;
 text-align: center;
 }
 
+.button1:active {
+  transform: scale(0.98);
+}
+
 .button1-big {
 /* Palet 2 / 4 */
 background: #FFC636;
