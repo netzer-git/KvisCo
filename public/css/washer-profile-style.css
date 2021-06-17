@@ -12,6 +12,15 @@
     margin-left: 5%;
 }
 
+.tabs-border-small {
+    border: 2px solid rgba(28, 28, 29, 1);
+    height: 56px;
+    width: 650px;
+    left: 0px;
+    top: 0px;
+    border-radius: 5px;
+}
+
 select::-ms-expand {
     display: none;
 }
