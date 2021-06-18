@@ -9,7 +9,7 @@ function show_profile_header_of_washer(tag, profile) {
     profile_header += '</table></div></div>';
     profile_header += '<div class="row">';
     profile_header += '<div class="col-7"><div class="location">'+profile.data().location_str+'</div></div>';   
-    profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star.png">'+ getRatingFromDoc(profile) + '</div></div>';       
+    profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(profile) + '</div></div>';       
     profile_header += '</div></div></div>';  
     profile_header += '<div class="row"><div class="col-2"></div><div class="col-10">'
     profile_header += '<img class="image-1" src="../images/laundry-room2.png"><img class="image-2" src="../images/folded-laundry1.png">'

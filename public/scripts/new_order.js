@@ -20,8 +20,12 @@ async function display_new_order_for_washer(orderID) {
     order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+order.data().wash_settings+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+order.data().property+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order.data().comments+'<br/> </div></tr>';
+    cur_price = order.data().price.toString() + " nis"  
+    order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr>';
+    order_block +='</table>';
     order_block += '<tr><td><button id="accept" value = "in_process" onclick = "change_status(this)" class= "yellow_button_3">Confirm</button></td>';
     order_block += '<td><button id="decline" value = "declined" onclick = "change_status(this)" class= "red_button">decline</button></td></tr>';
+    order_block +='</table>';
     document.getElementById("washer_order").innerHTML = order_block;
 }
 
@@ -52,8 +56,10 @@ async function display_new_order_for_user(orderID) {
     order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+order.data().wash_settings+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+order.data().property+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order.data().comments+'<br/></div></tr>';
-    order_block += '<tr><th scope="col" colspan="2"><a href="../html/final_pages/user_profile_final.html" class="btn btn-info">get back to profile</a></th>';
-    order_block += '';
+    cur_price = order.data().price.toString() + " nis"  
+    order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr>';
+    order_block += '<tr><th scope="col" colspan="2"><a href="../html/final_pages/user_profile_final.html" class="btn btn-info">back to profile</a></th>';  
+    order_block +='</table></table>';
     document.getElementById("user_order").innerHTML = order_block;
 }
 
