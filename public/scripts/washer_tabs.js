@@ -102,13 +102,13 @@ function f_display_washer_details(washer_doc) {
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    if (washer_doc.data().property == "ironing") {
+    if (washer_doc.data().properties == "ironing") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Ironing</td></tr>";
     }
-    if (washer_doc.data().property == "door2door") {
+    if (washer_doc.data().properties == "door2door") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
-    if (washer_doc.data().property == "dryer") {
+    if (washer_doc.data().properties == "dryer") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";
@@ -345,7 +345,7 @@ function color_today() {
 async function f_display_washer_reviews(all_orders) {
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_washer != "" && all_orders[j].data().rating_washer != 0) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null) {
             const user_that_review = await all_orders[j].data().user.get();
             // here start block of review
             all_reviews += "<div class='row'>";
@@ -372,9 +372,7 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
-            for (let k = 0; k < all_orders[j].data().laundry_pics.length; k++) {
-                all_reviews += '<img class="img-rounded-small" src="' + all_orders[j].data().laundry_pics[k] + '" alt="Mister Washer" aria-hidden="true">';
-            }
+            all_reviews += '<img class="img-rounded-small" src="' + all_orders[j].data().laundry_pic + '" alt="Mister Washer" aria-hidden="true">';
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += '<hr style="border: 2px solid #000000">';

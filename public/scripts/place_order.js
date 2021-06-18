@@ -99,13 +99,23 @@ function update_properties_and_price() {
  * @param {string} washerID the id of the washer
  * @param {string} userID the id of the user
  */
-function create_order(washerID, userID) {
+async function create_order(washerID) { //delete userID
     const cb = document.getElementById('terms');
     if (cb.checked != true) {
-        alert("please accept our terms");
+        alert("PLEASE ACCEPT OUR TERMS");
         return;
     }
-    order123 = {
+    if (!isUserSignedIn()) {
+        o
+        
+    }
+    // var userID = getTokensUser();
+    var usedID = "";
+    // if (!userID) {
+    //     register user
+    // }
+    // return
+    cur_order = {
         comments: comments,
         washer: washerID,
         user: userID,
@@ -115,9 +125,9 @@ function create_order(washerID, userID) {
         price: price,
         properties: property,
     }
-    console.log(order123);
-    // cur_order = create order in firebase and return it(order123);
-    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); // cur_order
+    console.log(cur_order);
+    // var orderID = await createNewOrder(cur_order)
+    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); //orderID
     document.getElementById("overlay").style.display = "block";
     // add_to_firebase_order_df(order123);
     // overlay thank you page

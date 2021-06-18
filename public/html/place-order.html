@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- this tag connects the header-page to the appropriate css -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="../css/overlay.css">
     <link rel="stylesheet" href="../css/new_order.css">
     <link rel="stylesheet" href="../css/place-order-css.css">
+    <link rel="stylesheet" href="../css/welcome.css">
 
 
     <script src="../scripts/app.js"></script>
@@ -61,7 +62,11 @@
     <script src="../../scripts/order_blocks_washer.js"></script>
     <script src="../scripts/new_order.js"></script>
     <script type="text/javascript">
-    window.onpaint = load_place_order_page('1LhDqVKzSkZdsnSC6wFrVG5jte93');
+    // var washerID = JSON.parse(sessionStorage.getItem("washerID"));
+    var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
+    // var userID = getUserToken();
+    // var userID = "";
+    window.onpaint = load_place_order_page(washerID);
     </script>
     
     <script>
@@ -97,55 +102,11 @@
             </div>
         </div>
     </div>
-    <!-- Header ends here-->
-    <!--Profile Details header starts here-->
-    <!--<div class="second_header">-->
     <div class="row">
-        <!-- <div class="col-6">
-            <div class="row">
-                <div class="col-1">
-                </div> -->
+
         <div class="col-6">
             <div id="profile_header"></div>
-            <!-- <div class="col-3">
-                    <div class="profile_pic">
-                        <a href="#"><img src="../images/Profile-yellow.png"></a>
-                    </div>
-                </div>
-                <div class="col-8">
-                    <div class="row">
-                        <div class="profile_pic">
-                            <table class="table-search">
-                                <tr>
-                                    <h8>Netzer Epstein</h8>
-                                </tr>
-                                </tr>
-                                <tr>
-                                    <div class="description">
-                                        Mechabes esh megil shesh (description)
-                                    </div>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-7">
-                            <div class="location">Hapalmach 7, Jerusalem</div>
-                        </div>
-                        <div class="col-5">
-                            <div class="location"><img class="rating-star" src="../images/Star_yellow.png">4.5</div>
-                        </div>
-                    </div>
-                </div> -->
 
-            <!-- <div class="row">
-                <div class="col-2">
-                </div>
-                <div class="col-10">
-                    <img class="image-1" src="../images/laundry-room2.png">
-                    <img class="image-2" src="../images/folded-laundry1.png">
-                </div>
-            </div> -->
         </div>
         <!-- Place Order Box -->
 
@@ -239,7 +200,7 @@
                                 <div id="user_order"></div>
                             </div>
                             <div>
-                                <button onclick="create_order('washer123','user123')" class="button1-big">SEND
+                                <button onclick="create_order(washerID)" class="button1-big">SEND
                                     REQUEST</button>
                             </div>                   
                         </div>
