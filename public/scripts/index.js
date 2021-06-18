@@ -65,7 +65,6 @@ async function exampleGettingUserDataIntoHTML2() {
 }
 
 
-
 /* ======================================================================== */
 var imageButtonElement = document.getElementById('submitImage');
 var imageFormElement = document.getElementById('image-form');
@@ -92,10 +91,24 @@ function displayImage() {
     }
 }
 
+
+var order1 = {
+    userID: "1LhDqVKzSkZdsnSC6wFrVG5jte93",
+    washerID: "1LhDqVKzSkZdsnSC6wFrVG5jte93",
+    price: 30,
+    loads: 3,
+    properties: "default and door2door",
+    due_to: new Date()
+}
+
 const testNadavQuery = async () => {
-    washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93"
-    const docArray = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
-    console.log("Nadav is running");
-    console.log("doc1: " + docArray[0].data().review_user);
-    console.log("doc2: " + docArray[1].data().review_user);
+    // washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93"
+    // const docArray = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
+    // console.log("Nadav is running");
+    // console.log("doc1: " + docArray[0].data().review_user);
+    // console.log("doc2: " + docArray[1].data().review_user);
+    reverseGeocoder(31.777030149931697, 35.198083551055305).then((response) => {
+        console.log(JSON.stringify(response))
+    });
+    document.getElementById("only-one").innerHTML = JSON.stringify(response);
 }

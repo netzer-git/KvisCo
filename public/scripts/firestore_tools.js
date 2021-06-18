@@ -18,7 +18,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document data: ", doc.data());
+                console.log("Document found: ", doc.uid);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
@@ -143,6 +143,7 @@ function promiseOrderArrayByUserIdAndStatus(userID, status) {
 
 /**
  * creates new order from order object and saves it to firestore server.
+ * @param {*} order : basic order object
  */
 function createNewOrder(order) {
     db.collection("orders").add({
@@ -160,6 +161,25 @@ function createNewOrder(order) {
         properties: order.properties,
         laundry_pic: null,
         comments: null,
+    }).then((docRef) => {
+        console.log("New order added: " + docRef);
+    })
+}
+
+/**
+ * create new user from the current user (on auth) and basic user object
+ * please notice: the user needs to be signed in (in auth) while creating new user (on firestore)
+ * @param {object} user : basic user object
+ */
+function createNewUser(user) {
+    db.collection("users").doc(getUserToken()).set({
+        name: user.name,
+        location_str: user.location_str,
+        location_cor: forwardGeocode(user.location_str),
+        saved_washers: [],
+        cover_photo: user.cover_photo,
+        rating_sum: 0,
+        rating_num: 0
     }).then((docRef) => {
         console.log("New order added: " + docRef);
     })
