@@ -204,19 +204,3 @@ function saveImageToUser(file) {
     });
 }
 
-function onMediaFileSelected(event) {
-    event.preventDefault();
-    var file = event.target.files[0];
-
-    // Clear the selection in the file picker input.
-    imageFormElement.reset();
-
-    // Check if the file is an image.
-    if (!file.type.match('image.*')) {
-        console.log("That's not an image");
-    } else if (isUserSignedIn()) {
-        saveImageToUser(file);
-    } else {
-        console.log("You are not connected");
-    }
-}
