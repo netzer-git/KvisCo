@@ -97,15 +97,25 @@ function update_properties_and_price() {
  * this function called when "submit request" pressed 
  * check if terms accepted, create order object and open "thank you"
  * @param {string} washerID the id of the washer
- * @param {string} userID the id of the user
  */
-function create_order(washerID, userID) {
+async function create_order(washerID) {
     const cb = document.getElementById('terms');
     if (cb.checked != true) {
-        alert("please accept our terms");
+        alert("PLEASE ACCEPT OUR TERMS");
         return;
     }
-    order123 = {
+    if (!isUserSignedIn()) {
+        signIn();
+        return;
+    }
+    var userID = getUserToken(); 
+    if (!promiseUserLoaderById(userID)) {
+        // display_new_order_for_user(orderID); //orderID
+        // document.getElementById("overlay").style.display = "block";
+        return;
+    }
+    console.log("full date is " , full_date); ///////////////////////////// date not correct
+    cur_order = {
         comments: comments,
         washer: washerID,
         user: userID,
@@ -113,20 +123,11 @@ function create_order(washerID, userID) {
         wash_settings: wash_settings,
         due_to: full_date,
         price: price,
-        property: property,
-        status: "pending",
-        rating_on_washer: 0,
-        review_on_washer: "",
-        rating_on_user: 0,
-        review_on_user: "",
-        laundry_pics: []
+        properties: property,
     }
-    console.log(order123);
-    // cur_order = create order in firebase and return it(order123);
-    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); // cur_order
-    document.getElementById("overlay").style.display = "block";
-    // add_to_firebase_order_df(order123);
-    // overlay thank you page
+    var orderID = await createNewOrder(cur_order);
+    display_new_order_for_user(orderID); //orderID
+    document.getElementById("overlay_thank_you").style.display = "block";
 }
 
 
@@ -144,7 +145,7 @@ async function load_place_order_page(washerID) {
     load_profile_header_of_washer(washerID);
     f_checkOpeningTimes(washer_doc);
     f_get_opening_hours_table(washer_doc);
-    f_display_washer_detailes(washer_doc);
+    f_display_washer_details(washer_doc);
     f_display_washer_reviews(all_orders);
 }
 
