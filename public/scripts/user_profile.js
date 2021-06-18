@@ -52,7 +52,7 @@ laundry_pics: []
 order111 = {
 orderID: "order111",
 washer: washer1, 
-user: "user7", 
+user: user7, 
 dueTO: "18/04", 
 Price: "30",
 status: "finished",
@@ -66,7 +66,7 @@ laundry_pics: ["../images/folded/folded1.jpg","../images/folded/folded2.jpg"]
 order144 = {
     orderID: "order144",
     washer: washer1, 
-    user: "user9", 
+    user: user9, 
     dueTO: "18/04", 
     Price: "30",
     status: "finished",
@@ -80,7 +80,7 @@ order144 = {
 order155 = {
     orderID: "order155",
     washer: washer1, 
-    user: "user7", 
+    user: user7, 
     dueTO: "18/04", 
     Price: "30",
     status: "finished",
@@ -92,17 +92,17 @@ order155 = {
 }
 
 order122 = {
-orderID: "order122",
-washer: washer1, 
-user: "user7", 
-dueTO: "18/04", 
-Price: "30",
-status: "finished",
-rating_on_washer: 0, 
-review_on_washer: "",
-rating_on_user: 0, 
-review_on_user: "",
-laundry_pics: []
+    orderID: "order122",
+    washer: washer1, 
+    user: user7, 
+    dueTO: "18/04", 
+    Price: "30",
+    status: "finished",
+    rating_on_washer: 0, 
+    review_on_washer: "",
+    rating_on_user: 0, 
+    review_on_user: "",
+    laundry_pics: []
 }
 
     

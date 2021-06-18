@@ -17,6 +17,9 @@
     margin-top: 5%;
 }
 
+table.leave_review_table tr {
+    text-align: center;
+}
 
 .header_24{
         margin-top: 5%;
