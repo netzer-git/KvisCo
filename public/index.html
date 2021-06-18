@@ -35,7 +35,7 @@
             press here to start the example!
         </button>
         <button type="button" onclick="testNadavQuery()">
-            Nadav's query!
+            Lets Geo Yo!
         </button>
         <button onclick="location.href='../html/components/profile_header.html'" type="button">
             profile_header</button>
@@ -52,14 +52,15 @@
         <button onclick="location.href='./html/washer-profile.html'" type="button">
             washer-profile</button>
         <form id="image-form" action="#">
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hide="true">
+            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
             <button id="submitImage" title="Add an image">
                 image
             </button>
-            <button onclick="displayImage()">
-                display image
-            </button>
         </form>
+        
+        <button onclick="displayImage()">
+            display image
+        </button>
         <div id="only-one">
             Hey!
         </div>
@@ -88,11 +89,14 @@
     <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
     <script src="/__/firebase/init.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/bigdatacloudapi/js-reverse-geocode-client@latest/bigdatacloud_reverse_geocode.min.js" type="text/javascript"></script>
+
     <script src="scripts/app.js"></script>
     <script src="scripts/tools.js"></script>
     <script src="scripts/firestore_tools.js"></script>
 
     <!-- JS for this specific page -->
     <script src="scripts/index.js"></script>
+
 </body>
 </html>
