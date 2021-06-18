@@ -113,13 +113,7 @@ function create_order(washerID, userID) {
         wash_settings: wash_settings,
         due_to: full_date,
         price: price,
-        property: property,
-        status: "pending",
-        rating_on_washer: 0,
-        review_on_washer: "",
-        rating_on_user: 0,
-        review_on_user: "",
-        laundry_pics: []
+        properties: property,
     }
     console.log(order123);
     // cur_order = create order in firebase and return it(order123);
@@ -144,7 +138,7 @@ async function load_place_order_page(washerID) {
     load_profile_header_of_washer(washerID);
     f_checkOpeningTimes(washer_doc);
     f_get_opening_hours_table(washer_doc);
-    f_display_washer_detailes(washer_doc);
+    f_display_washer_details(washer_doc);
     f_display_washer_reviews(all_orders);
 }
 
