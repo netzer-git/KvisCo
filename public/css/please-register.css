@@ -1,5 +1,5 @@
 .please_pink{
-    width: 900px;
+    width: 840px;
     height: 500px;
     left: 393px;
     top: 135px;
@@ -19,7 +19,7 @@
 
 .header_26{
     margin-top: 5%;
-    margin-left: 15%;
+    margin-left: 16%;
     text-align: center;
     margin-bottom: -10%;
 }
@@ -46,14 +46,15 @@
     color: #1C1C1D;
     margin-top: 2%;
     text-align: center;
-    margin-left: 25%;
+    margin-left: 26%;
 }
 
-.bottle{
+.bottles{
     left: 60.28%;
     right: 24.31%;
     top: 37.5%;
     bottom: 38.28%;
+    margin-bottom: 1%;
 
 }
 
