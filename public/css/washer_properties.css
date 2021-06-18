@@ -1,3 +1,13 @@
+.rounded-circle-small {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  
+    object-fit: cover;
+}
+
+
 .rounded-circle {
     display: inline-block;
     width: 100px;
@@ -12,7 +22,8 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-  
+    margin-top: 15%;
+    margin-left: 15%;
     object-fit: cover;
 }
 
@@ -20,6 +31,17 @@
     display: inline-block;
     width: 150px;
     height: 150px;
+    margin:10px; 
+    padding:10px;
+  
+    object-fit: cover;
+}
+
+
+.img-rounded-small {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
   
     object-fit: cover;
 }
