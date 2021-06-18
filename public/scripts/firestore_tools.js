@@ -110,8 +110,6 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
 
         query.get().then((docArray) => {
             const orderArray = [];
-            //console.log("docArray");
-            //console.log(docArray);
             docArray.forEach((doc) => {
                 if (doc.exists) {
                     console.log("doc")
