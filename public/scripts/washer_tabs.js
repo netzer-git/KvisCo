@@ -372,7 +372,9 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
-            all_reviews += '<img class="img-rounded-small" src="' + all_orders[j].data().laundry_pic + '" alt="Mister Washer" aria-hidden="true">';
+            if (all_orders[j].data().laundry_pics != null) {
+                all_reviews += "<img class='img-rounded-small' src=" + all_orders[j].data().laundry_pic + " alt='Mister Washer' aria-hidden='true'>";
+            }
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += '<hr style="border: 2px solid #000000">';
