@@ -97,24 +97,24 @@ function update_properties_and_price() {
  * this function called when "submit request" pressed 
  * check if terms accepted, create order object and open "thank you"
  * @param {string} washerID the id of the washer
- * @param {string} userID the id of the user
  */
-async function create_order(washerID) { //delete userID
+async function create_order(washerID) {
     const cb = document.getElementById('terms');
     if (cb.checked != true) {
         alert("PLEASE ACCEPT OUR TERMS");
         return;
     }
     if (!isUserSignedIn()) {
-        o
-        
+        signIn();
+        return;
     }
-    // var userID = getTokensUser();
-    var usedID = "";
-    // if (!userID) {
-    //     register user
-    // }
-    // return
+    var userID = getUserToken(); 
+    if (!promiseUserLoaderById(userID)) {
+        // display_new_order_for_user(orderID); //orderID
+        // document.getElementById("overlay").style.display = "block";
+        return;
+    }
+    console.log("full date is " , full_date); ///////////////////////////// date not correct
     cur_order = {
         comments: comments,
         washer: washerID,
@@ -125,12 +125,9 @@ async function create_order(washerID) { //delete userID
         price: price,
         properties: property,
     }
-    console.log(cur_order);
-    // var orderID = await createNewOrder(cur_order)
-    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); //orderID
-    document.getElementById("overlay").style.display = "block";
-    // add_to_firebase_order_df(order123);
-    // overlay thank you page
+    var orderID = await createNewOrder(cur_order);
+    display_new_order_for_user(orderID); //orderID
+    document.getElementById("overlay_thank_you").style.display = "block";
 }
 
 

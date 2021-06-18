@@ -64,8 +64,6 @@
     <script type="text/javascript">
     // var washerID = JSON.parse(sessionStorage.getItem("washerID"));
     var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
-    // var userID = getUserToken();
-    // var userID = "";
     window.onpaint = load_place_order_page(washerID);
     </script>
     
@@ -196,11 +194,16 @@
                     </div>
                     <div class="col-6">
                         <div style="margin-left: 5%; margin-top: 3%;">
-                            <div id="overlay" onclick="off()">
+                            <div id="overlay_register" onclick="off()">
+                                <div id="register_block"></div>
+                            </div>
+                            <div id="overlay_thank_you" onclick="off()">
                                 <div id="user_order"></div>
                             </div>
                             <div>
-                                <button onclick="create_order(washerID)" class="button1-big">SEND
+                                <!-- <button onclick="create_order(JSON.parse(sessionStorage.getItem('washerID')))" class="button1-big">SEND
+                                    REQUEST</button> -->
+                                <button onclick="create_order('1LhDqVKzSkZdsnSC6wFrVG5jte93')" class="button1-big">SEND
                                     REQUEST</button>
                             </div>                   
                         </div>
