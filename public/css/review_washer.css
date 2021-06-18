@@ -73,6 +73,7 @@
     /* Main / Black */
 
     color: #1C1C1D;
+    margin-left: 5%;
 }
 
 #submitImage{
@@ -108,6 +109,7 @@
     
     text-align: center;
     letter-spacing: 0.45px;
+    margin-left: 5%;
 }
 
 .photo_button{
@@ -152,6 +154,7 @@
     border-radius: 10px;
     width: 500px;
     height: 70px;
+    margin-left: 5%;
 
 }
 
@@ -218,6 +221,7 @@
     float: left;
     height: 46px;
     padding: 0 10px;
+    margin-left: 5%;
 }
 .rate:not(:checked) > input {
     position:absolute;

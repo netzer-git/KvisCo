@@ -62,7 +62,6 @@ table.order_white th{
 
     box-shadow: 0px 4px 0px #202020;
     border-radius: 10px;
-    text-align: center;
     width: 200px;
     height: 50px;
     margin-top: 2%;
@@ -82,38 +81,6 @@ table.order_white th{
     color: #1C1C1D;
 }
 
-.phone_number{
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-
-    /* Main / White */
-
-    background: #FFFFFF;
-    /* Main / Black */
-
-    border: 2px solid #1C1C1D;
-    border-radius: 25px;
-    width: 300px;
-    height: 50px;
-    margin-top: 1%;
-    margin-left: -5%;
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 150%;
-    /* or 51px */
-
-    text-align: center;
-    letter-spacing: 0.45px;
-
-    /* Main / Black */
-
-    color: #1C1C1D;
-
-}
 
 .header_24{
     margin-left:13%;
@@ -188,11 +155,41 @@ table.order_white th{
 
 
 .small-box-2{
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 0%;
+
+    /* Main / White */
+
+    background: #FFFFFF;
+    /* Main / Black */
+
+    border: 2px solid #1C1C1D;
+    border-radius: 25px;
+    width: 30%;
+    height: 20%;
+    margin-top: 1%;
+    margin-left: 3%;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 150%;
+    /* or 51px */
+
+    text-align: center;
+    letter-spacing: 0.45px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+}
+
+.phone_number{
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
-    height: 20%;
-    width: 30%;
     left: 0px;
     top: -0.6530606746673584px;
     border-radius: 10px;
@@ -203,4 +200,7 @@ table.order_white th{
     font-weight: bold;
     font-size: 20px;
     line-height: 32px;
+    width: 300px;
+    height: 50px;
+
 }

@@ -5,7 +5,9 @@
         <!-- this tag connects the header-page to the appropriate css -->
         <link rel="stylesheet" href="../css/washer_regist.css">
         <link rel="stylesheet" href="../css/welcome.css">
+        <link rel="stylesheet" href="../css/header_style.css">
         <script src="../js/header.js"></script>
+        <script src="../js/washer_regist.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
     </head>
 
@@ -21,10 +23,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <img class="user_profile_2" src="../images/Profile-yellow.png">
-                    </td>
-                    <td>
-                        <h4>
+                            <form id="image-form" action="#">
+                                <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
+                                <button id="submitImage3" title="Add an image">
+                                    Upload Profile Photo
+                                </button>
+                            </form>
+                        <!-- <img id="defualt_profile" class="user_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
+                        <h4 class="header_41">
                             Netzer Epstein
                         </h4>
                     </td>
@@ -39,11 +45,11 @@
                 <tr>
                     <th>
                     <form action="/action_page.php">
-                        <label for="city">City: </label>
+                        <label class="labels" for="city">City: </label>
                         <input class= "regist_input" type="text" id="city" name="city"><br>
-                        <label for="street">Street: </label>
+                        <label  class="labels" for="street">Street: </label>
                         <input class= "regist_input" type="text" id="street" name="street"><br>
-                        <label for="number">Number: </label>
+                        <label  class="labels" for="number">Number: </label>
                         <input class= "regist_input" type="text" id="number" name="number"><br>
                       </form>
                     </th>
@@ -58,7 +64,7 @@
                 <tr>
                     <th>
                     <form action="/action_page.php">
-                        <label for="city">Phone Number:  </label>
+                        <label class="labels" for="phone"></label>
                         <input class= "regist_input" type="text" id="phone" name="phone"><br>
                     </form>
                     </th>
@@ -73,11 +79,11 @@
                 <tr>
                     <th>
                     <form action="/action_page.php">
-                        <label for="module_name">Module Name: </label>
+                        <label  class="labels" for="module_name">Module Name: </label>
                         <input class= "regist_input" type="text" id="mudule" name="module"><br>
-                        <label for="capacity">Capacity: </label>
+                        <label  class="labels" for="capacity">Capacity: </label>
                         <input class= "regist_input" type="text" id="capacity" name="capacity"><br>
-                        <label for="year">Year Purchased: </label>
+                        <label  class="labels" for="year">Year Purchased: </label>
                         <input class= "regist_input" type="text" id="year" name="year"><br>
                       </form>
                     </th>
@@ -85,7 +91,7 @@
                 <tr>
                     <th>
                         <div class= "header_53">
-                            Add Photos of Your Laundry Machine & Environment
+                            Add Photos of Your Machine & Environment
                         </div>
                     </th>
                 </tr>
@@ -97,6 +103,41 @@
                                 Upload Photos
                             </button>
                         </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class= "header_53">
+                            Tell Us About Yourself
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="text" id="washer_details" name="washer_review"><br><br>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class= "header_53">
+                            Do You Provide Special Services?
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <div class= "labels">
+                    <input class= "cbx" type="checkbox" name="special_serve" value="Ironing" onclick="return ValidateServiceSelection();">Ironing<br>  
+                    <input class= "cbx" type="checkbox" name="special_serve" value="Door 2 Door" onclick="return ValidateServiceSelection();">Door 2 Door<br>  
+                    <input class= "cbx" type="checkbox" name="special_serve" value="Dryer" onclick="return ValidateServiceSelection();">Dryer<br>  
+                        <br>
+                    </div>
+                    </th>
+                </form>  
+                </tr>
+                <tr>
+                    <th>
+                    <button class= "yellow_button_4">Continue</button>
                     </th>
                 </tr>
 
