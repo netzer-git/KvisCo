@@ -219,7 +219,7 @@ function get_reviews_on_washer(tag, washer) {
 // }
 
 // details_tab
-function f_display_washer_detailes(washer_doc) {
+function f_display_washer_details(washer_doc) {
     let details_table = "<table class = machine_details>";
     details_table += "<tr><tr><th>Model Name</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
@@ -480,7 +480,7 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += "<div class='col-1'>";
             all_reviews += "</div>";
             all_reviews += "<div class='col-2'>";
-            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + user_that_review.data().imageURL + "></a></div>";
+            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + user_that_review.data().imageUrl + "></a></div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
             all_reviews += "<div class='location'>" +user_that_review.data().name + "</div>";
@@ -498,8 +498,8 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
-            for (let k = 0; k < all_orders[j].data().laundry_pics.length; k++) {
-                all_reviews += '<img class="img-rounded-small" src="' + all_orders[j].data().laundry_pics[k] + '" alt="Mister Washer" aria-hidden="true">';
+            if (all_orders[j].data().laundry_pics != null) {
+                all_reviews += "<img class='img-rounded-small' src=" + all_orders[j].data().laundry_pic + " alt='Mister Washer' aria-hidden='true'>";
             }
             all_reviews += '</div>';
             all_reviews += '</div>';
