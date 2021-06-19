@@ -185,7 +185,8 @@ async function setOrderDetails(orderDetails, orderId) {
  * @param {*} washer washer registration object
  */
 async function createNewWasher(washer) {
-    coordinates = forwardGeocode("Israel " + washer.city + " " + washer.street + " " + washer.number);
+    let data = await forwardGeocodePromise(washer.location_str);
+    let geoPoint = new firebase.firestore.GeoPoint(data.results[0].geometry.lat, data.results[0].geometry.lng);
     db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
@@ -193,7 +194,7 @@ async function createNewWasher(washer) {
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
-        location_cor: forwardGeocodePromise(washer.location_str).results[0].geometry,
+        location_cor: geoPoint,
         machine_type: washer.machine_type,
         description: washer.description,
         commitment: washer.commitment,
