@@ -231,7 +231,8 @@ function createNewUser(user) {
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
-        rating_num: 0
+        rating_num: 0,
+        phone: user.phone,
     }).then((docRef) => {
         console.log("New order added: " + docRef);
     });
