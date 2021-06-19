@@ -87,7 +87,6 @@ function updateFormFields(event) {
     helloField = helloElement.value;
     if (event !== null) {
         photoFile = event.target.files[0];
-        console.log("EVENT! " + JSON.stringify(event.target));
     }
 }
 
@@ -95,10 +94,6 @@ async function submitPhotoForm() {
     url = await saveImageToUser(photoFile);
     // create \ update user \ order
     console.log("hello: " + helloField + "url: " + url);
-}
-
-function clickTheImageButton() {
-    mediaCapture.click();
 }
 
 function displayImage() {
@@ -127,9 +122,8 @@ var order1 = {
 }
 
 const testNadavQuery = async () => {
-    // reverseGeocoder(31.777030149931697, 35.198083551055305).then((response) => {
-    //     console.log(JSON.stringify(response))
-    // });
+    var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    console.log("is it working: " + JSON.stringify(address));
     // document.getElementById("only-one").innerHTML = JSON.stringify(response);
     // filters = {commitment: 80};
     // wArray = await getWasherFilterQuery(filters);

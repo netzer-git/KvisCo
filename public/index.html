@@ -64,7 +64,7 @@
         <div class="container-fluid" style="margin: 50px">
             <textarea rows="1" cols="30" id="hello" onchange="updateFormFields()" placeholder="hello!"></textarea>
             <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden onchange="updateFormFields(event)">
-            <button title="Add an image" onclick="clickTheImageButton()">
+            <button title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                 image
             </button>
             <button onclick="submitPhotoForm()">
