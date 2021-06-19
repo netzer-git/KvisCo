@@ -186,7 +186,7 @@ async function setOrderDetails(orderDetails, orderId) {
  */
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
-    let geoPoint = new firebase.firestore.GeoPoint(data.results[0].geometry.lat, data.results[0].geometry.lng);
+    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
@@ -226,7 +226,7 @@ async function setWasherOpenTimes(openTimes, washerId) {
  */
 async function createNewUser(user) {
     let data = await forwardGeocodePromise(user.location_str);
-    let geoPoint = new firebase.firestore.GeoPoint(data.results[0].geometry.lat, data.results[0].geometry.lng);
+    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
@@ -262,6 +262,24 @@ async function saveImageToUser(file) {
         return url;
     }
     
+}
+
+/**
+ * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
+ * Notice: there is no difference between washer's "cover_photo" attribute to "pics" when saving images to storage.
+ * @param {*} file image file
+ * @param {*} washerId the id of the current washer
+ * @returns image url path to firebase storage
+ */
+async function saveImageToWasher(file, washerId) {
+    if (file === null) {
+        console.error("You are trying to upload an empty file");
+        return null;
+    }
+    let filePath = washerId + '/' + file.name;
+    let fileSnapshot = await storage.ref(filePath).put(file);
+    let url = await fileSnapshot.ref.getDownloadURL();
+    return url;
 }
 
 /**

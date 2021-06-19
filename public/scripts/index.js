@@ -124,8 +124,7 @@ var order1 = {
 const testNadavQuery = async () => {
     var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
     let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
-    data = data.results[0];
-    let geoPoint = new firebase.firestore.GeoPoint(data.geometry.lat, data.geometry.lng);
+    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     console.log(geoPoint);
     // document.getElementById("only-one").innerHTML = JSON.stringify(response);
     // filters = {commitment: 80};
