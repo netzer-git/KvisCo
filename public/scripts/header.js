@@ -1,4 +1,4 @@
-<script src="js\jquery-3.6.0.min.js"></script>
+// src="js\jquery-3.6.0.min.js">
 
 $(".checkbox-dropdown").click(function () {
     $(this).toggleClass("is-active");

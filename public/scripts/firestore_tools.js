@@ -47,19 +47,16 @@ function promiseWasherLoaderById(documentID) {
  */
 function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
-
 }
 
 /*
- * the function takes docID - the id of the order - and resolve a promise of the document of the order.
+ * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
- * USAGE: promiseOrderLoaderById(docID).then(doc => { // do something with.doc.data })
+ * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseOrderLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('orders', documentID);
-
 }
-
 
 /*
  * the function resolve a promise of the document of the current user based on the Auth system.
@@ -149,6 +146,8 @@ function promiseOrderArrayByUserIdAndStatus(userId, status) {
  * @param {*} order : basic order object
  */
 async function createNewOrder(order) {
+    // let user = await db.doc('users/' + order.userID);
+    // let washer = await db.doc('washers/' + order.washerID);
     let newOrderRef = await db.collection("orders").add({
         user: db.doc('users/' + order.user),
         washer: db.doc('washers/' + order.washer),
