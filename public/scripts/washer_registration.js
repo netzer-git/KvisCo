@@ -59,9 +59,10 @@ function save_machine_pic(event) {
     }
 }
 
-function save_special_service()  
-{  
-    washer_properties = document.getElementsByName("special_serve").value;  
+function save_special_service(choise) {  
+    // washer_properties = document.getElementsByName("special_serve").value; 
+    washer_properties = choise.value; 
+    console.log(washer_properties); 
 }  
 
 
@@ -73,7 +74,7 @@ async function create_washer() {
         profile_pic_url = null
     }
     if (profile_pic_url == null || washer_location_str == null || washer_phone_number == null || washer_description == null
-        || washer_capacity == null || washer_machine_type == null || washer_year_purchased == null) {
+        || washer_properties == null || washer_capacity == null || washer_machine_type == null || washer_year_purchased == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
@@ -90,11 +91,11 @@ async function create_washer() {
     catch {
         second_pic = ""
     }
-    pics_url =[first_pic, second_pic];
+    pics_urls =[first_pic, second_pic];
     new_washer = {
         name: getUserDisplayName(),
         imageUrl: profile_pic_url,
-        washer_pics: pics_url,
+        pics: pics_urls,
         location_str: washer_location_str,
         machine_type: washer_machine_type,
         description: washer_description,
@@ -106,7 +107,7 @@ async function create_washer() {
     }
     console.log(new_washer);
     await createNewWasher(new_washer);
-    // window.location.href = "../html/washer-profile.html";
+    window.location.href = "../html/washer-profile.html";
 }
 
 

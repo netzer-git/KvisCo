@@ -33,8 +33,8 @@ async function create_user() {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
-    // url = saveImageToUser(user_cover_photo);
-    url = "";
+    url = await saveImageToUser(user_cover_photo);
+    // url = "";
     new_user = {
         name: getUserDisplayName(),
         location_str: user_location_str,
@@ -44,7 +44,7 @@ async function create_user() {
     }
     console.log(new_user);
     await createNewUser(new_user);
-    // window.location.href = "../html/washer-profile.html";
+    window.location.href = "../html/user_profile_final.html";
 }
 
 

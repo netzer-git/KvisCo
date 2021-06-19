@@ -161,10 +161,12 @@
                 </tr>
                 <tr>
                     <th>
-                    <div class= "labels">
-                    <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service();">Ironing<br>  
-                    <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service();">Door 2 Door<br>  
-                    <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service();">Dryer<br>  
+                    <div class= "labels" >
+                        <form name="special_serve">
+                            <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">Ironing<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service(this);">Door 2 Door<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>  
+                        </form>
                         <br>
                     </div>
                     </th>
