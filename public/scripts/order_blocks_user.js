@@ -4,7 +4,7 @@ async function get_order_block_of_user(order) {
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
-    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src=" + washer_doc.data().imageUrl + " alt='profile_pic'> </th></tr>";
+    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'> </th></tr>";
     block += "<tr><th scope='col' colspan='2'>"+ washer_doc.data().name +"</th></tr>";
     // block += "<tr><td scope='col' colspan='2'>"+ order.orderID +"</td></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";

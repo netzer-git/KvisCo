@@ -285,7 +285,7 @@ async function f_display_user_reviews(all_orders) {
             all_reviews += "<div class='col-3'>"
             all_reviews += '</div>';
             all_reviews += "<div class='col-9'>";
-            all_reviews += "<div class='reviews_text'>" + all_orders[j].data().review_washer + "</div>";
+            all_reviews += "<div class='reviews_text'>" + all_orders[j].data().review_user + "</div>";
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += '</div>';

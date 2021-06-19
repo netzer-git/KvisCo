@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="../css/place-order-css.css">
     <link rel="stylesheet" href="../css/washer_properties.css">
     <link rel="stylesheet" href="../css/header_style.css">
+    <link rel="stylesheet" href="../css/washer_tabs.css">
     <link rel="stylesheet" href="../css/washer-profile-style.css">
     <link rel="stylesheet" href="../css/user-profile.css">
     <link rel="stylesheet" href="../css/washer_properties.css">
+
     <script src="../scripts/profile_header.js"></script>
     <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
@@ -30,7 +32,6 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="../scripts/header.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -51,6 +52,7 @@
     <script src="../scripts/profile_header.js"></script>
     <script src="../scripts/order_blocks_user.js"></script>
     <script src="../scripts/new_order.js"></script>
+    <script src="../scripts/washer_tabs.js"></script>
     <script src="../scripts/app.js"></script>
     <script src="../scripts/tools.js"></script>
     <script src="../scripts/firestore_tools.js"></script>
@@ -62,10 +64,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <script type="text/javascript">
-        // $(document).ready();
-        window.onpaint = load_user_profile_page();
-    </script>
 </head>
 
 <body>
@@ -115,9 +113,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-1">
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <div style="margin-top: 5%;" class="row text-center">
                 <div class="col-lg-6">
                     <div class="tabs-border-small">
@@ -130,10 +128,8 @@
                     <div class="window-border">
                         <div class="tab-content">
                             <div class="tab-pane active" id="3">
-                                <div class="overflow-auto">
-                                    <div id="my_reviews"></div>
-                                    <!-- function that get the reviews by loop -->
-                                </div>
+                                <div id="my_reviews"></div>
+                                <!-- function that get the reviews by loop -->
                             </div>
                         </div>
                     </div>
@@ -144,51 +140,11 @@
         </div>
     </div>
 
-    <!-- main section starts here-->
-    <div class="container-fluid">
-        <div class="row" id="main_profile">
-            <!-- favorites starts here-->
-            <div class="col-lg-6" id="favorite_washers">
-                <div class="row text-center with_padd">
-                    <h3> Reviews </h3>
-                </div>
-                <div class="row">
-                </div>
-            </div>
-
-            <!-- Orders starts here-->
-            <div class="col-lg-6">
-                <div class="row text-center with_padd">
-                    <h3> Laundry in process</h3>
-                </div>
-                <div class="card sticky-top">
-                    <div class="container testimonial-group">
-                        <div class="row text-center">
-                            <div id="in_process_orders"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row text-center with_padd">
-                    <h3>Laundry History</h3>
-                </div>
-                <div class="container testimonial-group">
-                    <div class="row text-center">
-                        <div id="finished_orders"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>load_profile_header_of_user('c0KmkCafo7bZmCcZvW2Nr7NqgDK2')</script>
-        <script>load_order_blocks_of_user('c0KmkCafo7bZmCcZvW2Nr7NqgDK2')</script>
-
-
-    </div>
-    </div>
-    </div>
-
 </body>
-
+<script type="text/javascript">
+    // $(document).ready();
+    window.onpaint = load_user_profile_page();
+</script>
 <script>
     $("#includedContent").load("./includes/header.html");
 </script>
