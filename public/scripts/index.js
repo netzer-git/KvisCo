@@ -123,7 +123,10 @@ var order1 = {
 
 const testNadavQuery = async () => {
     var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
-    console.log("is it working: " + JSON.stringify(address));
+    let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    data = data.results[0];
+    let geoPoint = new firebase.firestore.GeoPoint(data.geometry.lat, data.geometry.lng);
+    console.log(geoPoint);
     // document.getElementById("only-one").innerHTML = JSON.stringify(response);
     // filters = {commitment: 80};
     // wArray = await getWasherFilterQuery(filters);

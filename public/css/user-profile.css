@@ -24,6 +24,11 @@ table.machine_details th{
     color: #1C1C1D;
 }
 
+.laundry-proccess {
+    font-size: 20px;
+    color: black;
+}
+
 
 table.machine_details tr{
     /* position: absolute; */
