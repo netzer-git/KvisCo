@@ -27,9 +27,9 @@ function show_profile_header_of_user(tag, profile) {
         profile_header += '<tr><div class="description">'+profile.data().description +'</div></tr>';
         profile_header += '</table></div></div>';
         profile_header += '<div class="row">';
-        profile_header += '<div class="col-7"><div class="location">'+profile.data().location_str+'</div></div>';   
-        profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star.png">'+ getRatingFromDoc(profile) + '</div></div>';       
-        profile_header += '</div></div></div>';  ;
+        profile_header += "<div class='col-7'><div class='location'>"+profile.data().location_str+"</div></div>";   
+        profile_header += "<div class='col-5'><div class='location'><img class='rating-star' src='../images/Star_yellow.png'>"+ getRatingFromDoc(profile) + "</div></div>";       
+        profile_header += '</div></div></div>';
         document.getElementById(tag).innerHTML = profile_header;  
 
 }
