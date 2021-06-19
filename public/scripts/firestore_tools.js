@@ -231,7 +231,9 @@ function createNewUser(user) {
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
-        rating_num: 0
+        rating_num: 0,
+        phone: user.phone,
+        description: user.description,
     }).then((docRef) => {
         console.log("New order added: " + docRef);
     });
@@ -277,9 +279,9 @@ async function saveImageToUser(file) {
 }
 
 /**
- * 
- * @param {*} filters 
- * @returns 
+ * the function takes filters obj with specific fields and returns all of the relevant washer docs any possible filter combination.
+ * @param {*} filters filters obj
+ * @returns array of washers
  */
 async function getWasherFilterQuery(filters) {
     var filteredWashers = [];
