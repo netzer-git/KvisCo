@@ -4,8 +4,9 @@
  * @returns long string of order
  */
 async function get_order_block_of_washer(order) {
-    const user_doc = await order.data().user.get()
-    console.log("user_doc:" ,user_doc.data().name)
+    console.log("user_doc: " ,order.data().user);
+    const user_doc = await order.data().user.get();
+    console.log("user_doc:" ,user_doc.data().name);
     block = "";
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
@@ -13,14 +14,10 @@ async function get_order_block_of_washer(order) {
     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='netzer'> </th></tr>";
     block += "<tr><th scope='col' colspan='2'>"+ user_doc.data().name +"</th></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
-
-    let unix_timestamp = order.data().due_to['seconds']
+    let unix_timestamp = order.data().due_to;
     var date = new Date(unix_timestamp * 1000);
     var month = date.getMonth();
     var day = date.getDate();
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
     var formattedTime = day + '/' + month;
 
     block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" nis</td></tr>"
@@ -48,7 +45,8 @@ async function get_order_block_of_washer(order) {
 
 
 async function insert_orders_blocks_of_washer(tag, washerID, status) {
-    all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
+    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
+    console.log("this is the orders for status:",status," ",all_orders);
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
@@ -61,8 +59,8 @@ async function load_order_blocks_of_washer(washerID) {
     // const washer_doc = await promiseWasherLoaderById(washerID);
     // console.log(washer_doc);
     // insert_orders_blocks_of_user("in_process_orders", washer_doc, "processing");
-    insert_orders_blocks_of_washer("in_process_orders", washerID, "finished");
-    insert_orders_blocks_of_washer("finished_orders", washerID, "process");
+    insert_orders_blocks_of_washer("in_process_orders", washerID, "process");
+    insert_orders_blocks_of_washer("finished_orders", washerID, "finished");
     
 }
 

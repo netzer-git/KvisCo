@@ -8,12 +8,10 @@ const DRYER_PRICE = 12;
 const FAST_PTICE = 10;
 
 
-/*
-* order variable - will change according to place order section 
-*/
-var due_to_date = new Date();
-var due_to_hour = new Date().hour;
-var full_date = toTimestamp(due_to_date,due_to_hour);
+
+var due_to_date;
+var due_to_hour;
+var full_date = new Date();
 var loads = 1;
 var property = "deafult";
 var wash_settings = "deafult";
@@ -55,7 +53,6 @@ function toTimestamp(date,time){
  * @returns 
  */
 function compute_price(loads, property, wash_settings) {
-    console.log("loads:" + loads, "prop:" + property, "washs:" + wash_settings);
     var pricing = loads*DEAFULT_PRICE;
     if (property == "door2door") {
         pricing += DOOR2DOOR_PRICE;
@@ -114,7 +111,6 @@ async function create_order(washerID) {
         // document.getElementById("overlay").style.display = "block";
         return;
     }
-    console.log("full date is " , full_date); ///////////////////////////// date not correct
     cur_order = {
         comments: comments,
         washer: washerID,
@@ -132,16 +128,15 @@ async function create_order(washerID) {
 
 
   
-  function off() {
-    document.getElementById("overlay").style.display = "none";
-  }
+function off() {
+    document.getElementById("overlay_thank_you").style.display = "none";
+}
 
 
 // main function of place order page!!!!
 async function load_place_order_page(washerID) {
     const washer_doc = await promiseWasherLoaderById(washerID);
     const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
-    console.log(all_orders);
     load_profile_header_of_washer(washerID);
     f_checkOpeningTimes(washer_doc);
     f_get_opening_hours_table(washer_doc);

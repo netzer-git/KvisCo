@@ -1,48 +1,47 @@
-function show_profile_header_of_washer(tag, profile) {
-    // profile_header = '<div class="row"><div class="col-6">';
-    profile_header = '<div class="row"><div class="col-1"></div>';
-    // profile_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src=' + profile.data().imageUrl + '></div></div>';
-    profile_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="../images/tal_e_pic.png"></div></div>';
-    profile_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
-    profile_header += '<table class="table-search"><tr><h4>'+ profile.data().name +'</h4></tr></tr>';
-    profile_header += '<tr><div class="description">'+profile.data().description +'</div></tr>';
-    profile_header += '</table></div></div>';
-    profile_header += '<div class="row">';
-    profile_header += '<div class="col-7"><div class="location">'+profile.data().location_str+'</div></div>';   
-    profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(profile) + '</div></div>';       
-    profile_header += '</div></div></div>';  
-    profile_header += '<div class="row"><div class="col-2"></div><div class="col-10">'
-    profile_header += '<img class="image-1" src="../images/laundry-room2.png"><img class="image-2" src="../images/folded-laundry1.png">'
-    profile_header += '</div>';
-    document.getElementById(tag).innerHTML = profile_header;               
-}
-
-function show_profile_header_of_user(tag, profile) {
-        // profile_header = '<div class="row"><div class="col-6">';
-        profile_header = '<div class="row"><div class="col-1"></div>';
-        // profile_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src=' + profile.data().imageUrl + '></div></div>';
-        profile_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="../images/tal_e_pic.png"></div></div>';
-        profile_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
-        profile_header += '<table class="table-search"><tr><h4>'+ profile.data().name +'</h4></tr></tr>';
-        profile_header += '<tr><div class="description">'+profile.data().description +'</div></tr>';
-        profile_header += '</table></div></div>';
-        profile_header += '<div class="row">';
-        profile_header += '<div class="col-7"><div class="location">'+profile.data().location_str+'</div></div>';   
-        profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star.png">'+ getRatingFromDoc(profile) + '</div></div>';       
-        profile_header += '</div></div></div>';  ;
-        document.getElementById(tag).innerHTML = profile_header;  
-
-}
 
 
+
+/**
+ * display block of the washer header - his name, description and profile picture
+ * also display pics he uploaded if there are 
+ * @param {string} washerID id of washer
+ */
 async function load_profile_header_of_washer(washerID) {
     const washer_doc = await promiseWasherLoaderById(washerID);
-    console.log(washer_doc);
-    show_profile_header_of_washer("profile_header",washer_doc);
+    washer_header = '<div class="row"><div class="col-1"></div>';
+    washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
+    washer_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
+    washer_header += '<table class="table-search"><tr><h4>'+ washer_doc.data().name +'</h4></tr></tr>';
+    washer_header += '<tr><div class="description">'+washer_doc.data().description +'</div></tr>';
+    washer_header += '</table></div></div>';
+    washer_header += '<div class="row">';
+    washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
+    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(washer_doc) + '</div></div>';       
+    washer_header += '</div></div></div>';  
+    washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
+    if (washer_doc.data().pics !== undefined) {
+        washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[0] +'">';
+        washer_header += '<img class="image-2" src="'+ washer_doc.data().pics[1] +'">';
+    }
+    washer_header += '</div>';
+    document.getElementById("profile_header").innerHTML = washer_header;   
 }
 
+/**
+ * display block of the user header - his name, description and profile picture
+ * @param {string} userID id of user
+ */
 async function load_profile_header_of_user(userID) {
     const user_doc = await promiseUserLoaderById(userID);
-    console.log(user_doc.data().name)
-    show_profile_header_of_user("profile_header",user_doc);
+    user_header = '<div class="row"><div class="col-1"></div>';
+    user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="../images/tal_e_pic.png"></div></div>';
+    user_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
+    user_header += '<table class="table-search"><tr><h4>'+ user_doc.data().name +'</h4></tr></tr>';
+    user_header += '<tr><div class="description">'+user_doc.data().description +'</div></tr>';
+    user_header += '</table></div></div>';
+    user_header += '<div class="row">';
+    user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
+    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star.png">'+ getRatingFromDoc(user_doc) + '</div></div>';       
+    user_header += '</div></div></div>';  ;
+    document.getElementById("profile_header").innerHTML = user_header;  
 }
