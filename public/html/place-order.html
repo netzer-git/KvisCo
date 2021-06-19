@@ -126,6 +126,10 @@
                                 <input class="choose_location" type="date" id="date" value="2021-07-09"
                                     onchange="update_properties_and_price()"> <!-- Date -->
                             </div>
+                            <script>
+                                document.getElementById('date').value = new Date().toISOString().substring(0, 10);
+                                console.log("cur date is" + document.getElementById('date').value)
+                            </script>
                         </td>
                         <td style="padding-left: 50px;"><input class="choose_location" type="time" id="startTime"
                                 value="08:00" onchange="update_properties_and_price()"></td>

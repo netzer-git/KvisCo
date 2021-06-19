@@ -7,7 +7,7 @@ async function display_new_order_for_washer(orderID) {
     order_block += '<table><tr><h2 class="header_24">YOU RECIEVED A NEW ORDER</h2></tr>';
     order_block += '<tr><table class= "order_white">';
     order_block += '<tr><td><img class="rounded-circle" src= "' + user_doc.data().imageUrl + '" alt="profile_pic"></td><td><h4>'+user_doc.data().name+'</h4></td></tr>';
-    var date_not_format = order.data().due_to['seconds']*1000;
+    var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
     var time = date.getHours()+":"+ "0" +date.getMinutes();
@@ -43,10 +43,10 @@ async function display_new_order_for_user(orderID) {
     order_block += '<table><tr><h2 class="header_24">'+order_header+'</h2></tr>';
     order_block += '<tr><table class= "order_white">';
     order_block += '<tr><td><img class="rounded-circle" src="' + washer_doc.data().imageUrl + '" alt="profile_pic"></td><td><h4>'+washer_doc.data().name+'</h4></td></tr>';
-    var date_not_format = order.data().due_to;
+    var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-    var time = date.getHours()+":"+ "0" +date.getMinutes();
+    var time = date.getHours()+":"+ + date.getMinutes();
     order_block += '<tr><td><h6 class= "header_61">Date</h6></td><td><h6 class= "header_61">'+l_date+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Drop off hour</h6></td><td><h6 class= "header_61">'+time+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Loads</h6></td><td><h6 class= "header_61">'+order.data().loads+'</h6></td></tr>';
