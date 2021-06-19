@@ -52,13 +52,19 @@
         <button onclick="location.href='./html/washer-profile.html'" type="button">
             washer-profile</button>
             <button onclick="location.href='./html/welcome.html'" type="button">
-                Welcome</button>
-        <form id="image-form" action="#">
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
-            <button id="submitImage" title="Add an image">
+                Welcome
+            </button>
+        <!-- form for uploading pictures and more fields -->
+        <div class="container-fluid" style="margin: 50px">
+            <textarea rows="1" cols="30" id="hello" onchange="updateFormFields()" placeholder="hello!"></textarea>
+            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden onchange="updateFormFields(event)">
+            <button title="Add an image" onclick="clickTheImageButton()">
                 image
             </button>
-        </form>
+            <button onclick="submitPhotoForm()">
+                Lets RUN!--
+            </button>
+        </div>
         
         <button onclick="displayImage()">
             display image

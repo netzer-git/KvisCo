@@ -107,8 +107,6 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
 
         query.get().then((docArray) => {
             const orderArray = [];
-            //console.log("docArray");
-            //console.log(docArray);
             docArray.forEach((doc) => {
                 if (doc.exists) {
                     console.log("doc")
@@ -240,17 +238,49 @@ function createNewUser(user) {
 }
 
 /**
- * Saves a new message containing an image in Firebase. This first saves the image in Firebase storage.
+ * Saves a new image containing to user folder in firestorage. This first saves the image in Firebase storage.
  * @param {*} file image file
  * @return {string} image url path to firebase storage
  */
 async function saveImageToUser(file) {
-    let filePath = getUserToken() + '/' + file.name;
-    let fileSnapshot = await storage.ref(filePath).put(file);
-    let url = await fileSnapshot.getDownloadURL();
-    return url;
+    if (!isUserSignedIn()) {
+        console.error("You are trying to upload a picture to undefined user");
+    }
+    else {
+        if (file === null) {
+            console.error("You are trying to upload an empty file");
+            return null;
+        }
+        let filePath = getUserToken() + '/' + file.name;
+        let fileSnapshot = await storage.ref(filePath).put(file);
+        let url = await fileSnapshot.ref.getDownloadURL();
+        return url;
+    }
+    
 }
 
+/**
+ * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
+ * @param {*} file image file
+ * @param {string} orderId the id of the current order
+ * @return {string} image url path to firebase storage
+ */
+ async function saveImageToOrder(file, orderId) {
+        if (file === null) {
+            console.error("You are trying to upload an empty file");
+            return null;
+        }
+        let filePath = orderId + '/' + file.name;
+        let fileSnapshot = await storage.ref(filePath).put(file);
+        let url = await fileSnapshot.ref.getDownloadURL();
+        return url;
+}
+
+/**
+ * 
+ * @param {*} filters 
+ * @returns 
+ */
 async function getWasherFilterQuery(filters) {
     var filteredWashers = [];
     let washersArray = await db.collection('washers').get();

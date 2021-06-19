@@ -8,10 +8,10 @@ async function get_order_block_of_user(order) {
     block += "<tr><th scope='col' colspan='2'>"+ washer_doc.data().name +"</th></tr>";
     // block += "<tr><td scope='col' colspan='2'>"+ order.orderID +"</td></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
-    let unix_timestamp = order.data().due_to['seconds']
+    let unix_timestamp = (order.data().due_to)*1000
     // Create a new JavaScript Date object based on the timestamp
     // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-    var date = new Date(unix_timestamp * 1000);
+    var date = new Date(unix_timestamp);
     // Hours part from the timestamp
     var hours = date.getHours();
     // Minutes part from the timestamp
@@ -43,7 +43,7 @@ async function get_order_block_of_user(order) {
 
 
 async function insert_orders_blocks_of_user(tag, userID, status) {
-    all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
+    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
