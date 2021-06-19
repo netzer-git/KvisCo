@@ -277,9 +277,9 @@ async function saveImageToUser(file) {
 }
 
 /**
- * 
- * @param {*} filters 
- * @returns 
+ * the function takes filters obj with specific fields and returns all of the relevant washer docs any possible filter combination.
+ * @param {*} filters filters obj
+ * @returns array of washers
  */
 async function getWasherFilterQuery(filters) {
     var filteredWashers = [];
