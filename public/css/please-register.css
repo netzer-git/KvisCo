@@ -1,0 +1,136 @@
+.please_pink{
+    width: 840px;
+    height: 500px;
+    left: 393px;
+    top: 135px;
+    
+    /* Palet 1 / 3 */
+    
+    background: #FFB0BC;
+    /* Main / Black */
+    
+    border: 2px solid #1C1C1D;
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.header_26{
+    margin-top: 5%;
+    margin-left: 16%;
+    text-align: center;
+    margin-bottom: -10%;
+}
+
+.header_54{
+    width: 535px;
+    height: 32px;
+    left: 296px;
+    top: 326px;
+
+    /* Headline/Title/Bold 24 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 32px;
+    /* identical to box height, or 145% */
+
+    letter-spacing: 0.625px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+    margin-top: 2%;
+    text-align: center;
+    margin-left: 26%;
+}
+
+.bottles{
+    left: 60.28%;
+    right: 24.31%;
+    top: 37.5%;
+    bottom: 38.28%;
+    margin-bottom: 1%;
+
+}
+
+.machine_2{
+    width: 199px;
+    height: 229px;
+    left: 394px;
+    top: 408px;
+    margin-left: 10%;
+}
+
+.blue_button{
+    width: 200px;
+    height: 50px;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 7.41%;
+
+    /* Palet 1 / 4 */
+
+    background: #19FFE3;
+    /* Main / Black */
+
+    border: 1px solid #1C1C1D;
+    box-sizing: border-box;
+    /* Button */
+
+    box-shadow: 0px 4px 0px #202020;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 100%;
+    /* or 18px */
+
+    text-align: center;
+    letter-spacing: 0.45px;
+    margin-left: 10%;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+}
+
+.blue_button_2{
+    width: 200px;
+    height: 50px;
+    left: 0%;
+    right: 0%;
+    top: 0%;
+    bottom: 7.41%;
+
+    /* Palet 1 / 4 */
+
+    background: #19FFE3;
+    /* Main / Black */
+
+    border: 1px solid #1C1C1D;
+    box-sizing: border-box;
+    /* Button */
+
+    box-shadow: 0px 4px 0px #202020;
+    border-radius: 10px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 100%;
+    /* or 18px */
+
+    text-align: center;
+    letter-spacing: 0.45px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+}

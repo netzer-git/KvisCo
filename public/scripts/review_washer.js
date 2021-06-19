@@ -35,26 +35,35 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 
 var rating;
 var review;
-var save_laundry_pics;
+var photo;
 
 function save_rating(rateID) {
   rating = rateID.value;
   // console.log(rating);
 }
 
+function save_pic(event) {
+  var photo = event.target.files[0]; 
+  console.log(photo);
+}
+
 function save_review_change() {
   review = document.getElementById("washer_review").value;
 }
 
-function save_laundry_pics() {
-  laundry_pics = "";
-}
 
 function add_review(on_who) {
   if (review == null || rating == null) {
-    alert("you did not make your review");
+    alert("PLEASE RATE AND REVIEW");
   }
-  if (photo == null) {
+  try {
+    order = {
+      review_washer: review,
+      rating_washer: rating,
+      laundry_pics: photo,
+    }    
+  }
+  catch {
     if (on_who == "on_washer") {
       order = {
         review_washer: review,
@@ -66,13 +75,6 @@ function add_review(on_who) {
         review_user: review,
         rating_user: rating
       }
-    }
-  }
-  else {
-    order = {
-      review_washer: review,
-      rating_washer: rating,
-      laundry_pics: photo,
     }
   }
   console.log(order)
