@@ -224,11 +224,13 @@ async function setWasherOpenTimes(openTimes, washerId) {
  * please notice: the user needs to be signed in (in auth) while creating new user (on firestore)
  * @param {object} user : basic user object (from auth)
  */
-function createNewUser(user) {
+async function createNewUser(user) {
+    let data = await forwardGeocodePromise(user.location_str);
+    let geoPoint = new firebase.firestore.GeoPoint(data.results[0].geometry.lat, data.results[0].geometry.lng);
     db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
-        location_cor: forwardGeocodePromise(user.location_str).results[0].geometry,
+        location_cor: geoPoint,
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
