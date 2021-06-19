@@ -1,129 +1,3 @@
-// washer1 = {
-//     name: "Amitay Rachman", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-//     profile_pic: "../images/amitay_pic.jpg", pics: ["../images/miele.png", "../Profile.png"],
-//     location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155, 35.215351837826255],
-//     num_of_reviews: "12", machine_year: "2012",
-//     model_name: "bosch", capacity: "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!",
-//     commit: "48 hours", working_hours: { Sunday: [11, 16], Monday: [09, 18], Tuesday: [10, 18], Wednesday: [9, 18], Thursday: [10, 20], Friday: [09, 20], Saturday: [10, 18] },
-//     clients_who_review: ['client3', 'client5'], properties: { white: true, door_2_door: true, ironing: true, access: true }
-// };
-
-
-// washer2 = {
-//     name: "Tal Eliram", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-//     profile_pic: "../images/tal_e_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/laundry-room-1.jpg", "../Profile.png"],
-//     location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155, 35.215351837826255],
-//     num_of_reviews: "12", machine_year: "2012",
-//     model_name: "bosch", capacity: "9KG", description: "Hello! I’m Tal, and I love to Fold laundry perfectly!",
-//     commit: "48 hours", working_hours: { Sunday: [11, 16], Monday: [09, 18], Tuesday: [10, 18], Wednesday: [9, 18], Thursday: [10, 20], Friday: [13, 20], Saturday: [10, 18] },
-//     clients_who_review: ['client3', 'client5'], properties: { white: true, door_2_door: true, ironing: true, access: true }
-// };
-
-// washer3 = {
-//     name: "Tal Rozentzvi", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-//     profile_pic: "../images/tal_r_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/tal_r_laundry.jpg", "../Profile.png"],
-//     location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155, 35.215351837826255],
-//     num_of_reviews: "12", machine_year: "2012",
-//     model_name: "bosch", capacity: "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!",
-//     commit: "48 hours", working_hours: { Sunday: [11, 16], Monday: [09, 18], Tuesday: [10, 18], Wednesday: [9, 18], Thursday: [10, 20], Friday: [09, 20], Saturday: [10, 18] },
-//     clients_who_review: ['client3', 'client5'], properties: { white: true, door_2_door: true, ironing: true, access: true }
-// };
-
-// user7 = {
-//     name: "Netzer Epstein", drop_off_time: [11, 14], rating: 4.5, location: { lat: 31.773610027001155, lng: 35.215351837826255 },
-//     wash_setting: { degree: 50, smell: "icy pear" },
-//     favorites: [washer1, washer2, washer3, washer2, washer2, washer2],
-//     profile_pic: "../images/netzer_pic.png", description: "Hi, my name is Netzer and I don't do any sport so my clothes smell OK :)",
-//     prefer_properties: { white: true, door_2_door: false, ironing: true, access: true }
-// };
-
-// user9 = {
-//     name: "Shelly bendor", drop_off_time: [11, 14], rating: 4.5, location: { lat: 31.773610027001155, lng: 35.215351837826255 },
-//     wash_setting: { degree: 50, smell: "icy pear" },
-//     favorites: [washer1, washer2, washer3, washer2, washer2, washer2],
-//     profile_pic: "../images/netzer_pic.png", description: "Hi, my name is Netzer and I don't do any sport so my clothes smell OK :)",
-//     prefer_properties: { white: true, door_2_door: false, ironing: true, access: true }
-// };
-
-
-// order123 = {
-//     orderID: "order123",
-//     washer: washer1,
-//     user: user7,
-//     dueTO: "18/04",
-//     Price: "30",
-//     status: "in_process",
-//     rating_on_washer: 0,
-//     review_on_washer: "",
-//     rating_on_user: 0,
-//     review_on_user: "",
-//     laundry_pics: []
-// }
-
-// order111 = {
-//     orderID: "order111",
-//     washer: washer1,
-//     user: user7,
-//     dueTO: "18/04",
-//     Price: "30",
-//     status: "finished",
-//     rating_on_washer: 3,
-//     review_on_washer: "great lemon smell, very soft and also handsome bag! I'm reccomending",
-//     rating_on_user: 4,
-//     review_on_user: "a lot of socks which can be hard to connect toghther",
-//     laundry_pics: ["../images/folded/folded1.jpg", "../images/folded/folded2.jpg"]
-// }
-
-// order144 = {
-//     orderID: "order144",
-//     washer: washer1,
-//     user: user9,
-//     dueTO: "18/04",
-//     Price: "30",
-//     status: "finished",
-//     rating_on_washer: 3,
-//     review_on_washer: "great laundry",
-//     rating_on_user: 4,
-//     review_on_user: "orgnaize guy, came excactly on time",
-//     laundry_pics: ["../images/folded/folded2.jpg"]
-// }
-
-// order155 = {
-//     orderID: "order155",
-//     washer: washer1,
-//     user: user7,
-//     dueTO: "18/04",
-//     Price: "30",
-//     status: "finished",
-//     rating_on_washer: 5,
-//     review_on_washer: "amazing",
-//     rating_on_user: 0,
-//     review_on_user: "amazing",
-//     laundry_pics: ["../images/folded/folded3.jpg"]
-// }
-
-// order122 = {
-//     orderID: "order122",
-//     washer: washer1,
-//     user: user7,
-//     dueTO: "18/04",
-//     Price: "30",
-//     status: "finished",
-//     rating_on_washer: 4,
-//     review_on_washer: "great washer",
-//     rating_on_user: 0,
-//     review_on_user: "",
-//     laundry_pics: []
-// }
-
-
-
-// all_orders = [order111, order122, order155, order111, order122, order123, order111, order155, order144]
-
-
-
-
-
 
 // reviews tabs
 function get_reviews_on_user(tag, user) {
@@ -228,13 +102,13 @@ function f_display_washer_details(washer_doc) {
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    if (washer_doc.data().property == "ironing") {
+    if (washer_doc.data().properties == "ironing") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Ironing</td></tr>";
     }
-    if (washer_doc.data().property == "door2door") {
+    if (washer_doc.data().properties == "door2door") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
-    if (washer_doc.data().property == "dryer") {
+    if (washer_doc.data().properties == "dryer") {
         details_table += "<tr><td><img src='../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";
@@ -471,7 +345,7 @@ function color_today() {
 async function f_display_washer_reviews(all_orders) {
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_washer != "" && all_orders[j].data().rating_washer != 0) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null) {
             const user_that_review = await all_orders[j].data().user.get();
             // here start block of review
             all_reviews += "<div class='row'>";
@@ -483,7 +357,7 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + user_that_review.data().imageUrl + "></a></div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
-            all_reviews += "<div class='location'>" +user_that_review.data().name + "</div>";
+            all_reviews += "<div class='location'>" + user_that_review.data().name + "</div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-3'>";
             all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star_yellow.png'>" + all_orders[j].data().rating_washer + "</div>";
