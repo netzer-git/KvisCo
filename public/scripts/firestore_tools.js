@@ -193,7 +193,7 @@ async function createNewWasher(washer) {
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
-        location_cor: coordinates,
+        location_cor: forwardGeocodePromise(washer.location_str).results[0].geometry,
         machine_type: washer.machine_type,
         description: washer.description,
         commitment: washer.commitment,
@@ -227,7 +227,7 @@ function createNewUser(user) {
     db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
-        location_cor: forwardGeocode(user.location_str),
+        location_cor: forwardGeocodePromise(user.location_str).results[0].geometry,
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
