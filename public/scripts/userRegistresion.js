@@ -1,6 +1,5 @@
 
 
-var user_name = "BAR";
 var user_location_str;
 var user_cover_photo = "";
 var user_phone_number;
@@ -22,21 +21,35 @@ function save_description() {
 }
 
 
+function save_photo(event) {
+    if (event != null) {
+        user_cover_photo = event.target.files[0];
+        document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
+    }
+}
+
+
 async function create_user() {
-    if (user_name == null || user_location_str == null || user_phone_number == null || user_description == null) {
+    url = await saveImageToUser(user_cover_photo);
+    if (user_location_str == null || user_phone_number == null || user_description == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
     new_user = {
-        name: user_name,
+        name: getUserDisplayName(),
         location_str: user_location_str,
-        cover_photo: user_cover_photo,
-        phone_number: user_phone_number,
+        cover_photo: url,
+        phone: user_phone_number,
         description: user_description
     }
     console.log(new_user);
-    // createNewUser(new_user);
-    // window.location.href = "../html/user_profile_final.html";
+    createNewUser(new_user);
+    window.location.href = "../html/washer-profile.html";
+}
+
+
+function display_user_name() {
+    document.getElementById("user_name").innerHTML = getUserDisplayName();
 }
 
 

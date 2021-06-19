@@ -8,6 +8,21 @@
         <link rel="stylesheet" href="../css/user_regist.css">
         <link rel="stylesheet" href="../css/welcome.css">
         <link rel="stylesheet" href="../css/header_style.css">
+
+        <script src="/__/firebase/8.6.1/firebase-app.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+        <script src="/__/firebase/init.js"></script>
+
+        
+        <script src="../scripts/app.js"></script>
+        <script src="../scripts/tools.js"></script>
+        <script src="../scripts/firestore_tools.js"></script>
+
+        
         <script src="../scripts/header.js"></script>
         <script src="../scripts/header_bar.js"></script>
         <script src="../scripts/washer_regist.js"></script>
@@ -27,14 +42,15 @@
                 <tr>
                     <td>
                             <form id="image-form" action="#">
-                                <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
-                                <button id="submitImage3" title="Add an image">
+                                <input id="mediaCapture" onchange="save_photo(event)" type="file" accept="image/*" capture="camera" hidden>
+                                <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                                     Upload Profile Photo
                                 </button>
                             </form>
                         <!-- <img id="defualt_profile" class="user_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
+                        <div id= "checkmark"></div>
                         <h4 class="header_41">
-                            Bar Hazut
+                            <div id ="user_name"></div>
                         </h4>
                     </td>
                 </tr>
@@ -98,5 +114,6 @@
 
 <script>
     $("#includedContent").load("includes/header.html");
+    display_user_name()
 </script>
 
