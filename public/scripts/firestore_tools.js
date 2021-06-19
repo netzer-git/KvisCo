@@ -77,11 +77,15 @@ function promiseWasherLoaderByCurrentUserID() {
     return promiseLoaderByCollectionAndId('washers', getUserToken());
 }
 
-/*
- * the function takes doc from washers collection (the resolve of a promise!), and gets the washer rating
+/**
+ * @param {*} doc user or washer document
  */
 function getRatingFromDoc(doc) {
-    return doc.data().rating_sum / doc.data().rating_num;
+    if (doc.data().rating_sum == 0) {
+        return 0;
+    } else {
+        return doc.data().rating_sum / doc.data().rating_num;
+    }
 }
 
 /*
@@ -103,8 +107,6 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
 
         query.get().then((docArray) => {
             const orderArray = [];
-            //console.log("docArray");
-            //console.log(docArray);
             docArray.forEach((doc) => {
                 if (doc.exists) {
                     console.log("doc")
@@ -138,6 +140,7 @@ function promiseOrderArrayByUserIdAndStatus(userId, status) {
     return promiseOrderArrayByFieldIdAndStatus("user", userId, status);
 }
 
+
 /**
  * creates new order from order object and saves it to firestore server.
  * @param {*} order : basic order object
@@ -160,7 +163,7 @@ async function createNewOrder(order) {
         properties: order.properties,
         laundry_pic: null,
         comments: order.comments,
-        wash_settings: order.wash_settings
+        wash_settings: order.wash_settings,
     });
     return newOrderRef.id;
 }
@@ -170,10 +173,36 @@ async function createNewOrder(order) {
  * @param {*} orderDetails order details dict
  * @param {*} orderId order id
  */
- async function setOrderDetails(orderDetails, orderId) {
+async function setOrderDetails(orderDetails, orderId) {
     let washer = await db.collection('orders').doc(orderId);
     await washer.update(orderDetails).catch((err) => {
         console.error("error updating order details: " + err);
+    });
+}
+
+/**
+ * creating new washer doc from washer registration object
+ * @param {*} washer washer registration object
+ */
+async function createNewWasher(washer) {
+    coordinates = forwardGeocode("Israel " + washer.city + " " + washer.street + " " + washer.number);
+    db.collection("washers").doc(getUserToken()).set({
+        name: washer.name,
+        rating_sum: 0,
+        rating_num: 0,
+        imageUrl: washer.imageUrl,
+        pics: washer.pics,
+        location_str: washer.location_str,
+        location_cor: coordinates,
+        machine_type: washer.machine_type,
+        description: washer.description,
+        commitment: washer.commitment,
+        opening_times: {},
+        price: 0, // fixme for milestone 3
+        properties: washer.properties,
+        phone: washer.phone
+    }).then((docRef) => {
+        console.log("New order added: " + docRef);
     });
 }
 
@@ -184,7 +213,9 @@ async function createNewOrder(order) {
  */
 async function setWasherOpenTimes(openTimes, washerId) {
     let washer = await db.collection('washers').doc(washerId);
-    await washer.update({ opening_time : openTimes});
+    await washer.update({
+        opening_time: openTimes
+    });
 }
 
 /**
@@ -200,24 +231,58 @@ function createNewUser(user) {
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
-        rating_num: 0
+        rating_num: 0,
+        phone: user.phone,
+        description: user.description,
     }).then((docRef) => {
         console.log("New order added: " + docRef);
-    })
+    });
 }
 
 /**
- * Saves a new message containing an image in Firebase. This first saves the image in Firebase storage.
+ * Saves a new image containing to user folder in firestorage. This first saves the image in Firebase storage.
  * @param {*} file image file
  * @return {string} image url path to firebase storage
  */
 async function saveImageToUser(file) {
-    let filePath = getUserToken() + '/' + file.name;
-    let fileSnapshot = await storage.ref(filePath).put(file);
-    let url = await fileSnapshot.getDownloadURL();
-    return url;
+    if (!isUserSignedIn()) {
+        console.error("You are trying to upload a picture to undefined user");
+    }
+    else {
+        if (file === null) {
+            console.error("You are trying to upload an empty file");
+            return null;
+        }
+        let filePath = getUserToken() + '/' + file.name;
+        let fileSnapshot = await storage.ref(filePath).put(file);
+        let url = await fileSnapshot.ref.getDownloadURL();
+        return url;
+    }
+    
 }
 
+/**
+ * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
+ * @param {*} file image file
+ * @param {string} orderId the id of the current order
+ * @return {string} image url path to firebase storage
+ */
+ async function saveImageToOrder(file, orderId) {
+        if (file === null) {
+            console.error("You are trying to upload an empty file");
+            return null;
+        }
+        let filePath = orderId + '/' + file.name;
+        let fileSnapshot = await storage.ref(filePath).put(file);
+        let url = await fileSnapshot.ref.getDownloadURL();
+        return url;
+}
+
+/**
+ * the function takes filters obj with specific fields and returns all of the relevant washer docs any possible filter combination.
+ * @param {*} filters filters obj
+ * @returns array of washers
+ */
 async function getWasherFilterQuery(filters) {
     var filteredWashers = [];
     let washersArray = await db.collection('washers').get();
