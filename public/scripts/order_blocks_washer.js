@@ -169,4 +169,5 @@ function saveHour() {
     }
     console.log(working_times);
     setOrderDetails(working_times, washerID);
+    setWasherOpenTimes(working_times, washerId);
 }
