@@ -21,16 +21,16 @@ function executeRating(stars) {
 executeRating(ratingStars);
 
 
-// var imageButtonElement = document.getElementById('submitImage');
-// var imageFormElement = document.getElementById('image-form');
-// var mediaCaptureElement = document.getElementById('mediaCapture');
-// var imageAreaElement = document.getElementById('img-area');
-// //  Events for image upload.
-// imageButtonElement.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   mediaCaptureElement.click();
-// });
-// mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+var imageButtonElement = document.getElementById('submitImage');
+var imageFormElement = document.getElementById('image-form');
+var mediaCaptureElement = document.getElementById('mediaCapture');
+var imageAreaElement = document.getElementById('img-area');
+//  Events for image upload.
+imageButtonElement.addEventListener('click', function (e) {
+  e.preventDefault();
+  mediaCaptureElement.click();
+});
+mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 
 
 var rating;
@@ -94,7 +94,7 @@ function display_review_on_user_overlay(id) {
     review_on_user_overlay += '</th></tr>';
     review_on_user_overlay += '<tr><th><button onclick="add_review_to_order('+id.id+')" class="yellow_button_4">Leave Review</button></th></tr>';
     review_on_user_overlay += '</table></div>'; 
-    document.getElementById("review_block").innerHTML = review_on_user_overlay; 
+    document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
     // document.getElementById("overlay_review").style.display = "block";
 
 }

@@ -20,7 +20,6 @@ function save_description() {
     user_description = document.getElementById("user_description").value;
 }
 
-
 function save_photo(event) {
     if (event != null) {
         user_cover_photo = event.target.files[0];
@@ -30,11 +29,12 @@ function save_photo(event) {
 
 
 async function create_user() {
-    url = await saveImageToUser(user_cover_photo);
     if (user_location_str == null || user_phone_number == null || user_description == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
+    // url = saveImageToUser(user_cover_photo);
+    url = "";
     new_user = {
         name: getUserDisplayName(),
         location_str: user_location_str,
@@ -43,8 +43,8 @@ async function create_user() {
         description: user_description
     }
     console.log(new_user);
-    createNewUser(new_user);
-    window.location.href = "../html/washer-profile.html";
+    await createNewUser(new_user);
+    // window.location.href = "../html/washer-profile.html";
 }
 
 

@@ -6,8 +6,22 @@
         <link rel="stylesheet" href="../css/washer_regist.css">
         <link rel="stylesheet" href="../css/welcome.css">
         <link rel="stylesheet" href="../css/header_style.css">
-        <script src="../js/header.js"></script>
-        <script src="../js/washer_registration.js"></script>
+
+        <script src="/__/firebase/8.6.1/firebase-app.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
+        <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+        <script src="/__/firebase/init.js"></script>
+
+        
+        <script src="../scripts/app.js"></script>
+        <script src="../scripts/tools.js"></script>
+        <script src="../scripts/firestore_tools.js"></script>
+
+
+        <script src="../scripts/washer_registration.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
     </head>
 
@@ -23,15 +37,15 @@
                 </tr>
                 <tr>
                     <td>
-                            <form id="image-form" action="#">
-                                <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
-                                <button id="submitImage3" title="Add an image">
-                                    Upload Profile Photo
-                                </button>
-                            </form>
-                        <!-- <img id="defualt_profile" class="user_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
+                        <form id="image-form" action="#">
+                            <input id="mediaCapture" onchange="save_profile_pic(event)" type="file" accept="image/*" capture="camera" hidden>
+                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
+                                Upload Profile Photo
+                            </button>
+                        </form>
+                        <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
                         <h4 class="header_41">
-                            Netzer Epstein
+                            <div id ="washer_name"></div>
                         </h4>
                     </td>
                 </tr>
@@ -44,14 +58,14 @@
                 </tr>
                 <tr>
                     <th>
-                    <form action="/action_page.php">
-                        <label class="labels" for="city">City: </label>
-                        <input class= "regist_input" type="text" id="city" name="city"><br>
-                        <label  class="labels" for="street">Street: </label>
-                        <input class= "regist_input" type="text" id="street" name="street"><br>
-                        <label  class="labels" for="number">Number: </label>
-                        <input class= "regist_input" type="text" id="number" name="number"><br>
-                      </form>
+                        <form action="/action_page.php">
+                            <label class="labels" for="city">City: </label>
+                            <input class= "regist_input" type="text" id="city" name="city" value="" onchange="save_location()"><br>
+                            <label  class="labels" for="street">Street: </label>
+                            <input class= "regist_input" type="text" id="street" name="street" value="" onchange="save_location()"><br>
+                            <label  class="labels" for="number">Number: </label>
+                            <input class= "regist_input" type="text" id="number" name="number" value="" onchange="save_location()"><br>
+                          </form>
                     </th>
                 </tr>
                 <tr>
@@ -63,10 +77,25 @@
                 </tr>
                 <tr>
                     <th>
-                    <form action="/action_page.php">
-                        <label class="labels" for="phone"></label>
-                        <input class= "regist_input" type="text" id="phone" name="phone"><br>
-                    </form>
+                        <form action="/action_page.php">
+                            <label class="labels" for="phone"></label>
+                            <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
+                        </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                    <div class= "header_53">
+                        How much time (in hours) you can commit to your customers?
+                    </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <form action="/action_page.php">
+                            <label class="labels" for="phone"></label>
+                            <input class= "regist_input" type="number" id="commit" name="commit" value="" onchange="save_commit()"><br>
+                        </form>
                     </th>
                 </tr>
                 <tr>
@@ -80,11 +109,11 @@
                     <th>
                     <form action="/action_page.php">
                         <label  class="labels" for="module_name">Module Name: </label>
-                        <input class= "regist_input" type="text" id="mudule" name="module"><br>
+                        <input class= "regist_input" type="text" id="mudule" name="module" onchange="save_laundry_details()"><br>
                         <label  class="labels" for="capacity">Capacity: </label>
-                        <input class= "regist_input" type="text" id="capacity" name="capacity"><br>
+                        <input class= "regist_input" type="text" id="capacity" name="capacity" onchange="save_laundry_details()"><br>
                         <label  class="labels" for="year">Year Purchased: </label>
-                        <input class= "regist_input" type="text" id="year" name="year"><br>
+                        <input class= "regist_input" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()"><br>
                       </form>
                     </th>
                 </tr>
@@ -98,9 +127,13 @@
                 <tr>
                     <th>
                         <form id="image-form" action="#">
-                            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage2" title="Add an image">
-                                Upload Photos
+                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden>
+                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
+                                Upload Your Laundry Photo
+                            </button>
+                            <input id="mediaCapture3" onchange="save_machine_pic(event)" type="file" accept="image/*" capture="camera" hidden>
+                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
+                                Upload Your Machine Photo
                             </button>
                         </form>
                     </th>
@@ -114,8 +147,8 @@
                 </tr>
                 <tr>
                     <th>
-                        <textarea id="washer_details" class="washer_details" name="washer_details" rows="3" cols="50" placeholder=" ..." 
-                        onchange="save_details_change()"></textarea> <!-- Personal note--> <!--This onchange does not exist-->
+                        <textarea id="washer_description" class="washer_details" name="washer_details" rows="3" cols="50" placeholder=" ..." 
+                        onchange="save_description()"></textarea> <!-- Personal note--> <!--This onchange does not exist-->
                             <br><br>
                     </th>
                 </tr>
@@ -129,9 +162,9 @@
                 <tr>
                     <th>
                     <div class= "labels">
-                    <input class= "cbx" type="checkbox" name="special_serve" value="Ironing" onclick="return ValidateServiceSelection();">Ironing<br>  
-                    <input class= "cbx" type="checkbox" name="special_serve" value="Door 2 Door" onclick="return ValidateServiceSelection();">Door 2 Door<br>  
-                    <input class= "cbx" type="checkbox" name="special_serve" value="Dryer" onclick="return ValidateServiceSelection();">Dryer<br>  
+                    <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service();">Ironing<br>  
+                    <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service();">Door 2 Door<br>  
+                    <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service();">Dryer<br>  
                         <br>
                     </div>
                     </th>
@@ -139,7 +172,7 @@
                 </tr>
                 <tr>
                     <th>
-                    <button class= "yellow_button_4">Continue</button>
+                        <button class= "yellow_button_4" onclick="create_washer()">Continue</button>
                     </th>
                 </tr>
             </table>

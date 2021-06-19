@@ -8,15 +8,9 @@
     
     background: #FFB0BC;
     /* Main / Black */
-    
-    border: 2px solid #1C1C1D;
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    position: fixed;
+}
 
+.overlay_review {
     position: fixed;
     display: none;
     top: 0;
@@ -255,14 +249,3 @@ table.leave_review_table tr {
 }
 
 
-.overlay_review {
-    position: fixed;
-    display: none;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.7);
-    z-index: 2;
-    cursor: pointer;
-}

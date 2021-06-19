@@ -10,11 +10,10 @@ async function get_order_block_of_washer(order) {
     console.log("user_doc_id: " ,order.id);
     const user_doc = await order.data().user.get();
     // console.log("user_doc:" ,user_doc.data().name);
-    block = "";
     block = "<div class='col-lg-4'>";
+    block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
-    block += '<div id="overlay_review"><div id="review_block"></div>';
     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='netzer'> </th></tr>";
     block += "<tr><th scope='col' colspan='2'>"+ user_doc.data().name +"</th></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
@@ -34,7 +33,6 @@ async function get_order_block_of_washer(order) {
           break;
         case 'finished':
             if (order.data().review_user == null) {
-                block += '<div id="user_review_block"></div>';
                 block += "</tr><th scope='col' colspan='2'><button id = block_num_"+block_num+" value = '"+order.id+"' onclick= 'display_review_on_user_overlay(block_num_"+block_num+")' class='button1'> Review </button></th></tr>";
             }
             else {
