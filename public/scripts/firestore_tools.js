@@ -233,6 +233,7 @@ function createNewUser(user) {
         rating_sum: 0,
         rating_num: 0,
         phone: user.phone,
+        description: user.description,
     }).then((docRef) => {
         console.log("New order added: " + docRef);
     });
