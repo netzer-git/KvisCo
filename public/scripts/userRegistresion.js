@@ -24,7 +24,7 @@ function save_description() {
 function save_photo(event) {
     if (event != null) {
         user_cover_photo = event.target.files[0];
-        document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
+        // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
 

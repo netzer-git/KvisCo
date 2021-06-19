@@ -1,16 +1,20 @@
+
+var block_num = 0;
+
 /**
  * 
  * @param {order object} order 
  * @returns long string of order
  */
 async function get_order_block_of_washer(order) {
-    console.log("user_doc: " ,order.data().user);
+    console.log("user_doc_id: " ,order.id);
     const user_doc = await order.data().user.get();
-    console.log("user_doc:" ,user_doc.data().name);
+    // console.log("user_doc:" ,user_doc.data().name);
     block = "";
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
+    block += '<div id="overlay_review"><div id="review_block"></div>';
     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='netzer'> </th></tr>";
     block += "<tr><th scope='col' colspan='2'>"+ user_doc.data().name +"</th></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
@@ -29,14 +33,17 @@ async function get_order_block_of_washer(order) {
             block += "</tr><th scope='col' colspan='2'><button class='button1'> Finish </button></th></tr>";
           break;
         case 'finished':
-            if (order.data().review_on_user == "") {
-                block += "</tr><th scope='col' colspan='2'><button class='button1'> Review </button></th></tr>";
+            if (order.data().review_user == null) {
+                block += '<div id="user_review_block"></div>';
+                block += "</tr><th scope='col' colspan='2'><button id = block_num_"+block_num+" value = '"+order.id+"' onclick= 'display_review_on_user_overlay(block_num_"+block_num+")' class='button1'> Review </button></th></tr>";
             }
             else {
-                block += "</tr><th scope='col' colspan='2'><button class='button1'> Change Review </button></th></tr>";
+                block += "</tr><th scope='col' colspan='2'><button id = block_num_"+block_num+" value = '"+order.id+"' onclick= 'display_review_on_user_overlay(block_num_"+block_num+")' class='button1'> Change Review </button></th></tr>";     
+       
             }
         break;
     }
+    block_num++;
     block += "</table>";
     block += "</div>";
     block += "</div>";
@@ -56,9 +63,6 @@ async function insert_orders_blocks_of_washer(tag, washerID, status) {
 }
 
 async function load_order_blocks_of_washer(washerID) {
-    // const washer_doc = await promiseWasherLoaderById(washerID);
-    // console.log(washer_doc);
-    // insert_orders_blocks_of_user("in_process_orders", washer_doc, "processing");
     insert_orders_blocks_of_washer("in_process_orders", washerID, "process");
     insert_orders_blocks_of_washer("finished_orders", washerID, "finished");
     
