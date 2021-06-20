@@ -256,3 +256,12 @@ table.leave_review_table tr {
     font-weight: normal;
     margin-left: 10%;
 }
+
+#submitImage:active{
+    transform: translateY(4px);
+}
+
+
+.yellow_button_4:active{
+    transform: translateY(4px);
+}
