@@ -334,13 +334,6 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    // if we didn't get any filters
-    if (isObjectEmpty(filters)) {
-        washersArray.forEach((doc) => {
-            filteredWashersWithRating.push(doc);
-        })
-    }
-
     if (filters.commitment !== undefined) {
         let filteredWashersWithCommitment = [];
         await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
@@ -349,6 +342,19 @@ async function getWasherFilterQuery(filters) {
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
         firstQuery = false;
     }
+
+    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
+        let filteredWashersWithLoads = [];
+        washersArray.forEach(doc => {
+            if (true) { // fixme for milestone3
+                filteredWashersWithLoads.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        firstQuery = false;
+    }
+    
+
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
         washersArray.forEach(doc => {
@@ -392,6 +398,26 @@ async function getWasherFilterQuery(filters) {
         });
         filteredWashers = firstQuery ? filteredWashersWithOpenTime : intersection(filteredWashers, filteredWashersWithOpenTime);
         firstQuery = false;
+    }
+
+    if (filters.address !== undefined && filters.address !== null) {
+        let data = await forwardGeocodePromise(filters.address);
+        let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+        let filteredWashersWithAddress = [];
+        washersArray.forEach(doc => {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.location_cor) <= 2) {
+                filteredWashersWithAddress.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithAddress : intersection(filteredWashers, filteredWashersWithAddress);
+        firstQuery = false;
+    }
+
+    // if we didn't get any filters
+    if (firstQuery) {
+        washersArray.forEach((doc) => {
+            filteredWashers.push(doc);
+        })
     }
 
     return filteredWashers;
