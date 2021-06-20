@@ -330,9 +330,8 @@ async function getWasherFilterQuery(filters) {
 
     if (filters.distance !== undefined) {
         let filteredWashersWithDistance = [];
-        currentPoint = null; // fixme
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(currentPoint, doc.location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -355,7 +354,7 @@ async function getWasherFilterQuery(filters) {
     if (filters.openTime !== undefined) {
         let filteredWashersWithOpenTime = [];
         washersArray.forEach(doc => {
-            if (true) { // ????
+            if (checkOpenTimes(filters.openTime, doc)) {
                 filteredWashersWithOpenTime.push(doc);
             }
         });
