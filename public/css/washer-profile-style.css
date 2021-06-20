@@ -12,6 +12,15 @@
     margin-left: 5%;
 }
 
+.tabs-border-small {
+    border: 2px solid rgba(28, 28, 29, 1);
+    height: 56px;
+    width: 650px;
+    left: 0px;
+    top: 0px;
+    border-radius: 5px;
+}
+
 select::-ms-expand {
     display: none;
 }
@@ -24,6 +33,29 @@ select::-ms-expand {
     font-size: 16px;
     cursor: pointer;
     margin-left: 25%;
+  }
+
+  .save-button{
+        margin-top: 5px;
+        margin-left: 20%;
+        margin-bottom: 10px;
+        /* Palet 2 / 4 */
+        background: #FFC636;
+        /* Main / Black */
+        border: 1px solid #1C1C1D;
+        box-sizing: border-box;
+        /* Button */
+        box-shadow: 0px 4px 0px #202020;
+        border-radius: 15px;
+        height: 30px;
+        width: 60px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 25px;
+        letter-spacing: 0.44999998807907104px;
+        text-align: center;
   }
 
 select {

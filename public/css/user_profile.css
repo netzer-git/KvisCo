@@ -11,6 +11,7 @@
     /* Rectangle 1256 */
     /* position: absolute; */
     left: 0%;
+    margin-left: 10%;
     right: 0%;
     top: -0.57%;
     bottom: 0%;
@@ -109,6 +110,7 @@ table.Background_box td{
 }
 
 .col_with_padd {
-    margin:10px; 
-    padding:10px;
+    margin-left:10%;
+    padding:10%; 
+    /* padding:10px; */
 }

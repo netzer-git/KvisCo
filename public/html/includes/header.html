@@ -14,9 +14,10 @@
         <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
         <script src="/__/firebase/init.js"></script>
     
-        <script src="scripts/app.js"></script>
-        <script src="scripts/tools.js"></script>
-        <script src="scripts/firestore_tools.js"></script>
+        <script src="../scripts/app.js"></script>
+        <script src="../scripts/tools.js"></script>
+        <script src="../scripts/firestore_tools.js"></script>
+        <script src="../../scripts/header_bar.js"></script>
     </head>
     <body>
         <!--Header starts here-->
@@ -32,14 +33,14 @@
                                 <img src="../images/Menu.png" width="45%"> 
                             </a>
                             <div class="dropdown-content"> 
-                                <a href="#">Profile page</a>
+                                <a href="#"></a><button onclick = "become_a_user()">Watch Your Profile</button></a>
                                 <a href="#">New search</a>
                                 <a href="#">Log out</a>
                             </div>
                         </div>
                     </div>    
                     <div class="col-2">
-                        <button class="button1">Become a washer</button> <!-- Yellow generic button-->
+                        <button onclick = "become_a_washer()"  class="button1">Become a washer</button> <!-- Yellow generic button-->
                     </div>
                 </div>
             </div>

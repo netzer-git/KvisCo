@@ -1,50 +1,47 @@
 
-washer1 = {name: "Amitay Rachman", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-profile_pic: "../images/amitay_pic.jpg", pics: ["../images/miele.png", "../Profile.png"],
-location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
-num_of_reviews: "12", machine_year : "2012",
-model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
-commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
-clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
-};
 
 
-washer2 = {name: "Tal Eliram", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-profile_pic: "../images/tal_e_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/laundry-room-1.jpg", "../Profile.png"],
-location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
-num_of_reviews: "12", machine_year : "2012",
-model_name : "bosch", capacity : "9KG", description: "Hello! I’m Tal, and I love to Fold laundry perfectly!", 
-commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [13, 20],Saturday: [10, 18]}, 
-clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
-};
+/**
+ * display block of the washer header - his name, description and profile picture
+ * also display pics he uploaded if there are 
+ * @param {string} washerID id of washer
+ */
+async function load_profile_header_of_washer(washerID) {
+    const washer_doc = await promiseWasherLoaderById(washerID);
+    washer_header = '<div class="row"><div class="col-1"></div>';
+    washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
+    washer_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
+    washer_header += '<table class="table-search"><tr><h4>'+ washer_doc.data().name +'</h4></tr></tr>';
+    washer_header += '<tr><div class="description">'+washer_doc.data().description +'</div></tr>';
+    washer_header += '</table></div></div>';
+    washer_header += '<div class="row">';
+    washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
+    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(washer_doc) + '</div></div>';       
+    washer_header += '</div></div></div>';  
+    washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
+    if (washer_doc.data().pics !== undefined) {
+        washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[0] +'">';
+        washer_header += '<img class="image-2" src="'+ washer_doc.data().pics[1] +'">';
+    }
+    washer_header += '</div>';
+    document.getElementById("profile_header").innerHTML = washer_header;   
+}
 
-washer3 = {name: "Tal Rozentzvi", rating: 3, vertified: true, top_review: "”Better than my mom - Fold the laundry perfectly” (nadav, last week)",
-profile_pic: "../images/tal_r_pic.png", img_src: "../images/laundry-room-1.jpg", pics: ["../images/tal_r_laundry.jpg", "../Profile.png"],
-location_str: "Reahvia, Jerusalem", location_cor: [31.773610027001155,35.215351837826255],
-num_of_reviews: "12", machine_year : "2012",
-model_name : "bosch", capacity : "9KG", description: "Hello! I’m Amitay, student at HUJI! discount for soldiers!", 
-commit: "48 hours", working_hours: {Sunday: [11,16], Monday: [09, 18],Tuesday: [10, 18],Wednesday: [9, 18],Thursday: [10, 20],Friday: [09, 20],Saturday: [10, 18]}, 
-clients_who_review: ['client3', 'client5'] , properties : {white: true, door_2_door : true, ironing : true, access : true}
-};
-
-user7 = {name: "Netzer Epstein", drop_off_time: [11,14], rating: 4.5, location: {lat: 31.773610027001155, lng: 35.215351837826255},
-wash_setting: {degree: 50, smell: "icy pear"},
-favorites: [washer1, washer2,washer3, washer2, washer2, washer2],
-img: "../images/netzer pic.png", description: "Hi, my name is Netzer and I don't do any sport so my clothes smell OK :)",
-prefer_properties : {white: true, door_2_door : false, ironing : true, access : true}
-};
-
-function show_profile_header(tag, profile) {
-    profile_header = '<div class="row"><div class="col-lg-6">';
-    profile_header += '<div class="row"><div class="col-1"></div>';
-    profile_header += '<div class="col-3"><div class="profile_pic"><a href="#"><img class="rounded-circle-big" src=' + profile.profile_pic + '></a></div></div>';
-    profile_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
-    profile_header += '<table class="table-search"><tr><h4>'+ profile.name +'</h4></tr></tr>';
-    profile_header += '<tr><div class="description">'+profile.description+'</div></tr>';
-    profile_header += '</table></div></div>';
-    profile_header += '<div class="row">';
-    profile_header += '<div class="col-7"><div class="location">'+profile.location_str+'</div></div>';   
-    profile_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star.png">'+ profile.rating + '</div></div>';       
-    profile_header += '</div></div></div>';  
-    document.getElementById(tag).innerHTML = profile_header;               
+/**
+ * display block of the user header - his name, description and profile picture
+ * @param {string} userID id of user
+ */
+async function load_profile_header_of_user(userID) {
+    const user_doc = await promiseUserLoaderById(userID);
+    user_header = '<div class="row"><div class="col-1"></div>';
+    user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + user_doc.data().imageUrl + '"></div></div>';
+    user_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
+    user_header += '<table class="table-search"><tr><h4>'+ user_doc.data().name +'</h4></tr></tr>';
+    user_header += '<tr><div class="description">'+user_doc.data().description +'</div></tr>';
+    user_header += '</table></div></div>';
+    user_header += '<div class="row">';
+    user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
+    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(user_doc) + '</div></div>';       
+    user_header += '</div></div></div>';  ;
+    document.getElementById("profile_header").innerHTML = user_header;  
 }

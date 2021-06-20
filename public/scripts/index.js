@@ -65,18 +65,36 @@ async function exampleGettingUserDataIntoHTML2() {
 }
 
 
-
 /* ======================================================================== */
-var imageButtonElement = document.getElementById('submitImage');
-var imageFormElement = document.getElementById('image-form');
-var mediaCaptureElement = document.getElementById('mediaCapture');
+// var imageButtonElement = document.getElementById('submitImage');
+// var imageFormElement = document.getElementById('image-form');
+// var mediaCaptureElement = document.getElementById('mediaCapture');
 var imageAreaElement = document.getElementById('img-area');
-// Events for image upload.
-imageButtonElement.addEventListener('click', function(e) {
-    e.preventDefault();
-    mediaCaptureElement.click();
-  });
-mediaCaptureElement.addEventListener('change', onMediaFileSelected);
+
+//  Events for image upload.
+// imageButtonElement.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     mediaCaptureElement.click();
+//   });
+// mediaCaptureElement.addEventListener('change', saveImageToUser);
+
+var helloField = "Hello";
+var helloElement = document.getElementById('hello');
+var photoFile = null;
+var mediaCapture = document.getElementById('mediaCapture');
+
+function updateFormFields(event) {
+    helloField = helloElement.value;
+    if (event !== null) {
+        photoFile = event.target.files[0];
+    }
+}
+
+async function submitPhotoForm() {
+    url = await saveImageToUser(photoFile);
+    // create \ update user \ order
+    console.log("hello: " + helloField + "url: " + url);
+}
 
 function displayImage() {
     if (isUserSignedIn()) {
@@ -92,10 +110,26 @@ function displayImage() {
     }
 }
 
+
+var order1 = {
+    userID: "c0KmkCafo7bZmCcZvW2Nr7NqgDK2",
+    washerID: "1LhDqVKzSkZdsnSC6wFrVG5jte93",
+    price: 50,
+    loads: 3,
+    properties: "default",
+    due_to: new Date(),
+    comments: "They created me from the computer",
+}
+
 const testNadavQuery = async () => {
-    washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93"
-    const docArray = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
-    console.log("Nadav is running");
-    console.log("doc1: " + docArray[0].data().review_user);
-    console.log("doc2: " + docArray[1].data().review_user);
+    // var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+    // console.log(geoPoint);
+    // document.getElementById("only-one").innerHTML = JSON.stringify(response);
+    // filters = {commitment: 80};
+    // wArray = await getWasherFilterQuery(filters);
+    // wArray.forEach((w) => console.log(w.data()));
+    // setWasherOpenTimes({ 'Sunday': ["11:15", "11:45"], Friday: ["10:00", "15:00"] }, '27NLOVty9HfZRlWwrfuK');
+    checkOpenTimes("10:15", null);
 }
