@@ -1,7 +1,7 @@
 async function load_user_profile_page() {
     console.log("got here!");
     let userID = await getUserToken();
-    userID = "5IMy2kMSbheOriFPxqKmKTNWOJ92"
+    // userID = "5IMy2kMSbheOriFPxqKmKTNWOJ92"
     console.log(userID);
     // userID = 'c0KmkCafo7bZmCcZvW2Nr7NqgDK2';
     const user_doc = await promiseUserLoaderById(userID); //get the washer from the firebase
