@@ -134,7 +134,7 @@ function check_if_washer_open(opening_times) {
  * @param {washer object} washer_doc the washer 
  */
 function f_get_opening_hours_table(washer_doc) {
-    opening_times = '<table class="opening-hours-table" id="opening-hours-table">';
+    opening_times = '<table style="font-size: 20px;" class="opening-hours-table" id="opening-hours-table">';
     if (washer_doc.data().opening_times.Sunday !== undefined) {
         opening_times += '<tr id="Sunday" itemprop="openingHours" title="Open Sunday"><td>Sunday</td>';
         opening_times += '<td class="opens">' + washer_doc.data().opening_times.Sunday[0] + '</td><td>-</td>';
@@ -191,10 +191,12 @@ function f_checkOpeningTimes(washer_doc) {
     if (check_if_washer_open(washer_doc.data().opening_times)) {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
         document.getElementById("openClosedColor").style.color = "green";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
     }
     else {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
         document.getElementById("openClosedColor").style.color = "red";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
     }
 }
 

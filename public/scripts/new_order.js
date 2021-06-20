@@ -56,13 +56,13 @@ async function display_new_order_for_user(orderID) {
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order.data().comments+'<br/></div></tr>';
     cur_price = order.data().price.toString() + " nis";
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr></table>';
-    order_block += "<button style='margin-left: 35%; margin-top: 5%;' class='button1' onclick='back_to_profile'>back to profile</button>";  
+    order_block += "<button style='margin-left: 35%; margin-top: 5%;' class='button1' onclick='back_to_profile()'>back to profile</button>";  
     order_block +="</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
     document.getElementById("user_order").innerHTML = order_block;
 }
 
-function bac_to_profile() {
-    document.URL="../html/final_pages/user_profile_final.html";
+function back_to_profile() {
+    window.location.href="../html/user_profile_final.html";
 }
 
 function change_status(new_status) {
