@@ -342,6 +342,19 @@ async function getWasherFilterQuery(filters) {
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
         firstQuery = false;
     }
+
+    if (filters.loads !== undefined) {
+        let filteredWashersWithLoads = [];
+        washersArray.forEach(doc => {
+            if (true) { // fixme for milestone3
+                filteredWashersWithLoads.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        firstQuery = false;
+    }
+    
+
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
         washersArray.forEach(doc => {
@@ -384,6 +397,19 @@ async function getWasherFilterQuery(filters) {
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithOpenTime : intersection(filteredWashers, filteredWashersWithOpenTime);
+        firstQuery = false;
+    }
+
+    if (filters.address !== undefined) {
+        let data = await forwardGeocodePromise(filters.address);
+        let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+        let filteredWashersWithAddress = [];
+        washersArray.forEach(doc => {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.location_cor) <= 2) {
+                filteredWashersWithAddress.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithAddress : intersection(filteredWashers, filteredWashersWithAddress);
         firstQuery = false;
     }
 
