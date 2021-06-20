@@ -75,31 +75,13 @@
 
 <body>
 
-    <div class="header">
-        <div class="row">
-            <div class="col-9">
-                <a href="#"><img class="logo-header" src="../images/logo.png"></a>
-                <!--The logo button-->
-            </div>
-            <div class="col-1">
-                <div class="dropdown">
-                    <!-- drop down menu-->
-                    <a class="dropbtn" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img src="../images/Menu.png" width="45%">
-                    </a>
-                    <div class="dropdown-content">
-                        <a href="#">Profile page</a>
-                        <a href="#">New search</a>
-                        <a href="#">Log out</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <button class="button1">Become a washer</button> <!-- Yellow generic button-->
-            </div>
-        </div>
-    </div>
+    <!--Header starts here-->
+    <div id="includedContent"></div>
+    <!-- Header ends here-->
+    <!-- Header ends here-->
+    <!--Profile Details header starts here-->
+    <div style="margin-top: 3%;">
+    <!--<div class="second_header">-->
     <div class="row">
 
         <div class="col-6">
@@ -126,6 +108,10 @@
                                 <input class="choose_location" type="date" id="date" value="2021-07-09"
                                     onchange="update_properties_and_price()"> <!-- Date -->
                             </div>
+                            <script>
+                                document.getElementById('date').value = new Date().toISOString().substring(0, 10);
+                                console.log("cur date is" + document.getElementById('date').value)
+                            </script>
                         </td>
                         <td style="padding-left: 50px;"><input class="choose_location" type="time" id="startTime"
                                 value="08:00" onchange="update_properties_and_price()"></td>
@@ -216,6 +202,7 @@
         <!--Place order box ends-->
     </div>
     </div>
+    </div>
     <!--Profile Details header starts here-->
     <div class="row">
         <div class="col-1">
@@ -272,6 +259,9 @@
     </div>
 
 </body>
+<script>
+    $("#includedContent").load("./includes/header.html");
+</script>
 
 
 </html>
