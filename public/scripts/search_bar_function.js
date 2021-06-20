@@ -1,16 +1,16 @@
-var where = "";
+var address = "";
 var myDate = formatDate(new Date());
 var loads = '1';
 var duration = '24';
-jsarray_basic = [where, myDate, loads, duration];
+jsarray_basic = [address, myDate, loads, duration];
 
 function save() {
-    where = document.getElementById("where").value;
+    address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     loads = document.getElementById("loads_number").value;
     duration = document.getElementById("duration").value;
     // Do whatever you want with the value here.
-    jsarray = [where, myDate, loads, duration];
+    jsarray = [address, myDate, loads, duration];
     sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
     // JSON.stringify(jsArray) converts the jsArray into a string which can be stored in sessionStorage
 }
@@ -21,13 +21,15 @@ function get_search_bar(tag) {
     if (jsarray == null) {
         jsarray = jsarray_basic;
     }
-    where = jsarray[0];
+    address = jsarray[0];
     myDate = jsarray[1];
     loads = jsarray[2];
     duration = jsarray[3];
+    search_res = {address:address, myDate:myDate, loads:loads,duration:duration};
+
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Loads</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" id="where" value = " ' + where + ' " onload ="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" id="where" value = " ' + address + ' " onload ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onload="save()">';
     search_bar += '</td><td><input class="choose_location" type="number" id="loads_number" value= ' + loads + ' onload="save()"></td>';
     search_bar += '<td><div class="box" id="duration">';
@@ -60,6 +62,7 @@ function get_search_bar(tag) {
     }
     search_bar += '</div></td></tr></table>';
     document.getElementById(tag).innerHTML = search_bar;
+    return search_res;
 }
 
 function formatDate(date) {

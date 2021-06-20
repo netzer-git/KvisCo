@@ -88,91 +88,32 @@ const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "W
 let near_me_dist, rating, special_services;
 let active_times= new Array(2);
 const NUM_POPUP = 4
+let washerDoc_array;
 
+/* handle washers objects */
 
-function insert_header_and_buttons_block() {
-    let header_block_raw_html = '';
-    // upper header, filter buttons and more
-    header_block_raw_html += '<div class="container upper_header_filters_buttons">'
-    //TODO: add the real number of options, for the real dates
-    header_block_raw_html += '<div id="upper_filter_buttons_area">'
-    header_block_raw_html += insert_filter_buttons();
-    //TODO: make the buttons do something
-    // header_block_raw_html += '<button type="button" class="upper_filter_buttons" OnClick="filter_washers_by_self_service()">Drop off time</button>'
-    // header_block_raw_html += '<button type="button" class="upper_filter_buttons"'
-    // header_block_raw_html += 'OnClick="filter_washers_by_distance_from_point(current_user_location.lat, current_user_location.lng);">Near'
-    // header_block_raw_html += 'me</button>'
-    // header_block_raw_html += '<button type="button" class="upper_filter_buttons">Rating</button>'
-    // header_block_raw_html += '<button type="button" class="upper_filter_buttons">Special Services</button>'
-    
-    header_block_raw_html += '</div>'
-    header_block_raw_html += '<p><a href="" onclick="refresh_filters();">Clear Filters</a></p>'
-    header_block_raw_html += '<div>300+ washers $ Apr 29 - May 19 (3 days)</div>'
-    header_block_raw_html += '<h4>Washers in selected map area</h1>'
-    //TODO: add href to current covid restrictions -->
-    header_block_raw_html += '<p>Review COVID-19 restrictions before you wash. <a'
-    header_block_raw_html += 'href="https://www.gov.il/he/departments/guides/ramzor-cites-guidelines">Learn more</a></p>'
-    header_block_raw_html += '</div>'
-
-    document.getElementById("upper_header_and_buttons_block").innerHTML = header_block_raw_html;
-    // document.getElementById("upper_header_and_buttons_block").innerHTML = header_block_raw_html;
-}
-
-function insert_filter_buttons(){
-    /**
-     * insert filter buttons: "Drop off time" Time picker form,
-     * "Near Me" slider,
-     * "Rating" rating picker
-     * and "Special Services" dropdown with check box
-     */
-    let raw_html = insert_drop_off_time();
-    return raw_html;
-}
-
-function insert_drop_off_time(){    
-    /**
-     * insert "Drop off time" Time picker form
-     */
-    // add HTML tags
-    // raw_html = '<div class="dropdown">';
-    // raw_html += '<a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Drop off time</a>';
-    // raw_html += '<ul class="dropdown-menu">';
-    // raw_html += '<li><input class="dropdown-item" type="time" id="startTime" value="08:00" onchange=update_drop_off_time(e)></li>';
-    // raw_html += '</ul>';
-    // raw_html += '</div>';
-    raw_html = '<button type="button" class="upper_filter_buttons" OnClick="filter_washers_by_self_service()">Drop off time</button>';
-
-    return raw_html;
-}
-
-function update_drop_off_time(e){
-    /**
-     * update drop off time after it changed
-     */
-    drop_off_time = e.target.value
-}
-
-async function create_washer_list() {
+async function create_washer_list(filters) {
     /**
      * creaete washer list from JSON
      */
-    washerDoc_array = await getWasherFilterQuery({}); // get all washers
-    washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
+    washerDoc_array = await getWasherFilterQuery(filters); // get all washers
+    return washerDoc_array;
+    // washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
 
-    var cur_loc = getCurrentUserLocation(); // => {lat: num, lng: num} only when user is online, else-null
+    // var cur_loc = getCurrentUserLocation(); // => {lat: num, lng: num} only when user is online, else-null
 }
 
-/**
- *     currently - use all of the washers (query from server?) and take a filter function, than create each of the washers in block and display them.
-    FIXME: hard to order-by by location\rating, maybe will take a lot of time to load but DB
-*/
-function insert_washer_blocks(filter = () => true) {
+function insert_washer_blocks(washerDoc) {
+    /**
+     *     currently - use all of the washers (query from server?) and take a filter function, than create each of the washers in block and display them.
+        FIXME: hard to order-by by location\rating, maybe will take a lot of time to load but DB
+    */
     let whole_washers_html_block = '';
     // adjusting page height
-    const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, current_list_of_washers.length);
+    const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
 
     for (let i = 0; i < max_number_of_blocks; i++) {
-        let washer_block_raw_html = create_one_washer_block(current_list_of_washers[i]);
+        let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
         whole_washers_html_block += washer_block_raw_html;
     }
     document.getElementById("washers-cards").innerHTML = whole_washers_html_block;
@@ -192,7 +133,7 @@ function create_one_washer_block(washerDoc) {
     washer_block_raw_html += '<img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
-    washer_block_raw_html += '<img class="card-profile-img" src="'+washerDoc.data().imageUrl+'"/>';
+    washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
     washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">5</div>\n</div>\n</div>';
     // card text
     washer_block_raw_html+= '<div class="card-text col-9">';
@@ -201,23 +142,22 @@ function create_one_washer_block(washerDoc) {
     washer_block_raw_html+= '<p class="card-text">' + washerDoc.data().properties + '</p>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</a>';
 
-
-    // washer_block_raw_html += '<div class="container-fluid washer_block">';
-    // washer_block_raw_html += '<div class="row">';
-    // washer_block_raw_html += '<div class="col-md-6">';
-    // washer_block_raw_html += '<img class="washer_img" src="' + washer.img_src + '" alt="Mister Washer" aria-hidden="true">';
-    // washer_block_raw_html += '</div>';
-    // washer_block_raw_html += '<div class="col-md-6">';
-    // washer_block_raw_html += '<div class="washer_text" onclick="redirect_specific_washer(' + washer.id + ')">';
-    // if (washer.white) {
-    //     washer_block_raw_html += '<p>White and Colored in ' + washer.location + '</p>';
-    // } else {
-    //     washer_block_raw_html += '<p>Colored in ' + washer.location + '</p>';
-    // }
-    // washer_block_raw_html += '<h2>' + washer.name + '</h2>';
-    // washer_block_raw_html += '<p>' + washer.description + '</p>';
-    // washer_block_raw_html += '</div></div></div></div>';
     return washer_block_raw_html;
+    /*washer_block_raw_html += '<div class="container-fluid washer_block">';
+    washer_block_raw_html += '<div class="row">';
+    washer_block_raw_html += '<div class="col-md-6">';
+    washer_block_raw_html += '<img class="washer_img" src="' + washer.img_src + '" alt="Mister Washer" aria-hidden="true">';
+    washer_block_raw_html += '</div>';
+    washer_block_raw_html += '<div class="col-md-6">';
+    washer_block_raw_html += '<div class="washer_text" onclick="redirect_specific_washer(' + washer.id + ')">';
+    if (washer.white) {
+        washer_block_raw_html += '<p>White and Colored in ' + washer.location + '</p>';
+    } else {
+        washer_block_raw_html += '<p>Colored in ' + washer.location + '</p>';
+    }
+    washer_block_raw_html += '<h2>' + washer.name + '</h2>';
+    washer_block_raw_html += '<p>' + washer.description + '</p>';
+    washer_block_raw_html += '</div></div></div></div>';*/
 }
 /**
  * FIXME: please
@@ -238,47 +178,27 @@ function redirect_specific_washer(washer_id) {
     // window.open(final_url);
 }
 
-/*
-    initialzie google maps object and sets markers in the washers location.
-*/
+function update_drop_off_time(e){
+    /**
+     * update drop off time after it changed
+     */
+    drop_off_time = e.target.value
+}
+
+/* map section */
 function initMap(filter = () => true) {
+    /*
+    initialzie google maps object and sets markers in the washers location.
+    */
     // The map, centered at current location
     const map = new google.maps.Map(document.getElementById("map"), {
         zoom: 15,
         center: current_user_location,
     });
 
-    //ofir sction
-    // infoWindow = new google.maps.InfoWindow();
-    // if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(
-    //     (position) => {
-    //         var pos = {
-    //         lat: position.coords.latitude,
-    //         lng: position.coords.longitude,
-    //         };
-
-    //         user_pos= pos;
-
-    //         UpdateUserLocation("/update_user_location");
-    //         map.setCenter(pos);
-    //     },
-    //     () => {
-    //         handleLocationError(true, infoWindow, map.getCenter());
-    //     }
-    //     );
-    // } else {
-    //     // Browser doesn't support Geolocation
-    //     handleLocationError(false, infoWindow, map.getCenter());
-    //     map.setCenter({
-    //     lat: 31.771959,
-    //     lng: 35.217018,
-    //     });
-    // }
-    //end ofir
-
+    
     // adding markers for the washers (after filter)
-    for (i in current_list_of_washers) {
+    /*for (i in current_list_of_washers) {
         if (filter(current_list_of_washers[i])) {
             const marker = new google.maps.Marker({
                 position: {
@@ -299,13 +219,42 @@ function initMap(filter = () => true) {
                 filter_washers_by_distance_from_point(marker.washer.lat, marker.washer.lng);
             })
         }
+    }*/
+    /*//ofir sction
+    infoWindow = new google.maps.InfoWindow();
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+        (position) => {
+            var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            };
+
+            user_pos= pos;
+
+            UpdateUserLocation("/update_user_location");
+            map.setCenter(pos);
+        },
+        () => {
+            handleLocationError(true, infoWindow, map.getCenter());
+        }
+        );
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+        map.setCenter({
+        lat: 31.771959,
+        lng: 35.217018,
+        });
     }
+    //end ofir*/
 }
 
+/* handle filters (&update the map section) */
+function refresh_filters() {
 /*
     refresh all of the filters
 */
-function refresh_filters() {
     insert_washer_blocks();
     initMap();
 }
@@ -413,3 +362,14 @@ function init_near_me_range(){
     x = 0
 }
 
+async function on_load_page(){
+    /**
+     * 
+     */
+    //initialize search bar and get set results
+    search_res = get_search_bar("search-bar");
+    //initialize washers list
+    washerDoc = await create_washer_list(search_res);
+    //insert washers cards
+    insert_washer_blocks(washerDoc);
+}
