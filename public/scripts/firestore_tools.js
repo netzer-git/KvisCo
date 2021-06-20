@@ -203,7 +203,7 @@ async function createNewWasher(washer) {
         properties: washer.properties,
         phone: washer.phone
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New washer added: " + docRef);
     });
 }
 
@@ -227,7 +227,7 @@ async function setWasherOpenTimes(openTimes, washerId) {
 async function createNewUser(user) {
     let data = await forwardGeocodePromise(user.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("users").doc(getUserToken()).set({
+    await db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
         location_cor: geoPoint,

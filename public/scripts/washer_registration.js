@@ -97,13 +97,13 @@ async function create_washer() {
         imageUrl: profile_pic_url,
         pics: pics_urls,
         location_str: washer_location_str,
-        machine_type: washer_machine_type,
+        model_name: washer_machine_type,
         description: washer_description,
         commitment: washer_commitment,
         properties: washer_properties,
         phone: washer_phone_number,
         capacity: washer_capacity,
-        year_purchsed: washer_year_purchased,
+        year_purchased: washer_year_purchased,
     }
     console.log(new_washer);
     await createNewWasher(new_washer);
