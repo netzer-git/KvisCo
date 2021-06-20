@@ -112,24 +112,37 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return ratingNum == 0 ? ratingSum / ratingSum : null;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : null;
 }
 
 /**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
         // to look for doc-ref field, you have to get the ref
-        const docRef = db.collection(collection).doc(docID);
-        if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docRef).orderBy("created_at");
-        } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '!=', "finished").orderBy("created_at");
-        } else {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '==', status).orderBy("created_at");
+        const docRef = db.collection('users').doc(docID);
+        const docFullRef = collection + '/' + docRef.id;
+        if (field === "user") {
+            if (status === "all") {
+                var query = db.collection('orders').where('user', "==", docRef).orderBy("created_at");
+            } else if (status === "processing") {
+                var query = db.collection('orders').where('user', "==", docRef).where('status', '!=', "finished").orderBy("created_at");
+            } else {
+                var query = db.collection('orders').where('user', "==", docRef).where('status', '==', status).orderBy("created_at");
+            }
+        }
+
+        if (field === "washer") {
+            if (status === "all") {
+                var query = db.collection('orders').where('washer', "==", docFullRef).orderBy("created_at");
+            } else if (status === "processing") {
+                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '!=', "finished").orderBy("created_at");
+            } else {
+                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '==', status).orderBy("created_at");
+            }
         }
 
         query.get().then((docArray) => {
@@ -146,7 +159,7 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
             })
             resolve(orderArray);
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            reject("Error getting document:", error);
         });
     });
 }
