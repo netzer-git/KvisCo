@@ -733,15 +733,15 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
   }
 
   .instructions {
-    height: 54px;
-    width: 585px;
-    left: 758px;
-    top: 264px;
-    border-radius: nullpx;
-    color: rgba(71, 74, 87, 1);
-    font-size: 100%;
-    padding-left: 5%;
-    margin-top: 2%;
+      width: 585px;
+      left: 758px;
+      top: 264px;
+      border-radius: nullpx;
+      color: rgba(71, 74, 87, 1);
+      font-size: 16px;
+      padding-left: 5%;
+      margin-top: 2%;
+      margin-bottom: 4%;
   }
 
 
@@ -752,6 +752,7 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     top: 492px;
     margin-left: 5%;
     border-radius: 10px;
+    font-size: 16px;
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
