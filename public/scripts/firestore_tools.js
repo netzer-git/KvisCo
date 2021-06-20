@@ -101,9 +101,8 @@ async function getRatingFromDoc(doc, field) {
             });
     }
     else if (field === 'washer') {
-
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_user;
+            let rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
@@ -124,25 +123,25 @@ async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
         // to look for doc-ref field, you have to get the ref
-        const docRef = db.collection('users').doc(docID);
-        const docFullRef = collection + '/' + docRef.id;
+        //const docRef = db.collection('users').doc(docID);
+        //onst docFullRef = collection + '/' + docRef.id;
         if (field === "user") {
             if (status === "all") {
-                var query = db.collection('orders').where('user', "==", docRef).orderBy("created_at");
+                var query = db.collection('orders').where('user', "==", docID).orderBy("created_at");
             } else if (status === "processing") {
-                var query = db.collection('orders').where('user', "==", docRef).where('status', '!=', "finished").orderBy("created_at");
+                var query = db.collection('orders').where('user', "==", docID).where('status', '!=', "finished").orderBy("created_at");
             } else {
-                var query = db.collection('orders').where('user', "==", docRef).where('status', '==', status).orderBy("created_at");
+                var query = db.collection('orders').where('user', "==", docID).where('status', '==', status).orderBy("created_at");
             }
         }
 
         if (field === "washer") {
             if (status === "all") {
-                var query = db.collection('orders').where('washer', "==", docFullRef).orderBy("created_at");
+                var query = db.collection('orders').where('washer', "==", docID).orderBy("created_at");
             } else if (status === "processing") {
-                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '!=', "finished").orderBy("created_at");
+                var query = db.collection('orders').where('washer', "==", docID).where('status', '!=', "finished").orderBy("created_at");
             } else {
-                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '==', status).orderBy("created_at");
+                var query = db.collection('orders').where('washer', "==", docID).where('status', '==', status).orderBy("created_at");
             }
         }
 
