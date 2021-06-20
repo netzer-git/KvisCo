@@ -334,13 +334,6 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    // if we didn't get any filters
-    if (isObjectEmpty(filters)) {
-        washersArray.forEach((doc) => {
-            filteredWashersWithRating.push(doc);
-        })
-    }
-
     if (filters.commitment !== undefined) {
         let filteredWashersWithCommitment = [];
         await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
@@ -392,6 +385,13 @@ async function getWasherFilterQuery(filters) {
         });
         filteredWashers = firstQuery ? filteredWashersWithOpenTime : intersection(filteredWashers, filteredWashersWithOpenTime);
         firstQuery = false;
+    }
+
+    // if we didn't get any filters
+    if (firstQuery) {
+        washersArray.forEach((doc) => {
+            filteredWashers.push(doc);
+        })
     }
 
     return filteredWashers;
