@@ -93,15 +93,21 @@ async function getRatingFromDoc(doc, field) {
     const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            ratingSum += order.data().rating_user;
-            ratingNum ++;
-        });
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            ratingSum += order.data().rating_washer;
-            ratingNum ++;
-        });
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
     }
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
@@ -405,7 +411,7 @@ async function getWasherFilterQuery(filters) {
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.location_cor) <= 2) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 2) {
                 filteredWashersWithAddress.push(doc);
             }
         });
