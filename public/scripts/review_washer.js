@@ -35,16 +35,18 @@ mediaCaptureElement.addEventListener('change', onMediaFileSelected);
 
 var rating;
 var review;
-var photo;
+var photos;
 
 function save_rating(rateID) {
   rating = rateID.value;
   // console.log(rating);
 }
 
-function save_pic(event) {
-  var photo = event.target.files[0]; 
-  console.log(photo);
+function save_photo(event) {
+  if (event != null) {
+    photos = event.target.files[0];
+      // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
+  }
 }
 
 function save_review_change() {
@@ -52,29 +54,22 @@ function save_review_change() {
 }
 
 
-function add_review(on_who) {
+function add_review_to_order() {
   if (review == null || rating == null) {
     alert("PLEASE RATE AND REVIEW");
   }
   try {
+    url = saveImageToUser(photos);
     order = {
       review_washer: review,
       rating_washer: rating,
-      laundry_pics: photo,
+      laundry_pics: url,
     }    
   }
   catch {
-    if (on_who == "on_washer") {
-      order = {
-        review_washer: review,
-        rating_washer: rating,
-      }
-    }
-    if (on_who == "on_user") {
       order = {
         review_user: review,
         rating_user: rating
-      }
     }
   }
   console.log(order)

@@ -87,7 +87,6 @@ function updateFormFields(event) {
     helloField = helloElement.value;
     if (event !== null) {
         photoFile = event.target.files[0];
-        console.log("EVENT! " + JSON.stringify(event.target));
     }
 }
 
@@ -95,10 +94,6 @@ async function submitPhotoForm() {
     url = await saveImageToUser(photoFile);
     // create \ update user \ order
     console.log("hello: " + helloField + "url: " + url);
-}
-
-function clickTheImageButton() {
-    mediaCapture.click();
 }
 
 function displayImage() {
@@ -127,12 +122,14 @@ var order1 = {
 }
 
 const testNadavQuery = async () => {
-    // reverseGeocoder(31.777030149931697, 35.198083551055305).then((response) => {
-    //     console.log(JSON.stringify(response))
-    // });
+    // var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+    // console.log(geoPoint);
     // document.getElementById("only-one").innerHTML = JSON.stringify(response);
     // filters = {commitment: 80};
     // wArray = await getWasherFilterQuery(filters);
     // wArray.forEach((w) => console.log(w.data()));
     // setWasherOpenTimes({ 'Sunday': ["11:15", "11:45"], Friday: ["10:00", "15:00"] }, '27NLOVty9HfZRlWwrfuK');
+    checkOpenTimes("10:15", null);
 }

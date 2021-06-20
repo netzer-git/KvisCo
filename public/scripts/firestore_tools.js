@@ -185,7 +185,8 @@ async function setOrderDetails(orderDetails, orderId) {
  * @param {*} washer washer registration object
  */
 async function createNewWasher(washer) {
-    coordinates = forwardGeocode("Israel " + washer.city + " " + washer.street + " " + washer.number);
+    let data = await forwardGeocodePromise(washer.location_str);
+    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
@@ -193,7 +194,7 @@ async function createNewWasher(washer) {
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
-        location_cor: coordinates,
+        location_cor: geoPoint,
         machine_type: washer.machine_type,
         description: washer.description,
         commitment: washer.commitment,
@@ -223,15 +224,19 @@ async function setWasherOpenTimes(openTimes, washerId) {
  * please notice: the user needs to be signed in (in auth) while creating new user (on firestore)
  * @param {object} user : basic user object (from auth)
  */
-function createNewUser(user) {
+async function createNewUser(user) {
+    let data = await forwardGeocodePromise(user.location_str);
+    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
-        location_cor: forwardGeocode(user.location_str),
+        location_cor: geoPoint,
         saved_washers: [],
         cover_photo: user.cover_photo,
         rating_sum: 0,
-        rating_num: 0
+        rating_num: 0,
+        phone: user.phone,
+        description: user.description,
     }).then((docRef) => {
         console.log("New order added: " + docRef);
     });
@@ -261,6 +266,24 @@ async function saveImageToUser(file) {
 
 /**
  * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
+ * Notice: there is no difference between washer's "cover_photo" attribute to "pics" when saving images to storage.
+ * @param {*} file image file
+ * @param {*} washerId the id of the current washer
+ * @returns image url path to firebase storage
+ */
+async function saveImageToWasher(file, washerId) {
+    if (file === null) {
+        console.error("You are trying to upload an empty file");
+        return null;
+    }
+    let filePath = washerId + '/' + file.name;
+    let fileSnapshot = await storage.ref(filePath).put(file);
+    let url = await fileSnapshot.ref.getDownloadURL();
+    return url;
+}
+
+/**
+ * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
  * @param {*} file image file
  * @param {string} orderId the id of the current order
  * @return {string} image url path to firebase storage
@@ -277,9 +300,9 @@ async function saveImageToUser(file) {
 }
 
 /**
- * 
- * @param {*} filters 
- * @returns 
+ * the function takes filters obj with specific fields and returns all of the relevant washer docs any possible filter combination.
+ * @param {*} filters filters obj
+ * @returns array of washers
  */
 async function getWasherFilterQuery(filters) {
     var filteredWashers = [];
@@ -307,9 +330,8 @@ async function getWasherFilterQuery(filters) {
 
     if (filters.distance !== undefined) {
         let filteredWashersWithDistance = [];
-        currentPoint = null; // fixme
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(currentPoint, doc.location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -332,7 +354,7 @@ async function getWasherFilterQuery(filters) {
     if (filters.openTime !== undefined) {
         let filteredWashersWithOpenTime = [];
         washersArray.forEach(doc => {
-            if (true) { // ????
+            if (checkOpenTimes(filters.openTime, doc)) {
                 filteredWashersWithOpenTime.push(doc);
             }
         });

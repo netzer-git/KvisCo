@@ -1,20 +1,22 @@
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <!-- this tag connects the header-page to the appropriate css -->
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- Add icon library -->
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
-        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- this tag connects the header-page to the appropriate css -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- this tag connects the header-page to the appropriate css -->
 
@@ -40,6 +42,7 @@
     <script src="../scripts/order_blocks_washer.js"></script>
     <script src="../scripts/washer_tabs.js"></script>
     <script src="../scripts/header.js"></script>
+    <script src="../scripts/review_user.js"></script>
     <script scr="/js/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -70,7 +73,8 @@
     <link rel="stylesheet" href="../css/washer_properties.css">
     <link rel="stylesheet" href="../css/washer_tabs.css">
     <link rel="stylesheet" href="../css/washer_properties.css">
-    </head>
+    <link rel="stylesheet" href="../css/review_washer.css">
+</head>
     <body>
         <!--Header starts here-->
         <div id="includedContent"></div>
@@ -109,7 +113,9 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div style="margin-left: 12%;">
                         <div id="in_process_orders">
+                        </div>
                         </div>
                     </div>
                     <div class="row">
@@ -122,43 +128,46 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div style="margin-left: 12%;">
                         <div id="finished_orders">
+                        </div>
+
                         </div>
                     </div>            
                 </div>
             </div>
         </div>
-        <!--End of orders area-->
-        <!--Start tab section-->
-        <div class="row">
-            <div class="col-1">
-            </div>
-            <div class="col-10">
-                <div style="margin-top: 5%;" class="row text-center">
-                    <div class="col-lg-6">
-                        <div class="tabs-border-small">
-                            <ul class="nav nav-pills nav-fill">
-                                <li class="nav-item active">
-                                    <a class="tabs-title" href="#2" data-toggle="tab">Detailes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="tabs-title" href="#3" data-toggle="tab">Reviews</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="window-border">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="2">
-                                    <div class="with_padd">
-                                        <!-- function to get washer details -->
-                                        <div id="washer_details"></div>
-                                    </div>
+    </div>
+    <!--End of orders area-->
+    <!--Start tab section-->
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <div style="margin-top: 5%;" class="row text-center">
+                <div class="col-lg-6">
+                    <div class="tabs-border-small">
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item active">
+                                <a class="tabs-title" href="#2" data-toggle="tab">Detailes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="tabs-title" href="#3" data-toggle="tab">Reviews</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="window-border">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="2">
+                                <div class="with_padd">
+                                    <!-- function to get washer details -->
+                                    <div id="washer_details"></div>
                                 </div>
-                                <div class="tab-pane" id="3">
-                                    <div class="overflow-auto">
-                                        <div id="my_reviews"></div>
-                                        <!-- function that get the reviews by loop -->
-                                    </div>
+                            </div>
+                            <div class="tab-pane" id="3">
+                                <div class="overflow-auto">
+                                    <div id="my_reviews"></div>
+                                    <!-- function that get the reviews by loop -->
                                 </div>
                             </div>
                         </div>
@@ -166,13 +175,13 @@
                 </div>
             </div>
         </div>
-    </body>
-    <script>
-        $("#includedContent").load("./includes/header.html");
+    </div>
+</body>
+
+<script type="text/javascript">
+    // $(document).ready();
+    window.onpaint = load_washer_profile_page();
+    $("#includedContent").load("./includes/header.html");
     </script>
 
-    <script type="text/javascript">
-        // $(document).ready();
-        window.onpaint = load_washer_profile_page();
-    </script>
 </html>
