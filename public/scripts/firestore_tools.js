@@ -7,7 +7,7 @@ db.settings({
 const storage = firebase.storage();
 
 
-/*
+/**
  * the function takes docID and collection name and resolve a promise of the document.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -31,7 +31,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
     })
 }
 
-/*
+/**
  * the function takes docID - the id of the washer - and resolve a promise of the document of the washer.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -40,7 +40,7 @@ function promiseWasherLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('washers', documentID);
 }
 
-/*
+/**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseUserLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -49,7 +49,7 @@ function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
 }
 
-/*
+/**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -58,7 +58,7 @@ function promiseOrderLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('orders', documentID);
 }
 
-/*
+/**
  * the function resolve a promise of the document of the current user based on the Auth system.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -68,13 +68,21 @@ function promiseUserLoaderByCurrentUserID() {
     return promiseLoaderByCollectionAndId('users', getUserToken());
 }
 
-/*
+/**
  * the function resolve a promise of the document of the current washer based on the Auth system.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseWasherLoaderByCurrentUserID() {
     return promiseLoaderByCollectionAndId('washers', getUserToken());
+}
+
+/**
+ * @returns current user location coordinates.
+ */
+async function getCurrentUserLocation() {
+    currentUserDoc = promiseWasherLoaderByCurrentUserID.then();
+    return currentUserDoc ? currentUserDoc.data().location_cor : null;
 }
 
 /**
@@ -88,7 +96,7 @@ function getRatingFromDoc(doc) {
     }
 }
 
-/*
+/**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
@@ -229,7 +237,7 @@ async function setWasherOpenTimes(openTimes, washerId) {
 async function createNewUser(user) {
     let data = await forwardGeocodePromise(user.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("users").doc(getUserToken()).set({
+    await db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
         location_cor: geoPoint,
