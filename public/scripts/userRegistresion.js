@@ -4,6 +4,8 @@ var user_location_str;
 var user_cover_photo = "";
 var user_phone_number;
 var user_description;
+var is_user_profile_loaded = false;
+
 
 function save_location() {
     var city = document.getElementById("city").value;
@@ -18,11 +20,17 @@ function save_phone_number() {
 
 function save_description() {
     user_description = document.getElementById("user_description").value;
+
+
 }
 
 function save_photo(event) {
     if (event != null) {
         user_cover_photo = event.target.files[0];
+        is_user_profile_loaded = true
+        if (is_user_profile_loaded) {
+            document.getElementById("indicator4").style.display = "block";
+        }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }

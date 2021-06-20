@@ -1,3 +1,5 @@
+var is_review_photo_uploaded = false ;
+
 const ratingStars = [document.getElementsByClassName("rating__star")];
 
 
@@ -45,6 +47,10 @@ function save_rating(rateID) {
 function save_photo(event) {
   if (event != null) {
     photos = event.target.files[0];
+    is_review_photo_uploaded = true
+    if (is_review_photo_uploaded) {
+        document.getElementById("indicator5").style.display = "block";
+    }
       // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
   }
 }

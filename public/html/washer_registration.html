@@ -42,6 +42,7 @@
                             <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                                 Upload Profile Photo
                             </button>
+                            <label id="indicator">photo uploaded</label>
                         </form>
                         <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
                         <h4 class="header_41">
@@ -85,8 +86,8 @@
                 </tr>
                 <tr>
                     <th>
-                    <div class= "header_53">
-                        How much time (in hours) you can commit to your customers?
+                    <div class= "header_55">
+                        How much time (in minutes) does it take for one load?
                     </div>
                     </th>
                 </tr>
@@ -127,15 +128,22 @@
                 <tr>
                     <th>
                         <form id="image-form" action="#">
-                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
-                                Upload Your Laundry Photo
+                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden >
+                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
+                                Upload Laundry Photo
                             </button>
+
                             <input id="mediaCapture3" onchange="save_machine_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
-                                Upload Your Machine Photo
+                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
+                                Upload Machine Photo
                             </button>
                         </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label id="indicator2">photo uploaded</label>
+                        <label id="indicator3">photo uploaded</label>
                     </th>
                 </tr>
                 <tr>
@@ -165,14 +173,15 @@
                         <form name="special_serve">
                             <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">Ironing<br>  
                             <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service(this);">Door 2 Door<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>
+                            <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">None<br>  
                         </form>
-                    <div class= "labels">
+                    <!-- <div class= "labels">
                     <input class= "cbx" type="checkbox" name="special_serve" value="Ironing" onclick="return ValidateServiceSelection();">Ironing<br>  
                     <input class= "cbx" type="checkbox" name="special_serve" value="Door 2 Door" onclick="return ValidateServiceSelection();">Door 2 Door<br>  
                     <input class= "cbx" type="checkbox" name="special_serve" value="Dryer" onclick="return ValidateServiceSelection();">Dryer<br>  
                         <br>
-                    </div>
+                    </div> -->
                     </th>
                 </form>  
                 </tr>

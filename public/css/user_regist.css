@@ -18,7 +18,7 @@
     
 }
 
-#user_details{
+#user_description{
     left: 0%;
     right: 0%;
     top: -1.26%;
@@ -65,3 +65,10 @@
     color: #1C1C1D;
 
 }
+
+#indicator4{
+    display:none;
+    margin-left: 15%;
+    margin-top: 2%;
+    font-family: 'Montserrat';
+ }
