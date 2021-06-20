@@ -35,7 +35,7 @@
             press here to start the example!
         </button>
         <button type="button" onclick="testNadavQuery()">
-            Nadav's query!
+            Lets Geo Yo!
         </button>
         <button onclick="location.href='../html/components/profile_header.html'" type="button">
             profile_header</button>
@@ -43,7 +43,7 @@
                 order_blocks_washer</button>
         <button onclick="location.href='../html/components/order_blocks_for_user.html'" type="button">
             order_blocks_user</button>
-        <button onclick="location.href='../../html/final_pages/user_profile_final.html'" type="button">
+        <button onclick="location.href='../html/user_profile_final.html'" type="button">
             user_profile_final</button>
         <button onclick="location.href='./html/new_order_block.html'" type="button">
             new_order_block</button>
@@ -51,15 +51,24 @@
                 place-order</button>
         <button onclick="location.href='./html/washer-profile.html'" type="button">
             washer-profile</button>
-        <form id="image-form" action="#">
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hide="true">
-            <button id="submitImage" title="Add an image">
+            <button onclick="location.href='./html/welcome.html'" type="button">
+                Welcome
+            </button>
+        <!-- form for uploading pictures and more fields -->
+        <div class="container-fluid" style="margin: 50px">
+            <textarea rows="1" cols="30" id="hello" onchange="updateFormFields()" placeholder="hello!"></textarea>
+            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden onchange="updateFormFields(event)">
+            <button title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                 image
             </button>
-            <button onclick="displayImage()">
-                display image
+            <button onclick="submitPhotoForm()">
+                Lets RUN!--
             </button>
-        </form>
+        </div>
+        
+        <button onclick="displayImage()">
+            display image
+        </button>
         <div id="only-one">
             Hey!
         </div>
@@ -88,11 +97,14 @@
     <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
     <script src="/__/firebase/init.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/gh/bigdatacloudapi/js-reverse-geocode-client@latest/bigdatacloud_reverse_geocode.min.js" type="text/javascript"></script>
+
     <script src="scripts/app.js"></script>
     <script src="scripts/tools.js"></script>
     <script src="scripts/firestore_tools.js"></script>
 
     <!-- JS for this specific page -->
     <script src="scripts/index.js"></script>
+
 </body>
 </html>
