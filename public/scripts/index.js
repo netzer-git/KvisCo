@@ -131,5 +131,8 @@ const testNadavQuery = async () => {
     // wArray = await getWasherFilterQuery(filters);
     // wArray.forEach((w) => console.log(w.data()));
     // setWasherOpenTimes({ 'Sunday': ["11:15", "11:45"], Friday: ["10:00", "15:00"] }, '27NLOVty9HfZRlWwrfuK');
-    checkOpenTimes("10:15", null);
+    const nadavDoc = await promiseUserLoaderById('5IMy2kMSbheOriFPxqKmKTNWOJ92')
+    let r = await getRatingFromDoc(nadavDoc, 'user');
+    console.log("rating is now: " + r)
+
 }
