@@ -187,7 +187,7 @@ async function setOrderDetails(orderDetails, orderId) {
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("washers").doc(getUserToken()).set({
+    await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
         rating_num: 0,
@@ -197,13 +197,15 @@ async function createNewWasher(washer) {
         location_cor: geoPoint,
         machine_type: washer.machine_type,
         description: washer.description,
-        commitment: washer.commitment,
+        commitment: Number(washer.commitment),
         opening_times: {},
         price: 0, // fixme for milestone 3
         properties: washer.properties,
         phone: washer.phone
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New order added: " + docRef.id);
+    }).catch((err) => {
+        console.error("Washer cannot be registered: " + err.message);
     });
 }
 
