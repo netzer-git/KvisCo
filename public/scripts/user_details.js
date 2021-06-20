@@ -1,10 +1,6 @@
 async function load_user_profile_page() {
-    // var userID = sessionStorage.getItem("userid");
-    // console.log("got here!");
-    let userID = await getUserToken();
-    // userID = "5IMy2kMSbheOriFPxqKmKTNWOJ92"
+    var userID = sessionStorage.getItem("userid");
     console.log("cur user ID", userID);
-    // userID = 'c0KmkCafo7bZmCcZvW2Nr7NqgDK2';
     const user_doc = await promiseUserLoaderById(userID); //get the washer from the firebase
     if (!user_doc) {
         window.location.href = "../html/map-filter.html";

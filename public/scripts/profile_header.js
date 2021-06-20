@@ -8,6 +8,9 @@
  */
 async function load_profile_header_of_washer(washerID) {
     const washer_doc = await promiseWasherLoaderById(washerID);
+    // var rating = await getRatingFromDoc(washer_doc, "washer");
+    rating = 1.2;
+    console.log("the rating is ",  rating);
     washer_header = '<div class="row"><div class="col-1"></div>';
     washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
     washer_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
@@ -16,12 +19,13 @@ async function load_profile_header_of_washer(washerID) {
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
     washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
-    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(washer_doc) + '</div></div>';       
+    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';   
     washer_header += '</div></div></div>';  
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
     if (washer_doc.data().pics !== undefined) {
-        washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[0] +'">';
-        washer_header += '<img class="image-2" src="'+ washer_doc.data().pics[1] +'">';
+        for (i; i<washer_doc.data().pics.length; i++) {
+            washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[i] +'">';
+        }
     }
     washer_header += '</div>';
     document.getElementById("profile_header").innerHTML = washer_header;   
@@ -33,6 +37,7 @@ async function load_profile_header_of_washer(washerID) {
  */
 async function load_profile_header_of_user(userID) {
     const user_doc = await promiseUserLoaderById(userID);
+    var rating = await getRatingFromDoc(user_doc, "user");
     user_header = '<div class="row"><div class="col-1"></div>';
     user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + user_doc.data().imageUrl + '"></div></div>';
     user_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
@@ -41,7 +46,7 @@ async function load_profile_header_of_user(userID) {
     user_header += '</table></div></div>';
     user_header += '<div class="row">';
     user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
-    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ getRatingFromDoc(user_doc) + '</div></div>';       
+    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';       
     user_header += '</div></div></div>';  ;
     document.getElementById("profile_header").innerHTML = user_header;  
 }

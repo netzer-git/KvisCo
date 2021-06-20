@@ -19,7 +19,8 @@ async function get_order_block_of_user(order) {
     var formattedTime = hours + ':' + minutes.substr(-2);
     block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" nis</td></tr>"
     switch (order.data().status) {
-        case 'pending', 'process':
+        case 'pending':
+        case 'process':
             block += "</tr><th scope='col' colspan='2'>";
             block += "<div id='overlay' onclick='off()'>";
             block += "<div id='user_order'></div></div><div>";
@@ -43,7 +44,13 @@ async function get_order_block_of_user(order) {
 
 
 async function insert_orders_blocks_of_user(tag, userID, status) {
-    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
+    if (status == "process") {
+        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "pending");
+        all_orders.push(await promiseOrderArrayByUserIdAndStatus(userID, status));
+    }
+    else {
+        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
+    }
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {

@@ -93,15 +93,22 @@ async function getRatingFromDoc(doc, field) {
     const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
+            try{
             ratingSum += order.data().rating_user;
             ratingNum ++;
+            }
+            catch {}
         });
     }
     else if (field === 'washer') {
+
         docOrderArray.forEach((order) => {
-            ratingSum += order.data().rating_washer;
-            ratingNum ++;
-        });
+            try {
+                ratingSum += order.data().rating_washer;
+                ratingNum ++;
+            }
+            catch {}
+        });        
     }
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
