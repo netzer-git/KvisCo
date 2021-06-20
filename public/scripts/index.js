@@ -122,13 +122,14 @@ var order1 = {
 }
 
 const testNadavQuery = async () => {
-    var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
-    let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
-    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    console.log(geoPoint);
+    // var address = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let data = await forwardGeocodePromise("Israel, Jerusalem, Keren HaYesod 2");
+    // let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+    // console.log(geoPoint);
     // document.getElementById("only-one").innerHTML = JSON.stringify(response);
     // filters = {commitment: 80};
     // wArray = await getWasherFilterQuery(filters);
     // wArray.forEach((w) => console.log(w.data()));
     // setWasherOpenTimes({ 'Sunday': ["11:15", "11:45"], Friday: ["10:00", "15:00"] }, '27NLOVty9HfZRlWwrfuK');
+    checkOpenTimes("10:15", null);
 }
