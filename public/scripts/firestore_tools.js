@@ -343,7 +343,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.loads !== undefined) {
+    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
         let filteredWashersWithLoads = [];
         washersArray.forEach(doc => {
             if (true) { // fixme for milestone3
@@ -400,7 +400,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.address !== undefined) {
+    if (filters.address !== undefined && filters.address !== null) {
         let data = await forwardGeocodePromise(filters.address);
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
