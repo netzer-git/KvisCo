@@ -93,44 +93,57 @@ async function getRatingFromDoc(doc, field) {
     const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            try{
-            ratingSum += order.data().rating_user;
-            ratingNum ++;
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
             }
-            catch {}
-        });
+            });
     }
     else if (field === 'washer') {
 
         docOrderArray.forEach((order) => {
-            try {
-                ratingSum += order.data().rating_washer;
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
                 ratingNum ++;
             }
-            catch {}
-        });        
+            });
     }
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return ratingNum == 0 ? ratingSum / ratingSum : null;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : null;
 }
 
 /**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
         // to look for doc-ref field, you have to get the ref
-        const docRef = db.collection(collection).doc(docID);
-        if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docRef).orderBy("created_at");
-        } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '!=', "finished").orderBy("created_at");
-        } else {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '==', status).orderBy("created_at");
+        const docRef = db.collection('users').doc(docID);
+        const docFullRef = collection + '/' + docRef.id;
+        if (field === "user") {
+            if (status === "all") {
+                var query = db.collection('orders').where('user', "==", docRef).orderBy("created_at");
+            } else if (status === "processing") {
+                var query = db.collection('orders').where('user', "==", docRef).where('status', '!=', "finished").orderBy("created_at");
+            } else {
+                var query = db.collection('orders').where('user', "==", docRef).where('status', '==', status).orderBy("created_at");
+            }
+        }
+
+        if (field === "washer") {
+            if (status === "all") {
+                var query = db.collection('orders').where('washer', "==", docFullRef).orderBy("created_at");
+            } else if (status === "processing") {
+                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '!=', "finished").orderBy("created_at");
+            } else {
+                var query = db.collection('orders').where('washer', "==", docFullRef).where('status', '==', status).orderBy("created_at");
+            }
         }
 
         query.get().then((docArray) => {
@@ -147,7 +160,7 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
             })
             resolve(orderArray);
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            reject("Error getting document:", error);
         });
     });
 }
@@ -341,13 +354,6 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    // if we didn't get any filters
-    if (isObjectEmpty(filters)) {
-        washersArray.forEach((doc) => {
-            filteredWashersWithRating.push(doc);
-        })
-    }
-
     if (filters.commitment !== undefined) {
         let filteredWashersWithCommitment = [];
         await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
@@ -356,6 +362,19 @@ async function getWasherFilterQuery(filters) {
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
         firstQuery = false;
     }
+
+    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
+        let filteredWashersWithLoads = [];
+        washersArray.forEach(doc => {
+            if (true) { // fixme for milestone3
+                filteredWashersWithLoads.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        firstQuery = false;
+    }
+    
+
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
         washersArray.forEach(doc => {
@@ -399,6 +418,26 @@ async function getWasherFilterQuery(filters) {
         });
         filteredWashers = firstQuery ? filteredWashersWithOpenTime : intersection(filteredWashers, filteredWashersWithOpenTime);
         firstQuery = false;
+    }
+
+    if (filters.address !== undefined && filters.address !== null) {
+        let data = await forwardGeocodePromise(filters.address);
+        let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+        let filteredWashersWithAddress = [];
+        washersArray.forEach(doc => {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 2) {
+                filteredWashersWithAddress.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithAddress : intersection(filteredWashers, filteredWashersWithAddress);
+        firstQuery = false;
+    }
+
+    // if we didn't get any filters
+    if (firstQuery) {
+        washersArray.forEach((doc) => {
+            filteredWashers.push(doc);
+        })
     }
 
     return filteredWashers;
