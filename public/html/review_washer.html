@@ -43,12 +43,12 @@
                     </tr>
                     <tr>
                         <th>
-                            <form id="image-form" action="#">
-                                <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden>
-                                <button id="submitImage" title="Add an image">
-                                    Upload Photos
-                                </button>
-                            </form>
+                        <form id="image-form" action="#">
+                            <input id="mediaCapture" onchange="save_photo(event)" type="file" accept="image/*" capture="camera" hidden>
+                            <button id="submitImage" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
+                                Upload Photos
+                            </button>
+                        </form>
                         </th>
                     </tr>
                     <tr>
@@ -60,14 +60,14 @@
                     </tr>
                     <tr>
                         <th>
-                            <textarea id="washer_review" class="washer_review" name="washer_review" rows="3" cols="50" placeholder=" place your review here..." 
+                            <textarea id="washer_review" class="washer_review" name="washer_review" rows="3" cols="50" value = "" placeholder=" place your review here..." 
                             onchange="save_review_change()"></textarea> <!-- Personal note-->
                                 <br><br>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <button onclick="add_review('on_washer')" class="yellow_button_4">Leave Review</button>
+                            <button onclick="add_review_to_order()" class="yellow_button_4">Leave Review</button>
                         </th>
                     </tr>
 
