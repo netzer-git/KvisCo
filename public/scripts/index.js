@@ -133,6 +133,6 @@ const testNadavQuery = async () => {
     // setWasherOpenTimes({ 'Sunday': ["11:15", "11:45"], Friday: ["10:00", "15:00"] }, '27NLOVty9HfZRlWwrfuK');
     const nadavDoc = await promiseUserLoaderById('5IMy2kMSbheOriFPxqKmKTNWOJ92')
     let r = await getRatingFromDoc(nadavDoc, 'user');
-    console.log("rating: " + r)
+    console.log("rating is now: " + r)
 
 }
