@@ -1,8 +1,6 @@
 .order_pink{
     width: 750px;
-    height: 700px;
-    left: 331px;
-    top: 125px;
+    height: 650px;
 
     /* Palet 1 / 3 */
 
@@ -14,26 +12,20 @@
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 7%;
+    margin-top: 3%;
 }
 
 .order_white{
-    left: 7.29%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-
-    /* Main / White */
+    height: 550px;
+    width: 625px;
+    margin-top: -10%;
+        /* Main / White */
 
     background: #FFFFFF;
+    margin-bottom: 5%;
     /* Main / Black */
 
     border: 2px solid #1C1C1D;
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -10%;
 }
 
 
@@ -115,13 +107,44 @@ table.order_white th{
 }
 
 .header_24{
-    margin-left:13%;
-    text-align: center;
+      /* position: absolute; */
+  width: 558px;
+  height: 146px;
+  left: 120px;
+  top: 80px;
+
+  /* Headline / H2 */
+
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 45px;
+  line-height: 48px;
+  /* or 108% */
+
+  letter-spacing: 2px;
+
+  /* Main / Black */
+
+  color: #1C1C1D;
+    margin-left:2%;
     font-size: 35px;
 }
 
 .header_61{
     margin-left: 7%;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 32px;
+    /* or 160% */
+
+    letter-spacing: 0.625px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
 }
 
 .small_headline_4{
@@ -186,10 +209,6 @@ table.order_white th{
 
 
 .small-box-2{
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
 
     /* Main / White */
 
@@ -197,15 +216,14 @@ table.order_white th{
     /* Main / Black */
 
     border: 2px solid #1C1C1D;
-    border-radius: 25px;
-    width: 30%;
-    height: 20%;
-    margin-top: 1%;
+    border-radius: 10px;
+    width: 70%;
+    height: 50%;
     margin-left: 3%;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 150%;
     /* or 51px */
 
@@ -221,12 +239,10 @@ table.order_white th{
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
-    left: 0px;
-    margin-left: 30%;
+    margin-left: 5%;
     top: -0.6530606746673584px;
     border-radius: 10px;
     text-align: center;
-    padding-top: 0;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
