@@ -102,7 +102,7 @@ async function getRatingFromDoc(doc, field) {
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_user;
+            let rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
