@@ -34,7 +34,7 @@ async function load_profile_header_of_washer(washerID) {
 async function load_profile_header_of_user(userID) {
     const user_doc = await promiseUserLoaderById(userID);
     user_header = '<div class="row"><div class="col-1"></div>';
-    user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="../images/tal_e_pic.png"></div></div>';
+    user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + user_doc.data().imageUrl + '"></div></div>';
     user_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
     user_header += '<table class="table-search"><tr><h4>'+ user_doc.data().name +'</h4></tr></tr>';
     user_header += '<tr><div class="description">'+user_doc.data().description +'</div></tr>';
