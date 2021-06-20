@@ -111,6 +111,12 @@ async function forwardGeocodePromise(location_str) {
   })
 }
 
+/**
+ * get the distance between two geoPoints
+ * @param {*} pointA 
+ * @param {*} pointB 
+ * @returns the distance between them in km.
+ */
 function getDistanceFromLatLonInKm(pointA, pointB) {
   var R = 6371; // Radius of the earth in km
   var dLat = deg2rad(pointB.lat - pointA.lat); // deg2rad below
@@ -124,28 +130,42 @@ function getDistanceFromLatLonInKm(pointA, pointB) {
   return d;
 }
 
+/**
+ * convert deg to radians
+ * @param {*} deg 
+ * @returns the deg in radians
+ */
 function deg2rad(deg) {
   return deg * (Math.PI / 180)
 }
 
-// /* Initialise Reverse Geocode API Client */
-// var reverseGeocoder=new BDCReverseGeocode();
-
-// /* Get the current user's location information, based on the coordinates provided by their browser */
-// /* Fetching coordinates requires the user to be accessing your page over HTTPS and to allow the location prompt. */
-// reverseGeocoder.getClientLocation(function(result) {
-//     console.log(result);
-// });
-// /* Get the administrative location information using a set of known coordinates */
-// reverseGeocoder.getClientLocation({
-//     latitude: 31.7767,
-//     longitude: 35.2345,
-// }, function(result) {
-//     console.log(result);
-// });
-// /* You can also set the locality language as needed */
-// reverseGeocoder.localityLanguage='heb';
-// /* Request the current user's coordinates (requires HTTPS and acceptance of prompt) */
-// reverseGeocoder.getClientCoordinates(function(result) {
-//     console.log(result);
-// });
+/**
+ * takes filter time as "10:15" and checks if the time is in the washer opening time.
+ * @param {string} filter 
+ * @param {*} washerDoc 
+ * @return {boolean} true if the wanted time is in the washer opening time.
+ */
+function checkOpenTimes(filter, washerDoc) {
+  const getHourAsNumber = (hourMinTime) => {
+    openPattern = new RegExp(/(?<hour>\d\d):(?<min>\d\d)/);
+    wantedHour = hourMinTime.match(openPattern);
+    return [Number(wantedHour[1]), Number(wantedHour[2])]
+  }
+  // getting open and close time for the specific day
+  openTime = getHourAsNumber(washer.data().opening_times[filter[0]][0]);
+  closeTime = getHourAsNumber(washer.data().opening_times[filter[0]][1]);
+  wantedTime = getHourAsNumber(filter[1]);
+  // going through each possible combination of hour and min
+  if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
+    return false;
+  }
+  else if (openTime[0] < wantedTime[0]) {
+    return ((wantedTime[0] < closeTime[0]) || (wantedTime[1] < closeTime[1]));
+  }
+  else if (wantedTime[0] < closeTime[0]) {
+    return ((openTime[0] < wantedTime[0]) || (openTime[1] < wantedTime[1]));
+  }
+  else {
+    return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
+  }
+}
