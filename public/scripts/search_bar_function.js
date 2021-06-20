@@ -25,7 +25,7 @@ function get_search_bar(tag) {
     myDate = jsarray[1];
     loads = jsarray[2];
     duration = jsarray[3];
-    search_res = {address:address, myDate:myDate, loads:loads,duration:duration};
+    search_res = {address:address, myDate:myDate, loads:loads, duration:duration};
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Loads</td><td>Duration</td></tr>';
     search_bar += '<tr>';
@@ -78,4 +78,3 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
- 

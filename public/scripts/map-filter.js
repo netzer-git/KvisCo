@@ -127,7 +127,7 @@ function insert_washer_blocks(washerDoc) {
     @return {void}
 */
 function create_one_washer_block(washerDoc) {
-    let washer_block_raw_html = '<a class="washer-card col-12" href="washer-profile.html">';
+    let washer_block_raw_html = '<a class="washer-card col-12" href="washer-profile.html" onclick="save_washer_id('+washerDoc.id+')">';
     // creating html object
     washer_block_raw_html += '<div class="card">';
     washer_block_raw_html += '<img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
@@ -372,4 +372,11 @@ async function on_load_page(){
     washerDoc = await create_washer_list(search_res);
     //insert washers cards
     insert_washer_blocks(washerDoc);
+}
+
+function save_washer_id(id){
+    /**
+     * save washer id when click the washer card
+     */
+    sessionStorage.setItem("washer_id", JSON.stringify(jsarray));
 }
