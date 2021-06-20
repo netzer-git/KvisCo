@@ -8,8 +8,7 @@
  */
 async function load_profile_header_of_washer(washerID) {
     const washer_doc = await promiseWasherLoaderById(washerID);
-    // var rating = await getRatingFromDoc(washer_doc, "washer");
-    rating = 1.2;
+    const rating = await getRatingFromDoc(washer_doc, "washer");
     console.log("the rating is ",  rating);
     washer_header = '<div class="row"><div class="col-1"></div>';
     washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
