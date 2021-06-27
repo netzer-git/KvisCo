@@ -1,6 +1,3 @@
-// import * as mdb from '../../mdb-ui-kit'; // lib
-// import { Input } from '../../mdb-ui-kit'; // module
-
 // washers list
 let current_list_of_washers = [
     {
@@ -381,5 +378,5 @@ function save_washer_id(id){
      */
     console.log("this is the id in michal page:",id);
     sessionStorage.setItem("washer_id", id);
-    window.location.href = "../html/place-order.html"
+    window.location.href = "../html/user_flow/place-order.html"
 }

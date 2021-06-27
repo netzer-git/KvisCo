@@ -13,13 +13,13 @@ function f_display_washer_details(washer_doc) {
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
     if (washer_doc.data().properties == "ironing") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Ironing</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
     if (washer_doc.data().properties == "door2door") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Door 2 Door</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "dryer") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Dryer</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";
     document.getElementById("washer_details").innerHTML = details_table;

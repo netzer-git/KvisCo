@@ -64,7 +64,7 @@ async function display_new_order_for_user(orderID) {
 async function back_to_profile() {
     var userID = await getUserToken();
     sessionStorage.setItem("userid", userID);
-    window.location.href="../html/user_profile_final.html";
+    window.location.href="../html/user_flow/user_profile_final.html";
 }
 
 async function change_status(new_status, orderID) {
@@ -72,7 +72,7 @@ async function change_status(new_status, orderID) {
     order = {status: new_status}
     console.log(order);
     await setOrderDetails(order, orderID);
-    window.location.href = "../html/washer-profile.html";
+    window.location.href = "../html/washer_flow/washer-profile.html";
 }
 
 

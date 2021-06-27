@@ -3,7 +3,7 @@ async function load_user_profile_page() {
     console.log("cur user ID", userID);
     const user_doc = await promiseUserLoaderById(userID); //get the washer from the firebase
     if (!user_doc) {
-        window.location.href = "../html/map-filter.html";
+        window.location.href = "../html/user_flow/map-filter.html";
         return;
     }
     const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders

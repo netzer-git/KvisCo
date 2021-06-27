@@ -11,6 +11,9 @@ var washer_properties;
 var washer_phone_number;
 var washer_capacity; /////add netzer
 var washer_year_purchased; //// add netzer
+var is_profile_loaded = false;
+var is_land_loaded = false;
+var is_mach_loaded = false;
 
 
 function save_location() {
@@ -41,6 +44,10 @@ function save_description() {
 function save_profile_pic(event) {
     if (event != null) {
         washer_profile_pic = event.target.files[0];
+        is_profile_loaded = true
+        if (is_profile_loaded) {
+            document.getElementById("indicator").style.display = "block";
+          }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
@@ -48,6 +55,10 @@ function save_profile_pic(event) {
 function save_laundry_pic(event) {
     if (event != null) {
         washer_laundry_pic = event.target.files[0];
+        is_land_loaded = true
+        if (is_land_loaded) {
+            document.getElementById("indicator2").style.display = "block";
+        }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
@@ -55,6 +66,10 @@ function save_laundry_pic(event) {
 function save_machine_pic(event) {
     if (event != null) {
         washer_machine_pic = event.target.files[0];
+        is_mach_loaded = true
+        if (is_mach_loaded) {
+            document.getElementById("indicator3").style.display = "block";
+        }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
@@ -107,7 +122,7 @@ async function create_washer() {
     }
     console.log(new_washer);
     await createNewWasher(new_washer);
-    window.location.href = "../html/washer-profile.html";
+    // window.location.href = "../html/washer_flow/washer-profile.html";
 }
 
 
