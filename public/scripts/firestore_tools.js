@@ -112,7 +112,7 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return (ratingNum !== 0) ? (ratingSum / ratingNum) : null;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
 }
 
 /**

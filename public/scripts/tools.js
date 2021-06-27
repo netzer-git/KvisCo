@@ -3,9 +3,6 @@ function arrangeAddress(address) {
 }
 
 const intersection = (arrayA, arrayB) => {
-  // arrayB = new Set(arrayB); // recycling variable
-  // return [...new Set(arrayA)].filter(element => arrayB.has(element));
-  // return arrayA.filter(element => arrayB.include(element));
   return arrayA.filter(function(n) {
       return arrayA.indexOf(n) !== -1;
   });
