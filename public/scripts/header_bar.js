@@ -1,8 +1,10 @@
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         await signIn();
+        return;
     }
     // else {
+    sessionStorage.setItem("washer_that_register", getUserToken())
     window.location.href = "../html/washer-profile.html"
     // }
 }

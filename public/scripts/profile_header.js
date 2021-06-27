@@ -9,6 +9,7 @@
 async function load_profile_header_of_washer(washerID) {
     const washer_doc = await promiseWasherLoaderById(washerID);
     const rating = await getRatingFromDoc(washer_doc, "washer");
+    // rating = 1.2
     console.log("the rating is ",  rating);
     washer_header = '<div class="row"><div class="col-1"></div>';
     washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
@@ -22,7 +23,7 @@ async function load_profile_header_of_washer(washerID) {
     washer_header += '</div></div></div>';  
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
     if (washer_doc.data().pics !== undefined) {
-        for (i; i<washer_doc.data().pics.length; i++) {
+        for (i=0; i<washer_doc.data().pics.length; i++) {
             washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[i] +'">';
         }
     }

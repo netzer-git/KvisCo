@@ -7,9 +7,9 @@ var block_num = 0;
  * @returns long string of order
  */
 async function get_order_block_of_washer(order) {
-    console.log("user_doc_id:" + order.id);
+    // console.log("user_doc_id:" + order.id);
+    // console.log("user_doc_id:" + order.data().user);
     const user_doc = await promiseUserLoaderById(order.data().user);
-    // console.log("user_doc:" ,user_doc.data().name);
     block = "<div class='col-lg-4'>";
     block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";

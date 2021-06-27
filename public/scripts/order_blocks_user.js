@@ -1,5 +1,6 @@
 async function get_order_block_of_user(order) {
-    const washer_doc = await order.data().washer.get()
+    // const washer_doc = await order.data().washer.get();
+    const washer_doc = await promiseWasherLoaderByCurrentUserID(order.data().user);
     block = "";
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
@@ -54,8 +55,9 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
-            all_blocks += await get_order_block_of_user(all_orders[i]);
+        all_blocks += await get_order_block_of_user(all_orders[i]);
     }
+    
     document.getElementById(tag).innerHTML = all_blocks;
 }
 

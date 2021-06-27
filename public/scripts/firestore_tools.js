@@ -18,7 +18,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.uid);
+                console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case

@@ -3,9 +3,17 @@
     --color-2: #19FFE3;
     --color-3: #FFB0BC;
     --color-4: #FF785C;
+    --color-5: #FFBD12;
     --font-color: #1C1C1D;
     --secondary-font-color: #474A57;
     --bg-color: #ffffffff;
+}
+html,body{
+    overflow: hidden;
+    color: var(--font-color);
+    height: 100%;
+    padding-top: 44px;
+    padding-bottom: 25px;
 }
 
 h1{
@@ -258,21 +266,34 @@ hr.solid {
 .col-filters{
     padding-left: 30px !important;
     margin-top: 5px !important;
+    /* background-color: var(--color-5); */
 }
 
 .row-filters{
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     margin-top: -5px !important;
 }
 
-.col-filter {
+.active-time-col-filter {
     position: static;
     text-align: center !important;
     margin: auto;
     display: inline-block;
     padding: 2% 0;
     margin: 2% 0;
+    z-index: 3;
+}
+.near-me-col-filter,
+.rating-col-filter,
+.special-service-col-filter {
+    position: static;
+    text-align: center !important;
+    margin: auto;
+    display: inline-block;
+    padding: 2% 0;
+    margin: 2% 0;
+    z-index: 2;
 }
 
 #popup-btn{
@@ -311,7 +332,6 @@ hr.solid {
     overflow: hidden;
     text-align: center;
     border-radius: 6px;
-    z-index: 4;
     margin-top: -15px;
 }    
 
@@ -337,7 +357,7 @@ hr.solid {
 #popup-text1 .popup-text1-row1 .choose-day{
     position: relative;
     top: 50px;
-    z-index: 1;
+    z-index: 3;
     float: left;
 }
 
@@ -345,7 +365,7 @@ hr.solid {
     position: relative;
     top: 25px;
     right: -10px;
-    z-index: 1;
+    z-index: 3;
     float: right;
 }
 
@@ -357,10 +377,15 @@ hr.solid {
     right: -60px;
     float: right;
 }
-#washers-cards{
-    overflow: scroll;
+.washers-cards{
     z-index: -1 !important;
     margin-top: -170px !important;
+}
+
+.overflow-auto{
+    overflow: auto;
+    margin-top: -170px !important;
+    height: 100%;
 }
 
 .card{
@@ -382,6 +407,7 @@ hr.solid {
 } */
 
 .card-profile-img{
+    object-fit: cover;
     margin-left: 10px;
     width: 90px !important;
     height: 90px;
