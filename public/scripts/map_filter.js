@@ -1,6 +1,3 @@
-// import * as mdb from '../../mdb-ui-kit'; // lib
-// import { Input } from '../../mdb-ui-kit'; // module
-
 // washers list
 let current_list_of_washers = [
     {
@@ -127,7 +124,8 @@ function insert_washer_blocks(washerDoc) {
     @return {void}
 */
 function create_one_washer_block(washerDoc) {
-    let washer_block_raw_html = '<a class="washer-card col-12" href="washer-profile.html" onclick="save_washer_id('+washerDoc.id+')">';
+    console.log("this is the washer id", washerDoc.id.valueOf());
+    let washer_block_raw_html = '<a class="washer-card col-12" href="#" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
     // creating html object
     washer_block_raw_html += '<div class="card">';
     washer_block_raw_html += '<img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
@@ -378,5 +376,7 @@ function save_washer_id(id){
     /**
      * save washer id when click the washer card
      */
-    sessionStorage.setItem("washer_id", JSON.stringify(jsarray));
+    console.log("this is the id in michal page:",id);
+    sessionStorage.setItem("washer_id", id);
+    window.location.href = "../html/user_flow/place-order.html"
 }

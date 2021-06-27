@@ -18,7 +18,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.uid);
+                console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
@@ -112,7 +112,7 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return (ratingNum !== 0) ? (ratingSum / ratingNum) : null;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
 }
 
 /**

@@ -4,6 +4,8 @@ var user_location_str;
 var user_cover_photo = "";
 var user_phone_number;
 var user_description;
+var is_user_profile_loaded = false;
+
 
 function save_location() {
     var city = document.getElementById("city").value;
@@ -18,23 +20,28 @@ function save_phone_number() {
 
 function save_description() {
     user_description = document.getElementById("user_description").value;
+
+
 }
 
 function save_photo(event) {
     if (event != null) {
         user_cover_photo = event.target.files[0];
+        is_user_profile_loaded = true
+        if (is_user_profile_loaded) {
+            document.getElementById("indicator4").style.display = "block";
+        }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
 
 
 async function create_user() {
-    if (user_location_str == null || user_phone_number == null || user_description == null) {
+    url = await saveImageToUser(user_cover_photo);
+    if (url == null || user_location_str == null || user_phone_number == null || user_description == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
-    url = await saveImageToUser(user_cover_photo);
-    // url = "";
     new_user = {
         name: getUserDisplayName(),
         location_str: user_location_str,
@@ -44,7 +51,9 @@ async function create_user() {
     }
     console.log(new_user);
     await createNewUser(new_user);
-    window.location.href = "../html/user_profile_final.html";
+    var userID = getUserToken();
+    sessionStorage.setItem("userid", userID);
+    window.location.href = "../html/user_flow/user_profile_final.html";
 }
 
 
