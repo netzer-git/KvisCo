@@ -1,3 +1,13 @@
+$(".checkbox-dropdown").click(function () {
+    $(this).toggleClass("is-active");
+});
+
+$(".checkbox-dropdown ul").click(function(e) {
+    e.stopPropagation();
+});
+
+
+
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         await signIn();
