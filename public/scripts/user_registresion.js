@@ -53,7 +53,7 @@ async function create_user() {
     await createNewUser(new_user);
     var userID = getUserToken();
     sessionStorage.setItem("userid", userID);
-    window.location.href = "../html/user_profile_final.html";
+    window.location.href = "../html/user_flow/user_profile_final.html";
 }
 
 

@@ -122,7 +122,7 @@ async function create_washer() {
     }
     console.log(new_washer);
     await createNewWasher(new_washer);
-    // window.location.href = "../html/washer-profile.html";
+    // window.location.href = "../html/washer_flow/washer-profile.html";
 }
 
 
