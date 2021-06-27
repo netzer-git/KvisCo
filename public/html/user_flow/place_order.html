@@ -42,36 +42,31 @@
     <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
     <script src="/__/firebase/init.js"></script>
 
-    <link rel="stylesheet" href="../css/washer_properties.css">
-    <link rel="stylesheet" href="../css/washer_tabs.css">
-    <link rel="stylesheet" href="../css/header_style.css">
-    <link rel="stylesheet" href="../css/overlay.css">
-    <link rel="stylesheet" href="../css/new_order.css">
-    <link rel="stylesheet" href="../css/place-order-css.css">
-    <link rel="stylesheet" href="../css/welcome.css">
+    <link rel="stylesheet" href="../../css/washer_properties.css">
+    <link rel="stylesheet" href="../../css/washer_tabs.css">
+    <link rel="stylesheet" href="../../css/header_style.css">
+    <link rel="stylesheet" href="../../css/overlay.css">
+    <link rel="stylesheet" href="../../css/new_order.css">
+    <link rel="stylesheet" href="../../css/place-order-css.css">
+    <link rel="stylesheet" href="../../css/welcome.css">
 
 
-    <script src="../scripts/app.js"></script>
-    <script src="../scripts/tools.js"></script>
-    <script src="../scripts/firestore_tools.js"></script>
-
-    <script src="../scripts/place_order.js"></script>
-    <script src="../scripts/washer_tabs.js"></script>
-    <script src="../scripts/profile_header.js"></script>
-    <script src="../scripts/header.js"></script>
+    <script src="../../scripts/app.js"></script>
+    <script src="../../scripts/tools.js"></script>
+    <script src="../../scripts/firestore_tools.js"></script>
+    <script src="../../scripts/place_order.js"></script>
+    <script src="../../scripts/washer_tabs.js"></script>
+    <script src="../../scripts/profile_header.js"></script>
+    <script src="../../scripts/header.js"></script>
     <script src="../../scripts/order_blocks_washer.js"></script>
-    <script src="../scripts/new_order.js"></script>
-    <script type="text/javascript">
+    <script src="../../scripts/new_order.js"></script>
 
+    <script type="text/javascript">
         var washerID = sessionStorage.getItem("washer_id");
         // console.log("whaser from michal", washerID);
         // var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
         var washerID = "1lhdqvkzskzdsnsc6wfrvg5jte93";
         window.onpaint = load_place_order_page(washerID);
-    </script>
-
-    <script>
-        $("#includedContent").load("includes/header.html");
     </script>
 
 </head>

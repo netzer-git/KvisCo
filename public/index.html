@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Money Laundry</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/header_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
+
 </head>
 <body>
     <!-- READ ME FIRST PLEASSSEEEEE!!! -->
@@ -24,6 +30,7 @@
      -->
 
     <!-- DON'T MIND ME I'M JUST PLAYING HERE -->
+    <div id="includedContent"></div>
     <div class="container">
         <button type="button" onclick="signIn()">
             Sign In!
@@ -43,21 +50,21 @@
                 order_blocks_washer</button>
         <button onclick="location.href='../html/components/order_blocks_for_user.html'" type="button">
             order_blocks_user</button>
-        <button onclick="location.href='../html/user_profile_final.html'" type="button">
+        <button onclick="location.href='../html/user_flow/user_profile_final.html'" type="button">
             user_profile_final</button>
-        <button onclick="location.href='./html/new_order_block.html'" type="button">
+        <button onclick="location.href='./html/user_flow/new_order_block.html'" type="button">
             new_order_block</button>
-        <button onclick="location.href='./html/place-order.html'" type="button">
+        <button onclick="location.href='./html/user_flow/place_order.html'" type="button">
                 place-order</button>
-        <button onclick="location.href='./html/washer-profile.html'" type="button">
+        <button onclick="location.href='./html/washer_flow/washer_profile.html'" type="button">
             washer-profile</button>
         <button onclick="location.href='./html/welcome.html'" type="button">
             Welcome
         </button>
-        <button onclick="location.href='./html/user_registration.html'" type="button">
+        <button onclick="location.href='./html/user_flow/user_registration.html'" type="button">
             user_registresion
         </button>
-        <button onclick="location.href='./html/washer_registration.html'" type="button">
+        <button onclick="location.href='./html/washer_flow/washer_registration.html'" type="button">
             washer_registration
         </button>
         <!-- form for uploading pictures and more fields -->
@@ -75,7 +82,7 @@
         <button onclick="displayImage()">
             display image
         </button>
-        <button onclick="location.href='./html/map-filter.html'" style="background-color: blueviolet;">
+        <button onclick="location.href='./html/map_filter.html'" style="background-color: blueviolet;">
             map-filter
         </button>
         <div id="only-one">
@@ -114,6 +121,9 @@
 
     <!-- JS for this specific page -->
     <script src="scripts/index.js"></script>
-
+    
+    <!-- <script>
+        $("#includedContent").load("./html/includes/header.html");
+    </script> -->
 </body>
 </html>

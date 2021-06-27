@@ -4,8 +4,8 @@ async function load_washer_profile_page() {
     console.log("washer id is now : ", washerID)
     const washer_doc = await promiseWasherLoaderById(washerID); //get the washer from the firebase
     if (!washer_doc) {
-        window.location.href = "../html/washer_registration.html";
-        // move to washer register        
+        window.location.href = "../html/washer_flow/washer_registration.html";
+        // move to washer register
         return;
     }
     const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); //get all the people that reviewed this washer from orders
