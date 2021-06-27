@@ -3,8 +3,9 @@ function arrangeAddress(address) {
 }
 
 const intersection = (arrayA, arrayB) => {
-  arrayB = new Set(arrayB); // recycling variable
-  return [...new Set(arrayA)].filter(element => arrayB.has(element));
+  return arrayA.filter(function(n) {
+      return arrayA.indexOf(n) !== -1;
+  });
 };
 
 /**
@@ -152,8 +153,8 @@ function checkOpenTimes(filter, washerDoc) {
     return [Number(wantedHour[1]), Number(wantedHour[2])]
   }
   // getting open and close time for the specific day
-  openTime = getHourAsNumber(washer.data().opening_times[filter[0]][0]);
-  closeTime = getHourAsNumber(washer.data().opening_times[filter[0]][1]);
+  openTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][0]);
+  closeTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][1]);
   wantedTime = getHourAsNumber(filter[1]);
   // going through each possible combination of hour and min
   if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {

@@ -13,13 +13,13 @@ function f_display_washer_details(washer_doc) {
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
     if (washer_doc.data().properties == "ironing") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Ironing</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
     if (washer_doc.data().properties == "door2door") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Door 2 Door</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "dryer") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Dryer</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";
     document.getElementById("washer_details").innerHTML = details_table;
@@ -36,7 +36,12 @@ function toFullTimestamp(fullDate,time){
     year = fullDate.getFullYear();
     month = fullDate.getMonth();
     day = fullDate.getDate();
-    hour = time.substring(0,2);
+    if (time.length == 4) {
+        hour = time.substring(0,1);
+    }
+    else {
+        hour = time.substring(0,2);
+    }
     minute = time.substring(3,5);
     second = "00";
     return new Date(Date.UTC(year,month,day,hour,minute,second));
@@ -54,9 +59,9 @@ function check_if_washer_open(opening_times) {
     switch (day) {
         case 0:
             try {
-            opening_time = opening_times.Sunday[0];
-            closing_time = opening_times.Sunday[1];
-            break;
+                opening_time = opening_times.Sunday[0];
+                closing_time = opening_times.Sunday[1];
+                break;
             }
             catch {
                 return false;
@@ -121,7 +126,7 @@ function check_if_washer_open(opening_times) {
     if ((cur_date > opening_time) && (cur_date < closing_time)) {
         return true;
     }
-    return false
+    return false;
 }
 
 /**
@@ -129,7 +134,7 @@ function check_if_washer_open(opening_times) {
  * @param {washer object} washer_doc the washer 
  */
 function f_get_opening_hours_table(washer_doc) {
-    opening_times = '<table class="opening-hours-table" id="opening-hours-table">';
+    opening_times = '<table style="font-size: 20px;" class="opening-hours-table" id="opening-hours-table">';
     if (washer_doc.data().opening_times.Sunday !== undefined) {
         opening_times += '<tr id="Sunday" itemprop="openingHours" title="Open Sunday"><td>Sunday</td>';
         opening_times += '<td class="opens">' + washer_doc.data().opening_times.Sunday[0] + '</td><td>-</td>';
@@ -186,10 +191,12 @@ function f_checkOpeningTimes(washer_doc) {
     if (check_if_washer_open(washer_doc.data().opening_times)) {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
         document.getElementById("openClosedColor").style.color = "green";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
     }
     else {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
         document.getElementById("openClosedColor").style.color = "red";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
     }
 }
 

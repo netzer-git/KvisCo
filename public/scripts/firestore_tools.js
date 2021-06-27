@@ -7,7 +7,7 @@ db.settings({
 const storage = firebase.storage();
 
 
-/*
+/**
  * the function takes docID and collection name and resolve a promise of the document.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -18,7 +18,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.uid);
+                console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
@@ -31,7 +31,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
     })
 }
 
-/*
+/**
  * the function takes docID - the id of the washer - and resolve a promise of the document of the washer.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -40,7 +40,7 @@ function promiseWasherLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('washers', documentID);
 }
 
-/*
+/**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseUserLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -49,7 +49,7 @@ function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
 }
 
-/*
+/**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -58,7 +58,7 @@ function promiseOrderLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('orders', documentID);
 }
 
-/*
+/**
  * the function resolve a promise of the document of the current user based on the Auth system.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -68,7 +68,7 @@ function promiseUserLoaderByCurrentUserID() {
     return promiseLoaderByCollectionAndId('users', getUserToken());
 }
 
-/*
+/**
  * the function resolve a promise of the document of the current washer based on the Auth system.
  * the function does not return the doc, it returns the promise.
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
@@ -78,31 +78,56 @@ function promiseWasherLoaderByCurrentUserID() {
 }
 
 /**
- * @param {*} doc user or washer document
+ * @returns current user location coordinates.
  */
-function getRatingFromDoc(doc) {
-    if (doc.data().rating_sum == 0) {
-        return 0;
-    } else {
-        return doc.data().rating_sum / doc.data().rating_num;
-    }
+async function getCurrentUserLocation() {
+    currentUserDoc = promiseWasherLoaderByCurrentUserID.then();
+    return currentUserDoc ? currentUserDoc.data().location_cor : null;
 }
 
-/*
+/**
+ * @param {*} doc user or washer document
+ */
+async function getRatingFromDoc(doc, field) {
+    let ratingSum = 0, ratingNum = 0; 
+    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
+    if (field === 'user') {
+        docOrderArray.forEach((order) => {
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
+    }
+    else if (field === 'washer') {
+        docOrderArray.forEach((order) => {
+            let rating = order.data().rating_washer;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
+    }
+    else {
+        console.error("Error in getRatingFromDoc, check the field requirement.");
+    }
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
+}
+
+/**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
-        // to look for doc-ref field, you have to get the ref
-        const washerRef = db.collection(collection).doc(docID);
         if (status === "all") {
-            var query = db.collection('orders').where(field, "==", washerRef).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
         } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", washerRef).where('status', '!=', "finished").orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("created_at");
         } else {
-            var query = db.collection('orders').where(field, "==", washerRef).where('status', '==', status).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
         }
 
         query.get().then((docArray) => {
@@ -119,7 +144,7 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
             })
             resolve(orderArray);
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            reject("Error getting document:", error);
         });
     });
 }
@@ -149,8 +174,8 @@ async function createNewOrder(order) {
     // let user = await db.doc('users/' + order.userID);
     // let washer = await db.doc('washers/' + order.washerID);
     let newOrderRef = await db.collection("orders").add({
-        user: db.doc('users/' + order.user),
-        washer: db.doc('washers/' + order.washer),
+        user: order.user,
+        washer: order.washer,
         due_to: order.due_to,
         created_at: new Date(),
         price: order.price,
@@ -187,7 +212,7 @@ async function setOrderDetails(orderDetails, orderId) {
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("washers").doc(getUserToken()).set({
+    await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
         rating_num: 0,
@@ -195,15 +220,19 @@ async function createNewWasher(washer) {
         pics: washer.pics,
         location_str: washer.location_str,
         location_cor: geoPoint,
-        machine_type: washer.machine_type,
+        model_name: washer.model_name,
         description: washer.description,
-        commitment: washer.commitment,
+        commitment: Number(washer.commitment),
         opening_times: {},
         price: 0, // fixme for milestone 3
         properties: washer.properties,
-        phone: washer.phone
+        phone: washer.phone,
+        year_purchased: washer.year_purchased,
+        capacity: washer.capacity,
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New order added: " + docRef.id);
+    }).catch((err) => {
+        console.error("Washer cannot be registered: " + err.message);
     });
 }
 
@@ -227,7 +256,7 @@ async function setWasherOpenTimes(openTimes, washerId) {
 async function createNewUser(user) {
     let data = await forwardGeocodePromise(user.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("users").doc(getUserToken()).set({
+    await db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
         location_cor: geoPoint,
@@ -317,10 +346,23 @@ async function getWasherFilterQuery(filters) {
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
         firstQuery = false;
     }
+
+    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
+        let filteredWashersWithLoads = [];
+        washersArray.forEach(doc => {
+            if (true) { // fixme for milestone3
+                filteredWashersWithLoads.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        firstQuery = false;
+    }
+    
+
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
         washersArray.forEach(doc => {
-            if (getRatingFromDoc(doc) >= filters.rating) {
+            if (getRatingFromDoc(doc, 'washer') >= filters.rating) {
                 filteredWashersWithRating.push(doc);
             }
         });
@@ -360,6 +402,26 @@ async function getWasherFilterQuery(filters) {
         });
         filteredWashers = firstQuery ? filteredWashersWithOpenTime : intersection(filteredWashers, filteredWashersWithOpenTime);
         firstQuery = false;
+    }
+
+    if (filters.address !== undefined && filters.address !== null) {
+        let data = await forwardGeocodePromise(filters.address);
+        let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+        let filteredWashersWithAddress = [];
+        washersArray.forEach(doc => {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 2) {
+                filteredWashersWithAddress.push(doc);
+            }
+        });
+        filteredWashers = firstQuery ? filteredWashersWithAddress : intersection(filteredWashers, filteredWashersWithAddress);
+        firstQuery = false;
+    }
+
+    // if we didn't get any filters
+    if (firstQuery) {
+        washersArray.forEach((doc) => {
+            filteredWashers.push(doc);
+        })
     }
 
     return filteredWashers;

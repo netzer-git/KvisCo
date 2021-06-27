@@ -37,12 +37,11 @@ function save_photo(event) {
 
 
 async function create_user() {
-    if (user_location_str == null || user_phone_number == null || user_description == null) {
+    url = await saveImageToUser(user_cover_photo);
+    if (url == null || user_location_str == null || user_phone_number == null || user_description == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
-    url = await saveImageToUser(user_cover_photo);
-    // url = "";
     new_user = {
         name: getUserDisplayName(),
         location_str: user_location_str,
@@ -52,7 +51,9 @@ async function create_user() {
     }
     console.log(new_user);
     await createNewUser(new_user);
-    window.location.href = "../html/user_profile_final.html";
+    var userID = getUserToken();
+    sessionStorage.setItem("userid", userID);
+    window.location.href = "../html/user_flow/user_profile_final.html";
 }
 
 
