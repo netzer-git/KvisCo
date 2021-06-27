@@ -8,6 +8,6 @@ A full deployed site with user mangemant (for users and washers), location base 
 - Amitay Rahman  - design, frontend, product.
 - Nadav Yochman  - frontend, product.
 
-## technolegy involved:
+## Technolegy involved:
 - frontend: JS, CSS, HTML.
 - backend: Firebase (JS framework).

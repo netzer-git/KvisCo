@@ -1,15 +1,15 @@
 
-async function display_new_order_for_washer(orderID) {
+async function display_new_order_for_washer(order, orderID) {
     // const order = await promiseOrderArrayByUserIdAndStatus(userID, status)[0];
-    const order = await promiseOrderLoaderById(orderID);
     const user_doc = await order.data().user.get();
+    console.log("the order id is: ", orderID);
     order_block = '<div class= "order_pink">';
     order_block += '<table><tr><h2 class="header_24">YOU RECIEVED A NEW ORDER</h2></tr>';
     order_block += '<tr><table class= "order_white">';
     order_block += '<tr><td><img class="rounded-circle" src= "' + user_doc.data().imageUrl + '" alt="profile_pic"></td><td><h4>'+user_doc.data().name+'</h4></td></tr>';
     var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
-    var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+    var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
     var time = date.getHours()+":"+ "0" +date.getMinutes();
     order_block += '<tr><td><div class= "header_61">Date</div></td><td><div class= "header_61">'+l_date+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Drop off hour</div></td><td><div class= "header_61">'+time+'</div></td></tr>';
@@ -20,7 +20,7 @@ async function display_new_order_for_washer(orderID) {
     cur_price = order.data().price.toString() + " nis"  
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr>';
     order_block +='</table>';
-    order_block += '<tr><td><button id="accept" value = "in_process" onclick = "change_status(this)" class= "yellow_button_3">Confirm</button></td>';
+    order_block += '<tr><td><button id="accept" value = "in_process" onclick = "change_status(this.value,"'+orderID+'")" class= "yellow_button_3">Confirm</button></td>';
     order_block += '<td><button id="decline" value = "declined" onclick = "change_status(this)" class= "red_button">decline</button></td></tr>';
     order_block +='</table>';
     document.getElementById("washer_order").innerHTML = order_block;
@@ -46,7 +46,7 @@ async function display_new_order_for_user(orderID) {
     order_block += "<table style='margin-left:2%; margin-top:2%;'><tr><td><img class='rounded-circle' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4  style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
     var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
-    var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+    var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
     var time = date.getHours()+":"+ + date.getMinutes();
     order_block += "<table style='margin-left:15%; margin-top:3%;'><tr><td><h6 class='header_61'>Date</h6></td><td><h6 class= 'header_61'>"+l_date+"</h6></td></tr>";
     order_block += '<tr><td><h6 class= "header_61">Drop off hour</h6></td><td><h6 class= "header_61">'+time+'</h6></td></tr>';
@@ -61,14 +61,32 @@ async function display_new_order_for_user(orderID) {
     document.getElementById("user_order").innerHTML = order_block;
 }
 
-function back_to_profile() {
-    window.location.href="../html/user_profile_final.html";
+async function back_to_profile() {
+    var userID = await getUserToken();
+    sessionStorage.setItem("userid", userID);
+    window.location.href="../html/user_flow/user_profile_final.html";
 }
 
-function change_status(new_status) {
-    order = {status: new_status.value}
+async function change_status(new_status, orderID) {
+    console.log("u pressed change status!");
+    order = {status: new_status}
     console.log(order);
-    setOrderDetails(order, orderID);
-    // change_in_firebase_order_df(order);
-    // window.history.back();
+    await setOrderDetails(order, orderID);
+    window.location.href = "../html/washer_flow/washer-profile.html";
 }
+
+
+async function display_order_status(blockID) {
+    console.log("block id: ",blockID);
+    var orderID = blockID.value;
+    console.log("order id: ",orderID);
+    const order = await promiseOrderLoaderById(orderID);
+    console.log("order: ",order.data());
+    display_new_order_for_washer(order, orderID);
+    document.getElementById("overlay_washer_order").style.display = "block";
+}
+
+
+function off() {
+    document.getElementById("overlay_washer_order").style.display = "none";
+  }

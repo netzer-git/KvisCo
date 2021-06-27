@@ -18,7 +18,7 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.uid);
+                console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
@@ -93,37 +93,41 @@ async function getRatingFromDoc(doc, field) {
     const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            ratingSum += order.data().rating_user;
-            ratingNum ++;
-        });
+            let rating = order.data().rating_user;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            ratingSum += order.data().rating_washer;
-            ratingNum ++;
-        });
+            let rating = order.data().rating_washer;
+            if (rating) {
+                ratingSum += rating;
+                ratingNum ++;
+            }
+            });
     }
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return ratingNum == 0 ? ratingSum / ratingSum : null;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
 }
 
 /**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
         const collection = field + "s";
-        // to look for doc-ref field, you have to get the ref
-        const docRef = db.collection(collection).doc(docID);
         if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docRef).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
         } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '!=', "finished").orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("created_at");
         } else {
-            var query = db.collection('orders').where(field, "==", docRef).where('status', '==', status).orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
         }
 
         query.get().then((docArray) => {
@@ -140,7 +144,7 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
             })
             resolve(orderArray);
         }).catch((error) => {
-            console.log("Error getting document:", error);
+            reject("Error getting document:", error);
         });
     });
 }
@@ -170,8 +174,8 @@ async function createNewOrder(order) {
     // let user = await db.doc('users/' + order.userID);
     // let washer = await db.doc('washers/' + order.washerID);
     let newOrderRef = await db.collection("orders").add({
-        user: db.doc('users/' + order.user),
-        washer: db.doc('washers/' + order.washer),
+        user: order.user,
+        washer: order.washer,
         due_to: order.due_to,
         created_at: new Date(),
         price: order.price,
@@ -405,7 +409,7 @@ async function getWasherFilterQuery(filters) {
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.location_cor) <= 2) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 2) {
                 filteredWashersWithAddress.push(doc);
             }
         });

@@ -18,14 +18,14 @@ var wash_settings = "deafult";
 var price = DEAFULT_PRICE;
 var comments = "";
 
-/**
- * 
- * @param {string} washerID still not usable
- */
-async function load_place_order_page(washerID) {
-    const washer_doc = await promiseWasherLoaderById(washerID);
-    show_profile_header("profile_header",washer_doc);
-}
+// /**
+//  * 
+//  * @param {string} washerID still not usable
+//  */
+// async function load_place_order_page(washerID) {
+//     const washer_doc = await promiseWasherLoaderById(washerID);
+//     show_profile_header("profile_header",washer_doc);
+// }
 
 
 /**

@@ -3,7 +3,7 @@
         <!-- ************************css************************ -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
          <!-- this tag connects the header-page to the appropriate css -->
-        <link rel="stylesheet" href="../css/map-filter.css">
+        <link rel="stylesheet" href="../../css/map-filter.css">
         <!-- Font Awesome -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
         <!-- Google Fonts -->
@@ -13,8 +13,6 @@
 
         <!-- ************************js************************ -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="../scripts/map-filter.js"></script>
-        <script src="../scripts/search_bar_function.js"></script>
         <script src="/__/firebase/8.6.1/firebase-app.js"></script>
         <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
         <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
@@ -22,9 +20,11 @@
         <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
         <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
         <script src="/__/firebase/init.js"></script>
-        <script src="../scripts/app.js"></script>
-        <script src="../scripts/tools.js"></script>
-        <script src="../scripts/firestore_tools.js"></script>
+        <script src="../../scripts/app.js"></script>
+        <script src="../../scripts/tools.js"></script>
+        <script src="../../scripts/firestore_tools.js"></script>
+        <script src="../../scripts/map-filter.js"></script>
+        <script src="../../scripts/search_bar_function.js"></script>
     </head>
     <body onload="on_load_page()">
         <!-- MDB -->
@@ -53,7 +53,7 @@
                 <!-- Magnifying Glass button-->
                 <div class="col-2">
                     <div class="search_btn">
-                        <a href="#"><img class="shrink" src="../images/search-btn.png"></a>
+                        <a href="#"><img class="shrink" src="../../images/search-btn.png"></a>
                     </div> 
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="row-map-cards-filter row">
                 <!-- map section -->
                 <div class="col-map col-lg-6">
-                    <div id="map"></div>
+                    <div id="map" onload="init_map()"></div>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkDJzPLDJTncDPsoN5nL5qtG59v7QHV0&callback=initMap&libraries=&v=weekly" async>
                     </script>
                 </div>
@@ -69,7 +69,7 @@
                 <div class="col-filters col-lg-6">
                     <div class="row-filters row">
                         <!-- Active times filter -->
-                        <div class="col-filter col-3">
+                        <div class="active-time-col-filter col-3">
                             <button id="popup-btn" onclick="open_popup(1)">
                                 <span class="popup-btn-text">Active Times</span>
                                 <svg class="popup-btn-icon">
@@ -81,10 +81,10 @@
                                 <div class="popup-text1-row1 row">
                                     <span class="text">Search by day and time</span>
                                     <div class="choose-day col-6"> <!-- Date -->
-                                        <select id="day" onload="insert_days_options()"></select>
-                                        <!-- <script>
+                                        <select id="day"></select>
+                                        <script>
                                             insert_days_options()
-                                        </script> -->
+                                        </script>
                                     </div>
                                     <div class="choose-time col-4"> <!-- Start time -->
                                         <input class="choose-time" type="time" id="startTime" value="08:00">
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                         <!-- Near me filter -->
-                        <div class="col-filter col-3">
+                        <div class="near-me-col-filter col-3">
                             <button id="popup-btn" onclick="open_popup(2)">
                                 <span class="popup-btn-text">Near me</span>
                                 <svg class="popup-btn-icon"><use xlink:href="#popup-btn-icon"></use></svg>
@@ -118,50 +118,32 @@
                                     <button class="button1" onclick="update_active_times()">Save</button>
                                 </div> 
                             </div>
-                        </div>  
+                        </div>
+                        <div class="rating-col-filter col-3">
+                            <button id="popup-btn">
+                                <span class="popup-btn-text">Rating</span>
+                                <svg class="popup-btn-icon"><use xlink:href="#popup-btn-icon"></use></svg>
+                            </button>
+                        </div>
+                        <div class="special-service-col-filter col-3">
+                            <button id="popup-btn">
+                                <span class="popup-btn-text">Special services</span>
+                                <svg class="popup-btn-icon"><use xlink:href="#popup-btn-icon"></use></svg>
+                            </button>
+                        </div>   
                     </div>
-                    <!-- <script>
-                    insert_header_and_buttons_block()
-                    </script> -->
-                    <!-- washer cards section -->
-                    <div id="washers-cards">
-                        <!-- <a class="washer-card col-12" href="washer-profile.html">
-                            <div class="card">
-                                <img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>
-                                <div class="card-img-overlay">
-                                    <div class="card-details row">
-                                        <div class="card-pic-rating col-3">
-                                            <img class="card-profile-img" src="../images/tal_e_pic.png"/>
-                                            <div class="card-rating row">
-                                                <div class="col-6" style="float: right;">
-                                                    <svg class="rating-star">
-                                                        <use xlink:href="#rating-star"></use>
-                                                    </svg>
-                                                </div>
-                                                <div class="col-6" style="float: left;">5</div>
-                                            </div>
-                                        </div>
-                                        <div class="card-text col-9">
-                                            <h5 class="card-title">Netzer Epstein</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">Mechabes esh megil shesh</h6>
-                                            <p class="card-text">Fast Wash ⋅ 30°C Wash  ⋅ 60°C Wash</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>     -->
+                    <div class="overflow-auto">
+                        <div id="washers-cards"></div>
                     </div>
                     <script>
-                    insert_washer_blocks()
+                        insert_washer_blocks()
                     </script>
                 </div>
-            </div>
-        <!-- class wakka key: AIzaSyBP2kPsOHfmf-XJMKhf-lBWeQdl5SqSRR8 -->
-        
+            </div>        
         </div>
     </body>
 
     <script>
-        $("#includedContent").load("includes/header.html");
+        $("#includedContent").load("../includes/header.html");
     </script>
 </html>

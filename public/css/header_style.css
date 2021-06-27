@@ -9,14 +9,6 @@
     --bg-color: #ffffffff;
 }
 
-html,body{
-    color: var(--font-color);
-    overflow: hidden;
-    height: 100%;
-    padding-top: 44px;
-    padding-bottom: 25px;
-}
-
 h1{
   /* position: absolute; */
   width: 778px;

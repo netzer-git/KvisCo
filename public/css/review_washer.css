@@ -249,3 +249,19 @@ table.leave_review_table tr {
 }
 
 
+#indicator5{
+    display:none;
+    margin-top: 2%;
+    font-family: 'Montserrat';
+    font-weight: normal;
+    margin-left: 10%;
+}
+
+#submitImage:active{
+    transform: translateY(4px);
+}
+
+
+.yellow_button_4:active{
+    transform: translateY(4px);
+}
