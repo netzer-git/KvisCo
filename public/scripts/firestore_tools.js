@@ -272,6 +272,22 @@ async function createNewUser(user) {
 }
 
 /**
+ * adds new entry to user favorite washers.
+ * @param {*} userId the current user id
+ * @param {*} washerId the wanted washer id
+ */
+async function addWasherToFavorites(userId, washerId) {
+    let user = db.collection('users').doc(userId);
+    let saved_washers = user.data().saved_washers;
+    if (!saved_washers.includes(washerId)) {
+        saved_washers.push(washerId);
+    }
+    await user.update({
+        saved_washers: saved_washers
+    });
+}
+
+/**
  * Saves a new image containing to user folder in firestorage. This first saves the image in Firebase storage.
  * @param {*} file image file
  * @return {string} image url path to firebase storage
