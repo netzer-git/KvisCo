@@ -13,13 +13,13 @@ function f_display_washer_details(washer_doc) {
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
     if (washer_doc.data().properties == "ironing") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Ironing</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
     if (washer_doc.data().properties == "door2door") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Door 2 Door</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "dryer") {
-        details_table += "<tr><td><img src='../images/check.png' alt=''>Dryer</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";
     document.getElementById("washer_details").innerHTML = details_table;
@@ -36,7 +36,12 @@ function toFullTimestamp(fullDate,time){
     year = fullDate.getFullYear();
     month = fullDate.getMonth();
     day = fullDate.getDate();
-    hour = time.substring(0,2);
+    if (time.length == 4) {
+        hour = time.substring(0,1);
+    }
+    else {
+        hour = time.substring(0,2);
+    }
     minute = time.substring(3,5);
     second = "00";
     return new Date(Date.UTC(year,month,day,hour,minute,second));
@@ -54,9 +59,9 @@ function check_if_washer_open(opening_times) {
     switch (day) {
         case 0:
             try {
-            opening_time = opening_times.Sunday[0];
-            closing_time = opening_times.Sunday[1];
-            break;
+                opening_time = opening_times.Sunday[0];
+                closing_time = opening_times.Sunday[1];
+                break;
             }
             catch {
                 return false;
@@ -121,7 +126,7 @@ function check_if_washer_open(opening_times) {
     if ((cur_date > opening_time) && (cur_date < closing_time)) {
         return true;
     }
-    return false
+    return false;
 }
 
 /**

@@ -3,9 +3,9 @@
         <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <!-- this tag connects the header-page to the appropriate css -->
-        <link rel="stylesheet" href="../css/washer_regist.css">
-        <link rel="stylesheet" href="../css/welcome.css">
-        <link rel="stylesheet" href="../css/header_style.css">
+        <link rel="stylesheet" href="../../css/washer_regist.css">
+        <link rel="stylesheet" href="../../css/welcome.css">
+        <link rel="stylesheet" href="../../css/header_style.css">
 
         <script src="/__/firebase/8.6.1/firebase-app.js"></script>
         <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
@@ -15,13 +15,10 @@
         <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
         <script src="/__/firebase/init.js"></script>
 
-        
-        <script src="../scripts/app.js"></script>
-        <script src="../scripts/tools.js"></script>
-        <script src="../scripts/firestore_tools.js"></script>
-
-
-        <script src="../scripts/washer_registration.js"></script>
+        <script src="../../scripts/app.js"></script>
+        <script src="../../scripts/tools.js"></script>
+        <script src="../../scripts/firestore_tools.js"></script>
+        <script src="../../scripts/washer_registration.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
     </head>
 
@@ -42,6 +39,7 @@
                             <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                                 Upload Profile Photo
                             </button>
+                            <label id="indicator">photo uploaded</label>
                         </form>
                         <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
                         <h4 class="header_41">
@@ -58,14 +56,22 @@
                 </tr>
                 <tr>
                     <th>
+                        <th>
                         <form action="/action_page.php">
+                            <th>
                             <label class="labels" for="city">City: </label>
                             <input class= "regist_input" type="text" id="city" name="city" value="" onchange="save_location()"><br>
+                            </th>
+                            <th>
                             <label  class="labels" for="street">Street: </label>
                             <input class= "regist_input" type="text" id="street" name="street" value="" onchange="save_location()"><br>
+                            </th>
+                            <th>
                             <label  class="labels" for="number">Number: </label>
                             <input class= "regist_input" type="text" id="number" name="number" value="" onchange="save_location()"><br>
-                          </form>
+                            </th>
+                        </form>
+                        </th>
                     </th>
                 </tr>
                 <tr>
@@ -85,8 +91,8 @@
                 </tr>
                 <tr>
                     <th>
-                    <div class= "header_53">
-                        How much time (in hours) you can commit to your customers?
+                    <div class= "header_55">
+                        How much time (in minutes) does it take for one load?
                     </div>
                     </th>
                 </tr>
@@ -127,15 +133,22 @@
                 <tr>
                     <th>
                         <form id="image-form" action="#">
-                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
-                                Upload Your Laundry Photo
+                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden >
+                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
+                                Upload Laundry Photo
                             </button>
+
                             <input id="mediaCapture3" onchange="save_machine_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
-                                Upload Your Machine Photo
+                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
+                                Upload Machine Photo
                             </button>
                         </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <label id="indicator2">photo uploaded</label>
+                        <label id="indicator3">photo uploaded</label>
                     </th>
                 </tr>
                 <tr>
@@ -165,14 +178,15 @@
                         <form name="special_serve">
                             <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">Ironing<br>  
                             <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service(this);">Door 2 Door<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>
+                            <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">None<br>  
                         </form>
-                    <div class= "labels">
+                    <!-- <div class= "labels">
                     <input class= "cbx" type="checkbox" name="special_serve" value="Ironing" onclick="return ValidateServiceSelection();">Ironing<br>  
                     <input class= "cbx" type="checkbox" name="special_serve" value="Door 2 Door" onclick="return ValidateServiceSelection();">Door 2 Door<br>  
                     <input class= "cbx" type="checkbox" name="special_serve" value="Dryer" onclick="return ValidateServiceSelection();">Dryer<br>  
                         <br>
-                    </div>
+                    </div> -->
                     </th>
                 </form>  
                 </tr>
@@ -187,6 +201,6 @@
 </body>
 
 <script>
-    $("#includedContent").load("includes/header.html");
+    $("#includedContent").load("../includes/header.html");
 </script>
 
