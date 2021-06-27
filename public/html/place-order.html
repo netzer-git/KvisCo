@@ -62,11 +62,14 @@
     <script src="../../scripts/order_blocks_washer.js"></script>
     <script src="../scripts/new_order.js"></script>
     <script type="text/javascript">
-    // var washerID = JSON.parse(sessionStorage.getItem("washerID"));
-    var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
-    window.onpaint = load_place_order_page(washerID);
+
+        var washerID = sessionStorage.getItem("washer_id");
+        // console.log("whaser from michal", washerID);
+        // var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
+        var washerID = "1lhdqvkzskzdsnsc6wfrvg5jte93";
+        window.onpaint = load_place_order_page(washerID);
     </script>
-    
+
     <script>
         $("#includedContent").load("includes/header.html");
     </script>
@@ -81,126 +84,128 @@
     <!-- Header ends here-->
     <!--Profile Details header starts here-->
     <div style="margin-top: 3%;">
-    <!--<div class="second_header">-->
-    <div class="row">
+        <!--<div class="second_header">-->
+        <div class="row">
 
-        <div class="col-6">
-            <div id="profile_header"></div>
+            <div class="col-6">
+                <div id="profile_header"></div>
 
-        </div>
-        <!-- Place Order Box -->
+            </div>
+            <!-- Place Order Box -->
 
-        <div class="col-5 sticky-top">
-            <!--Lock the order box along the page-->
-            <div class="order-box">
-                <h7>PLACE ORDER</h7>
-                <div class="instructions">
-                    <!--Few instructions-->The more specific you are, the better your laundry will come out!
-                </div>
-                <table style="margin-left: 5%; margin-top: -2%; margin-bottom: 2%;">
-                    <tr style="color: black;">
-                        <td>Drop off day</td>
-                        <td style="padding-left: 50px;">Drop off time</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="box select">
-                                <input class="choose_location" type="date" id="date" value="2021-06-21"
-                                    onchange="update_properties_and_price()"> <!-- Date -->
-                            </div>
-                            <script>
-                                document.getElementById('date').value = new Date().toISOString().substring(0, 10);
-                                console.log("cur date is" + document.getElementById('date').value)
-                            </script>
-                        </td>
-                        <td style="padding-left: 50px;"><input class="choose_location" type="time" id="startTime"
-                                value="08:00" onchange="update_properties_and_price()"></td>
-                        <script>
-                            // document.getElementById('startTime').value = new Date().toISOString().substring(11, 16);
-                        </script>
-                    </tr>
-                    <tr style="color: black;">
-                        <!-- Special Services-->
-                        <td style="padding-top: 3%;">Special services</td>
-                        <td style="padding-left: 50px; padding-top: 3%;">Loads</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="box select">
-                                <!-- Special Services dropdwn-->
-                                <select id="property" onchange="update_properties_and_price()">
-                                    <option value="Default" selected>Deafult</option>
-                                    <option value="ironing">Ironing(+25)</option>
-                                    <option value="door2door">Door-2-Door(+20)</option>
-                                    <option value="dryer">Hanging Drying(+12)</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td style="padding-left: 50px;"><input class="choose_location" type="number" id="loads"
-                                value="1" onchange="update_properties_and_price()"></td>
-                        <!-- Loads -->
-                    </tr>
-                    <tr style="color: black;">
-                        <td style="padding-top: 3%;">Wash settings</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="box select">
-                                <!-- Wash settings -->
-                                <select id="wash_settings" onchange="update_properties_and_price()">
-                                    <option value="Default" selected>Default</option>
-                                    <option value="30°C Wash">30°C Wash</option>
-                                    <option value="60°C Wash">60°C Wash</option>
-                                    <option value="Fast Wash">Fast Wash(+10)</option>
-                                    <option value="Whites Only">Whites Only</option>
-                                    <option value="Delicates">Delicates</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <textarea class="note" id="notes_for_laundry" name="note" rows="4" cols="50"
-                    placeholder="Special requests and comments..." onchange="update_properties_and_price()"></textarea>
-                <!-- Personal note-->
-                <label class="cont">I agree to terms and conditions
-                    <!--checkbox-->
-                    <input type="checkbox" id="terms">
-                    <span class="checkmark"></span>
-                </label>
-                <div class="row">
-                    <div class="col-6">
-                        <table style="margin-left: 20%;">
-                            <tr>
-                                <td>
-                                    <div class="small-box" id="price"></div>
-                                    <script>update_properties_and_price()</script>
-                                </td>
-                            </tr>
-                        </table>
+            <div class="col-5 sticky-top">
+                <!--Lock the order box along the page-->
+                <div class="order-box">
+                    <h7>PLACE ORDER</h7>
+                    <div class="instructions">
+                        <!--Few instructions-->The more specific you are, the better your laundry will come out!
                     </div>
-                    <div class="col-6">
-                        <div style="margin-left: 5%; margin-top: 3%;">
-                            <div id="overlay_register" onclick="off()">
-                                <div id="register_block"></div>
-                            </div>
-                            <div id="overlay_thank_you" onclick="off()">
-                                <div id="user_order"></div>
-                            </div>
-                            <div>
-                                <!-- <button onclick="create_order(JSON.parse(sessionStorage.getItem('washerID')))" class="button1-big">SEND
+                    <table style="margin-left: 5%; margin-top: -2%; margin-bottom: 2%;">
+                        <tr style="color: black;">
+                            <td>Drop off day</td>
+                            <td style="padding-left: 50px;">Drop off time</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="box select">
+                                    <input class="choose_location" type="date" id="date" value="2021-06-21"
+                                        onchange="update_properties_and_price()"> <!-- Date -->
+                                </div>
+                                <script>
+                                    document.getElementById('date').value = new Date().toISOString().substring(0, 10);
+                                    console.log("cur date is" + document.getElementById('date').value)
+                                </script>
+                            </td>
+                            <td style="padding-left: 50px;"><input class="choose_location" type="time" id="startTime"
+                                    value="08:00" onchange="update_properties_and_price()"></td>
+                            <script>
+                            // document.getElementById('startTime').value = new Date().toISOString().substring(11, 16);
+                            </script>
+                        </tr>
+                        <tr style="color: black;">
+                            <!-- Special Services-->
+                            <td style="padding-top: 3%;">Special services</td>
+                            <td style="padding-left: 50px; padding-top: 3%;">Loads</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="box select">
+                                    <!-- Special Services dropdwn-->
+                                    <select id="property" onchange="update_properties_and_price()">
+                                        <option value="Default" selected>Deafult</option>
+                                        <option value="ironing">Ironing(+25)</option>
+                                        <option value="door2door">Door-2-Door(+20)</option>
+                                        <option value="dryer">Hanging Drying(+12)</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td style="padding-left: 50px;"><input class="choose_location" type="number" id="loads"
+                                    value="1" onchange="update_properties_and_price()"></td>
+                            <!-- Loads -->
+                        </tr>
+                        <tr style="color: black;">
+                            <td style="padding-top: 3%;">Wash settings</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="box select">
+                                    <!-- Wash settings -->
+                                    <select id="wash_settings" onchange="update_properties_and_price()">
+                                        <option value="Default" selected>Default</option>
+                                        <option value="30°C Wash">30°C Wash</option>
+                                        <option value="60°C Wash">60°C Wash</option>
+                                        <option value="Fast Wash">Fast Wash(+10)</option>
+                                        <option value="Whites Only">Whites Only</option>
+                                        <option value="Delicates">Delicates</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <textarea class="note" id="notes_for_laundry" name="note" rows="4" cols="50"
+                        placeholder="Special requests and comments..."
+                        onchange="update_properties_and_price()"></textarea>
+                    <!-- Personal note-->
+                    <label class="cont">I agree to terms and conditions
+                        <!--checkbox-->
+                        <input type="checkbox" id="terms">
+                        <span class="checkmark"></span>
+                    </label>
+                    <div class="row">
+                        <div class="col-6">
+                            <table style="margin-left: 20%;">
+                                <tr>
+                                    <td>
+                                        <div class="small-box" id="price"></div>
+                                        <script>update_properties_and_price()</script>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <div style="margin-left: 5%; margin-top: 3%;">
+                                <div id="overlay_register" onclick="off()">
+                                    <div id="register_block"></div>
+                                </div>
+                                <div id="overlay_thank_you" onclick="off()">
+                                    <div id="user_order"></div>
+                                </div>
+                                <div>
+                                    <!-- <button onclick="create_order(JSON.parse(sessionStorage.getItem('washerID')))" class="button1-big">SEND
                                     REQUEST</button> -->
-                                <button onclick="create_order('1LhDqVKzSkZdsnSC6wFrVG5jte93')" class="button1-big">SEND
-                                    REQUEST</button>
-                            </div>                   
+                                    <button onclick="create_order('1LhDqVKzSkZdsnSC6wFrVG5jte93')"
+                                        class="button1-big">SEND
+                                        REQUEST</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-1">
+            </div>
+            <!--Place order box ends-->
         </div>
-        <div class="col-1">
-        </div>
-        <!--Place order box ends-->
-    </div>
     </div>
     </div>
     <!--Profile Details header starts here-->
@@ -230,9 +235,7 @@
                                     <div class="openinghourscontent section">
                                         <div id="openorclosed"></div>
                                         <div id="openorclosedTable"></div>
-                                        <!-- <div id="openorclosedTable2"></div>
-                                        <script>get_opening_hours_table("openorclosedTable2", washer1)</script> -->
-                                        <!-- <script>color_today()</script> -->
+                                        <!-- <script>get_opening_hours_table("openorclosedTable2", washer1)</script> -->
                                     </div>
                                 </section>
                             </div>

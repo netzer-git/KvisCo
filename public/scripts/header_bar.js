@@ -1,8 +1,10 @@
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         await signIn();
+        return;
     }
     // else {
+    sessionStorage.setItem("washer_that_register", getUserToken())
     window.location.href = "../html/washer-profile.html"
     // }
 }
@@ -12,6 +14,12 @@ async function become_a_user() {
         signIn();
     }
     else {
+        let userID = await getUserToken();
+        const user_doc = await promiseUserLoaderById(userID); //get the washer from the firebase
+        if (!user_doc) {
+            window.location.href = "../html/user_registration.html";
+            return;
+        }
         window.location.href = "../html/user_profile_final.html"
     }
 }

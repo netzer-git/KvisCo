@@ -234,14 +234,18 @@ h6{
 
 
 .cards{
-    /* position: absolute; */
-    width: 1199px;
+    position: absolute;
+    /* width: 1199px; */
     height: 411px;
-    left: 120px;
-    top: 83px;
-    margin-top:70px;
-    margin-left: 5%;
 
+    /* top: 20px; */
+    /* left: 120px;
+    margin-top:70px;
+    margin-left: 5%; */
+    margin-top: 70px;
+    right: 0;
+    left: 0;
+    margin: 70px auto;
 }
 
 .leptop{
@@ -306,8 +310,13 @@ h6{
 
 
 .header_11{
-    margin-left: 17%;
-    margin-top: 3%;
+    /* margin-left: 17%;
+    margin-top: 3%; */
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    margin-top: 4%;
+    margin-bottom: 3%;
 }
 
 .header_21{
@@ -327,7 +336,7 @@ h6{
     margin: auto; */
     height: 90px;
     width: 1000px;
-    left: 37px;
+    left: 50px;
     /* top: 396px; */
     border-radius: 20px;
     background: rgba(255, 176, 188, 1);

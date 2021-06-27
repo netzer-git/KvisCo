@@ -1,6 +1,7 @@
 async function load_washer_profile_page() {
-    let washerID = getUserToken();
-    washerID = "5IMy2kMSbheOriFPxqKmKTNWOJ92";
+    // let washerID = await getUserToken();
+    washerID = sessionStorage.getItem("washer_that_register");
+    console.log("washer id is now : ", washerID)
     const washer_doc = await promiseWasherLoaderById(washerID); //get the washer from the firebase
     if (!washer_doc) {
         window.location.href = "../html/washer_registration.html";
