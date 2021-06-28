@@ -75,11 +75,10 @@ async function change_status(new_status, orderID) {
     window.location.href = "../html/washer_flow/washer-profile.html";
 }
 
-
+// TO FIX - sent the value (orderID) to the block - and not the blockID 
+// currently the value come with the famous tab problem
 async function display_order_status(blockID) {
-    console.log("block id: ",blockID);
     var orderID = blockID.value;
-    console.log("order id: ",orderID);
     const order = await promiseOrderLoaderById(orderID);
     console.log("order: ",order.data());
     display_new_order_for_washer(order, orderID);

@@ -134,10 +134,14 @@ function off() {
 
 
 // main function of place order page!!!!
-async function load_place_order_page(washerID) {
-    const washer_doc = await promiseWasherLoaderById(washerID);
-    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished");
-    load_profile_header_of_washer(washerID);
+async function load_place_order_page() {
+    var washerID = sessionStorage.getItem("pressed_washer"); // washer that pressed in page map_filter.html
+    const washer_doc = await promiseWasherLoaderById(washerID); 
+    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); // all finished orders of washer for his reviews
+    
+    load_profile_header_of_washer(washerID); // in profile_header.js
+    
+    // functions for place_order page tabs, in washer_tabs.js 
     f_checkOpeningTimes(washer_doc);
     f_get_opening_hours_table(washer_doc);
     f_display_washer_details(washer_doc);

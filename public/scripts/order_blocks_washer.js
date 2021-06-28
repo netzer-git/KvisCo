@@ -2,7 +2,9 @@
 var block_num = 0;
 
 /**
- * 
+ * create pink order block to the washer with the currect button and save in the button functions that display overlays according to the status 
+ * status pending/process - button overlay display_order_status(orderID) - locate in new_order.js
+ * status finished - button overlay display_review_on_user_overlay(orderID) - locate in review_on_user.js
  * @param {order object} order 
  * @returns long string of order
  */
@@ -17,15 +19,11 @@ async function get_order_block_of_washer(order) {
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
     let unix_timestamp = order.data().due_to;
     var date = new Date(unix_timestamp * 1000);
-    var month = date.getMonth();
-    var day = date.getDate();
-    var formattedTime = day + '/' + month;
+    var formattedTime = date.getDate() + '/' + date.getMonth();
 
     block += "<tr><td>" + formattedTime + "</td><td>" + order.data().price + "</td></tr>"
     switch (order.data().status) {
         case 'pending':
-            block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_order_status(block_num_" + block_num + ")' class='button1'> Open  </button></th></tr>";
-            break;
         case 'process':
             block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_order_status(block_num_" + block_num + ")' class='button1'> Open  </button></th></tr>";
             break;

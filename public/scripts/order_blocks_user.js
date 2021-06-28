@@ -70,8 +70,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
  * @param {string} userID the user id
  */
 async function load_order_blocks_of_user(userID) {
-    insert_orders_blocks_of_user("in_process_orders", userID, "process");
-    insert_orders_blocks_of_user("finished_orders", userID, "finished");
+
 }
 
 
