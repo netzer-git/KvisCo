@@ -96,5 +96,4 @@ function display_review_on_user_overlay(id) {
     review_on_user_overlay += '</table></div>'; 
     document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
     // document.getElementById("overlay_review").style.display = "block";
-
 }

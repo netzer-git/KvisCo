@@ -1,30 +1,17 @@
 
-/**
- * return the washer details block - as model name, capacity and more
- * @param {washer object} washer_doc the washer 
- */
-function f_display_washer_details(washer_doc) {
-    let details_table = "<table class = machine_details>";
-    details_table += "<tr><tr><th>Model Name</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Capacity</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().capacity + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
-    details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    if (washer_doc.data().properties == "ironing") {
-        details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
-    }
-    if (washer_doc.data().properties == "door2door") {
-        details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
-    }
-    if (washer_doc.data().properties == "dryer") {
-        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
-    }
-    details_table += "</tr></table>";
-    document.getElementById("washer_details").innerHTML = details_table;
-}
+//////////////////////// inner js help functions  ////////////////////////////////
 
+
+/**
+ * color the row of today in the opening hours table *****not in use*******
+ */
+ function color_today() {
+    let date = new Date(); // current time
+    let day = date.getDay();
+    let table = document.getElementById("opening-hours-table")
+    let rows = table.getElementsByTagName("tr");
+    rows[day].style.color = '#FFC636';
+}
 
 /**
  * return new time stamp of the currect date and hour
@@ -129,11 +116,32 @@ function check_if_washer_open(opening_times) {
     return false;
 }
 
+
+/////////////////// functions that called into html by washer_details.js and place_order.js  ///////
+
+/**
+ * check if the washer is open now, and return green "working now" if he is and red "closed now" if not
+ * @param {washer Object} washer_doc the washer  
+ */
+function f_checkOpeningTimes(washer_doc) {
+    if (check_if_washer_open(washer_doc.data().opening_times)) {
+        document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
+        document.getElementById("openClosedColor").style.color = "green";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
+    }
+    else {
+        document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
+        document.getElementById("openClosedColor").style.color = "red";
+        document.getElementById("openClosedColor").style.fontSize = "18px";
+    }
+}
+
+
 /**
  * display all the opening times table of the washer
  * @param {washer object} washer_doc the washer 
  */
-function f_get_opening_hours_table(washer_doc) {
+ function f_get_opening_hours_table(washer_doc) {
     opening_times = '<table style="font-size: 20px;" class="opening-hours-table" id="opening-hours-table">';
     if (washer_doc.data().opening_times.Sunday !== undefined) {
         opening_times += '<tr id="Sunday" itemprop="openingHours" title="Open Sunday"><td>Sunday</td>';
@@ -181,35 +189,6 @@ function f_get_opening_hours_table(washer_doc) {
     opening_times += '</table>';
     document.getElementById("openorclosedTable").innerHTML = opening_times;
     // color_today();
-}
-
-/**
- * check if the washer is open now, and return green "working now" if he is and red "closed now" if not
- * @param {washer Object} washer_doc the washer  
- */
-function f_checkOpeningTimes(washer_doc) {
-    if (check_if_washer_open(washer_doc.data().opening_times)) {
-        document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
-        document.getElementById("openClosedColor").style.color = "green";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
-    }
-    else {
-        document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
-        document.getElementById("openClosedColor").style.color = "red";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
-    }
-}
-
-
-/**
- * color the row of today in the opening hours table *****not in use*******
- */
-function color_today() {
-    let date = new Date(); // current time
-    let day = date.getDay();
-    let table = document.getElementById("opening-hours-table")
-    let rows = table.getElementsByTagName("tr");
-    rows[day].style.color = '#FFC636';
 }
 
 
@@ -262,49 +241,28 @@ async function f_display_washer_reviews(all_orders) {
     document.getElementById("my_reviews").innerHTML = all_reviews;
 }
 
-
 /**
- * display inner blocks of reviews on user
- * @param {array of orders objects} all_orders all reviews on specific user with status "finished"
+ * return the washer details block - as model name, capacity and more
+ * @param {washer object} washer_doc the washer 
  */
-async function f_display_user_reviews(all_orders) {
-    all_reviews = "";
-    for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().user_review != null && all_orders[j].data().user_rating != null) {
-            const washer_that_review = await all_orders[j].data().washer.get();
-            // here start block of review
-            all_reviews += "<div class='row'>";
-            all_reviews += "<div class='col-6'>";
-            all_reviews += "<div class='row'>";
-            all_reviews += "<div class='col-1'>";
-            all_reviews += "</div>";
-            all_reviews += "<div class='col-2'>";
-            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + washer_that_review.data().imageUrl + "></a></div>";
-            all_reviews += '</div>';
-            all_reviews += "<div class='col-6'>";
-            all_reviews += "<div class='location'>" + washer_that_review.data().name + "</div>";
-            all_reviews += '</div>';
-            all_reviews += "<div class='col-3'>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star_yellow.png'>" + all_orders[j].data().rating_washer + "</div>";
-            all_reviews += '</div>';
-            all_reviews += '</div>';
-            all_reviews += "<div class='row'>";
-            all_reviews += "<div class='col-3'>"
-            all_reviews += '</div>';
-            all_reviews += "<div class='col-9'>";
-            all_reviews += "<div class='reviews_text'>" + all_orders[j].data().review_user + "</div>";
-            all_reviews += '</div>';
-            all_reviews += '</div>';
-            all_reviews += '</div>';
-            all_reviews += "<div class='col-6'>";
-            all_reviews += '</div>';
-            all_reviews += '</div>';
-            all_reviews += '<hr style="border: 2px solid #000000">';
-        }
+ function f_display_washer_details(washer_doc) {
+    let details_table = "<table class = machine_details>";
+    details_table += "<tr><tr><th>Model Name</th></tr><tr>";
+    details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
+    details_table += "<tr><tr><th>Capacity</th></tr><tr>";
+    details_table += "<td>" + washer_doc.data().capacity + "</td></tr><tr>";
+    details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
+    details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
+    details_table += "<tr><tr><th>Special Services</th></tr><tr>";
+    if (washer_doc.data().properties == "ironing") {
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
-    if (all_reviews == "") {
-        all_reviews += "<h4> there are no reviews yet </h4>";
+    if (washer_doc.data().properties == "door2door") {
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
-    all_reviews += '</div>';
-    document.getElementById("my_reviews").innerHTML = all_reviews;
+    if (washer_doc.data().properties == "dryer") {
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
+    }
+    details_table += "</tr></table>";
+    document.getElementById("washer_details").innerHTML = details_table;
 }

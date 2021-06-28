@@ -61,6 +61,14 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     document.getElementById(tag).innerHTML = all_blocks;
 }
 
+
+/**
+ * function called from user_details 
+ * display pending+process orders in div "in_process_orders" 
+ * display finished orders in div "finished_orders" 
+ * 
+ * @param {string} userID the user id
+ */
 async function load_order_blocks_of_user(userID) {
     insert_orders_blocks_of_user("in_process_orders", userID, "process");
     insert_orders_blocks_of_user("finished_orders", userID, "finished");
