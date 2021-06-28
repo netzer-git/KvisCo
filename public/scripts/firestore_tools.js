@@ -89,20 +89,20 @@ async function getCurrentUserLocation() {
  * @param {*} doc user or washer document
  */
 async function getRatingFromDoc(doc, field) {
-    let ratingSum = 0, ratingNum = 0; 
-    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
+    let ratingSum = 0, ratingNum = 0, rating = 0; 
+    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "finished");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_user;
+            rating = order.data().rating_user;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
             }
-            });
+        });
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_washer;
+            rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
@@ -112,7 +112,7 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum).toFixed(1) : 0;
 }
 
 /**
@@ -121,25 +121,21 @@ async function getRatingFromDoc(doc, field) {
  */
 async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
-        const collection = field + "s";
-        if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
-        } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("created_at");
-        } else {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
-        }
+        var query = db.collection('orders').where(field, "==", docID);
+        // if (status === "all") {
+            // var query = db.collection('orders').where(field, "==", docID);
+        // } else if (status === "processing") {
+            // var query = db.collection('orders').where('status', '!=', "finished").where(field, "==", docID);
+        // } else {
+            // var query = db.collection('orders').where(field, "==", docID).where('status', '==', status);
+        // }
 
         query.get().then((docArray) => {
             const orderArray = [];
             docArray.forEach((doc) => {
-                if (doc.exists) {
-                    console.log("doc")
-                    console.log(doc.data())
+                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished') || (doc.data().status === status);
+                if (isDocGetIn) {
                     orderArray.push(doc);
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
                 }
             })
             resolve(orderArray);
@@ -278,13 +274,13 @@ async function createNewUser(user) {
  */
 async function addWasherToFavorites(userId, washerId) {
     let user = db.collection('users').doc(userId);
-    let saved_washers = user.data().saved_washers;
-    if (!saved_washers.includes(washerId)) {
-        saved_washers.push(washerId);
+    let favorites = user.data().saved_washers;
+    if (!favorites.includes(washerId)) {
+        favorites.push(washerId);
+        await user.update({
+            saved_washers: favorites
+        });
     }
-    await user.update({
-        saved_washers: saved_washers
-    });
 }
 
 /**
