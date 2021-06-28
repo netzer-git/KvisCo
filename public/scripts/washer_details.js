@@ -9,10 +9,13 @@ async function load_washer_profile_page() {
         return;
     }
     const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); //get all the people that reviewed this washer from orders
-    load_profile_header_of_washer(washerID); //function in profile_header.js
-    load_order_blocks_of_washer(washerID); // function in order_blocks_washer.js that have 2 function of washer blocks - for "in_process" and "finished"
+    load_profile_header_of_washer(washer_doc); //function in profile_header.js
+    
+    insert_orders_blocks_of_washer("in_process_orders", washerID, "processing");
+    insert_orders_blocks_of_washer("finished_orders", washerID, "finished");    
+    
     f_display_washer_details(washer_doc); // in washer_tabs.js
     f_display_washer_reviews(all_orders); // in washer_tabs.js
-    get_washer_working_hours(washer_doc) // order_blocks_washer.
+    get_washer_working_hours(washer_doc) // in working_hours_table.js.
 
 }

@@ -1,12 +1,20 @@
+$(".checkbox-dropdown").click(function () {
+    $(this).toggleClass("is-active");
+});
+
+$(".checkbox-dropdown ul").click(function(e) {
+    e.stopPropagation();
+});
+
+
+
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         await signIn();
         return;
     }
-    // else {
     sessionStorage.setItem("washer_that_register", getUserToken())
     window.location.href = "../html/washer_flow/washer_profile.html"
-    // }
 }
 
 async function become_a_user() {
