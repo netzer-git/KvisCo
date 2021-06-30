@@ -257,7 +257,7 @@ async function createNewUser(user) {
         location_str: user.location_str,
         location_cor: geoPoint,
         saved_washers: [],
-        cover_photo: user.cover_photo,
+        imgUrl: user.imgUrl,
         rating_sum: 0,
         rating_num: 0,
         phone: user.phone,
@@ -307,7 +307,7 @@ async function saveImageToUser(file) {
 
 /**
  * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
- * Notice: there is no difference between washer's "cover_photo" attribute to "pics" when saving images to storage.
+ * Notice: there is no difference between washer's "imgUrl" attribute to "pics" when saving images to storage.
  * @param {*} file image file
  * @param {*} washerId the id of the current washer
  * @returns image url path to firebase storage
@@ -437,4 +437,26 @@ async function getWasherFilterQuery(filters) {
     }
 
     return filteredWashers;
+}
+
+/**
+ * @param {*} washerArray array of washer docs
+ * @returns the same array sorted by rating
+ */
+async function sortWashersByRating(washerArray) {
+    await washerArray.sort((a, b) => {
+        aRating = await getWasherRatingFromDoc(a);
+        bRating = await getWasherRatingFromDoc(b);
+        return bRating - aRating;
+    });
+    return washersArray;
+}
+
+async function getWasherRatingFromDoc(washerArray, currentPoint) {
+    washerArray.sort((a, b) => {
+        aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
+        bDistance = getDistanceFromLatLonInKm(b.location_cor, currentPoint);
+        return bDistance - aDistance;
+    });
+    return washerArray;
 }
