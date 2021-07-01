@@ -64,7 +64,6 @@ function promiseOrderLoaderById(documentID) {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderByCurrentUserID() {
-    console.log(getUserToken());
     return promiseLoaderByCollectionAndId('users', getUserToken());
 }
 
@@ -445,8 +444,8 @@ async function getWasherFilterQuery(filters) {
  */
 async function sortWashersByRating(washerArray) {
     await washerArray.sort((a, b) => {
-        aRating = await getWasherRatingFromDoc(a);
-        bRating = await getWasherRatingFromDoc(b);
+        aRating = getWasherRatingFromDoc(a);
+        bRating = getWasherRatingFromDoc(b);
         return bRating - aRating;
     });
     return washersArray;
@@ -459,4 +458,8 @@ async function getWasherRatingFromDoc(washerArray, currentPoint) {
         return bDistance - aDistance;
     });
     return washerArray;
+}
+
+async function getWashersByDistanceAndRating() {
+
 }
