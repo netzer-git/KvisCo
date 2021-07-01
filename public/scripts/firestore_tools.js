@@ -120,6 +120,7 @@ async function getRatingFromDoc(doc, field) {
  */
 async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
+
         var query = db.collection('orders').where(field, "==", docID);
         // if (status === "all") {
             // var query = db.collection('orders').where(field, "==", docID);
@@ -256,7 +257,7 @@ async function createNewUser(user) {
         location_str: user.location_str,
         location_cor: geoPoint,
         saved_washers: [],
-        imgUrl: user.imgUrl,
+        imageUrl: user.imageUrl,
         rating_sum: 0,
         rating_num: 0,
         phone: user.phone,
