@@ -16,7 +16,7 @@ async function load_profile_header_of_washer(washer_doc) {
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
     washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
-    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';   
+    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';   
     washer_header += '</div></div></div>';  
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
     if (washer_doc.data().pics !== undefined) {
@@ -44,7 +44,7 @@ async function load_profile_header_of_user(user_doc) {
     user_header += '</table></div></div>';
     user_header += '<div class="row">';
     user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
-    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';       
+    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
     user_header += '</div></div></div>';  ;
     document.getElementById("profile_header").innerHTML = user_header;  
 }

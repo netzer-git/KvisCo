@@ -68,6 +68,6 @@ async function create_user() {
     await createNewUser(new_user);
     var userID = getUserToken();
     sessionStorage.setItem("current_user_id", userID);
-    window.location.href = "../html/user_flow/user_profile_final.html";
+    window.location.href = "../../html/user_flow/user_profile_final.html";
 }
 

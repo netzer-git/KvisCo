@@ -2,7 +2,7 @@
 var block_num = 0;
 
 /**
- * create pink order block to the washer with the currect button and save in the button functions that display overlays according to the status 
+ * create pink order-blocks to the washer page with the currect button and save in the button functions that display overlays according to the status 
  * status pending/process - button overlay display_order_status(orderID) - locate in new_order.js
  * status finished - button overlay display_review_on_user_overlay(orderID) - locate in review_on_user.js
  * @param {order object} order 
@@ -46,7 +46,12 @@ async function get_order_block_of_washer(order) {
 
 
 async function insert_orders_blocks_of_washer(tag, washerID, status) {
-    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
+    if (status == "process") {
+        var all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "processing");
+    }
+    else {
+        var all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
+    }
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {

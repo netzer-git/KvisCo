@@ -196,11 +196,12 @@ function f_checkOpeningTimes(washer_doc) {
  * display inner blocks of reviews on washer
  * @param {array of orders objects} all_orders all reviews on specific washer with status "finished"
  */
-async function f_display_washer_reviews(all_orders) {
+async function f_display_washer_reviews(washerID) {
+    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); //get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
         if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null) {
-            const user_that_review = await all_orders[j].data().user.get();
+            const user_that_review = await promiseUserLoaderById(all_orders[j].data().user);
             // here start block of review
             all_reviews += "<div class='row'>";
             all_reviews += "<div class='col-6'>";
@@ -214,7 +215,7 @@ async function f_display_washer_reviews(all_orders) {
             all_reviews += "<div class='location'>" + user_that_review.data().name + "</div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-3'>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star_yellow.png'>" + all_orders[j].data().rating_washer + "</div>";
+            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../../images/Star_yellow.png'>" + all_orders[j].data().rating_washer + "</div>";
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += "<div class='row'>";
@@ -231,7 +232,7 @@ async function f_display_washer_reviews(all_orders) {
             }
             all_reviews += '</div>';
             all_reviews += '</div>';
-            all_reviews += '<hr style="border: 2px solid #000000">';
+            all_reviews += '<hr style="border: 1px solid #000000">';
         }
     }
     if (all_reviews == "") {
