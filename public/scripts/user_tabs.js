@@ -1,9 +1,10 @@
-
+// TO FIXXXXXXXX
 /**
  * display inner blocks of reviews on user
- * @param {array of orders objects} all_orders all reviews on specific user with status "finished"
+ * @param {string} userID userID to get all the reviews on him
  */
- async function f_display_user_reviews(all_orders) {
+ async function f_display_user_reviews(userID) {
+    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
         if (all_orders[j].data().user_review != null && all_orders[j].data().user_rating != null) {
