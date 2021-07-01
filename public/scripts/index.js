@@ -134,5 +134,17 @@ const testNadavQuery = async () => {
     const nadavDoc = await promiseUserLoaderById('5IMy2kMSbheOriFPxqKmKTNWOJ92')
     let r = await getRatingFromDoc(nadavDoc, 'user');
     console.log("rating is now: " + r)
+}
 
+const test_rating = async () => {
+    const me = await promiseWasherLoaderById('c0KmkCafo7bZmCcZvW2Nr7NqgDK2');
+    //console.log(me.data());
+    const rating = await getRatingFromDoc(me, 'washer');
+    console.log("*******************");
+    const order_array = await promiseOrderArrayByWasherIdAndStatus(me.id, 'finished');
+    console.log("*******************");
+    for (o of order_array) {
+        console.log(o.data());
+    }
+    console.log("RATING: " + rating)
 }

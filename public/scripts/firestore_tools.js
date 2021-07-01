@@ -89,20 +89,20 @@ async function getCurrentUserLocation() {
  * @param {*} doc user or washer document
  */
 async function getRatingFromDoc(doc, field) {
-    let ratingSum = 0, ratingNum = 0; 
-    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
+    let ratingSum = 0, ratingNum = 0, rating = 0; 
+    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "finished");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_user;
+            rating = order.data().rating_user;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
             }
-            });
+        });
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_washer;
+            rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
@@ -112,7 +112,7 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum).toFixed(1) : 0;
 }
 
 /**
@@ -121,25 +121,22 @@ async function getRatingFromDoc(doc, field) {
  */
 async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
-        const collection = field + "s";
-        if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
-        } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("status");
-        } else {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
-        }
+
+        var query = db.collection('orders').where(field, "==", docID);
+        // if (status === "all") {
+            // var query = db.collection('orders').where(field, "==", docID);
+        // } else if (status === "processing") {
+            // var query = db.collection('orders').where('status', '!=', "finished").where(field, "==", docID);
+        // } else {
+            // var query = db.collection('orders').where(field, "==", docID).where('status', '==', status);
+        // }
 
         query.get().then((docArray) => {
             const orderArray = [];
             docArray.forEach((doc) => {
-                if (doc.exists) {
-                    console.log("doc")
-                    console.log(doc.data())
+                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished') || (doc.data().status === status);
+                if (isDocGetIn) {
                     orderArray.push(doc);
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
                 }
             })
             resolve(orderArray);
@@ -272,6 +269,22 @@ async function createNewUser(user) {
 }
 
 /**
+ * adds new entry to user favorite washers.
+ * @param {*} userId the current user id
+ * @param {*} washerId the wanted washer id
+ */
+async function addWasherToFavorites(userId, washerId) {
+    let user = db.collection('users').doc(userId);
+    let favorites = user.data().saved_washers;
+    if (!favorites.includes(washerId)) {
+        favorites.push(washerId);
+        await user.update({
+            saved_washers: favorites
+        });
+    }
+}
+
+/**
  * Saves a new image containing to user folder in firestorage. This first saves the image in Firebase storage.
  * @param {*} file image file
  * @return {string} image url path to firebase storage
@@ -295,7 +308,7 @@ async function saveImageToUser(file) {
 
 /**
  * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
- * Notice: there is no difference between washer's "cover_photo" attribute to "pics" when saving images to storage.
+ * Notice: there is no difference between washer's "imgUrl" attribute to "pics" when saving images to storage.
  * @param {*} file image file
  * @param {*} washerId the id of the current washer
  * @returns image url path to firebase storage
@@ -425,4 +438,26 @@ async function getWasherFilterQuery(filters) {
     }
 
     return filteredWashers;
+}
+
+/**
+ * @param {*} washerArray array of washer docs
+ * @returns the same array sorted by rating
+ */
+async function sortWashersByRating(washerArray) {
+    await washerArray.sort((a, b) => {
+        aRating = await getWasherRatingFromDoc(a);
+        bRating = await getWasherRatingFromDoc(b);
+        return bRating - aRating;
+    });
+    return washersArray;
+}
+
+async function getWasherRatingFromDoc(washerArray, currentPoint) {
+    washerArray.sort((a, b) => {
+        aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
+        bDistance = getDistanceFromLatLonInKm(b.location_cor, currentPoint);
+        return bDistance - aDistance;
+    });
+    return washerArray;
 }
