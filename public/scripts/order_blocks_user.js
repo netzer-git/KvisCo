@@ -1,6 +1,6 @@
 async function get_order_block_of_user(order) {
     // const washer_doc = await order.data().washer.get();
-    const washer_doc = await promiseWasherLoaderByCurrentUserID(order.data().user);
+    const washer_doc = await promiseWasherLoaderById(order.data().washer);
     block = "";
     block = "<div class='col-lg-4'>";
     block += "<div class='col_with_padd'>";
@@ -46,31 +46,19 @@ async function get_order_block_of_user(order) {
 
 async function insert_orders_blocks_of_user(tag, userID, status) {
     if (status == "process") {
-        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "pending");
-        all_orders.push(await promiseOrderArrayByUserIdAndStatus(userID, status));
+        var all_orders = promiseOrderArrayByUserIdAndStatus(userID, "processing");
     }
     else {
-        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
+        var all_orders = promiseOrderArrayByUserIdAndStatus(userID, status);
     }
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {
+        console.log("id of blocks: ", all_orders[i].id)
         all_blocks += await get_order_block_of_user(all_orders[i]);
     }
     
     document.getElementById(tag).innerHTML = all_blocks;
-}
-
-
-/**
- * function called from user_details 
- * display pending+process orders in div "in_process_orders" 
- * display finished orders in div "finished_orders" 
- * 
- * @param {string} userID the user id
- */
-async function load_order_blocks_of_user(userID) {
-
 }
 
 

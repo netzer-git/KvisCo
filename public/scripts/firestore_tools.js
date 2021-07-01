@@ -125,7 +125,7 @@ async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
         if (status === "all") {
             var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
         } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("created_at");
+            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("status");
         } else {
             var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
         }
@@ -261,7 +261,7 @@ async function createNewUser(user) {
         location_str: user.location_str,
         location_cor: geoPoint,
         saved_washers: [],
-        cover_photo: user.cover_photo,
+        imageUrl: user.imageUrl,
         rating_sum: 0,
         rating_num: 0,
         phone: user.phone,
