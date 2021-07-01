@@ -452,6 +452,12 @@ async function sortWashersByRating(washerArray) {
     return washersArray;
 }
 
+/**
+ * 
+ * @param {*} washerArray 
+ * @param {*} currentPoint 
+ * @returns 
+ */
 async function getWasherRatingFromDoc(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
         aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
@@ -461,6 +467,14 @@ async function getWasherRatingFromDoc(washerArray, currentPoint) {
     return washerArray;
 }
 
-async function getWashersByDistanceAndRating() {
+/**
+ * the function takes indicator number and returns washer array:
+ * 1 (better)   - rating > 4.5, order by distance
+ * 2 (mid)      - rating > 3, order by distance
+ * 3 (closer)   - distance closer than 1km, order by distance
+ * @param {*} indicator 1-3, indicates the wanted filter
+ * @returns array of washer as dictated by the control number
+ */
+async function getBetterCloserWashers(indicator) {
 
 }
