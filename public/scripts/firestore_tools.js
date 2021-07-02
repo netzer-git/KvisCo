@@ -382,7 +382,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined) {
+    if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
             if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
@@ -444,9 +444,9 @@ async function getWasherFilterQuery(filters) {
  * @returns the same array sorted by rating
  */
 async function sortWashersByRating(washerArray) {
-    await washerArray.sort((a, b) => {
-        aRating = getWasherRatingFromDoc(a);
-        bRating = getWasherRatingFromDoc(b);
+    await washerArray.sort(async (a, b) => {
+        aRating = await getWasherRatingFromDoc(a);
+        bRating = await getWasherRatingFromDoc(b);
         return bRating - aRating;
     });
     return washersArray;
@@ -458,7 +458,7 @@ async function sortWashersByRating(washerArray) {
  * @param {*} currentPoint 
  * @returns 
  */
-async function getWasherRatingFromDoc(washerArray, currentPoint) {
+async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
         aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
         bDistance = getDistanceFromLatLonInKm(b.location_cor, currentPoint);
@@ -475,6 +475,25 @@ async function getWasherRatingFromDoc(washerArray, currentPoint) {
  * @param {*} indicator 1-3, indicates the wanted filter
  * @returns array of washer as dictated by the control number
  */
-async function getBetterCloserWashers(indicator) {
-
+async function getBetterCloserWashers(indicator, currentPoint) {
+    let washerArray = []
+    switch(indicator) {
+        case 1:
+            washerArray = await getWasherFilterQuery({
+                rating: 4.5,
+            });
+            break;
+        case 2:
+            washerArray = await getWasherFilterQuery({
+                rating: 3,
+            });
+            break;
+        case 3:
+            washerArray = await getWasherFilterQuery({
+                distance: 1.5,
+                current_cor: currentPoint,
+            });
+            break;
+    }
+    return sortWashersByDistance(washerArray, currentPoint);
 }
