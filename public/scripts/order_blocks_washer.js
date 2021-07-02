@@ -14,14 +14,14 @@ async function get_order_block_of_washer(order) {
     block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
-    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='netzer'> </th></tr>";
+    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></th></tr>";
     block += "<tr><th scope='col' colspan='2'>" + user_doc.data().name + "</th></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
     let unix_timestamp = order.data().due_to;
     var date = new Date(unix_timestamp * 1000);
     var formattedTime = date.getDate() + '/' + date.getMonth();
 
-    block += "<tr><td>" + formattedTime + "</td><td>" + order.data().price + "</td></tr>"
+    block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" NIS</td></tr>"
     switch (order.data().status) {
         case 'pending':
         case 'process':
