@@ -108,10 +108,8 @@ async function create_order() {
         return;
     }
     var userID = getUserToken();
-    console.log("is found? ", promiseUserLoaderById(userID)) 
     if (!await promiseUserLoaderById(userID)) {
         window.location.href="../../html/user_flow/user_registration.html";
-        // user_regisster
         return;
     }
     sessionStorage.setItem("current_user_id", userID);
@@ -142,14 +140,14 @@ async function load_place_order_page() {
     var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
 
     const washer_doc = await promiseWasherLoaderById(washerID); 
-    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); // all finished orders of washer for his reviews
+    // const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); // all finished orders of washer for his reviews
     load_profile_header_of_washer(washer_doc); // in profile_header.js
     
     // functions for place_order page tabs, in washer_tabs.js 
     f_checkOpeningTimes(washer_doc);
     f_get_opening_hours_table(washer_doc);
     f_display_washer_details(washer_doc);
-    f_display_washer_reviews(all_orders);
+    f_display_washer_reviews(washerID);
 }
 
 

@@ -43,7 +43,7 @@ function promiseWasherLoaderById(documentID) {
 /**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
- * USAGE: promiseUserLoaderById(docID).then(doc => { // do something with.doc.data })
+ * USAGE: promiseUserLoaderById(docID).the  n(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
@@ -118,7 +118,7 @@ async function getRatingFromDoc(doc, field) {
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
 
         var query = db.collection('orders').where(field, "==", docID);
@@ -240,7 +240,7 @@ async function createNewWasher(washer) {
 async function setWasherOpenTimes(openTimes, washerId) {
     let washer = await db.collection('washers').doc(washerId);
     await washer.update({
-        opening_time: openTimes
+        opening_times: openTimes
     });
 }
 

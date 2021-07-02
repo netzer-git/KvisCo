@@ -7,8 +7,8 @@
     const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().user_review != null && all_orders[j].data().user_rating != null) {
-            const washer_that_review = await all_orders[j].data().washer.get(); // to FIX take washer by string
+        if (all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
+            const washer_that_review = await promiseWasherLoaderById(all_orders[j].data().washer);
             // here start block of review
             all_reviews += "<div class='row'>";
             all_reviews += "<div class='col-6'>";
@@ -22,7 +22,7 @@
             all_reviews += "<div class='location'>" + washer_that_review.data().name + "</div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-3'>";
-            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../images/Star_yellow.png'>" + all_orders[j].data().rating_washer + "</div>";
+            all_reviews += "<div class='location'><img style='margin-bottom:8px; margin-right: 5px;' src='../../images/Star_yellow.png'>" + all_orders[j].data().rating_user + "</div>";
             all_reviews += '</div>';
             all_reviews += '</div>';
             all_reviews += "<div class='row'>";
