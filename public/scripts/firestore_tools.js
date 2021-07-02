@@ -453,10 +453,10 @@ async function sortWashersByRating(washerArray) {
 }
 
 /**
- * 
- * @param {*} washerArray 
- * @param {*} currentPoint 
- * @returns 
+ * sort array if washers by the distance from specific point
+ * @param {*} washerArray array of washers
+ * @param {lat: number, lng: number} currentPoint the middle current point
+ * @returns sorted array by distance
  */
 async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
