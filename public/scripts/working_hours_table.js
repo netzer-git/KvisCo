@@ -56,7 +56,7 @@ function duplicate() {
 
 
 var working_times = {};
-function saveHour() {
+async function saveHour() {
     document.getElementById("demo").innerHTML = "Saved!";
     for (var i = 0; i < clicks; i++) {
         if (i == 0) {
@@ -103,6 +103,7 @@ function saveHour() {
         }
     }
     console.log(working_times);
-    setOrderDetails(working_times, washerID);
-    setWasherOpenTimes(working_times, washerId);
+    var washerID = sessionStorage.getItem("signed_in_washer");
+    // await setOrderDetails(working_times, washerID); // TO FIX - what does it mean?
+    await setWasherOpenTimes(working_times, washerID);
 }

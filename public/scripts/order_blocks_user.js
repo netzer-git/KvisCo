@@ -9,26 +9,20 @@ async function get_order_block_of_user(order) {
     block += "<tr><th scope='col' colspan='2'>"+ washer_doc.data().name +"</th></tr>";
     // block += "<tr><td scope='col' colspan='2'>"+ order.orderID +"</td></tr>";
     block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
-    let unix_timestamp = (order.data().due_to)*1000
-    // Create a new JavaScript Date object based on the timestamp
-    // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-    var date = new Date(unix_timestamp);
-    // Hours part from the timestamp
-    var hours = date.getHours();
-    // Minutes part from the timestamp
-    var minutes = "0" + date.getMinutes();
-    var formattedTime = hours + ':' + minutes.substr(-2);
-    block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" nis</td></tr>"
+    let unix_timestamp = order.data().due_to;
+    var date = new Date(unix_timestamp * 1000);
+    var formattedTime = date.getDate() + '/' + date.getMonth();
+    block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" NIS</td></tr>"
     switch (order.data().status) {
         case 'pending':
         case 'process':
             block += "</tr><th scope='col' colspan='2'>";
             block += "<div id='overlay' onclick='off()'>";
             block += "<div id='user_order'></div></div><div>";
-            block += "<div><button onclick='display_order()' class='button1'> Detailes </button></div></th></tr>";
+            block += "<div><button onclick='display_order()' class='button1'> Details </button></div></th></tr>";
           break;
         case 'finished':
-            if (order.data().review_on_washer == "") {
+            if (order.data().review_washer == "") {
                 
                 block += "</tr><th scope='col' colspan='2'><button class='button1'> Review </button></th></tr>";
             }
@@ -46,10 +40,10 @@ async function get_order_block_of_user(order) {
 
 async function insert_orders_blocks_of_user(tag, userID, status) {
     if (status == "process") {
-        var all_orders = promiseOrderArrayByUserIdAndStatus(userID, "processing");
+        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "processing");
     }
     else {
-        var all_orders = promiseOrderArrayByUserIdAndStatus(userID, status);
+        var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     }
     let all_blocks = "";
     let max_orders = Math.min(2, all_orders.length);

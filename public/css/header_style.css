@@ -772,3 +772,11 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
     font-size: 20px;
     line-height: 32px;
   }
+
+  #indicator {
+    position:fixed; 
+    /* width: 10%; */
+    /* height: 10%; */
+    background-color: green;
+    border: 1px solid #dddddd;
+}
