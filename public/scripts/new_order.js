@@ -1,7 +1,7 @@
 
 async function display_new_order_for_washer(order, orderID) {
     // const order = await promiseOrderArrayByUserIdAndStatus(userID, status)[0];
-    const user_doc = await order.data().user.get();
+    const user_doc = await promiseUserLoaderById(order.data().user);
     console.log("the order id is: ", orderID);
     order_block = '<div class= "order_pink">';
     order_block += '<table><tr><h2 class="header_24">YOU RECIEVED A NEW ORDER</h2></tr>';
@@ -10,14 +10,20 @@ async function display_new_order_for_washer(order, orderID) {
     var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
-    var time = date.getHours()+":"+ "0" +date.getMinutes();
+    if (date.getMinutes().toString().length <= 1) {
+        var minutes = ":0" +date.getMinutes();
+    }
+    else {
+        var minutes = date.getMinutes();
+    }
+    var time = date.getHours()+ ":" +minutes;
     order_block += '<tr><td><div class= "header_61">Date</div></td><td><div class= "header_61">'+l_date+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Drop off hour</div></td><td><div class= "header_61">'+time+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Loads</div></td><td><div class= "header_61">'+order.data().loads+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Wash Settings</div></td><td><div class= "header_61">'+order.data().wash_settings+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Special Services</div></td><td><div class= "header_61">'+order.data().property+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Notes:</div><div class="small_headline_4">'+order.data().comments+'<br/> </div></tr>';
-    cur_price = order.data().price.toString() + " nis"  
+    cur_price = order.data().price.toString() + " NIS"  
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr>';
     order_block +='</table>';
     order_block += '<tr><td><button id="accept" value = "in_process" onclick = "change_status(this.value,"'+orderID+'")" class= "yellow_button_3">Confirm</button></td>';
@@ -29,7 +35,7 @@ async function display_new_order_for_washer(order, orderID) {
 
 async function display_new_order_for_user(orderID) {
     const order = await promiseOrderLoaderById(orderID);
-    const washer_doc = await order.data().washer.get();
+    const washer_doc = await promiseWasherLoaderById(order.data().washer);
     order_block = '<div class= "order_pink">';
     if (order.data().status == "pending") {
         order_header = washer_doc.data().name + " will see your order soon...";
@@ -47,14 +53,20 @@ async function display_new_order_for_user(orderID) {
     var date_not_format = order.data().due_to*1000;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
-    var time = date.getHours()+":"+ + date.getMinutes();
+    if (date.getMinutes().toString().length <= 1) {
+        var minutes = ":0" +date.getMinutes();
+    }
+    else {
+        var minutes = date.getMinutes();
+    }
+    var time = date.getHours()+ ":" +minutes;
     order_block += "<table style='margin-left:15%; margin-top:3%;'><tr><td><h6 class='header_61'>Date</h6></td><td><h6 class= 'header_61'>"+l_date+"</h6></td></tr>";
     order_block += '<tr><td><h6 class= "header_61">Drop off hour</h6></td><td><h6 class= "header_61">'+time+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Loads</h6></td><td><h6 class= "header_61">'+order.data().loads+'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+ order.data().wash_settings +'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+ order.data().properties +'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order.data().comments+'<br/></div></tr>';
-    cur_price = order.data().price.toString() + " nis";
+    cur_price = order.data().price.toString() + " NIS";
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr></table>';
     order_block += "<button style='margin-left: 35%; margin-top: 5%;' class='button1' onclick='back_to_profile()'>back to profile</button>";  
     order_block +="</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
@@ -62,9 +74,7 @@ async function display_new_order_for_user(orderID) {
 }
 
 async function back_to_profile() {
-    var userID = await getUserToken();
-    sessionStorage.setItem("userid", userID);
-    window.location.href="../html/user_flow/user_profile_final.html";
+    window.location.href="../../html/user_flow/user_profile_final.html";
 }
 
 async function change_status(new_status, orderID) {
@@ -72,14 +82,13 @@ async function change_status(new_status, orderID) {
     order = {status: new_status}
     console.log(order);
     await setOrderDetails(order, orderID);
-    window.location.href = "../html/washer_flow/washer-profile.html";
+    window.location.href = "../../html/washer_flow/washer-profile.html";
 }
 
-
+// TO FIX - sent the value (orderID) to the block - and not the blockID 
+// currently the value come with the famous tab problem
 async function display_order_status(blockID) {
-    console.log("block id: ",blockID);
     var orderID = blockID.value;
-    console.log("order id: ",orderID);
     const order = await promiseOrderLoaderById(orderID);
     console.log("order: ",order.data());
     display_new_order_for_washer(order, orderID);

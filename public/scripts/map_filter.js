@@ -1,75 +1,75 @@
-// washers list
-let current_list_of_washers = [
-    {
-        'Document ID': 1,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 2,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 3,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 4,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 5,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      }
-];
-current_location = {
-    lat: 31.773610027001155,
-    lng: 35.235351837826255
-} // burger room
+// // washers list
+// let current_list_of_washers = [
+//     {
+//         'Document ID': 1,  
+//         name: "Netzer Epstein",
+//         rating_sum: 10,
+//         rating_num: 2,
+//         imageUrl: "../images/tal_e_pic.png",
+//         location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
+//         pics: ["../images/netzer pic.png","../images/netzer pic.png"],
+//         location_str: "Jerusalem,King George,15",
+//         machine_type: "Bosch F5690",
+//         description:  "we need some place details or short intro, one to two rows top. no more than that?",
+//         commitment: 60
+//       },
+//       {
+//         'Document ID': 2,  
+//         name: "Netzer Epstein",
+//         rating_sum: 10,
+//         rating_num: 2,
+//         imageUrl: "../images/tal_e_pic.png",
+//         location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
+//         pics: ["../images/netzer pic.png","../images/netzer pic.png"],
+//         location_str: "Jerusalem,King George,15",
+//         machine_type: "Bosch F5690",
+//         description:  "we need some place details or short intro, one to two rows top. no more than that?",
+//         commitment: 60
+//       },
+//       {
+//         'Document ID': 3,  
+//         name: "Netzer Epstein",
+//         rating_sum: 10,
+//         rating_num: 2,
+//         imageUrl: "../images/tal_e_pic.png",
+//         location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
+//         pics: ["../images/netzer pic.png","../images/netzer pic.png"],
+//         location_str: "Jerusalem,King George,15",
+//         machine_type: "Bosch F5690",
+//         description:  "we need some place details or short intro, one to two rows top. no more than that?",
+//         commitment: 60
+//       },
+//       {
+//         'Document ID': 4,  
+//         name: "Netzer Epstein",
+//         rating_sum: 10,
+//         rating_num: 2,
+//         imageUrl: "../images/tal_e_pic.png",
+//         location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
+//         pics: ["../images/netzer pic.png","../images/netzer pic.png"],
+//         location_str: "Jerusalem,King George,15",
+//         machine_type: "Bosch F5690",
+//         description:  "we need some place details or short intro, one to two rows top. no more than that?",
+//         commitment: 60
+//       },
+//       {
+//         'Document ID': 5,  
+//         name: "Netzer Epstein",
+//         rating_sum: 10,
+//         rating_num: 2,
+//         imageUrl: "../images/tal_e_pic.png",
+//         location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
+//         pics: ["../images/netzer pic.png","../images/netzer pic.png"],
+//         location_str: "Jerusalem,King George,15",
+//         machine_type: "Bosch F5690",
+//         description:  "we need some place details or short intro, one to two rows top. no more than that?",
+//         commitment: 60
+//       }
+// ];
+// current_location = {
+//     lat: 31.773610027001155,
+//     lng: 35.235351837826255
+// } // burger room
 ////////////////////////////////////////////////////
 
 const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
