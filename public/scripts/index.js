@@ -137,14 +137,9 @@ const testNadavQuery = async () => {
 }
 
 const test_rating = async () => {
-    const me = await promiseWasherLoaderById('c0KmkCafo7bZmCcZvW2Nr7NqgDK2');
-    //console.log(me.data());
-    const rating = await getRatingFromDoc(me, 'washer');
-    console.log("*******************");
-    const order_array = await promiseOrderArrayByWasherIdAndStatus(me.id, 'finished');
-    console.log("*******************");
-    for (o of order_array) {
-        console.log(o.data());
-    }
-    console.log("RATING: " + rating)
+    currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
+    arr = await getBetterCloserWashers(3, currentPoint);
+    console.log(arr[0].data());
+    console.log(arr[1].data());
+    console.log(arr[2].data());
 }

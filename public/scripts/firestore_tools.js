@@ -416,7 +416,7 @@ async function getWasherFilterQuery(filters) {
     if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -491,8 +491,8 @@ async function sortWashersByRating(washerArray) {
  */
 async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
-        aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
-        bDistance = getDistanceFromLatLonInKm(b.location_cor, currentPoint);
+        let aDistance = getDistanceFromLatLonInKm(a.data().location_cor, currentPoint);
+        let bDistance = getDistanceFromLatLonInKm(b.data().location_cor, currentPoint);
         return bDistance - aDistance;
     });
     return washerArray;
@@ -526,5 +526,6 @@ async function getBetterCloserWashers(indicator, currentPoint) {
             });
             break;
     }
+    console.log(washerArray);
     return sortWashersByDistance(washerArray, currentPoint);
 }
