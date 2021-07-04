@@ -233,6 +233,37 @@ async function createNewWasher(washer) {
 }
 
 /**
+ * @param {*} washerDoc washer doc
+ * @returns washer opening_times sorted by days
+ */
+function getWasherOpenTimes(washerDoc) {
+    let washerOpenTimes = washerDoc.data().opening_times;
+    let sortedOpenTimes = {};
+    if (washerOpenTimes['Sunday'] !== undefined) {
+        sortedOpenTimes['Sunday'] = washerOpenTimes['Sunday'];
+    }
+    if (washerOpenTimes['Monday'] !== undefined) {
+        sortedOpenTimes['Monday'] = washerOpenTimes['Monday'];
+    }
+    if (washerOpenTimes['Tuesday'] !== undefined) {
+        sortedOpenTimes['Tuesday'] = washerOpenTimes['Tuesday'];
+    }
+    if (washerOpenTimes['Wednesday'] !== undefined) {
+        sortedOpenTimes['Wednesday'] = washerOpenTimes['Wednesday'];
+    }
+    if (washerOpenTimes['Thursday'] !== undefined) {
+        sortedOpenTimes['Thursday'] = washerOpenTimes['Thursday'];
+    }
+    if (washerOpenTimes['Friday'] !== undefined) {
+        sortedOpenTimes['Friday'] = washerOpenTimes['Friday'];
+    }
+    if (washerOpenTimes['Saturday'] !== undefined) {
+        sortedOpenTimes['Saturday'] = washerOpenTimes['Saturday'];
+    }
+    return sortedOpenTimes;
+}
+
+/**
  * update the open times of specific washer
  * @param {*} openTimes dict of opening times
  * @param {*} washerId washer id

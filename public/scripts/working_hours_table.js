@@ -1,8 +1,8 @@
-
 clicks = 0
 function get_washer_working_hours(washer_doc) {
+    washerOpenTimes = getWasherOpenTimes(washer_doc);
     oldDays = "<table id='working-hours'><tr><td>Day</td><td>From</td><td>To</td><td>Keep weekly</td></tr>"
-    if (washer_doc.data().opening_times == {}) {
+    if (washerOpenTimes == {}) {
         clicks = 1
         oldDays += "<tr><td><div class='set-date'><select id='day" + clicks + "'>"
         oldDays += "<option value='Sunday'>Sunday</option>"
@@ -18,7 +18,7 @@ function get_washer_working_hours(washer_doc) {
         oldDays += "<td><input id='cbx" + clicks + "' type='checkbox'/><label class='cbx" + clicks + "' for='cbx" + clicks + "'><div class='flip'><div class='front'></div><div class='back'><svg width='16' height='14' viewBox='0 0 16 14'><path d='M2 8.5L6 12.5L14 1.5'></path></svg></div></div></label></td></tr></tables>"
     }
     else {
-        for (const [day, hours] of Object.entries(washer_doc.data().opening_times)) {
+        for (const [day, hours] of Object.entries(washerOpenTimes)) {
             clicks += 1
             oldDays += "<tr><td><div class='set-date'><select id='day" + clicks + "'>"
             oldDays += "<option value='Sunday'>Sunday</option>"
