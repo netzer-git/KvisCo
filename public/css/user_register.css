@@ -40,6 +40,12 @@
     margin-left: 5%;
 }
 
+
+#user_description:focus {
+    outline: none;
+
+}
+
 .yellow_button_6 {
     left: 0%;
     right: 0%;

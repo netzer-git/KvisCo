@@ -5,7 +5,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <!-- this tag connects the header-page to the appropriate css -->
         <link rel="stylesheet" href="../../css/washer_regist.css">
-        <link rel="stylesheet" href="../../css/user_regist.css">
+        <link rel="stylesheet" href="../../css/user_register.css">
         <link rel="stylesheet" href="../../css/welcome.css">
         <link rel="stylesheet" href="../../css/header_style.css">
 
@@ -55,41 +55,34 @@
                 <tr>
                     <th>
                     <div class= "header_53">
-                        Your Location
+                        <img id="icons" src="/public/images/icons/location-icon.png"/> Your location
                     </div>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                    <form action="/action_page.php">
-                        <label class="labels" for="city">City: </label>
-                        <input class= "regist_input" type="text" id="city" name="city" value="" onchange="save_location()"><br>
-                        <label  class="labels" for="street">Street: </label>
-                        <input class= "regist_input" type="text" id="street" name="street" value="" onchange="save_location()"><br>
-                        <label  class="labels" for="number">Number: </label>
-                        <input class= "regist_input" type="text" id="number" name="number" value="" onchange="save_location()"><br>
-                      </form>
-                    </th>
+                        <form action="/action_page.php">
+                            <label class="labels" for="city">City: </label>
+                            <label class="labels_2" for="street">Street: </label>
+                            <label class="labels_3" for="number">Number: </label>
+                            <input class= "regist_input_3" type="text" id="city" name="city" value="" onchange="save_location()">
+                            <input class= "regist_input_3" type="text" id="street" name="street" value="" onchange="save_location()">
+                            <input class= "regist_input_3" type="text" id="number" name="number" value="" onchange="save_location()">
+                        </form>
+                        </th>
                 </tr>
                 <tr>
                     <th>
-                    <div class= "header_53">
-                        Phone Number
-                    </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                    <form action="/action_page.php">
-                        <label class="labels" for="phone"></label>
-                        <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
-                    </form>
+                        <form action="/action_page.php">
+                            <label class="header_53" for="phone"><img id="icons" src="/public/images/icons/phone-icon.png"> Phone number</label>
+                            <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
+                        </form>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <div class= "header_53">
-                            Tell Us About Yourself
+                            <img id="icons" src="/public/images/icons/tell-icon.png"/> Tell us about yourself
                         </div>
                     </th>
                 </tr>
