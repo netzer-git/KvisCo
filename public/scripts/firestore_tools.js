@@ -404,8 +404,9 @@ async function getWasherFilterQuery(filters) {
 
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
-        washersArray.forEach(doc => {
-            if (getRatingFromDoc(doc, 'washer') >= filters.rating) {
+        washersArray.forEach(async (doc) => {
+            rating = await getRatingFromDoc(doc, 'washer');
+            if (rating >= filters.rating) {
                 filteredWashersWithRating.push(doc);
             }
         });
