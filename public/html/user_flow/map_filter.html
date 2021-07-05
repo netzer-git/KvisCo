@@ -31,7 +31,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
         
         <svg style="display:none; ">
-            <symbol id="filter-card" width="343" height="300" viewBox="0 0 343 252" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <symbol id="filter-card" width="616" height="149" viewBox="0 0 343 252" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10.3443 1.35057C92.2536 4.00407 152.09 3.12163 218.67 2.13974C253.207 1.63041 289.558 1.09431 331.746 1.01112C337.134 1.0005 341.338 5.68585 340.754 11.0436C339.018 26.9487 335.97 56.609 334.9 77.9751C332.161 132.641 338.415 211.915 340.974 240.912C341.447 246.28 337.093 250.879 331.683 250.774C230.797 248.824 176.754 249.464 116.58 250.177C85.2279 250.548 52.2113 250.939 10.0377 250.994C5.06343 251 1 246.966 1 242V10.3588C1 5.2678 5.2459 1.1854 10.3443 1.35057Z" fill="white" stroke="#1C1C1D" stroke-width="2"/>
             </symbol>
             <symbol id="popup-btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
@@ -77,12 +77,14 @@
                 </div>
             </div>
             <hr class="solid">
-            <div class="row-map-cards-filter row">
-                <!-- map section -->
-                <div class="col-map col-lg-6">
+            <div class="h-100 row-map-cards-filter row">
+                <div class="col"></div>
+                <!-- Washer cards section -->
+                <div class="col-5">
+                    <div id="washers-cards"></div>
                 </div>
                 <!-- filter section -->
-                <div class="col-filters col-lg-6">
+                <div class="col-filters col-5">
                     <div class="row-filters row">
                         <!-- Active times filter -->
                         <div class="active-time-col-filter col-3">
@@ -98,9 +100,6 @@
                                     <span class="text">Search by day and time</span>
                                     <div class="choose-day col-6"> <!-- Date -->
                                         <select id="day"></select>
-                                        <!-- <script>
-                                            insert_days_options()
-                                        </script> -->
                                     </div>
                                     <div class="choose-time col-4"> <!-- Start time -->
                                         <input class="choose-time" type="time" id="startTime" value="08:00">
@@ -126,9 +125,6 @@
                                     <div class="range col-12">
                                         <input type="range" class="form-range" min="0" max="5" step="0.5" id="dist-range"/>
                                     </div>
-                                    <!-- <script>
-                                        init_near_me_range()
-                                    </script> -->
                                 </div>
                                 <div class="popup-text2-row2 row">
                                     <button class="button1" onclick="update_active_times()">Save</button>
@@ -149,12 +145,10 @@
                         </div>   
                     </div>
                     <div class="overflow-auto">
-                        <div id="washers-cards"></div>
+                        
                     </div>
-                    <!-- <script>
-                        insert_washer_blocks()
-                    </script> -->
                 </div>
+                <div class="col"></div>
             </div>        
         </div>
     </body>
