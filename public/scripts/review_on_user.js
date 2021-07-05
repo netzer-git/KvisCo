@@ -46,7 +46,7 @@ function save_review_change() {
 }
 
 
-function add_review_to_order(id) {
+async function add_review_to_order(orderID) {
     if (review == "" || rating == null) {
         alert("PLEASE RATE AND REVIEW");
         return;
@@ -56,11 +56,10 @@ function add_review_to_order(id) {
         rating_user: rating,
     }
     document.getElementById("overlay_review").style.display = "none";
-    orderID = document.getElementById(id.id).value
-    console.log(orderID);
-    setOrderDetails(new_order,orderID);  
-    // load_order_blocks_of_washer(getUserToken());
-    load_order_blocks_of_washer("5IMy2kMSbheOriFPxqKmKTNWOJ92");
+    await setOrderDetails(new_order,orderID);  
+    var washerID = sessionStorage.getItem("signed_in_washer");
+    await insert_orders_blocks_of_washer("in_process_orders", washerID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
+    await insert_orders_blocks_of_washer("finished_orders", washerID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
 }
 
 // function off() {
@@ -68,7 +67,7 @@ function add_review_to_order(id) {
 // }
 
 
-function display_review_on_user_overlay(id) {
+async function display_review_on_user_overlay(orderID) {
     review_on_user_overlay = '<div class= "review_pink">';
     review_on_user_overlay += '<table><tr><h2 class="header_24">LEAVE A REVIEW</h2></tr>';
     review_on_user_overlay += '<tr><div class= "header_51">Rate your experience</div></tr>';
@@ -92,8 +91,8 @@ function display_review_on_user_overlay(id) {
     review_on_user_overlay += '<tr><th><div class= "header_51">Share your thoughts and feelings</div></th></tr>';
     review_on_user_overlay += '<tr><th><textarea id="user_review" class="user_review" name="user_review" rows="3" cols="50" placeholder=" place your review here..." value = "" onchange="save_review_change()"></textarea><br><br>';
     review_on_user_overlay += '</th></tr>';
-    review_on_user_overlay += '<tr><th><button onclick="add_review_to_order('+id.id+')" class="yellow_button_4">Leave Review</button></th></tr>';
+    review_on_user_overlay += '<tr><th><button onclick="add_review_to_order('+orderID+')" class="yellow_button_4">Leave Review</button></th></tr>';
     review_on_user_overlay += '</table></div>'; 
     document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
-    // document.getElementById("overlay_review").style.display = "block";
+    document.getElementById("overlay_review").style.display = "block";
 }

@@ -18,11 +18,11 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.id);
+                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -210,8 +210,6 @@ async function createNewWasher(washer) {
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
-        rating_sum: 0,
-        rating_num: 0,
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
@@ -220,16 +218,50 @@ async function createNewWasher(washer) {
         description: washer.description,
         commitment: Number(washer.commitment),
         opening_times: {},
-        price: 0, // fixme for milestone 3
+        price: 0,
         properties: washer.properties,
         phone: washer.phone,
         year_purchased: washer.year_purchased,
         capacity: washer.capacity,
-    }).then((docRef) => {
-        console.log("New order added: " + docRef.id);
-    }).catch((err) => {
-        console.error("Washer cannot be registered: " + err.message);
     });
+    await createNewUser({
+        name: washer.name,
+        location_str: washer.location_str,
+        imageUrl: washer.imageUrl,
+        phone: washer.phone,
+        description: washer.description,
+    });
+}
+
+/**
+ * @param {*} washerDoc washer doc
+ * @returns washer opening_times sorted by days
+ */
+function getWasherOpenTimes(washerDoc) {
+    let washerOpenTimes = washerDoc.data().opening_times;
+    let sortedOpenTimes = {};
+    if (washerOpenTimes['Sunday'] !== undefined) {
+        sortedOpenTimes['Sunday'] = washerOpenTimes['Sunday'];
+    }
+    if (washerOpenTimes['Monday'] !== undefined) {
+        sortedOpenTimes['Monday'] = washerOpenTimes['Monday'];
+    }
+    if (washerOpenTimes['Tuesday'] !== undefined) {
+        sortedOpenTimes['Tuesday'] = washerOpenTimes['Tuesday'];
+    }
+    if (washerOpenTimes['Wednesday'] !== undefined) {
+        sortedOpenTimes['Wednesday'] = washerOpenTimes['Wednesday'];
+    }
+    if (washerOpenTimes['Thursday'] !== undefined) {
+        sortedOpenTimes['Thursday'] = washerOpenTimes['Thursday'];
+    }
+    if (washerOpenTimes['Friday'] !== undefined) {
+        sortedOpenTimes['Friday'] = washerOpenTimes['Friday'];
+    }
+    if (washerOpenTimes['Saturday'] !== undefined) {
+        sortedOpenTimes['Saturday'] = washerOpenTimes['Saturday'];
+    }
+    return sortedOpenTimes;
 }
 
 /**
@@ -258,12 +290,10 @@ async function createNewUser(user) {
         location_cor: geoPoint,
         saved_washers: [],
         imageUrl: user.imageUrl,
-        rating_sum: 0,
-        rating_num: 0,
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New User added: " + docRef);
     });
 }
 
@@ -362,19 +392,19 @@ async function getWasherFilterQuery(filters) {
     if (filters.loads !== undefined && Number(filters.loads) !== 0) {
         let filteredWashersWithLoads = [];
         washersArray.forEach(doc => {
-            if (true) { // fixme for milestone3
+            if (true) {
                 filteredWashersWithLoads.push(doc);
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
         firstQuery = false;
     }
-    
 
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
-        washersArray.forEach(doc => {
-            if (getRatingFromDoc(doc, 'washer') >= filters.rating) {
+        washersArray.forEach(async (doc) => {
+            rating = await getRatingFromDoc(doc, 'washer');
+            if (rating >= filters.rating) {
                 filteredWashersWithRating.push(doc);
             }
         });
@@ -382,10 +412,10 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined) {
+    if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -416,7 +446,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.address !== undefined && filters.address !== null) {
+    if (filters.address !== undefined && filters.address !== null && filters.address !== "") {
         let data = await forwardGeocodePromise(filters.address);
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
@@ -444,23 +474,57 @@ async function getWasherFilterQuery(filters) {
  * @returns the same array sorted by rating
  */
 async function sortWashersByRating(washerArray) {
-    await washerArray.sort((a, b) => {
-        aRating = getWasherRatingFromDoc(a);
-        bRating = getWasherRatingFromDoc(b);
+    await washerArray.sort(async (a, b) => {
+        aRating = await getWasherRatingFromDoc(a);
+        bRating = await getWasherRatingFromDoc(b);
         return bRating - aRating;
     });
     return washersArray;
 }
 
-async function getWasherRatingFromDoc(washerArray, currentPoint) {
+/**
+ * sort array if washers by the distance from specific point
+ * @param {*} washerArray array of washers
+ * @param {lat: number, lng: number} currentPoint the middle current point
+ * @returns sorted array by distance
+ */
+async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
-        aDistance = getDistanceFromLatLonInKm(a.location_cor, currentPoint);
-        bDistance = getDistanceFromLatLonInKm(b.location_cor, currentPoint);
+        let aDistance = getDistanceFromLatLonInKm(a.data().location_cor, currentPoint);
+        let bDistance = getDistanceFromLatLonInKm(b.data().location_cor, currentPoint);
         return bDistance - aDistance;
     });
     return washerArray;
 }
 
-async function getWashersByDistanceAndRating() {
-
+/**
+ * the function takes indicator number and returns washer array:
+ * 1 (better)   - rating > 4.5, order by distance
+ * 2 (mid)      - rating > 3, order by distance
+ * 3 (closer)   - distance closer than 1km, order by distance
+ * @param {*} indicator 1-3, indicates the wanted filter
+ * @returns array of washer as dictated by the control number
+ */
+async function getBetterCloserWashers(indicator, currentPoint) {
+    let washerArray = []
+    switch(indicator) {
+        case 1:
+            washerArray = await getWasherFilterQuery({
+                rating: 4.5,
+            });
+            break;
+        case 2:
+            washerArray = await getWasherFilterQuery({
+                rating: 3,
+            });
+            break;
+        case 3:
+            washerArray = await getWasherFilterQuery({
+                distance: 1.5,
+                current_cor: currentPoint,
+            });
+            break;
+    }
+    console.log(washerArray);
+    return sortWashersByDistance(washerArray, currentPoint);
 }

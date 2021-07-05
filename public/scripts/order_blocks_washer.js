@@ -25,14 +25,14 @@ async function get_order_block_of_washer(order) {
     switch (order.data().status) {
         case 'pending':
         case 'process':
-            block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_order_status(block_num_" + block_num + ")' class='button1'> Open  </button></th></tr>";
+            block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_order_status(block_num_" + block_num + ".value)' class='button1'> Open  </button></th></tr>";
             break;
         case 'finished':
             if (order.data().review_user == null) {
-                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ")' class='button1'> Review </button></th></tr>";
+                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Review </button></th></tr>";
             }
             else {
-                block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ")' class='button1'> Change Review </button></th></tr>";
+                block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Change Review </button></th></tr>";
 
             }
             break;
