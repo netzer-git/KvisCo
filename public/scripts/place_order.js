@@ -150,5 +150,14 @@ async function load_place_order_page() {
     f_display_washer_reviews(washerID);
 }
 
-
+function open_indicator(washer_doc) {
+    icon_text = ""
+    if (check_if_washer_open(washer_doc.data().opening_times)) {
+        icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="/public/images/open_ind.svg">Opened</div>'
+    }
+    else {
+        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="/public/images/closed_ind.svg">Closed</div>';
+    }
+    document.getElementById("open_ind").innerHTML = icon_text;
+}
 
