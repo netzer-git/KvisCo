@@ -18,11 +18,11 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.id);
+                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -210,8 +210,6 @@ async function createNewWasher(washer) {
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
-        rating_sum: 0,
-        rating_num: 0,
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
@@ -220,15 +218,18 @@ async function createNewWasher(washer) {
         description: washer.description,
         commitment: Number(washer.commitment),
         opening_times: {},
-        price: 0, // fixme for milestone 3
+        price: 0,
         properties: washer.properties,
         phone: washer.phone,
         year_purchased: washer.year_purchased,
         capacity: washer.capacity,
-    }).then((docRef) => {
-        console.log("New order added: " + docRef.id);
-    }).catch((err) => {
-        console.error("Washer cannot be registered: " + err.message);
+    });
+    await createNewUser({
+        name: washer.name,
+        location_str: washer.location_str,
+        imageUrl: washer.imageUrl,
+        phone: washer.phone,
+        description: washer.description,
     });
 }
 
@@ -289,12 +290,10 @@ async function createNewUser(user) {
         location_cor: geoPoint,
         saved_washers: [],
         imageUrl: user.imageUrl,
-        rating_sum: 0,
-        rating_num: 0,
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New User added: " + docRef);
     });
 }
 
@@ -393,14 +392,13 @@ async function getWasherFilterQuery(filters) {
     if (filters.loads !== undefined && Number(filters.loads) !== 0) {
         let filteredWashersWithLoads = [];
         washersArray.forEach(doc => {
-            if (true) { // fixme for milestone3
+            if (true) {
                 filteredWashersWithLoads.push(doc);
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
         firstQuery = false;
     }
-    
 
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
@@ -448,7 +446,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.address !== undefined && filters.address !== null) {
+    if (filters.address !== undefined && filters.address !== null && filters.address !== "") {
         let data = await forwardGeocodePromise(filters.address);
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
