@@ -15,6 +15,7 @@ html,body{
     height: 100%;
     padding-top: 44px;
     padding-bottom: 25px;
+    background-color: blue;
 }
 
 h1{
@@ -376,9 +377,9 @@ hr.solid {
     right: -60px;
     float: right;
 }
-.washers-cards{
+#washers-cards{
     z-index: -1 !important;
-    margin-top: -170px !important;
+    /* margin-top: -170px !important; */
 }
 
 .overflow-auto{
@@ -394,11 +395,12 @@ hr.solid {
 
 .card-subtitle{
     padding-left: 5%;
+    margin-top: 10%;
 }
 
 .card-text{
-    margin-top: 10px !important;
-    padding-left: 5%;
+    margin-top: 5% !important;
+    margin-left: -5% !important;
 }
 
 /* .card .card-img-overlay .card-details .card-pic-rating{
