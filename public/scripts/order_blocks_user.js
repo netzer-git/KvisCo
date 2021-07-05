@@ -1,3 +1,5 @@
+var block_num = 0;
+
 async function get_order_block_of_user(order) {
     // const washer_doc = await order.data().washer.get();
     const washer_doc = await promiseWasherLoaderById(order.data().washer);
@@ -22,8 +24,10 @@ async function get_order_block_of_user(order) {
             block += "<div><button onclick='display_order()' class='button1'> Details </button></div></th></tr>";
           break;
         case 'finished':
-            if (order.data().review_washer == "") {
-                
+            if (window.location.pathname == "/html/welcome.html") {
+                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + order.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='button1'> Order Again </button></th></tr>";
+            }
+            else if (order.data().review_washer == "") {
                 block += "</tr><th scope='col' colspan='2'><button class='button1'> Review </button></th></tr>";
             }
             else {
@@ -37,6 +41,16 @@ async function get_order_block_of_user(order) {
     return block;
 }
 
+async function quick_place_order(orderID) {
+    var order_doc = await promiseOrderLoaderById(orderID);
+    console.log(order_doc);
+    var washerID = await promiseWasherLoaderById(order_doc.data().washer);
+    sessionStorage.setItem("pressed_washer", washerID); // washer that pressed in page map_filter.html
+    window.location.href = "../../html/user_flow/place_order.html";
+
+
+}
+
 
 async function insert_orders_blocks_of_user(tag, userID, status) {
     if (status == "process") {
@@ -46,7 +60,10 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
         var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     }
     let all_blocks = "";
-    let max_orders = Math.min(2, all_orders.length);
+    var max_orders = Math.min(2, all_orders.length);
+    if (window.location.pathname == "/html/welcome.html") {
+        var max_orders = Math.min(3, all_orders.length);
+    }
     for (var i = 0; i < max_orders; i++) {
         console.log("id of blocks: ", all_orders[i].id)
         all_blocks += await get_order_block_of_user(all_orders[i]);
@@ -67,3 +84,15 @@ function display_order() {
 function off() {
     document.getElementById("overlay").style.display = "none";
   }
+
+
+async function load_quick_welcome_page() {
+    try {
+        var userID = sessionStorage.getItem("connected_userID");
+    }
+    catch {
+        return;
+    }
+    // await insert_orders_blocks_of_user("in_process_orders", userID, "process"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
+    await insert_orders_blocks_of_user("finished_orders", userID, "finished"); // func 
+}
