@@ -208,7 +208,7 @@ async function setOrderDetails(orderDetails, orderId) {
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    await db.collection("washers").doc(getUserToken()).set({
+    db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         rating_sum: 0,
         rating_num: 0,
@@ -220,13 +220,20 @@ async function createNewWasher(washer) {
         description: washer.description,
         commitment: Number(washer.commitment),
         opening_times: {},
-        price: 0, // fixme for milestone 3
+        price: 0,
         properties: washer.properties,
         phone: washer.phone,
         year_purchased: washer.year_purchased,
         capacity: washer.capacity,
-    }).then((docRef) => {
-        console.log("New order added: " + docRef.id);
+    }).then(async (docRef) => {
+        console.log("New washer added: " + docRef.id);
+        await createNewUser({
+            name: washer.name,
+            location_str: washer.location_str,
+            imageUrl: washer.imageUrl,
+            phone: washer.phone,
+            description: washer.description,
+        });
     }).catch((err) => {
         console.error("Washer cannot be registered: " + err.message);
     });
@@ -294,7 +301,7 @@ async function createNewUser(user) {
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New User added: " + docRef);
     });
 }
 
@@ -393,14 +400,13 @@ async function getWasherFilterQuery(filters) {
     if (filters.loads !== undefined && Number(filters.loads) !== 0) {
         let filteredWashersWithLoads = [];
         washersArray.forEach(doc => {
-            if (true) { // fixme for milestone3
+            if (true) {
                 filteredWashersWithLoads.push(doc);
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
         firstQuery = false;
     }
-    
 
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
@@ -448,7 +454,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.address !== undefined && filters.address !== null) {
+    if (filters.address !== undefined && filters.address !== null && filters.address !== "") {
         let data = await forwardGeocodePromise(filters.address);
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
