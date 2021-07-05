@@ -18,11 +18,11 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.id);
+                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -208,10 +208,8 @@ async function setOrderDetails(orderDetails, orderId) {
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
-    db.collection("washers").doc(getUserToken()).set({
+    await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
-        rating_sum: 0,
-        rating_num: 0,
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
@@ -225,17 +223,13 @@ async function createNewWasher(washer) {
         phone: washer.phone,
         year_purchased: washer.year_purchased,
         capacity: washer.capacity,
-    }).then(async (docRef) => {
-        console.log("New washer added: " + docRef.id);
-        await createNewUser({
-            name: washer.name,
-            location_str: washer.location_str,
-            imageUrl: washer.imageUrl,
-            phone: washer.phone,
-            description: washer.description,
-        });
-    }).catch((err) => {
-        console.error("Washer cannot be registered: " + err.message);
+    });
+    await createNewUser({
+        name: washer.name,
+        location_str: washer.location_str,
+        imageUrl: washer.imageUrl,
+        phone: washer.phone,
+        description: washer.description,
     });
 }
 
@@ -296,8 +290,6 @@ async function createNewUser(user) {
         location_cor: geoPoint,
         saved_washers: [],
         imageUrl: user.imageUrl,
-        rating_sum: 0,
-        rating_num: 0,
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
