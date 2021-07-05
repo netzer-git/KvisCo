@@ -53,6 +53,18 @@ h8 {
     white-space: nowrap;
 }
 
+.place_order_table {
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.close_ind {
+    color: #F95A2C;
+    font-weight: bolder;
+    width: 100px;
+}
+
 .tabs-title {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
