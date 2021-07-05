@@ -62,10 +62,11 @@ function insert_washer_blocks(washerDoc) {
 */
 function create_one_washer_block(washerDoc) {
     console.log("this is the washer id", washerDoc.id.valueOf());
-    let washer_block_raw_html = '<a class="washer-card col-12" href="#" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
+    let washer_block_raw_html = '<a class="washer-card" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
     // creating html object
     washer_block_raw_html += '<div class="card">';
-    washer_block_raw_html += '<img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
+    washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
+    // washer_block_raw_html += '<svg class="card-img"><use xlink:href="#filter-card"></use></svg>';
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
     washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
@@ -206,7 +207,7 @@ async function on_load_page(){
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
     //initialize washers list
-    washerDoc = await create_washer_list({});
+    washerDoc = await create_washer_list(search_res);
     //insert washers cards
     insert_washer_blocks(washerDoc);
     //initialize filters btn
