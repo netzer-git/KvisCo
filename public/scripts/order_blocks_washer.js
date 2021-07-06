@@ -1,4 +1,3 @@
-
 var block_num = 0;
 
 /**
@@ -11,17 +10,22 @@ var block_num = 0;
 async function get_order_block_of_washer(order) {
     const user_doc = await promiseUserLoaderById(order.data().user);
     block = "<div class='col-lg-4'>";
-    block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
+    // block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";
-    block += "<table class='Background_box'>";
+    block += "<table class='Background_box' onclick='flip(event)'>";
+    block += "<div class='front'>";
     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></th></tr>";
     block += "<tr><th scope='col' colspan='2'>" + user_doc.data().name + "</th></tr>";
-    block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
-    let unix_timestamp = order.data().due_to;
-    var date = new Date(unix_timestamp * 1000);
-    var formattedTime = date.getDate() + '/' + date.getMonth();
-
-    block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" NIS</td></tr>"
+    var date = new Date(order.data().due_to.seconds*1000);
+    var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
+    if (date.getMinutes().toString().length <= 1) {
+        var minutes = "0" +date.getMinutes();
+    }
+    else {
+        var minutes = date.getMinutes();
+    }
+    var time = date.getHours()+ ":" +minutes;
+    block += "<tr><td>"+ formattedTime + "</td><td>"+ order.data().price +" &#8362</td></tr>"
     switch (order.data().status) {
         case 'pending':
         case 'process':
@@ -39,6 +43,7 @@ async function get_order_block_of_washer(order) {
     }
     block_num++;
     block += "</table>";
+    block += "</div>";
     block += "</div>";
     block += "</div>";
     return block;

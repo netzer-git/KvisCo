@@ -13,9 +13,8 @@ async function display_new_order_for_washer(orderID) {
     }
     order_block += '<tr><table class= "order_white">';
     order_block += '<tr><td><img class="rounded-circle" src= "' + user_doc.data().imageUrl + '" alt="profile_pic"></td><td><h4>'+user_doc.data().name+'</h4></td></tr>';
-    var date_not_format = order_doc.data().due_to*1000;
-    var date = new Date(date_not_format);
-    var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
+    var date = new Date(order_doc.data().due_to.seconds*1000);
+    var l_date = date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
     if (date.getMinutes().toString().length <= 1) {
         var minutes = "0" +date.getMinutes();
     }

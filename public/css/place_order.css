@@ -12,12 +12,17 @@
     margin-left: 5%;
 }
 
+svg{
+    overflow: visible !important;
+}
+
 h7 {
     width: 289px;
     height: 49px;
     left: 758px;
     top: 190px;
     padding-left: 5%;
+    margin-left: 5%;
 
     /* Headline / H5 */
 
@@ -46,6 +51,18 @@ h8 {
     text-align: left;
     color: black;
     white-space: nowrap;
+}
+
+.place_order_table {
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.close_ind {
+    color: #F95A2C;
+    font-weight: bolder;
+    width: 100px;
 }
 
 .tabs-title {
@@ -90,4 +107,14 @@ h8 {
     border-radius: 5px;
     border: 2px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 8px 0px 0px rgba(32, 32, 32, 1);
+}
+
+.place-order{
+    overflow:visible;
+    width: 667;
+    height: 611;
+}
+
+.place-order-content{
+    margin-top: -20%;
 }
