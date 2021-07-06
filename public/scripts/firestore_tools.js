@@ -115,6 +115,26 @@ async function getRatingFromDoc(doc, field) {
 }
 
 /**
+ * @param {Number} ratingNum target number for the rating
+ * @returns list of all the washers that have rating bigger than ratingNum
+ */
+async function getWashersWithRatingOverNumber(ratingNum) {
+    const docOrderArray = await db.collection('orders').where(status, "==", 'finished').get();
+    let ratingDict = {};
+    docOrderArray.forEach((doc) => {
+        let washer = doc.data().washer;
+        let rating = doc.data().rating_washer;
+        if (ratingDict[washer] !== undefined && rating !== undefined) {
+            ratingDict[washer].ratingSum += rating;
+            ratingDict[washer].ratingNum += 1;
+        }
+    });
+    ratingDict.filter((washer) => {
+        
+    });
+}
+
+/**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
@@ -394,6 +414,7 @@ async function getWasherFilterQuery(filters) {
     }
 
     if (filters.rating !== undefined) {
+        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
         let filteredWashersWithRating = [];
         washersArray.forEach(async (doc) => {
             rating = await getRatingFromDoc(doc, 'washer');
