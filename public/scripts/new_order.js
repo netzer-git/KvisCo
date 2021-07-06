@@ -160,6 +160,6 @@ async function display_order_status(orderID) {
 }
 
 
-function off() {
+function close_order() {
     document.getElementById("overlay_washer_order").style.display = "none";
   }
