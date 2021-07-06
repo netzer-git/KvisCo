@@ -252,3 +252,91 @@ table.order_white th{
     height: 50px;
 
 }
+
+
+.Background_box_open{
+    
+    /* Rectangle 1256 */
+    /* position: absolute; */
+    left: 0%;
+    margin-left: 10%;
+    right: 0%;
+    top: -0.57%;
+    bottom: 0%;
+    /* Palet 1 / 3 */
+    background: #FFB0BC;
+    border: 2px solid #1C1C1D;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 0px #202020;
+    border-radius: 10px;
+    width: 120%;
+}
+
+
+table.Background_box_open th{
+    /* position: absolute; */
+    left: 19.78%;
+    right: 19.78%;
+    top: 39.21%;
+    bottom: 46.7%;
+
+    /* Headline/Title/Bold 20 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 32px;
+    /* or 160% */
+
+    text-align: center;
+    letter-spacing: 0.625px;
+
+    /* Main / Black */
+
+    color: #1C1C1D;
+}
+
+table.Background_box_open tr{
+/* position: absolute; */
+left: 9.71%;
+right: 7.55%;
+top: 53.74%;
+bottom: 34.8%;
+
+/* Text / Medium 18 */
+
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 145.4%;
+/* identical to box height, or 26px */
+
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+table.Background_box_open td{
+    /* position: absolute; */
+    left: 9.71%;
+    right: 7.55%;
+    top: 53.74%;
+    bottom: 34.8%;
+    
+    /* Text / Medium 18 */
+    
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 145.4%;
+    /* identical to box height, or 26px */
+    
+    text-align: center;
+    letter-spacing: 0.5px;
+    
+    color: #000000;
+    }
