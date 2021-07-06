@@ -222,7 +222,7 @@ async function on_load_page(){
  */
 function save_washer_id(id){
     console.log("this is the id in michal page:",id);
-    sessionStorage.setItem("washer_id", id);
+    sessionStorage.setItem("pressed_washer", id);
     window.location.href = "../html/user_flow/place-order.html"
 }
 
