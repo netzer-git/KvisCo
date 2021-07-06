@@ -122,18 +122,11 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
 
         var query = db.collection('orders').where(field, "==", docID);
-        // if (status === "all") {
-            // var query = db.collection('orders').where(field, "==", docID);
-        // } else if (status === "processing") {
-            // var query = db.collection('orders').where('status', '!=', "finished").where(field, "==", docID);
-        // } else {
-            // var query = db.collection('orders').where(field, "==", docID).where('status', '==', status);
-        // }
 
         query.get().then((docArray) => {
             const orderArray = [];
             docArray.forEach((doc) => {
-                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished') || (doc.data().status === status);
+                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished' && doc.data().status !== 'declined') || (doc.data().status === status);
                 if (isDocGetIn) {
                     orderArray.push(doc);
                 }
