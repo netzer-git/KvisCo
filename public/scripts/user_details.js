@@ -1,15 +1,9 @@
 async function load_user_profile_page() {
-    var userID = sessionStorage.getItem("userid");
-    console.log("cur user ID", userID);
+    var userID = sessionStorage.getItem("current_user_id"); // come from getUserToken() in the page before (user_registresion/place_order/header_bar)
     const user_doc = await promiseUserLoaderById(userID); //get the washer from the firebase
-    if (!user_doc) {
-        window.location.href = "../html/user_flow/map-filter.html";
-        return;
-    }
-    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders
-    load_profile_header_of_user(userID); //function in profile_header.js
-    load_order_blocks_of_user(userID); // function in order_blocks_washer.js that have 2 function of washer blocks - for "in_process" and "finished"
-    f_display_user_reviews(all_orders); // in washer_tabs.js
-
+    await load_profile_header_of_user(user_doc); //function in profile_header.js
+    await insert_orders_blocks_of_user("in_process_orders", userID, "process"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
+    await insert_orders_blocks_of_user("finished_orders", userID, "finished"); // function in order_blocks_user.js that insert all "finished" into div "finished_orders"
+    await f_display_user_reviews(userID); // in user_tabs.js
 }
 

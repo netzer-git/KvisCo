@@ -39,11 +39,19 @@ var rating;
 var review;
 var photos;
 
+
+/**
+ * update the current rating
+ * @param {input object} rateID rate object with value of the current id
+ */
 function save_rating(rateID) {
   rating = rateID.value;
-  // console.log(rating);
 }
 
+/**
+ * save the photo object in photos var, and change review_photo_uploaded to true
+ * @param {event of upload photo} event the event with target.files[0] that is the photo
+ */
 function save_photo(event) {
   if (event != null) {
     photos = event.target.files[0];
@@ -55,11 +63,16 @@ function save_photo(event) {
   }
 }
 
+/**
+ * save the review
+ */
 function save_review_change() {
   review = document.getElementById("washer_review").value;
 }
 
-
+/**
+ * try to add the review to the order, first with photo than without
+ */
 function add_review_to_order() {
   if (review == null || rating == null) {
     alert("PLEASE RATE AND REVIEW");

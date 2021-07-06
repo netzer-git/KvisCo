@@ -1,71 +1,3 @@
-// washers list
-let current_list_of_washers = [
-    {
-        'Document ID': 1,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 2,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 3,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 4,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      },
-      {
-        'Document ID': 5,  
-        name: "Netzer Epstein",
-        rating_sum: 10,
-        rating_num: 2,
-        imageUrl: "../images/tal_e_pic.png",
-        location_cor: {"lat": 31.779610027001155, "lng": 35.210351837826255},
-        pics: ["../images/netzer pic.png","../images/netzer pic.png"],
-        location_str: "Jerusalem,King George,15",
-        machine_type: "Bosch F5690",
-        description:  "we need some place details or short intro, one to two rows top. no more than that?",
-        commitment: 60
-      }
-];
 current_location = {
     lat: 31.773610027001155,
     lng: 35.235351837826255
@@ -88,7 +20,11 @@ const NUM_POPUP = 4
 let washerDoc_array;
 
 /* handle washers objects */
-
+/**
+ * create washer list from Firestore storage
+ * @param {String : Number} filters 
+ * @returns Washer Objects array
+ */
 async function create_washer_list(filters) {
     /**
      * creaete washer list from JSON
@@ -100,11 +36,12 @@ async function create_washer_list(filters) {
     // var cur_loc = getCurrentUserLocation(); // => {lat: num, lng: num} only when user is online, else-null
 }
 
+
+/**
+ * get all washers and create each of the washers in block and display them.
+ * @param {*} washerDoc 
+ */
 function insert_washer_blocks(washerDoc) {
-    /**
-     *     currently - use all of the washers (query from server?) and take a filter function, than create each of the washers in block and display them.
-        FIXME: hard to order-by by location\rating, maybe will take a lot of time to load but DB
-    */
     let whole_washers_html_block = '';
     // adjusting page height
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
@@ -125,10 +62,11 @@ function insert_washer_blocks(washerDoc) {
 */
 function create_one_washer_block(washerDoc) {
     console.log("this is the washer id", washerDoc.id.valueOf());
-    let washer_block_raw_html = '<a class="washer-card col-12" href="#" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
+    let washer_block_raw_html = '<a class="washer-card" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
     // creating html object
     washer_block_raw_html += '<div class="card">';
-    washer_block_raw_html += '<img src="../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
+    washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
+    // washer_block_raw_html += '<svg class="card-img"><use xlink:href="#filter-card"></use></svg>';
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
     washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
@@ -141,36 +79,13 @@ function create_one_washer_block(washerDoc) {
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</a>';
 
     return washer_block_raw_html;
-    /*washer_block_raw_html += '<div class="container-fluid washer_block">';
-    washer_block_raw_html += '<div class="row">';
-    washer_block_raw_html += '<div class="col-md-6">';
-    washer_block_raw_html += '<img class="washer_img" src="' + washer.img_src + '" alt="Mister Washer" aria-hidden="true">';
-    washer_block_raw_html += '</div>';
-    washer_block_raw_html += '<div class="col-md-6">';
-    washer_block_raw_html += '<div class="washer_text" onclick="redirect_specific_washer(' + washer.id + ')">';
-    if (washer.white) {
-        washer_block_raw_html += '<p>White and Colored in ' + washer.location + '</p>';
-    } else {
-        washer_block_raw_html += '<p>Colored in ' + washer.location + '</p>';
-    }
-    washer_block_raw_html += '<h2>' + washer.name + '</h2>';
-    washer_block_raw_html += '<p>' + washer.description + '</p>';
-    washer_block_raw_html += '</div></div></div></div>';*/
 }
+
 /**
  * FIXME: please
  * @param {*} washer_id 
  */
 function redirect_specific_washer(washer_id) {
-    // let current_washer = null;
-    // for (i in current_user_location) {
-    //     if (washer_id == current_user_location[i].id) {
-    //         current_washer = current_user_location[i];
-    //     }
-    // } 
-    // let url_params = new URLSearchParams();
-    // const base_url = "wahser_details.html";
-    // const final_url = base_url //+ JSON.stringify(current_washer);
     sessionStorage.setItem('current_wahser_id', washer_id);
     location.href = "../src/wahser_details.html";
     // window.open(final_url);
@@ -183,78 +98,13 @@ function update_drop_off_time(e){
     drop_off_time = e.target.value
 }
 
-/* map section */
-function initMap(filter = () => true) {
-    /*
-    initialzie google maps object and sets markers in the washers location.
-    */
-    // The map, centered at current location
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
-        center: current_user_location,
-    });
-
-    
-    // adding markers for the washers (after filter)
-    /*for (i in current_list_of_washers) {
-        if (filter(current_list_of_washers[i])) {
-            const marker = new google.maps.Marker({
-                position: {
-                    lat: current_list_of_washers[i].lat,
-                    lng: current_list_of_washers[i].lng
-                },
-                animation: google.maps.Animation.DROP,
-                map: map,
-                washer: current_list_of_washers[i],
-            })
-            marker.addListener("click", () => {
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                } else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
-                // filter by washer location
-                filter_washers_by_distance_from_point(marker.washer.lat, marker.washer.lng);
-            })
-        }
-    }*/
-    /*//ofir sction
-    infoWindow = new google.maps.InfoWindow();
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-        (position) => {
-            var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            };
-
-            user_pos= pos;
-
-            UpdateUserLocation("/update_user_location");
-            map.setCenter(pos);
-        },
-        () => {
-            handleLocationError(true, infoWindow, map.getCenter());
-        }
-        );
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-        map.setCenter({
-        lat: 31.771959,
-        lng: 35.217018,
-        });
-    }
-    //end ofir*/
-}
 
 /* handle filters (&update the map section) */
+/**
+ * refresh all of the filters
+ */
 function refresh_filters() {
-/*
-    refresh all of the filters
-*/
     insert_washer_blocks();
-    initMap();
 }
 
 /*
@@ -268,7 +118,6 @@ function filter_washers_by_self_service() {
 
     // insert new blocks and markers
     insert_washer_blocks(is_washer_self_service);
-    initMap(is_washer_self_service);
 }
 
 /**
@@ -286,7 +135,6 @@ function filter_washers_by_distance_from_point(lat, lng) {
         return dist(washer_a, middle_point) - dist(washer_b, middle_point) > 0 ? 1 : -1;
     });
     insert_washer_blocks();
-    initMap();
 }
 
 /**
@@ -298,20 +146,11 @@ function dist(washer, middle_point) {
     return Math.sqrt((washer.lat - middle_point.lat) ** 2 + (washer.lng - middle_point.lng) ** 2)
 }
 
-function GetElementInsideContainer(containerID, childID) {
-    /**
-     * returns inside element in other element
-     */
-    var elm = document.getElementById(childID);
-    var parent = elm ? elm.parentNode : {};
-    return (parent.id && parent.id === containerID) ? elm : {};
-}
-
+/**
+ * open filter button pop up section
+ * @param {Number} ind popup's index 
+ */
 function open_popup(ind){
-    /**
-     * open filter button pop up section
-     * @param {Number} ind popup's index 
-     */
     const targetDiv = document.getElementById("popup-text"+ind);
     if (targetDiv.style.visibility != "hidden") {
         targetDiv.style.visibility = "hidden";
@@ -322,10 +161,10 @@ function open_popup(ind){
     }
 }
 
+/**
+ * insert days options tags into days select tag (dropdown form)
+ */
 function insert_days_options(){
-    /**
-     * insert days options tags into days select tag (dropdown form)
-     */
     let raw_html = '';
     for(i=0; i<DAYS.length; i++){
         raw_html += '<option>'+DAYS[i]+'</option>';
@@ -334,10 +173,10 @@ function insert_days_options(){
     select_day.innerHTML = raw_html;
 }
 
+/**
+ * close active times popup and update day and time filters
+ */ 
 function update_active_times(){
-    /**
-     * close actvie times popup and update day and time filters
-     */
     //close popup section
     open_popup(1);
 
@@ -351,32 +190,40 @@ function update_active_times(){
     //TODO: update changes on search results
 }
 
+/**
+ * init near me range (slider)
+ */
 function init_near_me_range(){
-    /**
-     * init near me range (slider)
-     */
     range_elm = document.getElementById('dist-range');
     const range = new mdb.Range(range_elm);
     x = 0
 }
 
+/**
+ * 
+ */
 async function on_load_page(){
-    /**
-     * 
-     */
+
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
     //initialize washers list
     washerDoc = await create_washer_list(search_res);
     //insert washers cards
     insert_washer_blocks(washerDoc);
+    //initialize filters btn
+    insert_days_options();
+    init_near_me_range();
 }
 
+
+/**
+ * save washer id when click the washer card
+ * @param {Number} id 
+ */
 function save_washer_id(id){
-    /**
-     * save washer id when click the washer card
-     */
     console.log("this is the id in michal page:",id);
-    sessionStorage.setItem("washer_id", id);
+    sessionStorage.setItem("pressed_washer", id);
     window.location.href = "../html/user_flow/place-order.html"
 }
+
+window.onload = on_load_page;

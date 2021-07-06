@@ -58,9 +58,17 @@
                 place-order</button>
         <button onclick="location.href='./html/washer_flow/washer_profile.html'" type="button">
             washer-profile</button>
-        <button onclick="location.href='./html/welcome.html'" type="button">
+        <button onclick="gotowelcome();" type="button" style="background-color: aquamarine;">
             Welcome
         </button>
+        <script> 
+            async function gotowelcome() {
+            if (isUserSignedIn) {
+                sessionStorage.setItem("connected_userID", await getUserToken());
+                console.log(sessionStorage.getItem("connected_userID"));
+            }
+            location.href='./html/welcome.html';
+        }</script>
         <button onclick="location.href='./html/user_flow/user_registration.html'" type="button">
             user_registresion
         </button>
@@ -84,6 +92,9 @@
         </button>
         <button onclick="location.href='./html/user_flow/map_filter.html'" style="background-color: blueviolet;">
             map-filter
+        </button>
+        <button onclick="test_rating()" style="background-color: lightblue;">
+            RATING
         </button>
         <div id="only-one">
             Hey!

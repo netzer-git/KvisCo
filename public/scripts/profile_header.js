@@ -6,11 +6,8 @@
  * also display pics he uploaded if there are 
  * @param {string} washerID id of washer
  */
-async function load_profile_header_of_washer(washerID) {
-    const washer_doc = await promiseWasherLoaderById(washerID);
+async function load_profile_header_of_washer(washer_doc) {
     const rating = await getRatingFromDoc(washer_doc, "washer");
-    // rating = 1.2
-    console.log("the rating is ",  rating);
     washer_header = '<div class="row"><div class="col-1"></div>';
     washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
     washer_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
@@ -19,7 +16,7 @@ async function load_profile_header_of_washer(washerID) {
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
     washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
-    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';   
+    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';   
     washer_header += '</div></div></div>';  
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
     if (washer_doc.data().pics !== undefined) {
@@ -33,10 +30,11 @@ async function load_profile_header_of_washer(washerID) {
 
 /**
  * display block of the user header - his name, description and profile picture
- * @param {string} userID id of user
+ * called from user_details.js
+ * use from user_doc imageUrl, name, description, location_str, rating
+ * @param {user_object} user_doc object of user 
  */
-async function load_profile_header_of_user(userID) {
-    const user_doc = await promiseUserLoaderById(userID);
+async function load_profile_header_of_user(user_doc) {
     var rating = await getRatingFromDoc(user_doc, "user");
     user_header = '<div class="row"><div class="col-1"></div>';
     user_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + user_doc.data().imageUrl + '"></div></div>';
@@ -46,7 +44,7 @@ async function load_profile_header_of_user(userID) {
     user_header += '</table></div></div>';
     user_header += '<div class="row">';
     user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
-    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../images/Star_yellow.png">'+ rating + '</div></div>';       
+    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
     user_header += '</div></div></div>';  ;
     document.getElementById("profile_header").innerHTML = user_header;  
 }

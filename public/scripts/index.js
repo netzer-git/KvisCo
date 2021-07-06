@@ -134,5 +134,12 @@ const testNadavQuery = async () => {
     const nadavDoc = await promiseUserLoaderById('5IMy2kMSbheOriFPxqKmKTNWOJ92')
     let r = await getRatingFromDoc(nadavDoc, 'user');
     console.log("rating is now: " + r)
+}
 
+const test_rating = async () => {
+    currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
+    arr = await getBetterCloserWashers(2, currentPoint);
+    console.log(arr[0].data());
+    console.log(arr[1].data());
+    console.log(arr[2].data());
 }
