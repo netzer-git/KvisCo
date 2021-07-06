@@ -46,7 +46,8 @@ function save_review_change() {
 }
 
 
-async function add_review_to_order(orderID) {
+async function add_review_to_order() {
+    var orderID = sessionStorage.getItem("order that get review now");
     if (review == "" || rating == null) {
         alert("PLEASE RATE AND REVIEW");
         return;
@@ -62,9 +63,9 @@ async function add_review_to_order(orderID) {
     await insert_orders_blocks_of_washer("finished_orders", washerID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
 }
 
-// function off() {
-//     document.getElementById("overlay_review").style.display = "none";
-// }
+function off() {
+    document.getElementById("overlay_review").style.display = "none";
+}
 
 
 async function display_review_on_user_overlay(orderID) {
@@ -91,7 +92,8 @@ async function display_review_on_user_overlay(orderID) {
     review_on_user_overlay += '<tr><th><div class= "header_51">Share your thoughts and feelings</div></th></tr>';
     review_on_user_overlay += '<tr><th><textarea id="user_review" class="user_review" name="user_review" rows="3" cols="50" placeholder=" place your review here..." value = "" onchange="save_review_change()"></textarea><br><br>';
     review_on_user_overlay += '</th></tr>';
-    review_on_user_overlay += '<tr><th><button onclick="add_review_to_order('+orderID+')" class="yellow_button_4">Leave Review</button></th></tr>';
+    sessionStorage.setItem("order that get review now", orderID);
+    review_on_user_overlay += '<tr><th><button onclick="add_review_to_order()" class="yellow_button_4">Leave Review</button></th></tr>';
     review_on_user_overlay += '</table></div>'; 
     document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
     document.getElementById("overlay_review").style.display = "block";

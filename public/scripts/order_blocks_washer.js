@@ -1,4 +1,3 @@
-
 var block_num = 0;
 
 /**
@@ -8,37 +7,42 @@ var block_num = 0;
  * @param {order object} order 
  * @returns long string of order
  */
-async function get_order_block_of_washer(order) {
-    const user_doc = await promiseUserLoaderById(order.data().user);
+async function get_order_block_of_washer(order_doc) {
+    const user_doc = await promiseUserLoaderById(order_doc.data().user);
     block = "<div class='col-lg-4'>";
-    block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
+    // block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";
     block += "<table class='Background_box'>";
     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></th></tr>";
     block += "<tr><th scope='col' colspan='2'>" + user_doc.data().name + "</th></tr>";
-    block += "<tr><th scope='col'>Due to</th><th scope='col'>Price</th></tr>";
-    let unix_timestamp = order.data().due_to;
-    var date = new Date(unix_timestamp * 1000);
-    var formattedTime = date.getDate() + '/' + date.getMonth();
-
-    block += "<tr><td>"+ formattedTime +"</td><td>"+ order.data().price +" NIS</td></tr>"
-    switch (order.data().status) {
+    var date = new Date(order_doc.data().due_to*1000);
+    var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
+    if (date.getMinutes().toString().length <= 1) {
+        var minutes = "0" +date.getMinutes();
+    }
+    else {
+        var minutes = date.getMinutes();
+    }
+    var time = date.getHours()+ ":" +minutes;
+    block += "<tr><td>"+ formattedTime + "</td><td>"+ order_doc.data().price +" &#8362</td></tr>"
+    switch (order_doc.data().status) {
         case 'pending':
         case 'process':
-            block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_order_status(block_num_" + block_num + ".value)' class='button1'> Open  </button></th></tr>";
+            block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_order_status(block_num_" + block_num + ".value)' class='button1'> Open  </button></th></tr>";
             break;
         case 'finished':
-            if (order.data().review_user == null) {
-                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Review </button></th></tr>";
+            if (order_doc.data().review_user == null) {
+                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Review </button></th></tr>";
             }
             else {
-                block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Change Review </button></th></tr>";
+                block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_review_on_user_overlay(block_num_" + block_num + ".value)' class='button1'> Change Review </button></th></tr>";
 
             }
             break;
     }
     block_num++;
     block += "</table>";
+    block += "</div>";
     block += "</div>";
     block += "</div>";
     return block;
