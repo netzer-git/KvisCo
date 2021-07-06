@@ -147,11 +147,6 @@ function deg2rad(deg) {
  * @return {boolean} true if the wanted time is in the washer opening time.
  */
 function checkOpenTimes(filter, washerDoc) {
-  const getHourAsNumber = (hourMinTime) => {
-    openPattern = new RegExp(/(?<hour>\d\d):(?<min>\d\d)/);
-    wantedHour = hourMinTime.match(openPattern);
-    return [Number(wantedHour[1]), Number(wantedHour[2])]
-  }
   // getting open and close time for the specific day
   openTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][0]);
   closeTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][1]);
@@ -169,4 +164,27 @@ function checkOpenTimes(filter, washerDoc) {
   else {
     return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
   }
+}
+
+/**
+ * @param {*} hourMinTime "hours:minutes"
+ * @returns [hours, minutes] as numbers
+ */
+function getHourAsNumber (hourMinTime) {
+  openPattern = new RegExp(/(?<hour>\d\d):(?<min>\d\d)/);
+  wantedHour = hourMinTime.match(openPattern);
+  return [Number(wantedHour[1]), Number(wantedHour[2])]
+}
+
+/**
+ * @param {*} washerDoc washer document
+ * @returns [day, "hour:minutes"] which is the next time the washer is open
+ */
+function getNextOpenTime(washerDoc) {
+  var myDate = new Date();
+
+  var t1 = myDate.getHours();
+  var t2 = myDate.getMinutes();
+
+  ddmmyyyy = (t1) + ":" + t2;
 }
