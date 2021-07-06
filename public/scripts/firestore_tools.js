@@ -18,11 +18,11 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                console.log("Document found: ", doc.id);
+                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -43,7 +43,7 @@ function promiseWasherLoaderById(documentID) {
 /**
  * the function takes docID - the id of the user - and resolve a promise of the document of the user.
  * the function does not return the doc, it returns the promise.
- * USAGE: promiseUserLoaderById(docID).then(doc => { // do something with.doc.data })
+ * USAGE: promiseUserLoaderById(docID).the  n(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderById(documentID) {
     return promiseLoaderByCollectionAndId('users', documentID);
@@ -64,7 +64,6 @@ function promiseOrderLoaderById(documentID) {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderByCurrentUserID() {
-    console.log(getUserToken());
     return promiseLoaderByCollectionAndId('users', getUserToken());
 }
 
@@ -89,20 +88,20 @@ async function getCurrentUserLocation() {
  * @param {*} doc user or washer document
  */
 async function getRatingFromDoc(doc, field) {
-    let ratingSum = 0, ratingNum = 0; 
-    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "all");
+    let ratingSum = 0, ratingNum = 0, rating = 0; 
+    const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "finished");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_user;
+            rating = order.data().rating_user;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
             }
-            });
+        });
     }
     else if (field === 'washer') {
         docOrderArray.forEach((order) => {
-            let rating = order.data().rating_washer;
+            rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
                 ratingNum ++;
@@ -112,34 +111,31 @@ async function getRatingFromDoc(doc, field) {
     else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
-    return (ratingNum !== 0) ? (ratingSum / ratingNum) : 0;
+    return (ratingNum !== 0) ? (ratingSum / ratingNum).toFixed(1) : 0;
 }
 
 /**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
-async function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
+function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
-        const collection = field + "s";
-        if (status === "all") {
-            var query = db.collection('orders').where(field, "==", docID).orderBy("created_at");
-        } else if (status === "processing") {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '!=', "finished").orderBy("created_at");
-        } else {
-            var query = db.collection('orders').where(field, "==", docID).where('status', '==', status).orderBy("created_at");
-        }
+
+        var query = db.collection('orders').where(field, "==", docID);
+        // if (status === "all") {
+            // var query = db.collection('orders').where(field, "==", docID);
+        // } else if (status === "processing") {
+            // var query = db.collection('orders').where('status', '!=', "finished").where(field, "==", docID);
+        // } else {
+            // var query = db.collection('orders').where(field, "==", docID).where('status', '==', status);
+        // }
 
         query.get().then((docArray) => {
             const orderArray = [];
             docArray.forEach((doc) => {
-                if (doc.exists) {
-                    console.log("doc")
-                    console.log(doc.data())
+                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished') || (doc.data().status === status);
+                if (isDocGetIn) {
                     orderArray.push(doc);
-                } else {
-                    // doc.data() will be undefined in this case
-                    console.log("No such document!");
                 }
             })
             resolve(orderArray);
@@ -214,8 +210,6 @@ async function createNewWasher(washer) {
     let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
     await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
-        rating_sum: 0,
-        rating_num: 0,
         imageUrl: washer.imageUrl,
         pics: washer.pics,
         location_str: washer.location_str,
@@ -224,16 +218,50 @@ async function createNewWasher(washer) {
         description: washer.description,
         commitment: Number(washer.commitment),
         opening_times: {},
-        price: 0, // fixme for milestone 3
+        price: 0,
         properties: washer.properties,
         phone: washer.phone,
         year_purchased: washer.year_purchased,
         capacity: washer.capacity,
-    }).then((docRef) => {
-        console.log("New order added: " + docRef.id);
-    }).catch((err) => {
-        console.error("Washer cannot be registered: " + err.message);
     });
+    await createNewUser({
+        name: washer.name,
+        location_str: washer.location_str,
+        imageUrl: washer.imageUrl,
+        phone: washer.phone,
+        description: washer.description,
+    });
+}
+
+/**
+ * @param {*} washerDoc washer doc
+ * @returns washer opening_times sorted by days
+ */
+function getWasherOpenTimes(washerDoc) {
+    let washerOpenTimes = washerDoc.data().opening_times;
+    let sortedOpenTimes = {};
+    if (washerOpenTimes['Sunday'] !== undefined) {
+        sortedOpenTimes['Sunday'] = washerOpenTimes['Sunday'];
+    }
+    if (washerOpenTimes['Monday'] !== undefined) {
+        sortedOpenTimes['Monday'] = washerOpenTimes['Monday'];
+    }
+    if (washerOpenTimes['Tuesday'] !== undefined) {
+        sortedOpenTimes['Tuesday'] = washerOpenTimes['Tuesday'];
+    }
+    if (washerOpenTimes['Wednesday'] !== undefined) {
+        sortedOpenTimes['Wednesday'] = washerOpenTimes['Wednesday'];
+    }
+    if (washerOpenTimes['Thursday'] !== undefined) {
+        sortedOpenTimes['Thursday'] = washerOpenTimes['Thursday'];
+    }
+    if (washerOpenTimes['Friday'] !== undefined) {
+        sortedOpenTimes['Friday'] = washerOpenTimes['Friday'];
+    }
+    if (washerOpenTimes['Saturday'] !== undefined) {
+        sortedOpenTimes['Saturday'] = washerOpenTimes['Saturday'];
+    }
+    return sortedOpenTimes;
 }
 
 /**
@@ -244,7 +272,7 @@ async function createNewWasher(washer) {
 async function setWasherOpenTimes(openTimes, washerId) {
     let washer = await db.collection('washers').doc(washerId);
     await washer.update({
-        opening_time: openTimes
+        opening_times: openTimes
     });
 }
 
@@ -261,14 +289,28 @@ async function createNewUser(user) {
         location_str: user.location_str,
         location_cor: geoPoint,
         saved_washers: [],
-        cover_photo: user.cover_photo,
-        rating_sum: 0,
-        rating_num: 0,
+        imageUrl: user.imageUrl,
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
-        console.log("New order added: " + docRef);
+        console.log("New User added: " + docRef);
     });
+}
+
+/**
+ * adds new entry to user favorite washers.
+ * @param {*} userId the current user id
+ * @param {*} washerId the wanted washer id
+ */
+async function addWasherToFavorites(userId, washerId) {
+    let user = db.collection('users').doc(userId);
+    let favorites = user.data().saved_washers;
+    if (!favorites.includes(washerId)) {
+        favorites.push(washerId);
+        await user.update({
+            saved_washers: favorites
+        });
+    }
 }
 
 /**
@@ -295,7 +337,7 @@ async function saveImageToUser(file) {
 
 /**
  * Saves a new image containing an image in Firebase. This first saves the image in Firebase storage.
- * Notice: there is no difference between washer's "cover_photo" attribute to "pics" when saving images to storage.
+ * Notice: there is no difference between washer's "imgUrl" attribute to "pics" when saving images to storage.
  * @param {*} file image file
  * @param {*} washerId the id of the current washer
  * @returns image url path to firebase storage
@@ -350,19 +392,19 @@ async function getWasherFilterQuery(filters) {
     if (filters.loads !== undefined && Number(filters.loads) !== 0) {
         let filteredWashersWithLoads = [];
         washersArray.forEach(doc => {
-            if (true) { // fixme for milestone3
+            if (true) {
                 filteredWashersWithLoads.push(doc);
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
         firstQuery = false;
     }
-    
 
     if (filters.rating !== undefined) {
         let filteredWashersWithRating = [];
-        washersArray.forEach(doc => {
-            if (getRatingFromDoc(doc, 'washer') >= filters.rating) {
+        washersArray.forEach(async (doc) => {
+            rating = await getRatingFromDoc(doc, 'washer');
+            if (rating >= filters.rating) {
                 filteredWashersWithRating.push(doc);
             }
         });
@@ -370,10 +412,10 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined) {
+    if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -404,7 +446,7 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.address !== undefined && filters.address !== null) {
+    if (filters.address !== undefined && filters.address !== null && filters.address !== "") {
         let data = await forwardGeocodePromise(filters.address);
         let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
         let filteredWashersWithAddress = [];
@@ -425,4 +467,64 @@ async function getWasherFilterQuery(filters) {
     }
 
     return filteredWashers;
+}
+
+/**
+ * @param {*} washerArray array of washer docs
+ * @returns the same array sorted by rating
+ */
+async function sortWashersByRating(washerArray) {
+    await washerArray.sort(async (a, b) => {
+        aRating = await getWasherRatingFromDoc(a);
+        bRating = await getWasherRatingFromDoc(b);
+        return bRating - aRating;
+    });
+    return washersArray;
+}
+
+/**
+ * sort array if washers by the distance from specific point
+ * @param {*} washerArray array of washers
+ * @param {lat: number, lng: number} currentPoint the middle current point
+ * @returns sorted array by distance
+ */
+async function sortWashersByDistance(washerArray, currentPoint) {
+    washerArray.sort((a, b) => {
+        let aDistance = getDistanceFromLatLonInKm(a.data().location_cor, currentPoint);
+        let bDistance = getDistanceFromLatLonInKm(b.data().location_cor, currentPoint);
+        return bDistance - aDistance;
+    });
+    return washerArray;
+}
+
+/**
+ * the function takes indicator number and returns washer array:
+ * 1 (better)   - rating > 4.5, order by distance
+ * 2 (mid)      - rating > 3, order by distance
+ * 3 (closer)   - distance closer than 1km, order by distance
+ * @param {*} indicator 1-3, indicates the wanted filter
+ * @returns array of washer as dictated by the control number
+ */
+async function getBetterCloserWashers(indicator, currentPoint) {
+    let washerArray = []
+    switch(indicator) {
+        case 1:
+            washerArray = await getWasherFilterQuery({
+                rating: 4.5,
+            });
+            break;
+        case 2:
+            washerArray = await getWasherFilterQuery({
+                rating: 3,
+            });
+            break;
+        case 3:
+            washerArray = await getWasherFilterQuery({
+                distance: 1.5,
+                current_cor: currentPoint,
+            });
+            break;
+    }
+    console.log(washerArray);
+    return sortWashersByDistance(washerArray, currentPoint);
 }

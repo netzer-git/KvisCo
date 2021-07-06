@@ -15,6 +15,7 @@
         <script src="/__/firebase/init.js"></script>
         <script src="../../scripts/header_bar.js"></script>
         <script src="../../scripts/app.js"></script>
+        <script src="../../scripts/firestore_tools.js"></script>
     </head>
     <body>
         <!--Header starts here-->
@@ -30,14 +31,14 @@
                                 <img src="../../images/Menu.png" width="45%"> 
                             </a>
                             <div class="dropdown-content"> 
-                                <a href="#" onclick = "become_a_user()">Watch Your Profile</a>
-                                <a href="#">New search</a>
-                                <a href="#">Log out</a>
+                                <a href="#" onclick = "become_a_user()">My Profile</a>
+                                <a href="#" id = "log_in_out_msg" onclick="log_in_or_out();">Log In</a> 
+                                <!-- TO FIXXXXXXXX -->
                             </div>
                         </div>
                     </div>    
                     <div class="col-2">
-                        <button onclick = "become_a_washer()"  class="button1">Become a washer</button> <!-- Yellow generic button-->
+                        <button onclick = "become_a_washer()"  class="button1">Be a Washer</button> <!-- Yellow generic button-->
                     </div>
                 </div>
             </div>
