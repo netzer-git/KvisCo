@@ -141,7 +141,6 @@ function off() {
 
 
 function nextDay(day_str){
-    
     var x = CreateDayDictionary()[day_str];
     var now = new Date();    
     now.setDate(now.getDate() + (x+(7-now.getDay())) % 7);
@@ -150,13 +149,13 @@ function nextDay(day_str){
 
 function CreateDayDictionary() {
     var days = new Array();
-    days['Sunday'] = 1;
-    days['Monday'] = 2;
-    days['Tuesday'] = 3;
-    days['Wednesday'] = 4;
-    days['Thursday'] = 5;
-    days['Friday'] = 6;
-    days['Saturday'] = 7;
+    days['Sunday'] = 0;
+    days['Monday'] = 1;
+    days['Tuesday'] = 2;
+    days['Wednesday'] = 3;
+    days['Thursday'] = 4;
+    days['Friday'] = 5;
+    days['Saturday'] = 6;
     return days
     }
 
@@ -189,13 +188,45 @@ async function load_place_order_page() {
     f_display_washer_reviews(washerID);
 
     opening_times = washer_doc.data().opening_times;
-    // var first_opening_time = getWasherFirstOpeningTime(washer_doc);
-    // open_day = nextDay(first_opening_time[0]);
-    // open_hour = first_opening_time[1];
-    open_day = nextDay("Sunday");
-    open_hour = "10:00"
+    var first_opening_time = getWasherFirstOpeningTime(opening_times);
+    console.log(first_opening_time)
+    open_day = nextDay(first_opening_time[0]);
+    open_hour = first_opening_time[1];
+    // open_day = nextDay("Sunday");
+    // open_hour = "10:00"
     document.getElementById("date").value =  open_day;
     document.getElementById("startTime").value = open_hour;
     update_properties_and_price();
     msg = "please order your laundry to an hour where " +washer_doc.data().name + " is working"
+}
+
+
+function getWasherFirstOpeningTime(opening_times) {
+    var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var cur_date = new Date();
+    var i = cur_date.getDay();
+    var tzoffset = cur_date.getTimezoneOffset() * 60000; //offset in milliseconds
+    var localTime = (new Date(Date.now() - tzoffset)).toISOString().slice(11, 16);
+// => '2015-01-26T06:40:36.181'
+    if (opening_times[week_days[i]] != undefined) {
+        open_time = '01/01/2011 '+opening_times[week_days[i]][0]
+        close_time = '01/01/2011 '+opening_times[week_days[i]][1]
+        cur_time = '01/01/2011 ' +localTime
+        if (Date.parse(open_time) > Date.parse(cur_time)) {
+            return [week_days[i], opening_times[week_days[i]][0]]
+        }
+        if (Date.parse(cur_time) < Date.parse(close_time)) {
+            return [week_days[i], localTime]
+        }
+        else {
+            i++;
+        }
+    }
+    while (opening_times[week_days[i]] == undefined) {
+        i++
+        if (i == 7) {
+            i = 0;
+        }
+    }
+    return [week_days[i], opening_times[week_days[i]][0]]
 }
