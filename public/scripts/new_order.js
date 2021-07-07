@@ -28,7 +28,7 @@ async function display_new_order_for_washer(orderID) {
     order_block += '<tr><td><div class= "header_61">Wash Settings</div></td><td><div class= "header_61">'+order_doc.data().wash_settings+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Special Services</div></td><td><div class= "header_61">'+order_doc.data().property+'</div></td></tr>';
     order_block += '<tr><td><div class= "header_61">Notes:</div><div class="small_headline_4">'+order_doc.data().comments+'<br/> </div></tr>';
-    cur_price = order_doc.data().price.toString() + " NIS"  
+    cur_price = order_doc.data().price.toString() + " &#8362"  
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr>';
     order_block +='</table>';
     if (order_status == "pending") {
@@ -44,10 +44,62 @@ async function display_new_order_for_washer(orderID) {
 }
 
 
+// async function display_new_order_for_washer(orderID) {
+//     sessionStorage.setItem("cur_order", orderID);
+//     const order_doc = await promiseOrderLoaderById(orderID);
+//     const user_doc = await promiseUserLoaderById(order_doc.data().user);
+//     var order_status = order_doc.data().status;
+//     if (order_status == "pending") {
+//         block += '<h2 class="header_24">YOU RECIEVED A NEW ORDER</h2>';
+//     }
+//     else {
+//         block += '<h2 class="header_24">LAUNDRY IN PROCESS</h2>';
+//     }
+//     block = "<div class='col-lg-4'>";
+//     // block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
+//     block += "<div class='col_with_padd'>";
+//     block += "<table class='Background_box_open'>";
+//     block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></th></tr>";
+//     block += "<tr><th scope='col' colspan='2'>" + user_doc.data().name + "</th></tr>";
+//     var date = new Date(order_doc.data().due_to.seconds*1000);
+//     var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
+//     if (date.getMinutes().toString().length <= 1) {
+//         var minutes = "0" +date.getMinutes();
+//     }
+//     else {
+//         var minutes = date.getMinutes();
+//     }
+//     var time = date.getHours()+ ":" +minutes;
+//     // block += "<tr><td>"+ formattedTime + "  " + time + "</td><tr>"
+//     // block += order_doc.data().price +" &#8362</td></tr>"
+//     block += "<tr><td>"+ formattedTime +"</td>"
+//     block += "<td>"+ order_doc.data().price +" &#8362</td></tr>"
+//     block += "<tr><td>"+ time + "</td>"
+//     block += "<td>"+ order_doc.data().loads + "loads</td></tr>"
+//     block += "<tr><td scope='col' colspan='2'>"+ order_doc.data().wash_settings + " services</td><tr>"
+//     block += "<tr><td scope='col' colspan='2'>"+ order_doc.data().property + " special property</td><tr>"
+//     block += '<tr><td><div class= "header_61">Notes:</div><div class="small_headline_4">'+order_doc.data().comments+'<br/> </div></tr>';
+//     block += "</table>";
+//     if (order_status == "pending") {
+//         block += '<button id="process" value = "process" onclick = "change_status(process.value)" class= "yellow_button_3">Confirm</button>';
+//         block += '<button id="declined" value = "declined" onclick = "change_status(declined.value)" class= "red_button">decline</button>';    
+//     }
+//     else {
+//         block += '<button id="finished" value = "finished" onclick = "change_status(finished.value)" class= "yellow_button_3">Finish</button>';
+//         block += '<button id="declined" value = "declined" onclick = "change_status(declined.value)" class= "red_button">decline</button>';  
+//     }
+//     block += "</div>";
+//     block += "</div>";
+
+//     block += "</div>";
+//     document.getElementById("washer_order").innerHTML = block;
+// }
+
+
 async function display_new_order_for_user(orderID) {
     sessionStorage.setItem("cur_order", orderID);
     const order_doc = await promiseOrderLoaderById(orderID);
-    const washer_doc = await promiseWasherLoaderById(order.data().washer);
+    const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {
@@ -79,7 +131,7 @@ async function display_new_order_for_user(orderID) {
     order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+ order_doc.data().wash_settings +'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+ order_doc.data().properties +'</h6></td></tr>';
     order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order_doc.data().comments+'<br/></div></tr>';
-    cur_price = order_doc.data().price.toString() + " NIS";
+    cur_price = order_doc.data().price.toString() + " &#8362";
     order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr></table>';
     order_block += "<button style='margin-left: 35%; margin-top: 5%;' class='button1' onclick='back_to_profile()'>back to profile</button>";  
     order_block +="</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
@@ -108,6 +160,6 @@ async function display_order_status(orderID) {
 }
 
 
-function off() {
+function close_order() {
     document.getElementById("overlay_washer_order").style.display = "none";
   }
