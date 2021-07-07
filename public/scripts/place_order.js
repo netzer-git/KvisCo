@@ -204,29 +204,29 @@ async function load_place_order_page() {
 function getWasherFirstOpeningTime(opening_times) {
     var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var cur_date = new Date();
-    var i = cur_date.getDay();
-    var tzoffset = cur_date.getTimezoneOffset() * 60000; //offset in milliseconds
-    var localTime = (new Date(Date.now() - tzoffset)).toISOString().slice(11, 16);
-// => '2015-01-26T06:40:36.181'
-    if (opening_times[week_days[i]] != undefined) {
-        open_time = '01/01/2011 '+opening_times[week_days[i]][0]
-        close_time = '01/01/2011 '+opening_times[week_days[i]][1]
-        cur_time = '01/01/2011 ' +localTime
+    var day_num = cur_date.getDay();
+    var tz_offset = cur_date.getTimezoneOffset() * 60000; // offset in milliseconds
+    var localTime = (new Date(Date.now() - tz_offset)).toISOString().slice(11, 16);
+    // => '2015-01-26T06:40:36.181'
+    if (opening_times[week_days[day_num]] !== undefined) {
+        open_time = '01/01/2011 ' + opening_times[week_days[day_num]][0];
+        close_time = '01/01/2011 ' + opening_times[week_days[day_num]][1];
+        cur_time = '01/01/2011 ' + localTime;
         if (Date.parse(open_time) > Date.parse(cur_time)) {
-            return [week_days[i], opening_times[week_days[i]][0]]
+            return [week_days[day_num], opening_times[week_days[day_num]][0]];
         }
         if (Date.parse(cur_time) < Date.parse(close_time)) {
-            return [week_days[i], localTime]
+            return [week_days[day_num], localTime];
         }
         else {
-            i++;
+            day_num++;
         }
     }
-    while (opening_times[week_days[i]] == undefined) {
-        i++
-        if (i == 7) {
-            i = 0;
+    while (opening_times[week_days[day_num]] === undefined) {
+        day_num++;
+        if (day_num == 7) {
+            day_num = 0;
         }
     }
-    return [week_days[i], opening_times[week_days[i]][0]]
+    return [week_days[day_num], opening_times[week_days[day_num]][0]];
 }
