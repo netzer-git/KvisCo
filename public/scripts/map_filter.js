@@ -230,7 +230,7 @@ async function on_load_page(){
  * @param {Number} id 
  */
 function save_washer_id(e){
-    console.log("this is the id in michal page:",e.data.name);
+    console.log("this is the id in michal page:",e.id);
     sessionStorage.setItem("pressed_washer", e.id);
     window.location.href = "../user_flow/place_order.html"
 }
