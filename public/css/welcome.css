@@ -370,6 +370,10 @@ h6{
 
 }
 
+.choose_location:focus {
+    outline: none;
+  }
+
 .box select{
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
@@ -382,6 +386,10 @@ h6{
     margin-right: -10px;
 
 }
+
+.box select:focus {
+    outline: none;
+  }
 
 .table-search {
     height: 26px;

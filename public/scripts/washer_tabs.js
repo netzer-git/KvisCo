@@ -31,18 +31,17 @@ function toFullTimestamp(fullDate,time){
     }
     minute = time.substring(3,5);
     second = "00";
-    return new Date(Date.UTC(year,month,day,hour,minute,second));
+    return new Date(Date.UTC(year,month,day,hour-3,minute,second));
 }
-
 
 /**
  * return true if washer is open now and false if not
  * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
  * @returns 
  */
-function check_if_washer_open(opening_times) {
-    var cur_date = new Date(); // current time
-    var day = cur_date.getDay();
+ function check_if_washer_open(opening_times, cur_date) {
+    var date = new Date(cur_date) 
+    var day = date.getDay();
     switch (day) {
         case 0:
             try {
@@ -108,12 +107,22 @@ function check_if_washer_open(opening_times) {
                 return false;
             }
     }
-    opening_time = toFullTimestamp(cur_date, opening_time);
-    closing_time = toFullTimestamp(cur_date, closing_time);
-    if ((cur_date > opening_time) && (cur_date < closing_time)) {
+    opening_time = toFullTimestamp(date, opening_time);
+    closing_time = toFullTimestamp(date, closing_time);
+    if ((date >= opening_time) && (date <= closing_time)) {
         return true;
     }
     return false;
+}
+
+/**
+ * return true if washer is open now and false if not
+ * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
+ * @returns 
+ */
+ function check_if_washer_open_now(opening_times) {
+    var cur_date = new Date(); // current time
+    return check_if_washer_open(opening_times, cur_date);
 }
 
 
@@ -124,7 +133,7 @@ function check_if_washer_open(opening_times) {
  * @param {washer Object} washer_doc the washer  
  */
 function f_checkOpeningTimes(washer_doc) {
-    if (check_if_washer_open(washer_doc.data().opening_times)) {
+    if (check_if_washer_open_now(washer_doc.data().opening_times)) {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
         document.getElementById("openClosedColor").style.color = "green";
         document.getElementById("openClosedColor").style.fontSize = "18px";
