@@ -59,7 +59,7 @@ table.machine_details tr{
     /* position: absolute; */
     left: 0%;
     right: 0%;
-    top: -0.57%;
+    top: 0%;
     bottom: 0%;
     /* Palet 1 / 3 */
     background: #FFB0BC;
@@ -69,6 +69,7 @@ table.machine_details tr{
     border-radius: 10px;
     width: 120%;
 }
+
 
 
 table.Background_box th{
