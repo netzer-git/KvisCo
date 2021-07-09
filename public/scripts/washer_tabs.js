@@ -109,7 +109,7 @@ function toFullTimestamp(fullDate,time){
     }
     opening_time = toFullTimestamp(date, opening_time);
     closing_time = toFullTimestamp(date, closing_time);
-    if ((date > opening_time) && (date < closing_time)) {
+    if ((date >= opening_time) && (date <= closing_time)) {
         return true;
     }
     return false;
