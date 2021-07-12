@@ -47,10 +47,17 @@ function insert_washer_blocks(washerDoc) {
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
 
     for (let i = 0; i < max_number_of_blocks; i++) {
-        let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
+        // let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
         whole_washers_html_block += washer_block_raw_html;
     }
     document.getElementById("washers-cards").innerHTML = whole_washers_html_block;
+
+    // add onclick function
+    var washer_cards = document.getElementsByClassName("washer-card");
+    // for (var i = 0; i < washer_cards.length; i++) {
+    //     console.log(washer_cards[i].id);
+    //     washer_cards[i].onclick = function(){save_washer_id(washer_cards[i].id)};
+    // }
 }
 
 /**
@@ -62,7 +69,8 @@ function insert_washer_blocks(washerDoc) {
 */
 function create_one_washer_block(washerDoc) {
     console.log("this is the washer id", washerDoc.id.valueOf());
-    let washer_block_raw_html = '<a class="washer-card" onclick="save_washer_id("'+washerDoc.id.valueOf()+'")">';
+    // let washer_block_raw_html = '<a class="washer-card" id="'+washerDoc.id.valueOf()+'">';
+    let washer_block_raw_html = '<div class="washer-card" id="'+washerDoc.id.valueOf()+'" onclick="save_washer_id(this)">';
     // creating html object
     washer_block_raw_html += '<div class="card">';
     washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
@@ -70,13 +78,14 @@ function create_one_washer_block(washerDoc) {
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
     washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
-    washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">5</div>\n</div>\n</div>';
+    washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">'+getRatingFromDoc(washerDoc, 'washer')+'</div>\n</div>\n</div>';
     // card text
     washer_block_raw_html+= '<div class="card-text col-9">';
     washer_block_raw_html+= '<h5 class="card-title">'+washerDoc.data().name+'</h5>';
     washer_block_raw_html+= '<h6 class="card-subtitle mb-2 text-muted">'+washerDoc.data().description+'</h6>';
     washer_block_raw_html+= '<p class="card-text">' + washerDoc.data().properties + '</p>';
-    washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</a>';
+    washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
+    // washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</a>';
 
     return washer_block_raw_html;
 }
@@ -91,10 +100,10 @@ function redirect_specific_washer(washer_id) {
     // window.open(final_url);
 }
 
+/**
+ * update drop off time after it changed
+ */
 function update_drop_off_time(e){
-    /**
-     * update drop off time after it changed
-     */
     drop_off_time = e.target.value
 }
 
@@ -220,10 +229,10 @@ async function on_load_page(){
  * save washer id when click the washer card
  * @param {Number} id 
  */
-function save_washer_id(id){
-    console.log("this is the id in michal page:",id);
-    sessionStorage.setItem("pressed_washer", id);
-    window.location.href = "../html/user_flow/place-order.html"
+function save_washer_id(e){
+    console.log("this is the id in michal page:",e.id);
+    sessionStorage.setItem("pressed_washer", e.id);
+    window.location.href = "../user_flow/place_order.html"
 }
 
 window.onload = on_load_page;

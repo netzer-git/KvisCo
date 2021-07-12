@@ -1,6 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,200&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
+:root{
+    --color-1: #F95A2C;
+    --color-2: #19FFE3;
+    --color-3: #FFB0BC;
+    --color-4: #FF785C;
+    --color-5: #FFBD12;
+    --font-color: #1C1C1D;
+    --secondary-font-color: #474A57;
+    --bg-color: #ffffffff;
+}
+
+.container{
+    /* overflow: auto; */
+    margin-top: 4%;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+
 h1{
     /* position: absolute; */
     width: 778px;
@@ -167,9 +187,10 @@ h6{
 
 
 .red-section{
-    /* position: absolute; */
+    position: absolute;
     width: 100%;
     /* height: 100%; */
+    right: 0px;
     left: 0px;
     top: 0px;
     
@@ -212,10 +233,10 @@ h6{
 
 .rope_img{
     /* position: absolute; */
-    width: 1440px;
+    /* width: 1440px;
     height: 290px;
     left: -1px;
-    top: 537px;
+    top: 537px; */
     margin-bottom: 3%;
 
 }
@@ -331,19 +352,7 @@ h6{
 
 
 
-.search {
-    /* position: fixed !important;
-    margin: auto; */
-    height: 90px;
-    width: 1000px;
-    left: 50px;
-    /* top: 396px; */
-    border-radius: 20px;
-    background: rgba(255, 176, 188, 1);
-    border: 2px solid rgba(28, 28, 29, 1);
-    box-shadow: 0px 8px 0px 0px rgba(32, 32, 32, 1);
-    
-}
+ 
 
 .input-box {
     height: 50.65306091308594px;
@@ -391,18 +400,18 @@ h6{
     outline: none;
   }
 
-.table-search {
+/* .table-search {
     height: 26px;
     width: 68px;
     border-radius: nullpx;
-}
+} */
 
 
-
+/* 
 .table-search td, th {
     text-align: left;
     padding: 4px;
-  }
+  } */
 
 
 .search_btn {
@@ -416,4 +425,35 @@ h6{
 }
 #open_ind {
     display: inline-block;
+}
+
+
+.table-search {
+    height: 26px;
+    /* width: 68px; */
+    border-radius: nullpx;
+}
+
+.table-search td, th {
+    text-align: left;
+    padding: 4px;
+  }
+
+
+.col-search-btn {
+  margin: 0 auto;
+  /* width: 50%; */
+  padding: 7%;
+}
+
+
+.row-search {
+    /* position: fixed !important; */
+    height: 80px;
+    border-radius: 20px;
+    background: var(--color-3);
+    border: 2px solid var(--font-color);
+    box-shadow: 0px 8px 0px 0px var(--font-color);
+    z-index: 2;
+    margin: auto !important;
 }
