@@ -43,8 +43,7 @@ async function become_a_washer() {
         return;
     }
     var washerID = getUserToken();
-    console.log("deeeeeeeeeebug")
-    washer_doc = await promiseWasherLoaderById(washerID) 
+    washer_doc = await promiseWasherLoaderById(washerID);
     if (washer_doc == null) {
         window.location.href = "../../html/washer_flow/washer_registration.html";
         return;
