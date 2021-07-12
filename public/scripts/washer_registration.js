@@ -16,6 +16,24 @@ var is_land_loaded = false;
 var is_mach_loaded = false;
 
 
+// /**
+//  * NOT IN USE - insert details we already know if the washer is already user in the app
+//  * @returns null
+//  */
+// async function insert_user_details_if_there_any() {
+//     var userID = getUserToken();
+//     user_doc = await promiseUserLoaderById(userID);
+//     if (user_doc == null) {
+//         return;
+//     }
+//     washer_profile_pic = user_doc.data().imageUrl;
+//     washer_location_str = user_doc.data().location_str;
+//     washer_description = user_doc.data().description;
+//     document.getElementById("indicator1").style.display = "block";
+//     document.getElementById("indicator1").hidden = false;
+// }
+
+
 function save_location() {
     var city = document.getElementById("city").value;
     var street = document.getElementById("street").value;
@@ -42,23 +60,18 @@ function save_description() {
 }
 
 function save_profile_pic(event) {
-    if (event != null) {
-        washer_profile_pic = event.target.files[0];
-        is_profile_loaded = true
-        if (is_profile_loaded) {
-            document.getElementById("indicator1").style.display = "block";
-          }
+    // if (event != null) {
+    washer_profile_pic = event.target.files[0];
+    document.getElementById("indicator1").style.display = "block";
+    document.getElementById("indicator1").hidden = false;
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
-    }
+    // }
 }
 
 function save_laundry_pic(event) {
     if (event != null) {
         washer_laundry_pic = event.target.files[0];
-        is_land_loaded = true
-        if (is_land_loaded) {
-            document.getElementById("indicator2").style.display = "block";
-        }
+        document.getElementById("indicator2").style.display = "block";
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
@@ -66,10 +79,7 @@ function save_laundry_pic(event) {
 function save_machine_pic(event) {
     if (event != null) {
         washer_machine_pic = event.target.files[0];
-        is_mach_loaded = true
-        if (is_mach_loaded) {
-            document.getElementById("indicator3").style.display = "block";
-        }
+        document.getElementById("indicator3").style.display = "block";
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
@@ -77,13 +87,12 @@ function save_machine_pic(event) {
 function save_special_service(choise) {  
     // washer_properties = document.getElementsByName("special_serve").value; 
     washer_properties = choise.value; 
-    console.log(washer_properties); 
 }  
 
 
 async function create_washer() {
     try {
-    profile_pic_url = await saveImageToUser(washer_profile_pic);
+        profile_pic_url = await saveImageToUser(washer_profile_pic);
     }
     catch {
         profile_pic_url = null
@@ -122,7 +131,7 @@ async function create_washer() {
     }
     console.log(new_washer);
     await createNewWasher(new_washer);
-    // window.location.href = "../html/washer_flow/washer-profile.html";
+    window.location.href = "../../html/washer_flow/washer_profile.html";
 }
 
 
