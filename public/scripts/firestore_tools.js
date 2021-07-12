@@ -534,7 +534,7 @@ async function getBetterCloserWashers(indicator, currentPoint) {
         case 2:
             washerArray = await getWasherFilterQuery({
                 rating: 3,
-                distance: 50,
+                distance: 3,
                 current_cor: currentPoint,
             });
             break;
