@@ -4,19 +4,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!-- this tag connects the header-page to the appropriate css -->
+    <script src="/__/firebase/8.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+
     <link rel="stylesheet" href="../css/header_style.css">
     <link rel="stylesheet" href="../css/welcome.css">
+    <link rel="stylesheet" href="../css/user_profile.css">
+    <link rel="stylesheet" href="../css/washer_properties.css">
     <script src="../scripts/search_bar_function.js"></script>
     <script src="../scripts/header_bar.js"></script>
-    <script src="../js/header.js"></script>
+    <script src="../scripts/order_blocks_user.js"></script>
+    <script src="../../scripts/app.js"></script>
+    <script src="../../scripts/tools.js"></script>
+    <script src="../../scripts/firestore_tools.js"></script>
     <script scr="/js/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
+    <script type="text/javascript">
+        window.onpaint = load_quick_welcome_page();
+    </script>
 </head>
 
 <body>
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
-
+    
         <div class="container-fluid">
             <div class="row">
                 <div class="red-section">
@@ -77,6 +94,19 @@
                         </div>
                     </div>
                     <!-- Search Bar ends here-->
+                    <div class="row">
+                        <div class="col-1">
+                                <div class="col-8">
+                                </div>
+                                <div class="col-2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div id="finished_orders">
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
 
                     <div class="row">
                         <img class="rope_img" src="../images/rope.png">
@@ -96,7 +126,7 @@
                                     </th>
                                     <td>
                                         <div class="col-md-4" class="float-right">
-                                            <img class="orange_machine" src="../images/Slider.png" />
+                                            <img class="orange_machine" src="../images/washing-machine.gif" />
                                         </div>
                                     </td>
                                 </tr>

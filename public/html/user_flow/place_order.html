@@ -50,6 +50,7 @@
     <link rel="stylesheet" href="../../css/overlay.css">
     <link rel="stylesheet" href="../../css/new_order.css">
     <link rel="stylesheet" href="../../css/place_order.css">
+
     <link rel="stylesheet" href="../../css/welcome.css">
 
 
@@ -69,6 +70,14 @@
 </head>
 
 <body>
+    <svg style="display:none; ">
+        <symbol id="order-box-svg" width="600.4075" height="550" viewBox="0 0 667 611" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 14.3657C1 9.28755 5.32618 5.19618 10.4355 5.36304C139.339 9.57295 231.648 6.87975 322.51 4.22876C326.28 4.11878 330.047 4.00888 333.814 3.89954C428.376 1.15487 522.957 -1.2318 657.297 4.57934C662.116 4.7878 666 8.76674 666 13.5641V596.539C666 601.61 661.709 605.695 656.612 605.543C531.554 601.82 435.458 604.42 342.404 606.937C337.464 607.071 332.532 607.204 327.606 607.337C229.877 609.96 133.993 612.114 9.63979 606.326C4.83853 606.103 1 602.135 1 597.346V14.3657Z" fill="#FFB0BC" stroke="#1C1C1D" stroke-width="2"/>
+            </symbol>
+        <symbol id="popup-btn-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </symbol>
+    </svg>
 
     <!--Header starts here-->
     <div id="includedContent"></div>
@@ -85,20 +94,21 @@
             </div>
             <!-- Place Order Box -->
 
-            <div class="col-5 sticky-top">
+            <div class="place-order col-5">
                 <!--Lock the order box along the page-->
-                <div class="order-box">
+                <svg><use xlink:href="#order-box-svg"></use></svg>
+                <div class="place-order-content row" style="z-index: 1;">
                     <h7>PLACE ORDER</h7>
-                    <div class="instructions">
-                        <!--Few instructions-->The more specific you are, the better your laundry will come out!
-                    </div>
-                    <table style="margin-left: 5%; margin-top: -2%; margin-bottom: 2%;">
+                <!--<div class="instructions">
+                    The more specific you are, the better your laundry will come out!
+                </div>-->
+                    <table class="place_order_table">
                         <tr style="color: black;">
                             <td>Drop off day</td>
-                            <td style="padding-left: 50px;">Drop off time</td>
+                            <td style="margin-left: -100px;">Special services</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td style="width: 250px;">
                                 <div class="box select">
                                     <input class="choose_location" type="date" id="date" value="2021-06-21"
                                         onchange="update_properties_and_price()"> <!-- Date -->
@@ -107,18 +117,6 @@
                                     document.getElementById('date').value = new Date().toISOString().substring(0, 10);
                                 </script>
                             </td>
-                            <td style="padding-left: 50px;"><input class="choose_location" type="time" id="startTime"
-                                    value="08:00" onchange="update_properties_and_price()"></td>
-                            <script>
-                            // document.getElementById('startTime').value = new Date().toISOString().substring(11, 16);
-                            </script>
-                        </tr>
-                        <tr style="color: black;">
-                            <!-- Special Services-->
-                            <td style="padding-top: 3%;">Special services</td>
-                            <td style="padding-left: 50px; padding-top: 3%;">Loads</td>
-                        </tr>
-                        <tr>
                             <td>
                                 <div class="box select">
                                     <!-- Special Services dropdwn-->
@@ -129,15 +127,33 @@
                                         <option value="dryer">Hanging Drying(+12)</option>
                                     </select>
                                 </div>
+                                </td>
+                        </tr>
+                        <tr style="color: black;">
+                            <!-- Special Services-->
+                            <td style="padding-top: 3%;">Drop off time</td>
+                            <td style="margin-left: 0; padding-top: 3%;">Loads</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="choose_location" type="time" id="startTime"
+                                    value="08:00" onchange="update_properties_and_price()">
                             </td>
-                            <td style="padding-left: 50px;"><input class="choose_location" type="number" id="loads"
+                            <td style="margin-left: 0;"><input class="choose_location" type="number" id="loads"
                                     value="1" onchange="update_properties_and_price()"></td>
                             <!-- Loads -->
                         </tr>
                         <tr style="color: black;">
+                            <td>
+                                <div id='open_ind'></div>
+                            </td>
+                            <script>
+                                // document.open_indicator(washer_doc);
+                            </script>
                             <td style="padding-top: 3%;">Wash settings</td>
                         </tr>
                         <tr>
+                            <td></td>
                             <td>
                                 <div class="box select">
                                     <!-- Wash settings -->
@@ -163,7 +179,7 @@
                         <span class="checkmark"></span>
                     </label>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <table style="margin-left: 20%;">
                                 <tr>
                                     <td>
@@ -173,7 +189,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-6">
+                        <div class="col-7">
                             <div style="margin-left: 5%; margin-top: 3%;">
                                 <div id="overlay_register" onclick="off()">
                                     <div id="register_block"></div>

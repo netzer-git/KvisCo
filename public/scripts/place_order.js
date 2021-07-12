@@ -7,7 +7,8 @@ const IRONING_PRICE = 25;
 const DRYER_PRICE = 12;
 const FAST_PTICE = 10;
 
-
+var opening_times;
+var msg;
 
 var due_to_date;
 var due_to_hour;
@@ -41,8 +42,8 @@ function toTimestamp(date,time){
     hour = time.substring(0,2);
     minute = time.substring(3,5);
     second = "00";
-    var datum = new Date(Date.UTC(year,month,day,hour,minute,second));
-    return datum.getTime()/1000;
+    var datum = new Date(Date.UTC(year,month-1,day,hour-3,minute,second));
+    return datum.getTime();
 }
 
 /**
@@ -66,7 +67,7 @@ function compute_price(loads, property, wash_settings) {
     if (wash_settings == "Fast Wash") {
         pricing += 10;
     }
-    cur_price = " " + price + " nis ";
+    cur_price = " " + price + " &#8362 ";
     document.getElementById("price").innerHTML = cur_price;
     return pricing;
 }
@@ -83,6 +84,7 @@ function update_properties_and_price() {
     property = document.getElementById("property").value;
     wash_settings = document.getElementById("wash_settings").value;
     var last_price = price;
+    open_indicator(opening_times,full_date);
     price = compute_price(loads,property, wash_settings);
     if (last_price != price) {
         update_properties_and_price()
@@ -101,6 +103,10 @@ async function create_order() {
     const cb = document.getElementById('terms');
     if (cb.checked != true) {
         alert("PLEASE ACCEPT OUR TERMS");
+        return;
+    }
+    if (!check_if_washer_open(opening_times, full_date)) {
+        alert(msg);
         return;
     }
     if (!isUserSignedIn()) {
@@ -134,6 +140,38 @@ function off() {
 }
 
 
+function nextDay(day_str){
+    var x = CreateDayDictionary()[day_str];
+    var now = new Date();    
+    now.setDate(now.getDate() + (x+(7-now.getDay())) % 7);
+    return now.toISOString().substring(0, 10);
+}
+
+function CreateDayDictionary() {
+    var days = new Array();
+    days['Sunday'] = 0;
+    days['Monday'] = 1;
+    days['Tuesday'] = 2;
+    days['Wednesday'] = 3;
+    days['Thursday'] = 4;
+    days['Friday'] = 5;
+    days['Saturday'] = 6;
+    return days
+    }
+
+
+
+function open_indicator(opening_times,full_date) {
+    icon_text = ""
+    if (check_if_washer_open(opening_times, full_date)) {
+        icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="../../images/open_ind.svg">Open</div>'
+    }
+    else {
+        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="../../images/closed_ind.svg">Close</div>';
+    }
+    document.getElementById("open_ind").innerHTML = icon_text;
+}
+
 // main function of place order page!!!!
 async function load_place_order_page() {
     var washerID = sessionStorage.getItem("pressed_washer"); // washer that pressed in page map_filter.html
@@ -148,7 +186,47 @@ async function load_place_order_page() {
     f_get_opening_hours_table(washer_doc);
     f_display_washer_details(washer_doc);
     f_display_washer_reviews(washerID);
+
+    opening_times = washer_doc.data().opening_times;
+    var first_opening_time = getWasherFirstOpeningTime(opening_times);
+    console.log(first_opening_time)
+    open_day = nextDay(first_opening_time[0]);
+    open_hour = first_opening_time[1];
+    // open_day = nextDay("Sunday");
+    // open_hour = "10:00"
+    document.getElementById("date").value =  open_day;
+    document.getElementById("startTime").value = open_hour;
+    update_properties_and_price();
+    msg = "please order your laundry to an hour where " +washer_doc.data().name + " is working"
 }
 
 
-
+function getWasherFirstOpeningTime(opening_times) {
+    var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var cur_date = new Date();
+    var i = cur_date.getDay();
+    var tzoffset = cur_date.getTimezoneOffset() * 60000; //offset in milliseconds
+    var localTime = (new Date(Date.now() - tzoffset)).toISOString().slice(11, 16);
+// => '2015-01-26T06:40:36.181'
+    if (opening_times[week_days[i]] != undefined) {
+        open_time = '01/01/2011 '+opening_times[week_days[i]][0]
+        close_time = '01/01/2011 '+opening_times[week_days[i]][1]
+        cur_time = '01/01/2011 ' +localTime
+        if (Date.parse(open_time) > Date.parse(cur_time)) {
+            return [week_days[i], opening_times[week_days[i]][0]]
+        }
+        if (Date.parse(cur_time) < Date.parse(close_time)) {
+            return [week_days[i], localTime]
+        }
+        else {
+            i++;
+        }
+    }
+    while (opening_times[week_days[i]] == undefined) {
+        i++
+        if (i == 7) {
+            i = 0;
+        }
+    }
+    return [week_days[i], opening_times[week_days[i]][0]]
+}
