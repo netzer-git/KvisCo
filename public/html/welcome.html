@@ -24,6 +24,7 @@
     <script src="../../scripts/welcome.js"></script>
     <script src="../../scripts/tools.js"></script>
     <script src="../../scripts/firestore_tools.js"></script>
+    <script src="../../scripts/search_bar_function.js"></script>
     <script scr="/js/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
     <script type="text/javascript">
@@ -34,89 +35,66 @@
 </head>
 
 <body>
-     <!-- onload="myFunction()" style="margin:0;">
-    <div id="loader"></div> -->
-
+    <svg style="display:none; ">
+        <symbol id="search-btn" width="59" height="61" viewBox="0 0 59 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d)">
+            <circle cx="29.3107" cy="29.6496" r="29.2619" fill="white"/>
+            <circle cx="29.3107" cy="29.6496" r="28.7619" stroke="#1C1C1D"/>
+            </g>
+            <path d="M28.8611 36.4024C32.8392 36.4024 36.0641 33.1776 36.0641 29.1995C36.0641 25.2214 32.8392 21.9966 28.8611 21.9966C24.8831 21.9966 21.6582 25.2214 21.6582 29.1995C21.6582 33.1776 24.8831 36.4024 28.8611 36.4024Z" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M37.8639 38.2032L33.9473 34.2866" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+            <filter id="filter0_d" x="0.0488281" y="0.387695" width="58.5238" height="60.5238" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 1 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+            </filter>
+            </defs>
+        </symbol>
+    </svg>
+    <!-- a note to change stuff-->
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="red-section">
-                    <div class="col-md-12">
-                        <h1 class="header_11">
-                            LAUNDRY HAS NEVER BEEN EASIER
-                        </h1>
-                        <div class="row"></div>
-                        <!-- Search Bar starts here-->
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-1">
-                                </div>
-                                <div class="col-9">
-                                    <div class="Search">
-                                        <!-- Search Bar style is the pink box-->
-                                        <div class="row">
-                                            <div class="col-10">
-                                                <table class="table-search">
-                                                    <tr>
-                                                        <td>Where?</td>
-                                                        <td>When?</td>
-                                                        <td>Loads</td>
-                                                        <td>Duration</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input class="choose_location" type="text" id="where" defaultValue="" value=""
-                                                                onchange="save()"></td> <!-- Location -->
-                                                        <td><input class="choose_location" type="date" id="myDate"
-                                                                value="2021-07-09" onchange="save()"></td> <!-- Date -->
-                                                        <td><input class="choose_location" type="number" id="loads_number" defaultValue="1"
-                                                                value="1" onchange="save()"></td> <!-- Loads -->
-                                                        <td>
-                                                            <div class="box">
-                                                                <!-- Duration -->
-                                                                <select id="duration" onchange="save()">
-                                                                    <option value="8">8 hours</option>
-                                                                    <option value="24" selected>24 hours</option>
-                                                                    <option value="48">48 hours</option>
-                                                                    <option value="72">72 hours</option>
-                                                                </select>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="col-2">
-                                                <!-- <div id="search_btn"></div>
-                                                <script>display_search_btn("search_btn")</script> -->
-                                                    <div class="search_btn" id="search_btn">
-                                                        <!-- Magnifying Glass button-->
-                                                        <a href="../html/user_flow/map_filter.html"><img class="shrink" src="../images/search-btn.png"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Search Bar ends here-->
-                    <div class="row">
-                        <div class="col-1">
-                                <div class="col-8">
-                                </div>
-                                <div class="col-2">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div id="finished_orders">
-                                </div>
-                            </div>            
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <img class="rope_img" src="../images/rope.png">
-                    </div>
+        <!-- <div class="container-fluid"> -->
+    <div class="h-100 w-100 container d-flex justify-content-center">
+        <div class="red-section row">
+            <div class= "row">
+                <h1 class="header_11">LAUNDRY HAS NEVER BEEN EASIER</h1>
+            </div>                          
+            <div class="row-search w-50 row">
+                <!-- Search Bar starts here-->
+                <div id="search-bar" class="col-10"> 
+                    <script>get_search_bar("search-bar")</script>
                 </div>
+                <!-- search button-->
+                <div class="col-2">
+                    <div class="col-search-btn">
+                        <a class="search-btn-" href="./user_flow/map_filter.html">
+                            <svg class="search-btn"><use xlink:href="#search-btn"></use></svg>
+                        </a>
+                    </div> 
+                </div>
+            </div>
+            <!-- Search Bar ends here-->
+            <div class="row">
+                <div class="col-1">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-2">
+                    </div>
+                    <div class="row">
+                        <div id="finished_orders"></div>
+                    </div>            
+                </div>
+            </div>
+
+            <div class="row">
+                <img class="rope_img" src="../images/rope.png">
+            </div>
+        </div>
 
             <div class= "pink-section">
                 <div class="row">
