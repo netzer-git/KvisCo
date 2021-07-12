@@ -249,7 +249,7 @@ function insertPlaceOrderBox (tag) {
     po_block += '<tr><td style="width: 250px;">';
     po_block += '<div class="box select">';
     po_block += '<input class="choose_location" type="date" id="date" value="2021-06-21" onchange="update_properties_and_price()"></div>'; // the function updates the price in the box at the buttom.
-    po_block += '<script>document.getElementById('date').value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
+    po_block += '<script>document.getElementById("date").value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
     po_block += '</td><td><div class="box select">';
     po_block += '<select id="property" onchange="update_properties_and_price()">';
     po_block += '<option value="Default" selected>Default</option><option value="ironing">Ironing(+25)</option>';
