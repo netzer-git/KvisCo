@@ -44,9 +44,8 @@ function getUserDisplayName() {
 function authStateObserver(user) {
   if (user) { // User is signed-in
     console.log("in " + getUserToken());
-
-    myOnlyOneElement.innerHTML = "Out";
-
+    user_doc = promiseUserLoaderByCurrentUserID();
+    document.getElementById("log_in_indicator").innerHTML = user_doc.data().name
   } else { // User is signed out!
     console.log("out " + getUserToken());
   }
@@ -60,8 +59,6 @@ function checkSetup() {
         'sure you are running the codelab using `firebase serve`');
   }
 }
-
-var myOnlyOneElement = document.getElementById('only-one');
  
 // Checks that Firebase has been imported.
 checkSetup();

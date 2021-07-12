@@ -20,6 +20,10 @@
         <script src="../../scripts/firestore_tools.js"></script>
         <script src="../../scripts/washer_registration.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
+
+        <!-- <script type="text/javascript">
+            window.onpaint = insert_user_details_if_there_any();
+        </script> -->
     </head>
 
 <body>
@@ -39,7 +43,7 @@
                             <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                                 Upload Profile Photo
                             </button>
-                            <label id="indicator1">photo uploaded</label>
+                            <label id="indicator1" hidden>photo uploaded</label>
                         </form>
                         <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
                         <h4 class="header_41">
@@ -91,10 +95,10 @@
                     <th>
                     <form action="/action_page.php">
                         <label  class="labels" for="module_name">Module Name: </label>
-                        <label  class="labels_2" for="capacity">Capacity: </label>
+                        <label  class="labels_2" for="capacity">Capacity (in KG): </label>
                         <label  class="labels_3" for="year">Year Purchased: </label>
-                        <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
                         <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
+                        <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
                         <input class= "regist_input_3" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
                       </form>
                     </th>

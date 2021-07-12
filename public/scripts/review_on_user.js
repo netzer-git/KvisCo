@@ -63,9 +63,9 @@ async function add_review_to_order() {
     await insert_orders_blocks_of_washer("finished_orders", washerID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
 }
 
-function close_review() {
-    document.getElementById("overlay_review").style.display = "none";
-}
+// function close_review() {
+//     document.getElementById("overlay_review").style.display = "none";
+// }
 
 
 async function display_review_on_user_overlay(orderID) {
