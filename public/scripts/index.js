@@ -137,11 +137,25 @@ const testNadavQuery = async () => {
 }
 
 const test_rating = async () => {
-    // currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
-    // arr = await getBetterCloserWashers(2, currentPoint);
+    currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
+    let nir = {lat: 31.8255, lng: 34.6825};
+    arr = await getBetterCloserWashers(2, nir);
     // console.log(arr[0].data());
     // console.log(arr[1].data());
     // console.log(arr[2].data());
-    let washersOver3 = await getWashersWithRatingOverNumber(3);
-    console.log(washersOver3);
+    let id = [  '1LhDqVKzSkZdsnSC6wFrVG5jte93',
+                '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
+                '59k1DZDLkmSnQqAwMu4hDxNJUhU2',
+                'JaLY3KeIsSO8kSUr3Ks6kiJXkQ92',
+                'VxbGFBQzipZf1rzyAAvr8uMp8nl1',
+                'c0KmkCafo7bZmCcZvW2Nr7NqgDK2',
+                'oLIW1OSO4RPX04nVJpRfe9FGsrd2',
+                'vXHZptolc5WUF6ERfIlxvqOmsfI2',
+                'vkJUWqtEC1cwoFQFL417gOdqeZr2'
+            ];
+    for (i of id) {
+        doc = await promiseWasherLoaderById(i);
+        rating = await getRatingFromDoc(doc, 'washer');
+        console.log(doc.data().name + " : " + rating);
+    }
 }

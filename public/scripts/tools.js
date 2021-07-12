@@ -204,23 +204,3 @@ function checkIfOpenNow(openTime, closeTime, wantedTime) {
     return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
   }
 }
-
-/**
- * @param {*} washerDoc washer document
- * @returns [day, "hour:minutes"] which is the next time the washer is open
- */
-function getNextOpenTime(washerDoc) {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const myDate = new Date();
-  const wantedTime = [Number(myDate.getHours()) + 1, 0];
-
-  for (i of days) {
-    if (i >= myDate.getDay()) {
-      openTime = getHourAsNumber(washerDoc.data().opening_times[day[i]][0]);
-      closeTime = getHourAsNumber(washerDoc.data().opening_times[day[i]][1]);
-      if (checkIfOpenNow(openTime, closeTime, wantedTime)) {
-        return [days[i], str(wantedTime[0]) + ":00"];
-      }
-    }
-  }
-}

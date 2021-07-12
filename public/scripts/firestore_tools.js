@@ -415,13 +415,17 @@ async function getWasherFilterQuery(filters) {
 
     if (filters.rating !== undefined) {
         // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
-        let filteredWashersWithRating = [];
-        washersArray.forEach(async (doc) => {
-            rating = await getRatingFromDoc(doc, 'washer');
-            if (rating >= filters.rating) {
-                filteredWashersWithRating.push(doc);
-            }
+        let docArray = [];
+        washersArray.forEach((doc) => {
+            docArray.push(doc);
         });
+        let filteredWashersWithRating = [];
+        for (let washer of docArray) {
+            let rating = await getRatingFromDoc(washer, 'washer');
+            if (rating >= filters.rating) {
+                filteredWashersWithRating.push(washer);
+            }
+        }
         filteredWashers = firstQuery ? filteredWashersWithRating : intersection(filteredWashers, filteredWashersWithRating);
         firstQuery = false;
     }
@@ -530,6 +534,7 @@ async function getBetterCloserWashers(indicator, currentPoint) {
         case 2:
             washerArray = await getWasherFilterQuery({
                 rating: 3,
+                distance: 1,
             });
             break;
         case 3:
