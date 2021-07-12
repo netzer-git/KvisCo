@@ -413,19 +413,6 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.rating !== undefined) {
-        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
-        let filteredWashersWithRating = [];
-        washersArray.forEach(async (doc) => {
-            rating = await getRatingFromDoc(doc, 'washer');
-            if (rating >= filters.rating) {
-                filteredWashersWithRating.push(doc);
-            }
-        });
-        filteredWashers = firstQuery ? filteredWashersWithRating : intersection(filteredWashers, filteredWashersWithRating);
-        firstQuery = false;
-    }
-
     if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
@@ -434,6 +421,23 @@ async function getWasherFilterQuery(filters) {
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithDistance : intersection(filteredWashers, filteredWashersWithDistance);
+        firstQuery = false;
+    }
+
+    if (filters.rating !== undefined) {
+        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
+        let docArray = [];
+        washersArray.forEach((doc) => {
+            docArray.push(doc);
+        });
+        let filteredWashersWithRating = [];
+        for (let washer of docArray) {
+            let rating = await getRatingFromDoc(washer, 'washer');
+            if (rating >= filters.rating) {
+                filteredWashersWithRating.push(washer);
+            }
+        }
+        filteredWashers = firstQuery ? filteredWashersWithRating : intersection(filteredWashers, filteredWashersWithRating);
         firstQuery = false;
     }
 
@@ -530,6 +534,8 @@ async function getBetterCloserWashers(indicator, currentPoint) {
         case 2:
             washerArray = await getWasherFilterQuery({
                 rating: 3,
+                distance: 3,
+                current_cor: currentPoint,
             });
             break;
         case 3:

@@ -9,12 +9,12 @@ function save() {
     duration = document.getElementById("duration").value;
     // Do whatever you want with the value here.
     jsarray = [address, myDate, duration];
-    sessionStorage.setItem("jsArray", JSON.stringify(jsarray));
+    sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     // JSON.stringify(jsArray) converts the jsArray into a string which can be stored in sessionStorage
 }
 
 function get_search_bar(tag) {
-    var jsarray = JSON.parse(sessionStorage.getItem("jsArray"));
+    var jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
     if (jsarray == null) {
         jsarray = jsarray_basic;
     }
