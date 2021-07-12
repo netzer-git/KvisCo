@@ -39,11 +39,13 @@ function display_log_in_or_out() {
 
 async function become_a_washer() {
     if (!isUserSignedIn()) {
-        await signIn();
+        signIn();
         return;
     }
     var washerID = getUserToken();
-    if (!await promiseUserLoaderById(washerID)) {
+    console.log("deeeeeeeeeebug")
+    washer_doc = await promiseWasherLoaderById(washerID) 
+    if (washer_doc == null) {
         window.location.href = "../../html/washer_flow/washer_registration.html";
         return;
     }

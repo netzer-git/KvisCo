@@ -11,13 +11,6 @@ async function get_order_block_of_user(order_doc) {
     block += "<tr><th scope='col' colspan='2'>"+ washer_doc.data().name +"</th></tr>";
     var date = new Date(order_doc.data().due_to*1000);
     var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
-    if (date.getMinutes().toString().length <= 1) {
-        var minutes = "0" +date.getMinutes();
-    }
-    else {
-        var minutes = date.getMinutes();
-    }
-    var time = date.getHours()+ ":" +minutes;
     block += "<tr><td>"+ formattedTime + "</td><td>"+ order_doc.data().price +" &#8362</td></tr>"
     switch (order_doc.data().status) {
         case 'pending':
