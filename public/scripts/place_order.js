@@ -204,29 +204,83 @@ async function load_place_order_page() {
 function getWasherFirstOpeningTime(opening_times) {
     var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var cur_date = new Date();
-    var i = cur_date.getDay();
-    var tzoffset = cur_date.getTimezoneOffset() * 60000; //offset in milliseconds
-    var localTime = (new Date(Date.now() - tzoffset)).toISOString().slice(11, 16);
-// => '2015-01-26T06:40:36.181'
-    if (opening_times[week_days[i]] != undefined) {
-        open_time = '01/01/2011 '+opening_times[week_days[i]][0]
-        close_time = '01/01/2011 '+opening_times[week_days[i]][1]
-        cur_time = '01/01/2011 ' +localTime
+    var day_num = cur_date.getDay();
+    var tz_offset = cur_date.getTimezoneOffset() * 60000; // offset in milliseconds
+    var localTime = (new Date(Date.now() - tz_offset)).toISOString().slice(11, 16);
+    // => '2015-01-26T06:40:36.181'
+    if (opening_times[week_days[day_num]] !== undefined) {
+        open_time = '01/01/2011 ' + opening_times[week_days[day_num]][0];
+        close_time = '01/01/2011 ' + opening_times[week_days[day_num]][1];
+        cur_time = '01/01/2011 ' + localTime;
         if (Date.parse(open_time) > Date.parse(cur_time)) {
-            return [week_days[i], opening_times[week_days[i]][0]]
+            return [week_days[day_num], opening_times[week_days[day_num]][0]];
         }
         if (Date.parse(cur_time) < Date.parse(close_time)) {
-            return [week_days[i], localTime]
+            return [week_days[day_num], localTime];
         }
         else {
-            i++;
+            day_num++;
         }
     }
-    while (opening_times[week_days[i]] == undefined) {
-        i++
-        if (i == 7) {
-            i = 0;
+    while (opening_times[week_days[day_num]] === undefined) {
+        day_num++;
+        if (day_num == 7) {
+            day_num = 0;
         }
     }
-    return [week_days[i], opening_times[week_days[i]][0]]
+    return [week_days[day_num], opening_times[week_days[day_num]][0]];
+}
+
+function insertPlaceOrderBox (tag) {
+    // The col-5 can be changed.
+    //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
+    // The SVG is neccessery to be included in the page, where the bodey begins.
+    po_block += '<svg><use xlink:href="#order-box-svg"></use></svg>';
+    // Topic
+    po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
+    po_block += '<h7>PLACE ORDER</h7>';
+    // Start of input table zone
+    po_block += '<table class="place_order_table">';
+    // First row- labels of dropoff day and special services.
+    po_block += '<tr style="color: black;">';
+    po_block += '<td>Drop off day</td>';
+    po_block += '<td style="margin-left: -100px;">Special services</td></tr>';
+    // Second row- input fields of dropoff time and special services.
+    po_block += '<tr><td style="width: 250px;">';
+    po_block += '<div class="box select">';
+    po_block += '<input class="choose_location" type="date" id="date" value="2021-06-21" onchange="update_properties_and_price()"></div>'; // the function updates the price in the box at the buttom.
+    po_block += '<script>document.getElementById('date').value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
+    po_block += '</td><td><div class="box select">';
+    po_block += '<select id="property" onchange="update_properties_and_price()">';
+    po_block += '<option value="Default" selected>Default</option><option value="ironing">Ironing(+25)</option>';
+    po_block += '<option value="door2door">Door-2-Door(+20)</option>';
+    po_block += '<option value="dryer">Hanging Drying(+12)</option></select></div></td></tr>';
+    // Labels of Drop off time and loads
+    po_block += '<tr style="color: black;"><td style="padding-top: 3%;">Drop off time</td>';
+    po_block += '<td style="margin-left: 0; padding-top: 3%;">Loads</td></tr>';
+    // input fields of time and  
+    po_block += '<tr><td>';
+    po_block += '<input class="choose_location" type="time" id="startTime"value="08:00" onchange="update_properties_and_price()"></td>';
+    po_block += '<td style="margin-left: 0;"><input class="choose_location" type="number" id="loads"value="1" onchange="update_properties_and_price()"></td></tr>';
+    po_block += '<tr style="color: black;"><td><div id="open_ind"></div></td>';
+    po_block += '<td style="padding-top: 3%;">Wash settings</td>';
+    po_block += '</tr><tr><td></td>';
+    po_block += '<td><div class="box select"><select id="wash_settings" onchange="update_properties_and_price()">';
+    po_block += '<option value="Default" selected>Default</option>';
+    po_block += '<option value="30°C Wash">30°C Wash</option><option value="60°C Wash">60°C Wash</option>';
+    po_block += '<option value="Fast Wash">Fast Wash(+10)</option>';
+    po_block += '<option value="Whites Only">Whites Only</option>';
+    po_block += '<option value="Delicates">Delicates</option>';
+    po_block += '</select></div></td></tr></table>'
+    po_block += '<textarea class="note" id="notes_for_laundry" name="note" rows="4" cols="50" placeholder="Special requests and comments..."onchange="update_properties_and_price()"></textarea>';
+    po_block += '<label class="cont">I agree to terms and conditions<input type="checkbox" id="terms"><span class="checkmark"></span></label>';
+    po_block += '<div class="row"><div class="col-5">';
+    po_block += '<div class="col-5"><tr><td><div class="small-box" id="price"></div>';
+    po_block += '<script>update_properties_and_price()</script></td></tr></table></div>';
+    po_block += '<div class="col-7"><div style="margin-left: 15%; margin-top: -3%;">';
+    po_block += '<div id="overlay_register" onclick="off()">';
+    po_block += '<div id="register_block"></div></div>';
+    po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
+    po_block += '</div></div></div></div>';
+    document.getElementById(tag).innerHTML = po_block;
 }

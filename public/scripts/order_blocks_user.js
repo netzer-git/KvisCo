@@ -4,11 +4,36 @@ async function get_order_block_of_user(order_doc) {
     // const washer_doc = await order_doc.data().washer.get();
     const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
     block = "";
-    block = "<div class='col-lg-4'>";
-    block += "<div class='col_with_padd'>";
-    block += "<table class='Background_box'>";
-    block += "<tr><th scope='col' colspan='2'><img class='rounded-circle' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'> </th></tr>";
-    block += "<tr><th scope='col' colspan='2'>"+ washer_doc.data().name +"</th></tr>";
+    block += "<div class='col-lg-5'>";
+    // block += "<div class='col_with_padd'>";
+    block += "<div class='shadow frame'>";
+    block += "<div class='center-order'>";
+    block += "<div class='profile'>";
+    block += "<div class='image-order'><div class='circle-1'></div><div class='circle-2'></div>";
+    block += "<img src=" + washer_doc.data().imageUrl + " class='rounded-circle-xs' alt='profile_pic'></div>";
+    block += "<div class='name'>"+ washer_doc.data().name +"</div>";
+    // Button - changing
+    switch (order_doc.data().status) {
+        case 'pending':
+        case 'process':
+            block += "<div class='actions'>";
+            block += "<div id='overlay' onclick='off()'>";
+            block += "<div id='user_order'></div></div>";
+            block += " <button class='btn-white' onclick='display_order()'>Details</button></div></div>";
+          break;
+        case 'finished':
+            if (window.location.pathname == "/html/welcome.html") {
+                block += "<button id=block_num_" + block_num + " value='" + washer_doc.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Order Again </button></div>";
+            }
+            else if (order_doc.data().review_washer == "") {
+                block += "<button class='btn-white'> Review </button></div>";
+            }
+            else {
+                block += "<button id = 'user_order' class='btn-white' style='margin-top:10%;'> Watch Review </button></div>";
+            }
+            break;
+    }
+    // Date and Price blocks 
     var date = new Date(order_doc.data().due_to*1000);
     var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
     if (date.getMinutes().toString().length <= 1) {
@@ -18,28 +43,12 @@ async function get_order_block_of_user(order_doc) {
         var minutes = date.getMinutes();
     }
     var time = date.getHours()+ ":" +minutes;
-    block += "<tr><td>"+ formattedTime + "</td><td>"+ order_doc.data().price +" &#8362</td></tr>"
-    switch (order_doc.data().status) {
-        case 'pending':
-        case 'process':
-            block += "</tr><th scope='col' colspan='2'>";
-            block += "<div id='overlay' onclick='off()'>";
-            block += "<div id='user_order'></div></div><div>";
-            block += "<div><button onclick='display_order()' class='button1'> Details </button></div></th></tr>";
-          break;
-        case 'finished':
-            if (window.location.pathname == "/html/welcome.html") {
-                block += "</tr><th scope='col' colspan='2'><button id=block_num_" + block_num + " value='" + washer_doc.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='button1'> Order Again </button></th></tr>";
-            }
-            else if (order_doc.data().review_washer == "") {
-                block += "</tr><th scope='col' colspan='2'><button class='button1'> Review </button></th></tr>";
-            }
-            else {
-                block += "</tr><th scope='col' colspan='2'><button id = 'user_order' class='button1'> Watch Review </button><div id='myModal' class='modal'></th></tr>";
-            }
-        break;
-    }
-    block += "</table>";
+    block += "<div class='stats'><div class='box-price'>"
+    block += "<span class='value'>"+ formattedTime + "</span><span class='parameter'>Date</span></div>"
+    block += "<div class='box-price'><span class='value'>" + order_doc.data().price +" &#8362</span><span class='parameter'>Price</span></div></div>"
+    
+    block += "</div>";
+    // block += "</div>";
     block += "</div>";
     block += "</div>";
     return block;
