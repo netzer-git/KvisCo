@@ -115,6 +115,26 @@ async function getRatingFromDoc(doc, field) {
 }
 
 /**
+ * @param {Number} ratingNum target number for the rating
+ * @returns list of all the washers that have rating bigger than ratingNum
+ */
+async function getWashersWithRatingOverNumber(ratingNum) {
+    const docOrderArray = await db.collection('orders').where(status, "==", 'finished').get();
+    let ratingDict = {};
+    docOrderArray.forEach((doc) => {
+        let washer = doc.data().washer;
+        let rating = doc.data().rating_washer;
+        if (ratingDict[washer] !== undefined && rating !== undefined) {
+            ratingDict[washer].ratingSum += rating;
+            ratingDict[washer].ratingNum += 1;
+        }
+    });
+    ratingDict.filter((washer) => {
+        
+    });
+}
+
+/**
  * the function takes washerID and resolves a promise of multiple orders (of the current washer) by specific given status
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
@@ -122,18 +142,11 @@ function promiseOrderArrayByFieldIdAndStatus(field, docID, status) {
     return new Promise((resolve, reject) => {
 
         var query = db.collection('orders').where(field, "==", docID);
-        // if (status === "all") {
-            // var query = db.collection('orders').where(field, "==", docID);
-        // } else if (status === "processing") {
-            // var query = db.collection('orders').where('status', '!=', "finished").where(field, "==", docID);
-        // } else {
-            // var query = db.collection('orders').where(field, "==", docID).where('status', '==', status);
-        // }
 
         query.get().then((docArray) => {
             const orderArray = [];
             docArray.forEach((doc) => {
-                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished') || (doc.data().status === status);
+                let isDocGetIn = (status === 'all') || (status === 'processing' && doc.data().status !== 'finished' && doc.data().status !== 'declined') || (doc.data().status === status);
                 if (isDocGetIn) {
                     orderArray.push(doc);
                 }
@@ -400,18 +413,6 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.rating !== undefined) {
-        let filteredWashersWithRating = [];
-        washersArray.forEach(async (doc) => {
-            rating = await getRatingFromDoc(doc, 'washer');
-            if (rating >= filters.rating) {
-                filteredWashersWithRating.push(doc);
-            }
-        });
-        filteredWashers = firstQuery ? filteredWashersWithRating : intersection(filteredWashers, filteredWashersWithRating);
-        firstQuery = false;
-    }
-
     if (filters.distance !== undefined && filters.current_cor !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
@@ -420,6 +421,23 @@ async function getWasherFilterQuery(filters) {
             }
         });
         filteredWashers = firstQuery ? filteredWashersWithDistance : intersection(filteredWashers, filteredWashersWithDistance);
+        firstQuery = false;
+    }
+
+    if (filters.rating !== undefined) {
+        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
+        let docArray = [];
+        washersArray.forEach((doc) => {
+            docArray.push(doc);
+        });
+        let filteredWashersWithRating = [];
+        for (let washer of docArray) {
+            let rating = await getRatingFromDoc(washer, 'washer');
+            if (rating >= filters.rating) {
+                filteredWashersWithRating.push(washer);
+            }
+        }
+        filteredWashers = firstQuery ? filteredWashersWithRating : intersection(filteredWashers, filteredWashersWithRating);
         firstQuery = false;
     }
 
@@ -516,6 +534,8 @@ async function getBetterCloserWashers(indicator, currentPoint) {
         case 2:
             washerArray = await getWasherFilterQuery({
                 rating: 3,
+                distance: 3,
+                current_cor: currentPoint,
             });
             break;
         case 3:

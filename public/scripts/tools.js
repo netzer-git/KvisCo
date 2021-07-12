@@ -147,16 +147,50 @@ function deg2rad(deg) {
  * @return {boolean} true if the wanted time is in the washer opening time.
  */
 function checkOpenTimes(filter, washerDoc) {
-  const getHourAsNumber = (hourMinTime) => {
-    openPattern = new RegExp(/(?<hour>\d\d):(?<min>\d\d)/);
-    wantedHour = hourMinTime.match(openPattern);
-    return [Number(wantedHour[1]), Number(wantedHour[2])]
-  }
   // getting open and close time for the specific day
   openTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][0]);
   closeTime = getHourAsNumber(washerDoc.data().opening_times[filter[0]][1]);
   wantedTime = getHourAsNumber(filter[1]);
   // going through each possible combination of hour and min
+  return checkIfOpenNow(openTime, wantedTime);
+  // if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
+  //   return false;
+  // }
+  // else if (openTime[0] < wantedTime[0]) {
+  //   return ((wantedTime[0] < closeTime[0]) || (wantedTime[1] < closeTime[1]));
+  // }
+  // else if (wantedTime[0] < closeTime[0]) {
+  //   return ((openTime[0] < wantedTime[0]) || (openTime[1] < wantedTime[1]));
+  // }
+  // else {
+  //   return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
+  // }
+}
+
+/**
+ * @param {*} hourMinTime "hours:minutes"
+ * @returns [hours, minutes] as numbers
+ */
+function getHourAsNumber (hourMinTime) {
+  if (hourMinTime === undefined) {
+    return null;
+  }
+  openPattern = new RegExp(/(?<hour>\d\d):(?<min>\d\d)/);
+  wantedHour = hourMinTime.match(openPattern);
+  return [Number(wantedHour[1]), Number(wantedHour[2])]
+}
+
+/**
+ * 
+ * @param {*} openTime 
+ * @param {*} wantedTime 
+ * @param {*} closeTime
+ * @returns 
+ */
+function checkIfOpenNow(openTime, closeTime, wantedTime) {
+  if (!openTime || !closeTime || !wantedTime) {
+    return false;
+  }
   if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
     return false;
   }

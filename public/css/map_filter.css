@@ -9,13 +9,19 @@
     --bg-color: #ffffffff;
 }
 
-html,body{
+body{
     overflow: hidden;
     color: var(--font-color);
+    /* width: 100%;
     height: 100%;
+    min-height: 100%;
     padding-top: 44px;
-    padding-bottom: 25px;
-    background-color: blue;
+    padding-bottom: 25px; */
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    max-width: 100vw;
+    margin: 0 auto;
 }
 
 h1{
@@ -96,40 +102,17 @@ h4 {
 
 .card-title {
     /* Headline/Title/Bold 24 */
-
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
     line-height: 32px;
     /* or 145% */
-
     letter-spacing: 0.625px;
-
     /* Main / Black */
-
-    color: var(--font-color)
-    /* width: 289px;
-    height: 49px;
-    left: 758px;
-    top: 190px;
-    padding-left: 5%; */
-
-    /* Headline / H5 */
-
-    /* font-family: 'Permanent Marker', cursive;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 200%;
-    line-height: 48px; */
-    /* identical to box height, or 108% */
-
-    /* letter-spacing: 2px; */
-
-    /* Main / Black */
-
-    /* color: #1C1C1D;
-    white-space: nowrap; */
+    color: var(--font-color);
+    padding-left: 0%;
+    margin-bottom: 0px  !important;
 }
 
 h6{
@@ -147,18 +130,13 @@ h6{
     color: var(--secondary-font-color);
 }
 
-body{
-    width: 100%;
-    height: 100%;
-}
-
 svg{
     overflow: visible;
 }
 
 .container{
     /* overflow: auto; */
-    margin-top: -20px;
+    margin-top: 4%;
     height: 100%;
     width: 100%;
     padding: 0;
@@ -184,7 +162,7 @@ hr.solid {
 
 .row-search {
     position: fixed !important;
-    height: 20%;
+    height: 80px;
     border-radius: 20px;
     background: var(--color-3);
     border: 2px solid var(--font-color);
@@ -240,10 +218,10 @@ hr.solid {
   }
 
 
-.search_btn {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
+.col-search-btn {
+  margin: 0 auto;
+  /* width: 50%; */
+  padding: 7%;
 }
 
 .row-map-cards-filter{
@@ -398,14 +376,18 @@ hr.solid {
     margin-top: 10%;
 }
 
-.card-text{
-    margin-top: 5% !important;
-    margin-left: -5% !important;
-}
-
 /* .card .card-img-overlay .card-details .card-pic-rating{
     margin-left: 5px
 } */
+
+.card-details{
+    position: relative;
+}
+.card-profile-img-border{
+    width: 94px !important;
+    height: 94px;
+    border: 1px solid #1C1C1D;
+}
 
 .card-profile-img{
     object-fit: cover;
@@ -413,11 +395,11 @@ hr.solid {
     width: 90px !important;
     height: 90px;
     /* Main / Black */
-    border: 1px solid #1C1C1D;
+    /* border: 1px solid #1C1C1D; */
     border-radius: 100px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     /* Elements */
-    box-shadow: 0px 2px 0px #202020;
+    /* box-shadow: 0px 3px 0px #202020; */
 }
 
 .rating-star{
