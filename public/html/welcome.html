@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../css/welcome.css">
     <link rel="stylesheet" href="../css/user_profile.css">
     <link rel="stylesheet" href="../css/washer_properties.css">
+    <link rel="stylesheet" href="../css/orders_components.css">
     <script src="../scripts/search_bar_function.js"></script>
     <script src="../scripts/header_bar.js"></script>
     <script src="../scripts/order_blocks_user.js"></script>
@@ -60,56 +61,85 @@
     <div id="includedContent"></div>
         <!-- <div class="container-fluid"> -->
     <div class="h-100 w-100 container d-flex justify-content-center">
-        <div class="red-section row">
-            <div class= "row">
-                <h1 class="header_11">LAUNDRY HAS NEVER BEEN EASIER</h1>
-            </div>                          
-            <div class="row-search w-50 row">
-                <!-- Search Bar starts here-->
-                <div id="search-bar" class="col-10"> 
-                    <script>get_search_bar("search-bar")</script>
-                </div>
-                <!-- search button-->
-                <div class="col-2">
-                    <div class="col-search-btn">
-                        <a class="search-btn-" href="./user_flow/map_filter.html">
-                            <svg class="search-btn"><use xlink:href="#search-btn"></use></svg>
-                        </a>
-                    </div> 
-                </div>
-            </div>
-            <!-- Search Bar ends here-->
-            <div class="row">
-                <div class="col-1">
-                    <div class="col-8">
+        <div class="main-row row">
+            <div class="red-section row">
+                <div class= "row-header row">
+                    <h1 class="header_11">LAUNDRY HAS NEVER<br/>BEEN EASIER</h1>
+                </div>                          
+                <div class="row-search w-50 row">
+                    <!-- Search Bar starts here-->
+                    <div id="search-bar" class="col-10"> 
+                        <script>get_search_bar("search-bar")</script>
                     </div>
+                    <!-- search button-->
                     <div class="col-2">
+                        <div class="col-search-btn">
+                            <a class="search-btn-" href="./user_flow/map_filter.html">
+                                <svg class="search-btn"><use xlink:href="#search-btn"></use></svg>
+                            </a>
+                        </div> 
                     </div>
-                    <div class="row">
-                        <div id="finished_orders"></div>
-                    </div>            
+                </div>
+                <!-- Search Bar ends here-->
+                <div class="row">
+                    <div class="col-12" id="finished_orders"></div>
+                    <!-- <div class="col-1">
+                        <div class="col-8">
+                        </div>
+                        <div class="col-2">
+                        </div>
+                        <div class="row">
+                            <div id="finished_orders"></div>
+                        </div>            
+                    </div> -->
+                </div>
+    
+                <div class="row">
+                    <img class="rope_img" src="../images/rope.png">
                 </div>
             </div>
-
-            <div class="row">
-                <img class="rope_img" src="../images/rope.png">
-            </div>
-        </div>
-
-            <div class= "pink-section">
-                <div class="row">
-                    <div class="white-section">
+    
+            <!-- <div class= "pink-section"> -->
+                <div class="white-section row">
+                    <table class="white-section-info">
+                        <tr>
+                            <th>
+                                <h2 class="header_21">
+                                    THE SOCIAL LAUNDRY <br /> SERVICES ARE NOW <br /> IN TOWN!
+                                </h2>
+                            </th>
+                            <td>
+                                <div class="col-md-4" class="float-right">
+                                    <img class="orange_machine" src="../images/washing-machine.gif" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div class="small_headline">
+                                    Try one of the best washers from your area,
+                                    <br /> they are ready to give your clothes the perfect care!
+                                </div>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pink-section row">
+                    <img class="cards" src="../images/Cards.svg" />
+                </div>
+                <div class="white-section-2 row">
+                    <!-- <div class="white-section-2"> -->
                         <table>
                             <div class="col-md-8">
                                 <tr>
                                     <th>
-                                        <h2 class="header_21">
-                                            THE SOCIAL LAUNDRY <br /> SERVICES ARE NOW <br /> IN TOWN!
+                                        <h2 class="header_22">
+                                            BECOME A WASHER
                                         </h2>
                                     </th>
                                     <td>
                                         <div class="col-md-4" class="float-right">
-                                            <img class="orange_machine" src="../images/washing-machine.gif" />
+                                            <img class="leptop" src="../images/leptop.png" />
                                         </div>
                                     </td>
                                 </tr>
@@ -117,71 +147,26 @@
                             <div class="row">
                                 <tr>
                                     <th>
-                                        <div class="small_headline">
-                                            Try one of the best washers from your area,
-                                            <br /> they are ready to give your clothes the perfect care!
+                                        <div class="small_headline_2">
+                                            Clean other’s clothes and become
+                                            <br /> part of an awesome sharing community.
+                                            <br /> Thanks to your help, people around you will have
+                                            better smelling clothes and a much better hygiene
                                         </div>
                                     </th>
                                 </tr>
-                            </div>
-                    </div>
-                </div>
-                </table>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="pink-section">
-                <table>
-                    <tr>
-                        <th>
-                            <div class="col-md-3">
-                                <img class="cards" src="../images/Cards.svg" />
-                            </div>
-                        </th>
-                </table>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="white-section-2">
-                <table>
-                    <div class="col-md-8">
-                        <tr>
-                            <th>
-                                <h2 class="header_22">
-                                    BECOME A WASHER
-                                </h2>
-                            </th>
-                            <td>
-                                <div class="col-md-4" class="float-right">
-                                    <img class="leptop" src="../images/leptop.png" />
+                                <div class="row">
+                                    <tr>
+                                        <th>
+                                            <button onclick = "become_a_washer()" class="red_button">Let's Start</button>
+                                        </th>
+                                    </tr>
                                 </div>
-                            </td>
-                        </tr>
-                    </div>
-                    <div class="row">
-                        <tr>
-                            <th>
-                                <div class="small_headline_2">
-                                    Clean other’s clothes and become
-                                    <br /> part of an awesome sharing community.
-                                    <br /> Thanks to your help, people around you will have
-                                    better smelling clothes and a much better hygiene
-                                </div>
-                            </th>
-                        </tr>
-                        <div class="row">
-                            <tr>
-                                <th>
-                                    <button onclick = "become_a_washer()" class="red_button">Let's Start</button>
-                                </th>
-                            </tr>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </table>
-        </div>
+                    </table>
+                <!-- </div> -->
+            </div>
         </div>
     </div>
     </body>

@@ -13,11 +13,14 @@
 }
 
 .container{
-    /* overflow: auto; */
-    margin-top: 4%;
+    /* margin-top: 4% !important; */
     height: 100%;
     width: 100%;
     padding: 0;
+}
+
+.main-row{
+    position: absolute;
 }
 
 
@@ -147,7 +150,7 @@ h6{
     font-weight: normal;
     font-size: 18px;
     line-height: 150%;
-    margin-top: -15%;
+    margin-top: -12%;
     margin-left: 10%;
 
     /* or 27px */
@@ -176,7 +179,7 @@ h6{
     /* or 27px */
 
     letter-spacing: 0.45px;
-    margin-top: -55%;
+    margin-top: -50%;
     margin-left: 10%;
 
 
@@ -187,9 +190,8 @@ h6{
 
 
 .red-section{
-    position: absolute;
+    /* position: absolute !important; */
     width: 100%;
-    /* height: 100%; */
     right: 0px;
     left: 0px;
     top: 0px;
@@ -200,15 +202,16 @@ h6{
 }
 
 .white-section{
-    /* position: absolute; */
+    /* position: absolute !important; */
     width: 100%;
     height: 468px;
     left: 0px;
-    top: 882px;
+    /* top: 882px; */
 
     /* Main / White */
 
     background: #FFFFFF;
+    margin-left: 99.6px !important;
 }
 
 .pink-section{
@@ -216,7 +219,7 @@ h6{
     width: 100%;
     height: 574px;
     left: 0px;
-    top: 1350px;
+    /* top: 1350px; */
 
     /* Palet 1 / 3 */
 
@@ -226,9 +229,10 @@ h6{
 .white-section-2{
     width: 1440px;
     height: 562px;
-    left: 0px;
+    left: 99.6px;
     top: 1924px;
     background: #FFFFFF;
+    margin-left: 99.6px !important;
 }
 
 .rope_img{
@@ -242,17 +246,17 @@ h6{
 }
 
 .orange_machine{
-    /* position: absolute; */
     width: 470px;
     height: 288px;
     left: 829px;
     top: 90px;
     right: 0px;
-    margin-left: 60%;
-    margin-top: 60%;
-
+    /* margin-left: 60%; */
 }
 
+.white-section-info{
+    margin: auto 0 !important;
+}
 
 .cards{
     position: absolute;
@@ -266,7 +270,7 @@ h6{
     margin-top: 70px;
     right: 0;
     left: 0;
-    margin: 70px auto;
+    margin: 70px auto !important;
 }
 
 .leptop{
@@ -342,7 +346,7 @@ h6{
 
 .header_21{
     margin-left: 10%;
-
+    margin-top: -10%;
 }
 
 .header_22{
@@ -351,7 +355,9 @@ h6{
 }
 
 
-
+.row-header{
+    margin-top: 4% !important;
+}
  
 
 .input-box {
@@ -423,9 +429,6 @@ h6{
 #startTime {
     display: inline-block;
 }
-#open_ind {
-    display: inline-block;
-}
 
 
 .table-search {
@@ -454,6 +457,6 @@ h6{
     background: var(--color-3);
     border: 2px solid var(--font-color);
     box-shadow: 0px 8px 0px 0px var(--font-color);
-    z-index: 2;
+    /* z-index: 2; */
     margin: auto !important;
 }
