@@ -1,6 +1,6 @@
 .order_pink{
-    width: 750px;
-    height: 650px;
+    width: 40%;
+    height: 85%;
 
     /* Palet 1 / 3 */
 
@@ -12,12 +12,12 @@
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 3%;
+    margin-top: 5%;
 }
 
 .order_white{
-    height: 550px;
-    width: 625px;
+    height: 400px;
+    width: 400px;
     margin-top: -10%;
         /* Main / White */
 
@@ -26,6 +26,7 @@
     /* Main / Black */
 
     border: 2px solid #1C1C1D;
+    border-radius: 2%;
 }
 
 
@@ -107,44 +108,31 @@ table.order_white th{
 }
 
 .header_24{
-      /* position: absolute; */
-  width: 558px;
-  height: 146px;
-  left: 120px;
-  top: 80px;
-
-  /* Headline / H2 */
-
+  /* width: 558px; */
+  height: 130px;
   font-family: 'Permanent Marker';
   font-style: normal;
   font-weight: normal;
-  font-size: 45px;
-  line-height: 48px;
-  /* or 108% */
-
-  letter-spacing: 2px;
-
-  /* Main / Black */
-
+  line-height: 250%;
+  letter-spacing: 1px;
   color: #1C1C1D;
-    margin-left:2%;
-    font-size: 35px;
+  margin-left: 2%;
+  font-size: 29px;
 }
 
 .header_61{
-    margin-left: 7%;
-    font-family: Montserrat;
+    margin-left: 35%;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 32px;
-    /* or 160% */
-
+    line-height: 25px;
     letter-spacing: 0.625px;
-
-    /* Main / Black */
-
     color: #1C1C1D;
+}
+
+.header_44{
+    font-size: 30px;
 }
 
 .small_headline_4{
@@ -155,7 +143,7 @@ table.order_white th{
 
     /* Text / Medium 18 */
 
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -217,7 +205,7 @@ table.order_white th{
 
     border: 2px solid #1C1C1D;
     border-radius: 10px;
-    width: 70%;
+    width: 25%;
     height: 50%;
     margin-left: 3%;
     font-family: 'Montserrat';
@@ -233,6 +221,7 @@ table.order_white th{
     /* Main / Black */
 
     color: #1C1C1D;
+    margin-bottom: 4%;
 }
 
 .phone_number{
@@ -246,9 +235,9 @@ table.order_white th{
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 32px;
-    width: 300px;
+    width: 250px;
     height: 50px;
 
 }
