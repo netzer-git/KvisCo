@@ -137,9 +137,11 @@ const testNadavQuery = async () => {
 }
 
 const test_rating = async () => {
-    currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
-    arr = await getBetterCloserWashers(2, currentPoint);
-    console.log(arr[0].data());
-    console.log(arr[1].data());
-    console.log(arr[2].data());
+    // currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
+    // arr = await getBetterCloserWashers(2, currentPoint);
+    // console.log(arr[0].data());
+    // console.log(arr[1].data());
+    // console.log(arr[2].data());
+    let washersOver3 = await getWashersWithRatingOverNumber(3);
+    console.log(washersOver3);
 }
