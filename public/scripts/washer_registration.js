@@ -46,7 +46,7 @@ function save_profile_pic(event) {
         washer_profile_pic = event.target.files[0];
         is_profile_loaded = true
         if (is_profile_loaded) {
-            document.getElementById("indicator").style.display = "block";
+            document.getElementById("indicator1").style.display = "block";
           }
         // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
