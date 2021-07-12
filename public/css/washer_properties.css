@@ -18,6 +18,14 @@
     object-fit: cover;
 }
 
+.rounded-circle-xs {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .rounded-circle-big {
     display: inline-block;
     width: 120px;
