@@ -43,8 +43,8 @@ async function load_profile_header_of_user(user_doc) {
     user_header += '<tr><div class="description">'+user_doc.data().description +'</div></tr>';
     user_header += '</table></div></div>';
     user_header += '<div class="row">';
-    user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
-    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
+    user_header += '<div class="col-9"><div class="location">'+user_doc.data().location_str+'</div></div>';   
+    user_header += '<div class="col-3"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
     user_header += '</div></div></div>';  ;
     document.getElementById("profile_header").innerHTML = user_header;  
 }
