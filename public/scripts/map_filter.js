@@ -47,7 +47,7 @@ function insert_washer_blocks(washerDoc) {
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
 
     for (let i = 0; i < max_number_of_blocks; i++) {
-        let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
+        // let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
         whole_washers_html_block += washer_block_raw_html;
     }
     document.getElementById("washers-cards").innerHTML = whole_washers_html_block;
@@ -78,7 +78,7 @@ function create_one_washer_block(washerDoc) {
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
     washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
-    washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">5</div>\n</div>\n</div>';
+    washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">'+getRatingFromDoc(washerDoc, 'washer')+'</div>\n</div>\n</div>';
     // card text
     washer_block_raw_html+= '<div class="card-text col-9">';
     washer_block_raw_html+= '<h5 class="card-title">'+washerDoc.data().name+'</h5>';

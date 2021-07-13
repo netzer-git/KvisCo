@@ -103,19 +103,19 @@ async function display_new_order_for_user(orderID) {
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {
-        order_header = washer_doc.data().name + " will see your order soon...";
+        order_header = washer_doc.data().name + " recived your order";
     }
     if (order_status == "process") {
-        order_header = "your laundry approved! see you!!";
+        order_header = "your laundry is approved! see you!!";
     }
     if (order_status == "declined") {
         order_header = "sorry...the washer can't take your laundry...";
     }
     order_block += "<div class='row'>"
     order_block += "<div class='header_24'>"+order_header+"</div></div>";
-    order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white'>"; //row open div, col-10 open div, order white open div
-    order_block += "<table style='margin-left:2%; margin-top:2%;'><tr><td><img class='rounded-circle' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4  style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
-    var date_not_format = order_doc.data().due_to*1000;
+    order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white'><div class='col-1'></div>"; //row open div, col-10 open div, order white open div
+    order_block += "<table style='margin-left:2%; margin-top:2%;'><tr><td><img class='rounded-circle' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
+    var date_not_format = order_doc.data().due_to;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
     if (date.getMinutes().toString().length <= 1) {
@@ -125,15 +125,17 @@ async function display_new_order_for_user(orderID) {
         var minutes = date.getMinutes();
     }
     var time = date.getHours()+ ":" +minutes;
-    order_block += "<table style='margin-left:15%; margin-top:3%;'><tr><td><h6 class='header_61'>Date</h6></td><td><h6 class= 'header_61'>"+l_date+"</h6></td></tr>";
-    order_block += '<tr><td><h6 class= "header_61">Drop off hour</h6></td><td><h6 class= "header_61">'+time+'</h6></td></tr>';
-    order_block += '<tr><td><h6 class= "header_61">Loads</h6></td><td><h6 class= "header_61">'+order_doc.data().loads+'</h6></td></tr>';
-    order_block += '<tr><td><h6 class= "header_61">Wash Settings</h6></td><td><h6 class= "header_61">'+ order_doc.data().wash_settings +'</h6></td></tr>';
-    order_block += '<tr><td><h6 class= "header_61">Special Services</h6></td><td><h6 class= "header_61">'+ order_doc.data().properties +'</h6></td></tr>';
-    order_block += '<tr><td><h6 class= "header_61">Notes:</h6><div class="small_headline_4">'+order_doc.data().comments+'<br/></div></tr>';
+    order_block += "<table style='margin-left:15%; margin-top:3%;'>";
+    order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+l_date+'</h6></td></tr>';
+    order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+time+'</h6></td></tr>';
+    order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+order_doc.data().loads+'<class= "header_61"> Loads</h6></td></tr>';
+    order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+ order_doc.data().wash_settings +'<class= "header_61"> Setting</h6></td></tr>';
+    order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+ order_doc.data().properties +'<class= "header_61"> Service</h6></td></tr>';
+    // order_block += '<tr><td style="text-align:center"><h6 class= "header_61"></h6><div class="small_headline_4">'+order_doc.data().comments+'<br/></div></tr>';
     cur_price = order_doc.data().price.toString() + " &#8362";
-    order_block += '<tr><th><div class="small-box-2">'+cur_price+'</div></th><th><button class="phone_number">050-4447755</button></td></tr></table>';
-    order_block += "<button style='margin-left: 35%; margin-top: 5%;' class='button1' onclick='back_to_profile()'>back to profile</button>";  
+    order_block += '<tr><td><div class="small-box-2" style="margin-left: 40%; margin-top: 5%;">'+cur_price+'</div></td></tr>';
+    order_block += '<tr><td style="text-align:center"><button class="phone_number">'+washer_doc.data().phone+'</button></td></tr></table>';
+    order_block += "<button style='margin-left: 30%; margin-top: 5%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
     order_block +="</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
     document.getElementById("user_order").innerHTML = order_block;
 }

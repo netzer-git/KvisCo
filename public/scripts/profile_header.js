@@ -15,13 +15,13 @@ async function load_profile_header_of_washer(washer_doc) {
     washer_header += '<tr><div class="description">'+washer_doc.data().description +'</div></tr>';
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
-    washer_header += '<div class="col-7"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
-    washer_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';   
+    washer_header += '<div class="col-9"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
+    washer_header += '<div class="col-3"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';   
     washer_header += '</div></div></div>';  
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';
     if (washer_doc.data().pics !== undefined) {
         for (i=0; i<washer_doc.data().pics.length; i++) {
-            washer_header += '<img class="image-1" src="'+ washer_doc.data().pics[i] +'">';
+            washer_header += '<img class="image-1 shadow" src="'+ washer_doc.data().pics[i] +'">';
         }
     }
     washer_header += '</div>';
@@ -43,8 +43,8 @@ async function load_profile_header_of_user(user_doc) {
     user_header += '<tr><div class="description">'+user_doc.data().description +'</div></tr>';
     user_header += '</table></div></div>';
     user_header += '<div class="row">';
-    user_header += '<div class="col-7"><div class="location">'+user_doc.data().location_str+'</div></div>';   
-    user_header += '<div class="col-5"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
+    user_header += '<div class="col-9"><div class="location">'+user_doc.data().location_str+'</div></div>';   
+    user_header += '<div class="col-3"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';       
     user_header += '</div></div></div>';  ;
     document.getElementById("profile_header").innerHTML = user_header;  
 }

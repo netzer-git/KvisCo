@@ -18,6 +18,14 @@
     object-fit: cover;
 }
 
+.rounded-circle-xs {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .rounded-circle-big {
     display: inline-block;
     width: 120px;
@@ -26,6 +34,11 @@
     margin-top: 15%;
     margin-left: 15%;
     object-fit: cover;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #1C1C1D;
+    border-radius: 50%;
+    transition: all 1.5s ease-in-out;
 }
 
 .img-rounded {

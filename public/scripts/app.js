@@ -44,7 +44,8 @@ function getUserDisplayName() {
 function authStateObserver(user) {
   if (user) { // User is signed-in
     console.log("in " + getUserToken());
-
+    user_doc = promiseUserLoaderByCurrentUserID();
+    document.getElementById("log_in_indicator").innerHTML = user_doc.data().name
   } else { // User is signed out!
     console.log("out " + getUserToken());
   }

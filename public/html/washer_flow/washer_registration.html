@@ -20,6 +20,10 @@
         <script src="../../scripts/firestore_tools.js"></script>
         <script src="../../scripts/washer_registration.js"></script>
         <script scr="/js/jquery-3.6.0.min.js"></script>
+
+        <!-- <script type="text/javascript">
+            window.onpaint = insert_user_details_if_there_any();
+        </script> -->
     </head>
 
 <body>
@@ -39,7 +43,7 @@
                             <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
                                 Upload Profile Photo
                             </button>
-                            <label id="indicator">photo uploaded</label>
+                            <label id="indicator1" hidden>photo uploaded</label>
                         </form>
                         <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
                         <h4 class="header_41">
@@ -50,7 +54,7 @@
                 <tr>
                     <th>
                     <div class= "header_53">
-                        <img id="icons" src="/public/images/icons/location-icon.png"/> Your location
+                        <img id="icons" src="/images/icons/location-icon.png"/> Your location
                     </div>
                     </th>
                 </tr>
@@ -83,7 +87,7 @@
                 <tr>
                     <th>
                     <div class= "header_53">
-                        <img id="machine-icon" src="/public/images/icons/maybe-icon.png"> Laundry machine details
+                        <img id="machine-icon" src="/images/icons/maybe-icon.png"> Laundry machine details
                     </div>
                     </th>
                 </tr>
@@ -91,10 +95,10 @@
                     <th>
                     <form action="/action_page.php">
                         <label  class="labels" for="module_name">Module Name: </label>
-                        <label  class="labels_2" for="capacity">Capacity: </label>
+                        <label  class="labels_2" for="capacity">Capacity (in KG): </label>
                         <label  class="labels_3" for="year">Year Purchased: </label>
-                        <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
                         <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
+                        <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
                         <input class= "regist_input_3" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
                       </form>
                     </th>
@@ -140,7 +144,7 @@
                 <tr>
                     <th>
                         <form action="/action_page.php">
-                            <label class="header_53" for="phone"><img id="icons" src="/public/images/icons/phone-icon.png"> Phone number</label>
+                            <label class="header_53" for="phone"><img id="icons" src="/images/icons/phone-icon.png"> Phone number</label>
                             <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
                         </form>
                     </th>
@@ -148,7 +152,7 @@
                 <tr>
                     <th>
                         <div class= "header_53">
-                            <img id="icons" src="/public/images/icons/tell-icon.png"/> Tell us about yourself
+                            <img id="icons" src="/images/icons/tell-icon.png"/> Tell us about yourself
                         </div>
                     </th>
                 </tr>
@@ -162,14 +166,14 @@
                 <tr>
                     <th>
                         <div class= "header_53">
-                            <img id="icons" src="/public/images/icons/special-icon.png"/> Do you provide special services?
+                            <img id="icons" src="/images/icons/special-icon.png"/> Do you provide special services?
                         </div>
                     <div class= "labels_1" >
                         <form name="special_serve">
-                            <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">Ironing<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="door2door" onclick="save_special_service(this);">Door 2 Door<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="dryer" onclick="save_special_service(this);">Dryer<br>
-                            <input class= "cbx" type="radio" name="special_serve" value="ironing" onclick="save_special_service(this);">None<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="Ironing" onclick="save_special_service(this);">Ironing<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="Door2door" onclick="save_special_service(this);">Door 2 Door<br>  
+                            <input class= "cbx" type="radio" name="special_serve" value="Dryer" onclick="save_special_service(this);">Dryer<br>
+                            <input class= "cbx" type="radio" name="special_serve" value="None" onclick="save_special_service(this);">None<br>  
                         </form>
                     </th>
                 </form>  
