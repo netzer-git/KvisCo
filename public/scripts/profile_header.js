@@ -8,13 +8,14 @@
  */
 async function load_profile_header_of_washer(washer_doc) {
     const rating = await getRatingFromDoc(washer_doc, "washer");
-    washer_header = '<div class="row"><div class="col-1"></div>';
+    washer_header = '<div class="row style="margin-top: 10%;"><div class="col-1"></div>';
     washer_header += '<div class="col-3"><div class="profile_pic"><img class="rounded-circle-big" src="' + washer_doc.data().imageUrl + '"></div></div>';
     washer_header += '<div class="col-8"><div class="row"><div class="profile_pic">';
     washer_header += '<table class="table-search"><tr><h4>'+ washer_doc.data().name +'</h4></tr></tr>';
     washer_header += '<tr><div class="description">'+washer_doc.data().description +'</div></tr>';
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
+    // washer_header += '<div class="col-2"><img id="icons" src="/images/icons/location-icon.png"/><div>';
     washer_header += '<div class="col-9"><div class="location">'+washer_doc.data().location_str+'</div></div>';   
     washer_header += '<div class="col-3"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">'+ rating + '</div></div>';   
     washer_header += '</div></div></div>';  
