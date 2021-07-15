@@ -2,7 +2,7 @@ clicks = 0
 function get_washer_working_hours(washer_doc) {
     washerOpenTimes = getWasherOpenTimes(washer_doc);
     oldDays = "<table id='working-hours'><tr><td>Day</td><td>From</td><td>To</td><td>Keep weekly</td></tr>"
-    if (washerOpenTimes == {}) {
+    if (Object.keys(washerOpenTimes).length == 0) {
         clicks = 1
         oldDays += "<tr><td><div class='set-date'><select id='day" + clicks + "'>"
         oldDays += "<option value='Sunday'>Sunday</option>"
@@ -12,9 +12,9 @@ function get_washer_working_hours(washer_doc) {
         oldDays += "<option value='Thursday'>Thursday</option>"
         oldDays += "<option value='Friday'>Friday</option>"
         oldDays += "<option value='Satuday'>Saturday</option>"
-        oldDays += "<option value='" + day + "' selected>" + day + "</option></select></div></td>"
-        oldDays += "<td><input class='set-time' type='time' id='startTime" + clicks + "' value='" + hours[0] + "'></td>"
-        oldDays += "<td><input class='set-time' type='time' id='endTime" + clicks + "' value='" + hours[1] + "'></td>"
+        oldDays += "<option value='Sunday' selected>Sunday</option></select></div></td>"
+        oldDays += "<td><input class='set-time' type='time' id='startTime" + clicks + "' value='09:00'></td>"
+        oldDays += "<td><input class='set-time' type='time' id='endTime" + clicks + "' value='17:00'></td>"
         oldDays += "<td><input id='cbx" + clicks + "' type='checkbox'/><label class='cbx" + clicks + "' for='cbx" + clicks + "'><div class='flip'><div class='front'></div><div class='back'><svg width='16' height='14' viewBox='0 0 16 14'><path d='M2 8.5L6 12.5L14 1.5'></path></svg></div></div></label></td></tr></tables>"
     }
     else {
