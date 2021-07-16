@@ -402,14 +402,15 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
-        let filteredWashersWithLoads = [];
+    if (filters.myDay !== undefined) {
+        let filteredWashersWithDay = [];
+        let key = filters.myDay;
         washersArray.forEach(doc => {
-            if (true) {
-                filteredWashersWithLoads.push(doc);
+            if (doc.data().opening_times[key] !== undefined) {
+                filteredWashersWithDay.push(doc);
             }
         });
-        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        filteredWashers = firstQuery ? filteredWashersWithDay : intersection(filteredWashers, filteredWashersWithDay);
         firstQuery = false;
     }
 
