@@ -29,26 +29,16 @@
                     <a class="navbar-brand" href="../../html/welcome.html"><img src="../../images/logo.png"></a>
                     <!--The logo button-->
                 </div>
-                <div class="col-7">
-                    <div id="log_in_indicator"></div>
+                <div class="col-1">
+                    <button id="log_in_indicator" class="button1" onclick="become_a_user();" hidden>
+                </div>
+                <div class="col-6">
                 </div>
                 <div class="col-1">
-                    <div class="dropdown">
-                        <!-- drop down menu-->
-                        <a class="dropbtn" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../../images/Menu.png" width="45%">
-                        </a>
-                        <div class="dropdown-content">
-                            <a href="#" onclick="become_a_user()">My Profile</a>
-                            <a href="#" id="log_in_out_msg" onclick="log_in_or_out();">Log In</a>
-                            <!-- TO FIXXXXXXXX -->
-                        </div>
-                    </div>
+                    <button id="log_in_out_msg" onclick="log_in_or_out();" class="button1"></a>
                 </div>
                 <div class="col-2">
                     <button onclick="become_a_washer()" class="button1">Be a Washer</button>
-                    <!-- Yellow generic button-->
                 </div>
             </div>
         </div>
