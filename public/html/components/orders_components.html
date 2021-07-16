@@ -1,6 +1,12 @@
 <html>
     <head>
         <link rel="stylesheet" href="../../css/orders_components.css">
+        <link rel="stylesheet" href="../../css/header_style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
     </head>
     <body>
         <div class='frame'>
@@ -28,6 +34,29 @@
                     <div class='box-price'>
                         <span class='value'>45</span>
                         <span class='parameter'>Price</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Reviews tamplate -->
+        <div class="cardo">
+            <div class="row">
+                <div class="col-2" style="margin-top: -2%;"> <img src="/public/images/amitay pic.jpg" width="70" class="rounded-circle mt-2"> </div>
+                <div class="col-10">
+                    <div class="comment-box ml-2">
+                        <h4>Add a comment</h4>
+                        <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> </div>
+                        <div class="comment-area"> <textarea class="form-control" placeholder="what is your view?" rows="4"></textarea> </div>
+                        <div class="comment-btns mt-2">
+                            <div class="row">
+                                <div class="col-6">
+                                </div>
+                                <div class="col-6">
+                                    <div class="pull-right"> <button class="b-small">Send <i class="fa fa-long-arrow-right ml-1"></i></button> </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
