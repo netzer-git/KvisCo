@@ -81,14 +81,14 @@ function add_review_to_order() {
     url = saveImageToUser(photos);
     order = {
       review_washer: review,
-      rating_washer: rating,
+      rating_washer: Number(rating),
       laundry_pics: url,
     }    
   }
   catch {
       order = {
         review_user: review,
-        rating_user: rating
+        rating_user: Number(rating)
     }
   }
   console.log(order)
