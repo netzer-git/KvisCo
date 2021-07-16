@@ -4,7 +4,7 @@ async function get_order_block_of_user(order_doc) {
     // const washer_doc = await order_doc.data().washer.get();
     const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
     block = "";
-    block += "<div class='col-4'>";
+    block += "<div class='col-5'>";
     // block += "<div class='col_with_padd'>";
     block += "<div class='shadow frame'>";
     block += "<div class='center-order'>";
@@ -23,7 +23,7 @@ async function get_order_block_of_user(order_doc) {
           break;
         case 'finished':
             if (window.location.pathname == "/html/welcome.html") {
-                block += "<button id=block_num_" + block_num + " value='" + washer_doc.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Order Again </button></div>";
+                block += "<button id = 'block_num_" + block_num + "' value='" + washer_doc.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Order Again </button></div>";
             }
             else if (order_doc.data().review_washer == "") {
                 block += "<button class='btn-white'> Review </button></div>";
@@ -44,19 +44,19 @@ async function get_order_block_of_user(order_doc) {
     }
     var time = date.getHours()+ ":" +minutes;
     block += "<div class='stats'><div class='box-price'>"
-    block += "<span class='value'>"+ formattedTime + "</span><span class='parameter'>Date</span></div>"
+    block += "<span class='value'>"+ formattedTime + "</span><span class='parameter'>Date</span></div>";
     block += "<div class='box-price'><span class='value'>" + order_doc.data().price +" &#8362</span><span class='parameter'>Price</span></div></div>"
     
     block += "</div>";
     // block += "</div>";
     block += "</div>";
     block += "</div>";
+    block_num ++;
     return block;
 }
 
 async function quick_place_order(washerID) {
     // var order_doc = await promiseOrderLoaderById(orderID);
-    console.log(washerID);
     // var washerID = await promiseWasherLoaderById(washerID);
     sessionStorage.setItem("pressed_washer", washerID); // washer that pressed in page map_filter.html
     window.location.href = "../../html/user_flow/place_order.html";
@@ -78,7 +78,6 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
         var max_orders = Math.min(3, all_orders.length);
     }
     for (var i = 0; i < max_orders; i++) {
-        console.log("id of blocks: ", all_orders[i].id)
         all_blocks += await get_order_block_of_user(all_orders[i]);
     }
     all_blocks += "</div>";
