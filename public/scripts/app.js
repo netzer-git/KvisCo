@@ -57,7 +57,8 @@ async function authStateObserver(user) {
     console.log("out " + getUserToken());
     document.getElementById("log_in_indicator").hidden = true;
     document.getElementById("log_in_indicator").innerHTML = "Anonymous";
-    document.getElementById("log_in_out_msg").innerHTML = "Log In"
+    document.getElementById("log_in_out_msg").innerHTML = "Log In";
+    sessionStorage.setItem("connected_userID", null);
   }
 }
 
