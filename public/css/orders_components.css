@@ -252,13 +252,15 @@ text-align: center;
     display: flex;
     margin-top: -10px;
     flex-direction: row-reverse;
-    margin-left: -4px;
-    float: left
+    margin-right: 100px;
+    float: center;
 }
 
 .rating>input {
     display: none
 }
+
+
 
 .rating>label {
     position: relative;
