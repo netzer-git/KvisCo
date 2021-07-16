@@ -4,7 +4,7 @@ async function get_order_block_of_user(order_doc) {
     // const washer_doc = await order_doc.data().washer.get();
     const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
     block = "";
-    block += "<div class='col-lg-5'>";
+    block += "<div class='col-4'>";
     // block += "<div class='col_with_padd'>";
     block += "<div class='shadow frame'>";
     block += "<div class='center-order'>";
@@ -72,7 +72,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     else {
         var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     }
-    let all_blocks = "";
+    let all_blocks = "<div class = 'row'>";
     var max_orders = Math.min(2, all_orders.length);
     if (window.location.pathname == "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
@@ -81,7 +81,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
         console.log("id of blocks: ", all_orders[i].id)
         all_blocks += await get_order_block_of_user(all_orders[i]);
     }
-    
+    all_blocks += "</div>";
     document.getElementById(tag).innerHTML = all_blocks;
 }
 
