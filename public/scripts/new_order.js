@@ -103,7 +103,7 @@ async function display_new_order_for_user(orderID) {
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {
-        order_header = washer_doc.data().name + " recieved your order";
+        order_header = "our washer recieved your order";
     }
     if (order_status == "process") {
         order_header = "your laundry is approved! see you!!";
