@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,200&display=swap');
 
-:root{
+:root{  
+    --color-1: #F95A2C;
+    --color-2: #19FFE3;
+    --color-3: #FFB0BC;
+    --color-4: #FF785C;
+    --color-5: #FFBD12;
     --primary-color: #52d6edff;
     --secondary-color: #ffe1f0ff;
     --font-color: #484848ff;
