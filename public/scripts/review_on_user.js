@@ -54,7 +54,7 @@ async function add_review_to_order() {
     }
     new_order = {
         review_user: review,
-        rating_user: rating,
+        rating_user: Number(rating),
     }
     document.getElementById("overlay_review").style.display = "none";
     await setOrderDetails(new_order,orderID);  

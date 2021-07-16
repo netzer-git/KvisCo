@@ -402,14 +402,15 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
-        let filteredWashersWithLoads = [];
+    if (filters.myDay !== undefined) {
+        let filteredWashersWithDay = [];
+        let key = filters.myDay;
         washersArray.forEach(doc => {
-            if (true) {
-                filteredWashersWithLoads.push(doc);
+            if (doc.data().opening_times[key] !== undefined) {
+                filteredWashersWithDay.push(doc);
             }
         });
-        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        filteredWashers = firstQuery ? filteredWashersWithDay : intersection(filteredWashers, filteredWashersWithDay);
         firstQuery = false;
     }
 
@@ -493,8 +494,8 @@ async function getWasherFilterQuery(filters) {
  */
 async function sortWashersByRating(washerArray) {
     await washerArray.sort(async (a, b) => {
-        aRating = await getWasherRatingFromDoc(a);
-        bRating = await getWasherRatingFromDoc(b);
+        let aRating = await getWasherRatingFromDoc(a);
+        let bRating = await getWasherRatingFromDoc(b);
         return bRating - aRating;
     });
     return washersArray;
@@ -513,6 +514,21 @@ async function sortWashersByDistance(washerArray, currentPoint) {
         return bDistance - aDistance;
     });
     return washerArray;
+}
+
+
+/**
+ * takes array of orders and sort them by creation time
+ * @param {*} orderArray array of orders
+ * @returns the same array, sorted
+ */
+function sortOrdersByCreatedAt(orderArray) {
+    orderArray.sort((a, b) => {
+        let aCreatedAt = a.data().created_at.seconds;
+        let bCreatedAt = b.data().created_at.seconds;
+        return bCreatedAt - aCreatedAt;
+    });
+    return orderArray;
 }
 
 /**
