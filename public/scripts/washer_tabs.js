@@ -218,7 +218,7 @@ async function f_display_washer_reviews(washerID) {
             all_reviews += "<div class='col-1'>";
             all_reviews += "</div>";
             all_reviews += "<div class='col-2'>";
-            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + user_that_review.data().imageUrl + "></a></div>";
+            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-xs' src=" + user_that_review.data().imageUrl + "></a></div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
             all_reviews += "<div class='location'>" + user_that_review.data().name + "</div>";
@@ -245,7 +245,7 @@ async function f_display_washer_reviews(washerID) {
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4> there are no reviews yet </h4>";
+        all_reviews += "<h4> There are no reviews yet </h4>";
     }
     all_reviews += '</div>';
     document.getElementById("my_reviews").innerHTML = all_reviews;

@@ -215,6 +215,7 @@ async function on_load_page(){
 
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
+    search_res['myDay'] = search_res["myDate"].getDay();
     //initialize washers list
     washerDoc = await create_washer_list(search_res);
     //insert washers cards

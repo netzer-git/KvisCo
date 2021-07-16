@@ -800,6 +800,6 @@ select:focus { outline: none; }
 }
 
 #log_in_out_msg {
-  background: var(--bg-color);
+  background: white;
   width: 100px;
 }

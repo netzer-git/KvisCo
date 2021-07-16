@@ -247,6 +247,18 @@ async function createNewWasher(washer) {
 }
 
 /**
+ * delete washer by Id
+ * @param {} washerid the id of the washer to delete
+ */
+async function deleteCurrentWasher() {
+    db.collection("washers").doc(getUserToken()).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+
+/**
  * @param {*} washerDoc washer doc
  * @returns washer opening_times sorted by days
  */
@@ -402,14 +414,15 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.loads !== undefined && Number(filters.loads) !== 0) {
-        let filteredWashersWithLoads = [];
+    if (filters.myDay !== undefined) {
+        let filteredWashersWithDay = [];
+        let key = filters.myDay;
         washersArray.forEach(doc => {
-            if (true) {
-                filteredWashersWithLoads.push(doc);
+            if (doc.data().opening_times[key] !== undefined) {
+                filteredWashersWithDay.push(doc);
             }
         });
-        filteredWashers = firstQuery ? filteredWashersWithLoads : intersection(filteredWashers, filteredWashersWithLoads);
+        filteredWashers = firstQuery ? filteredWashersWithDay : intersection(filteredWashers, filteredWashersWithDay);
         firstQuery = false;
     }
 
@@ -493,18 +506,9 @@ async function getWasherFilterQuery(filters) {
  */
 async function sortWashersByRating(washerArray) {
     await washerArray.sort(async (a, b) => {
-        aRating = await getWasherRatingFromDoc(a);
-        bRating = await getWasherRatingFromDoc(b);
-        return aRating - bRating;
-    });
-    return washersArray;
-}
-
-async function sortOrdersByCreatedAt(orderArray) {
-    await orderArray.sort(async (a, b) => {
-        aCreatedAt = a.data().created_at.seconds;
-        bCreatedAt = b.data().created_at.seconds;
-        return aCreatedAt - bCreatedAt;
+        let aRating = await getWasherRatingFromDoc(a);
+        let bRating = await getWasherRatingFromDoc(b);
+        return bRating - aRating;
     });
     return washersArray;
 }
@@ -522,6 +526,21 @@ async function sortWashersByDistance(washerArray, currentPoint) {
         return bDistance - aDistance;
     });
     return washerArray;
+}
+
+
+/**
+ * takes array of orders and sort them by creation time
+ * @param {*} orderArray array of orders
+ * @returns the same array, sorted
+ */
+function sortOrdersByCreatedAt(orderArray) {
+    orderArray.sort((a, b) => {
+        let aCreatedAt = a.data().created_at.seconds;
+        let bCreatedAt = b.data().created_at.seconds;
+        return bCreatedAt - aCreatedAt;
+    });
+    return orderArray;
 }
 
 /**

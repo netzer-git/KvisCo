@@ -1,11 +1,6 @@
-$(".checkbox-dropdown").click(function () {
-    $(this).toggleClass("is-active");
-});
-
-$(".checkbox-dropdown ul").click(function(e) {
-    e.stopPropagation();
-});
-
+/**
+ * checks if the user is signed in - either signIn or signOut
+ */
 function log_in_or_out() {
     if(!isUserSignedIn()) {
         signIn();
@@ -20,6 +15,9 @@ function log_in_or_out() {
     }
 }
 
+/**
+ * checks if the user has washer profile - either signIn, create washer profile or go to washer profile
+ */
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         signIn();
@@ -35,6 +33,9 @@ async function become_a_washer() {
     window.location.href = "../../html/washer_flow/washer_profile.html"
 }
 
+/**
+ * checks if the user has user profile - either signIn, create user profile or go to user profile
+ */
 async function become_a_user() {
     if (!isUserSignedIn()) {
         signIn();
