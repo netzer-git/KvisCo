@@ -495,7 +495,16 @@ async function sortWashersByRating(washerArray) {
     await washerArray.sort(async (a, b) => {
         aRating = await getWasherRatingFromDoc(a);
         bRating = await getWasherRatingFromDoc(b);
-        return bRating - aRating;
+        return aRating - bRating;
+    });
+    return washersArray;
+}
+
+async function sortOrdersByCreatedAt(orderArray) {
+    await orderArray.sort(async (a, b) => {
+        aCreatedAt = a.data().created_at.seconds;
+        bCreatedAt = b.data().created_at.seconds;
+        return aCreatedAt - bCreatedAt;
     });
     return washersArray;
 }
