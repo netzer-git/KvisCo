@@ -797,6 +797,6 @@ a:hover { color: inherit; } /* remove the awful blue color on hovernig */
 }
 
 #log_in_out_msg {
-  background: var(--bg-color);
+  background: white;
   width: 100px;
 }
