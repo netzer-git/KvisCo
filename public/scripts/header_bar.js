@@ -1,11 +1,3 @@
-$(".checkbox-dropdown").click(function () {
-    $(this).toggleClass("is-active");
-});
-
-$(".checkbox-dropdown ul").click(function(e) {
-    e.stopPropagation();
-});
-
 function log_in_or_out() {
     if(!isUserSignedIn()) {
         signIn();
