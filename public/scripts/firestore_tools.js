@@ -247,6 +247,18 @@ async function createNewWasher(washer) {
 }
 
 /**
+ * delete washer by Id
+ * @param {} washerid the id of the washer to delete
+ */
+async function deleteCurrentWasher() {
+    db.collection("washers").doc(getUserToken()).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+
+/**
  * @param {*} washerDoc washer doc
  * @returns washer opening_times sorted by days
  */
