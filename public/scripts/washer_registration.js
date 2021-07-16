@@ -138,3 +138,5 @@ async function create_washer() {
 function display_washer_name() {
     document.getElementById("washer_name").innerHTML = getUserDisplayName();
 }
+
+
