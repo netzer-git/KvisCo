@@ -41,13 +41,17 @@ function getUserDisplayName() {
 }
 
 // Triggers when the auth state change for instance when the user signs-in or signs-out.
-function authStateObserver(user) {
+async function authStateObserver(user) {
   if (user) { // User is signed-in
     console.log("in " + getUserToken());
-    user_doc = promiseUserLoaderByCurrentUserID();
-    document.getElementById("log_in_indicator").innerHTML = user_doc.data().name
+    // user_doc = await promiseUserLoaderByCurrentUserID();
+    // document.getElementById("log_in_indicator").innerHTML = user_doc.data().name;
+    document.getElementById("log_in_indicator").innerHTML = getUserDisplayName();
+    document.getElementById("log_in_out_msg").innerHTML = "Log Out"
   } else { // User is signed out!
     console.log("out " + getUserToken());
+    document.getElementById("log_in_indicator").innerHTML = "Anonymous";
+    document.getElementById("log_in_out_msg").innerHTML = "Log In"
   }
 }
 
