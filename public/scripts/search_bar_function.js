@@ -1,14 +1,19 @@
 var address = "";
-var myDate = formatDate(new Date());
+var d = new Date()
+var myDate = formatDate(d);
 var duration = '24';
-jsarray_basic = [address, myDate, duration];
+var day = d.getDay();
+var myDay = DAYS[day];
+jsarray_basic = [address, myDate, duration, myDay];
 
 function save() {
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
+    day = d.getDay();
+    myDay = DAYS[day];
     // Do whatever you want with the value here.
-    jsarray = [address, myDate, duration];
+    jsarray = [address, myDate, duration, myDay];
     sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     // JSON.stringify(jsArray) converts the jsArray into a string which can be stored in sessionStorage
 }
@@ -21,7 +26,8 @@ function get_search_bar(tag) {
     address = jsarray[0];
     myDate = jsarray[1];
     duration = jsarray[2];
-    search_res = {address:address, myDate:myDate, duration:duration};
+    myDay = jsarray[3]
+    search_res = {address:address, myDate:myDate, duration:duration, myDay:myDay};
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
