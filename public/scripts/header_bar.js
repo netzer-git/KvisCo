@@ -6,12 +6,9 @@ $(".checkbox-dropdown ul").click(function(e) {
     e.stopPropagation();
 });
 
-
-
 function log_in_or_out() {
     if(!isUserSignedIn()) {
         signIn();
-        document.getElementById("log_in_out_msg").innerHTML = "Log Out";
     }
     else {
         var sPath = window.location.pathname;
@@ -20,22 +17,8 @@ function log_in_or_out() {
             window.location.href = "../../html/welcome.html"
         }
         signOut();
-        document.getElementById("log_in_out_msg").innerHTML = "Log In";
     }
 }
-
-document.getElementById("log_in_out_msg").addEventListener("load", display_log_in_or_out);
-
-
-function display_log_in_or_out() {
-    if(!isUserSignedIn()) {
-        document.getElementById("log_in_out_msg").innerHTML = "Log In";
-    }
-    else {
-        document.getElementById("log_in_out_msg").innerHTML = "Log Out";
-    }
-}
-
 
 async function become_a_washer() {
     if (!isUserSignedIn()) {
