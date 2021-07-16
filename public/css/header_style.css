@@ -9,6 +9,10 @@
     --bg-color: #ffffffff;
 }
 
+body {
+  background-color: #f5f5f5;
+}
+
 h1{
   /* position: absolute; */
   width: 778px;
