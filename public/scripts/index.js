@@ -137,13 +137,6 @@ const testNadavQuery = async () => {
 }
 
 const test_rating = async () => {
-    let currentPoint = {lat: 31.775647059035226, lng: 35.21755425909884};
-    let nir = {lat: 31.8255, lng: 34.6825};
-    let arad = {lat: 31.2614, lng: 35.2149};
-    arr = await getBetterCloserWashers(2, arad);
-    // console.log(arr[0].data());
-    // console.log(arr[1].data());
-    // console.log(arr[2].data());
     let id = [  
         // '1LhDqVKzSkZdsnSC6wFrVG5jte93',
         // '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
@@ -155,9 +148,13 @@ const test_rating = async () => {
         // 'vXHZptolc5WUF6ERfIlxvqOmsfI2',
         '5IMy2kMSbheOriFPxqKmKTNWOJ92'
             ];
-    for (i of id) {
-        doc = await promiseWasherLoaderById(i);
-        rating = await getRatingFromDoc(doc, 'washer');
-        console.log(doc.data().name + " : " + rating);
+    orderArray = await promiseOrderArrayByUserIdAndStatus(id[0], 'processing');
+    for (o of orderArray) {
+        console.log(o.data().created_at.seconds)
+    }
+    console.log("******** sort ********")
+    orderArray = sortOrdersByCreatedAt(orderArray);
+    for (o of orderArray) {
+        console.log(o.data().created_at.seconds)
     }
 }
