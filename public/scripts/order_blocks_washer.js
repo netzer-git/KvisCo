@@ -24,7 +24,6 @@ async function get_order_block_of_washer(order_doc) {
         case 'process':
             block += "<div class='actions'>";
             block += " <button id = block_num_" + block_num + " value='" + order_doc.id + "' class='btn-white' onclick= 'display_order_status(block_num_" + block_num + ".value)'>Open</button></div></div>";
-            // block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_order_status(block_num_" + block_num + ".value)' class='button1'> Open  </button></th></tr>";
             break;
         case 'finished':
             if (order_doc.data().review_user == null) {
