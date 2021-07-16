@@ -145,15 +145,15 @@ const test_rating = async () => {
     // console.log(arr[1].data());
     // console.log(arr[2].data());
     let id = [  
-        '1LhDqVKzSkZdsnSC6wFrVG5jte93',
-        '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
-        '59k1DZDLkmSnQqAwMu4hDxNJUhU2',
-        'JaLY3KeIsSO8kSUr3Ks6kiJXkQ92',
-        'VxbGFBQzipZf1rzyAAvr8uMp8nl1',
-        'c0KmkCafo7bZmCcZvW2Nr7NqgDK2',
-        'oLIW1OSO4RPX04nVJpRfe9FGsrd2',
-        'vXHZptolc5WUF6ERfIlxvqOmsfI2',
-        'vkJUWqtEC1cwoFQFL417gOdqeZr2'
+        // '1LhDqVKzSkZdsnSC6wFrVG5jte93',
+        // '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
+        // '59k1DZDLkmSnQqAwMu4hDxNJUhU2',
+        // 'JaLY3KeIsSO8kSUr3Ks6kiJXkQ92',
+        // 'VxbGFBQzipZf1rzyAAvr8uMp8nl1',
+        // 'c0KmkCafo7bZmCcZvW2Nr7NqgDK2',
+        // 'oLIW1OSO4RPX04nVJpRfe9FGsrd2',
+        // 'vXHZptolc5WUF6ERfIlxvqOmsfI2',
+        '5IMy2kMSbheOriFPxqKmKTNWOJ92'
             ];
     for (i of id) {
         doc = await promiseWasherLoaderById(i);
