@@ -54,7 +54,7 @@ async function add_review_to_order() {
     }
     new_order = {
         review_user: review,
-        rating_user: rating,
+        rating_user: Number(rating),
     }
     document.getElementById("overlay_review").style.display = "none";
     await setOrderDetails(new_order,orderID);  
@@ -68,33 +68,58 @@ async function add_review_to_order() {
 // }
 
 
+// async function display_review_on_user_overlay(orderID) {
+//     review_on_user_overlay = '<div class= "review_pink">';
+//     review_on_user_overlay += '<table><tr><h2 class="header_24">LEAVE A REVIEW</h2></tr>';
+//     review_on_user_overlay += '<tr><div class= "header_51">Rate your experience</div></tr>';
+//     review_on_user_overlay += '<tr><th><div class="rate">';
+//     review_on_user_overlay += '<input type="radio" id="star5" name="rate" value="5" onchange="save_rating(this)" />';
+//     review_on_user_overlay += '<label for="star5" title="text">5 stars</label>'; 
+
+//     review_on_user_overlay += '<input type="radio" id="star4" name="rate" value="4" onchange="save_rating(this)" />';
+//     review_on_user_overlay += '<label for="star4" title="text">4 stars</label>'; 
+
+//     review_on_user_overlay += '<input type="radio" id="star3" name="rate" value="3" onchange="save_rating(this)" />';
+//     review_on_user_overlay += '<label for="star3" title="text">3 stars</label>';  
+
+//     review_on_user_overlay += '<input type="radio" id="star2" name="rate" value="2" onchange="save_rating(this)" />';
+//     review_on_user_overlay += '<label for="star2" title="text">2 stars</label>'; 
+
+//     review_on_user_overlay += '<input type="radio" id="star1" name="rate" value="1" onchange="save_rating(this)" />';
+//     review_on_user_overlay += '<label for="star1" title="text">1 stars</label>'; 
+
+//     review_on_user_overlay += '</div></th></tr>';
+//     review_on_user_overlay += '<tr><th><div class= "header_51">Share your thoughts and feelings</div></th></tr>';
+//     review_on_user_overlay += '<tr><th><textarea id="user_review" class="user_review" name="user_review" rows="3" cols="50" placeholder=" place your review here..." value = "" onchange="save_review_change()"></textarea><br><br>';
+//     review_on_user_overlay += '</th></tr>';
+//     sessionStorage.setItem("order that get review now", orderID);
+//     review_on_user_overlay += '<tr><th><button onclick="add_review_to_order()" class="yellow_button_4">Leave Review</button></th></tr>';
+//     review_on_user_overlay += '</table></div>'; 
+//     document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
+//     document.getElementById("overlay_review").style.display = "block";
+// }
+
 async function display_review_on_user_overlay(orderID) {
-    review_on_user_overlay = '<div class= "review_pink">';
-    review_on_user_overlay += '<table><tr><h2 class="header_24">LEAVE A REVIEW</h2></tr>';
-    review_on_user_overlay += '<tr><div class= "header_51">Rate your experience</div></tr>';
-    review_on_user_overlay += '<tr><th><div class="rate">';
-    review_on_user_overlay += '<input type="radio" id="star5" name="rate" value="5" onchange="save_rating(this)" />';
-    review_on_user_overlay += '<label for="star5" title="text">5 stars</label>'; 
+  let order_doc = await promiseOrderLoaderById(orderID);
+  let user_doc = await promiseUserLoaderById(order_doc.data().user)
 
-    review_on_user_overlay += '<input type="radio" id="star4" name="rate" value="4" onchange="save_rating(this)" />';
-    review_on_user_overlay += '<label for="star4" title="text">4 stars</label>'; 
-
-    review_on_user_overlay += '<input type="radio" id="star3" name="rate" value="3" onchange="save_rating(this)" />';
-    review_on_user_overlay += '<label for="star3" title="text">3 stars</label>';  
-
-    review_on_user_overlay += '<input type="radio" id="star2" name="rate" value="2" onchange="save_rating(this)" />';
-    review_on_user_overlay += '<label for="star2" title="text">2 stars</label>'; 
-
-    review_on_user_overlay += '<input type="radio" id="star1" name="rate" value="1" onchange="save_rating(this)" />';
-    review_on_user_overlay += '<label for="star1" title="text">1 stars</label>'; 
-
-    review_on_user_overlay += '</div></th></tr>';
-    review_on_user_overlay += '<tr><th><div class= "header_51">Share your thoughts and feelings</div></th></tr>';
-    review_on_user_overlay += '<tr><th><textarea id="user_review" class="user_review" name="user_review" rows="3" cols="50" placeholder=" place your review here..." value = "" onchange="save_review_change()"></textarea><br><br>';
-    review_on_user_overlay += '</th></tr>';
-    sessionStorage.setItem("order that get review now", orderID);
-    review_on_user_overlay += '<tr><th><button onclick="add_review_to_order()" class="yellow_button_4">Leave Review</button></th></tr>';
-    review_on_user_overlay += '</table></div>'; 
-    document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
-    document.getElementById("overlay_review").style.display = "block";
+  review_on_user_overlay = '<div class="cardo"><div class="row">';
+  review_on_user_overlay += '<div class="col-1"></div>';
+  review_on_user_overlay += '<div class="col-11">';
+  // review_on_user_overlay += '<div class="comment-box ml-2">';
+  review_on_user_overlay += '<div class="row">';
+  review_on_user_overlay += '<h7 style="margin-left:0%;">Add a comment</h7></div>';
+  review_on_user_overlay += '<div class="row" style="margin-left: -2%; margin-top: 0%;">';
+  // review_on_user_overlay += '<div class="col-2" style="font-size: 16px"></div>';
+  review_on_user_overlay += '<div class="col-6">';
+  review_on_user_overlay += '<div class="rating" style="margin-right: 100px;"><input type="radio" name="rating" value="1" id="1" onchange="save_rating(this)"><label for="1">☆</label><input type="radio" name="rating" value="2" id="2" onchange="save_rating(this)"><label for="2">☆</label><input type="radio" name="rating" value="3" id="3" onchange="save_rating(this)"><label for="3">☆</label><input type="radio" name="rating" value="4" id="4" onchange="save_rating(this)"><label for="4">☆</label><input type="radio" name="rating" value="5" id="5" onchange="save_rating(this)"><label for="5">☆</label></div></div></div>';
+  review_on_user_overlay += '<div class="col-6"></div>';
+  review_on_user_overlay += '<div class="comment-area"> <textarea class="form-control" style="height: 115px; width:350px; font-size: 16px;" placeholder="How was your experience?" rows="4" value = "" onchange="save_review_change()"></textarea> </div>'
+  review_on_user_overlay += '<div class="comment-btns mt-2">';
+  review_on_user_overlay += '<div class="row"><div class="col-6"></div><div class="col-6">';
+  review_on_user_overlay += '<div class="pull-right"> <button class="b-small" onclick="add_review_to_order()">Send <i class="fa fa-long-arrow-right ml-1"></i></button></div>'
+  review_on_user_overlay += '</div></div></div></div></div></div></div>';
+  sessionStorage.setItem("order that get review now", orderID);
+  document.getElementById("user_review_block").innerHTML = review_on_user_overlay;
+  document.getElementById("overlay_review").style.display = "block";
 }

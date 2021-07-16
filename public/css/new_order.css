@@ -16,13 +16,13 @@
 }
 
 .order_white{
-    height: 97%;
+    height: 85%;
     width: 100%;
-    margin-top: -15%;
     background: #FFFFFF;
     margin-bottom: 5%;
     border: 2px solid #1C1C1D;
     border-radius: 2%;
+    /* margin-top: 10%; */
 }
 
 
