@@ -60,6 +60,9 @@ async function create_washer_list(filters) {
  */
 async function insert_washer_blocks(washerDoc, day) {
     let whole_washers_html_block = '';
+    if (washerDoc.length == 0) {
+        whole_washers_html_block += "<h5>There are no washers working this day,</h5>\n<h5>please try other one :)</h5>"
+    }
     // adjusting page height
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
 

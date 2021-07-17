@@ -155,7 +155,12 @@ async function display_new_order_for_washer(orderID) {
 }
 
 async function back_to_profile() {
-    window.location.href="../../html/user_flow/user_profile_final.html";
+    if (window.location.pathname == "/html/user_flow/user_profile_final.html") {
+        off();
+    }
+    else {
+        window.location.href="../../html/user_flow/user_profile_final.html";
+    }
 }
 
 async function change_status(new_status) {

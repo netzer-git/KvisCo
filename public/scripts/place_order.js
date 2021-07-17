@@ -113,11 +113,6 @@ async function create_order() {
         return;
     }
     var userID = getUserToken();
-    if (!await promiseUserLoaderById(userID)) {
-        window.location.href="../../html/user_flow/user_registration.html";
-        return;
-    }
-    sessionStorage.setItem("current_user_id", userID);
     cur_order = {
         comments: comments,
         washer: washerID,
@@ -129,6 +124,11 @@ async function create_order() {
         properties: property,
     }
     var orderID = await createNewOrder(cur_order);    
+    if (!await promiseUserLoaderById(userID)) {
+        window.location.href="../../html/user_flow/user_registration.html";
+        return;
+    }
+    sessionStorage.setItem("current_user_id", userID);
     display_new_order_for_user(orderID);
     document.getElementById("overlay_thank_you").style.display = "block";
 }
