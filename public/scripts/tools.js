@@ -153,18 +153,6 @@ function checkOpenTimes(filter, washerDoc) {
   wantedTime = getHourAsNumber(filter[1]);
   // going through each possible combination of hour and min
   return checkIfOpenNow(openTime, wantedTime);
-  // if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
-  //   return false;
-  // }
-  // else if (openTime[0] < wantedTime[0]) {
-  //   return ((wantedTime[0] < closeTime[0]) || (wantedTime[1] < closeTime[1]));
-  // }
-  // else if (wantedTime[0] < closeTime[0]) {
-  //   return ((openTime[0] < wantedTime[0]) || (openTime[1] < wantedTime[1]));
-  // }
-  // else {
-  //   return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
-  // }
 }
 
 /**
