@@ -497,6 +497,10 @@ async function getWasherFilterQuery(filters) {
         })
     }
 
+    if (filters.currentPoint !== undefined) {
+        filteredWashers = sortWashersByDistance(filteredWashers, filters.currentPoint);
+    }
+
     return filteredWashers;
 }
 
