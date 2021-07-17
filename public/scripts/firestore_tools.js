@@ -527,7 +527,7 @@ async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
         let aDistance = getDistanceFromLatLonInKm(a.data().location_cor, currentPoint);
         let bDistance = getDistanceFromLatLonInKm(b.data().location_cor, currentPoint);
-        return bDistance - aDistance;
+        return aDistance - bDistance;
     });
     return washerArray;
 }
