@@ -24,11 +24,13 @@ async function get_order_block_of_user(order_doc, blocks_gap = 5) {
             if (window.location.pathname == "/html/welcome.html") {
                 block += "<button id = 'block_num_" + block_num + "' value='" + washer_doc.id + "' onclick= 'quick_place_order(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Order Again </button></div>";
             }
-            else if (order_doc.data().review_washer == "") {
-                block += "<button class='btn-white'> Review </button></div>";
+            else if (order_doc.data().review_washer == null) {
+                // block += "<button class='btn-white'> Review </button></div>";
+                block += "<button id=block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_review_on_washer_overlay(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Review </button></div>";
             }
             else {
-                block += "<button id = 'user_order' class='btn-white' style='margin-top:10%;'> Watch Review </button></div>";
+                // block += "<button id = 'user_order' class='btn-white' style='margin-top:10%;'> Change Review </button></div>";
+                block += "<button id = block_num_" + block_num + " value='" + order_doc.id + "' class='btn-white' onclick= 'display_review_on_washer_overlay(block_num_" + block_num + ".value)' style='margin-top:10%;'> Change Review </button></div>"
             }
             break;
     }
@@ -100,7 +102,8 @@ function off() {
 
 async function load_quick_welcome_page() {
     console.log(" Here is a big bug but no time now will do tomooroow")
-    var userID = sessionStorage.getItem("connected_userID");
+    // var userID = sessionStorage.getItem("connected_userID");
+    var userID = getUserToken();
     if (userID != null) {
         await insert_orders_blocks_of_user("welcome_orders_block", userID, "finished"); 
     }
