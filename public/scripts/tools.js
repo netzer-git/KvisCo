@@ -3,10 +3,19 @@ function arrangeAddress(address) {
 }
 
 const intersection = (arrayA, arrayB) => {
-  return arrayA.filter(function(n) {
-      return arrayA.indexOf(n) !== -1;
-  });
-};
+  interArray = [];
+
+  for (i of arrayA) {
+    loopJ: for (j of arrayB) {
+      if (j.id === i.id) {
+        interArray.push(i);
+        break loopJ;
+      }
+    }
+  }
+
+  return interArray;
+}
 
 /**
  * the function takes latitude and longitude and 
@@ -153,25 +162,13 @@ function checkOpenTimes(filter, washerDoc) {
   wantedTime = getHourAsNumber(filter[1]);
   // going through each possible combination of hour and min
   return checkIfOpenNow(openTime, wantedTime);
-  // if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
-  //   return false;
-  // }
-  // else if (openTime[0] < wantedTime[0]) {
-  //   return ((wantedTime[0] < closeTime[0]) || (wantedTime[1] < closeTime[1]));
-  // }
-  // else if (wantedTime[0] < closeTime[0]) {
-  //   return ((openTime[0] < wantedTime[0]) || (openTime[1] < wantedTime[1]));
-  // }
-  // else {
-  //   return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
-  // }
 }
 
 /**
  * @param {*} hourMinTime "hours:minutes"
  * @returns [hours, minutes] as numbers
  */
-function getHourAsNumber (hourMinTime) {
+function getHourAsNumber(hourMinTime) {
   if (hourMinTime === undefined) {
     return null;
   }
@@ -193,14 +190,11 @@ function checkIfOpenNow(openTime, closeTime, wantedTime) {
   }
   if (openTime[0] > wantedTime[0] || wantedTime[0] > closeTime[0]) {
     return false;
-  }
-  else if (openTime[0] < wantedTime[0]) {
+  } else if (openTime[0] < wantedTime[0]) {
     return ((wantedTime[0] < closeTime[0]) || (wantedTime[1] < closeTime[1]));
-  }
-  else if (wantedTime[0] < closeTime[0]) {
+  } else if (wantedTime[0] < closeTime[0]) {
     return ((openTime[0] < wantedTime[0]) || (openTime[1] < wantedTime[1]));
-  }
-  else {
+  } else {
     return ((openTime[1] < wantedTime[1]) && (openTime[1] < wantedTime[1]));
   }
 }
@@ -210,87 +204,80 @@ function checkIfOpenNow(openTime, closeTime, wantedTime) {
  * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
  * @returns 
  */
- function check_if_washer_open(opening_times, cur_date) {
-  var date = new Date(cur_date) 
+function check_if_washer_open(opening_times, cur_date) {
+  var date = new Date(cur_date)
   var day = date.getDay();
   switch (day) {
-      case 0:
-          try {
-              opening_time = opening_times.Sunday[0];
-              closing_time = opening_times.Sunday[1];
-              break;
-          }
-          catch {
-              return false;
-          }
+    case 0:
+      try {
+        opening_time = opening_times.Sunday[0];
+        closing_time = opening_times.Sunday[1];
+        break;
+      } catch {
+        return false;
+      }
       case 1:
+        try {
+          opening_time = opening_times.Monday[0];
+          closing_time = opening_times.Monday[1];
+          break;
+        } catch {
+          return false;
+        }
+        case 2:
           try {
-              opening_time = opening_times.Monday[0];
-              closing_time = opening_times.Monday[1];
-              break;
+            opening_time = opening_times.Tuesday[0];
+            closing_time = opening_times.Tuesday[1];
+            break;
+          } catch {
+            return false;
           }
-          catch {
-              return false;
-          }
-      case 2:
-          try {
-              opening_time = opening_times.Tuesday[0];
-              closing_time = opening_times.Tuesday[1];
-              break;
-          }
-          catch {
-              return false;
-          }
-      case 3:
-          try {
+          case 3:
+            try {
               opening_time = opening_times.Wednesday[0];
               closing_time = opening_times.Wednesday[1];
               break;
-          }
-          catch {
+            } catch {
               return false;
-          }
-      case 4:
-          try {
-              opening_time = opening_times.Thursday[0];
-              closing_time = opening_times.Thursday[1];
-              break;
-          }
-          catch {
-              return false;
-          }
-      case 5:
-          try {
-              opening_time = opening_times.Friday[0];
-              closing_time = opening_times.Friday[1];
-              break;
-          }
-          catch {
-              return false;
-          }
-      case 6:
-          try {
-              opening_time = opening_times.Saturday[0];
-              closing_time = opening_times.Saturday[1];
-          break;
-          }
-          catch {
-              return false;
-          }
+            }
+            case 4:
+              try {
+                opening_time = opening_times.Thursday[0];
+                closing_time = opening_times.Thursday[1];
+                break;
+              } catch {
+                return false;
+              }
+              case 5:
+                try {
+                  opening_time = opening_times.Friday[0];
+                  closing_time = opening_times.Friday[1];
+                  break;
+                } catch {
+                  return false;
+                }
+                case 6:
+                  try {
+                    opening_time = opening_times.Saturday[0];
+                    closing_time = opening_times.Saturday[1];
+                    break;
+                  } catch {
+                    return false;
+                  }
   }
   opening_time = toFullTimestamp(date, opening_time);
   closing_time = toFullTimestamp(date, closing_time);
   if ((date >= opening_time) && (date <= closing_time)) {
-      return true;
+    return true;
   }
   return false;
 }
 
 /**
-* return true if washer is open now and false if not
-* @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
-* @returns 
-*/
+ * return true if washer is open now and false if not
+ * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
+ * @returns 
+ */
 function check_if_washer_open_now(opening_times) {
   var cur_date = new Date(); // current time
   return check_if_washer_open(opening_times, cur_date);
