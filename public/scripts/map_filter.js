@@ -8,8 +8,6 @@ const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
-// popup
-var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "Whites Only", "Delicates", "Ironing"];
 // filters global variables
 let near_me_dist, rating, special_services;
@@ -199,14 +197,14 @@ function open_popup(ind){
 /**
  * insert days options tags into days select tag (dropdown form)
  */
-function insert_days_options(){
-    let raw_html = '';
-    for(i=0; i<DAYS.length; i++){
-        raw_html += '<option>'+DAYS[i]+'</option>';
-    }
-    let select_day = document.getElementById("day");
-    select_day.innerHTML = raw_html;
-}
+// function insert_days_options(){
+//     let raw_html = '';
+//     for(i=0; i<DAYS.length; i++){
+//         raw_html += '<option>'+DAYS[i]+'</option>';
+//     }
+//     let select_day = document.getElementById("day");
+//     select_day.innerHTML = raw_html;
+// }
 
 /**
  * close active times popup and update day and time filters
@@ -246,8 +244,8 @@ async function on_load_page(){
     //insert washers cards
     await insert_washer_blocks(washerDoc, search_res["myDay"]);
     //initialize filters btn
-    insert_days_options();
-    init_near_me_range();
+    // insert_days_options();
+    // init_near_me_range();
 }
 
 
