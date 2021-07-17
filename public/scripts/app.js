@@ -40,6 +40,7 @@ function getUserDisplayName() {
   return auth.currentUser.displayName;
 }
 
+// Returns the first name of the user
 function getUserFirstName() {
   return getUserDisplayName().split(' ')[0];
 }
@@ -52,15 +53,18 @@ async function authStateObserver(user) {
     // document.getElementById("log_in_indicator").innerHTML = user_doc.data().name;
     document.getElementById("log_in_indicator").innerHTML = 'Hi, ' + getUserFirstName();
     document.getElementById("log_in_indicator").hidden = false;
-    document.getElementById("welcome_orders_block").hidden = false;
     document.getElementById("log_in_out_msg").innerHTML = "Log Out";
+    // specific page Ids
+    document.getElementById("welcome_orders_block").hidden = false;
+    await load_quick_welcome_page()
   } else { // User is signed out!
     console.log("out " + getUserToken());
     document.getElementById("log_in_indicator").hidden = true;
-    document.getElementById("welcome_orders_block").hidden = true;
     document.getElementById("log_in_indicator").innerHTML = "Anonymous";
     document.getElementById("log_in_out_msg").innerHTML = "Log In";
     sessionStorage.setItem("connected_userID", null);
+    // specific page Ids
+    document.getElementById("welcome_orders_block").hidden = true;
   }
 }
 
