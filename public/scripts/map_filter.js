@@ -4,7 +4,7 @@ current_location = {
 } // burger room
 ////////////////////////////////////////////////////
 
-const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
+const MAX_NUMBER_OF_BLOCKS = 10; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
@@ -13,6 +13,11 @@ const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "W
 let near_me_dist, rating, special_services;
 let active_times= new Array(2);
 let washerDoc_array;
+
+// async function show_only_open_now() {
+
+// }
+
 
 /* handle washers objects */
 /**
@@ -25,7 +30,6 @@ async function create_washer_list(filters) {
      * creaete washer list from JSON
      */
     washerDoc_array = await getWasherFilterQuery(filters); // get all washers
-    console.log(washerDoc_array);
     return washerDoc_array;
     // washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
 
