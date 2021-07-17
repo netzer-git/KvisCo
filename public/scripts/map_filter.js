@@ -25,6 +25,7 @@ async function create_washer_list(filters) {
      * creaete washer list from JSON
      */
     washerDoc_array = await getWasherFilterQuery(filters); // get all washers
+    console.log(washerDoc_array);
     return washerDoc_array;
     // washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
 
