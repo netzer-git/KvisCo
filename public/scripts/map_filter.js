@@ -4,7 +4,7 @@ current_location = {
 } // burger room
 ////////////////////////////////////////////////////
 
-const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
+const MAX_NUMBER_OF_BLOCKS = 10; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
@@ -13,6 +13,11 @@ const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "W
 let near_me_dist, rating, special_services;
 let active_times= new Array(2);
 let washerDoc_array;
+
+// async function show_only_open_now() {
+
+// }
+
 
 /* handle washers objects */
 /**
@@ -25,7 +30,6 @@ async function create_washer_list(filters) {
      * creaete washer list from JSON
      */
     washerDoc_array = await getWasherFilterQuery(filters); // get all washers
-    console.log(washerDoc_array);
     return washerDoc_array;
     // washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
 
@@ -75,7 +79,7 @@ async function insert_washer_blocks(washerDoc, day) {
 async function create_one_washer_block(washerDoc, day) {
     rating = await getRatingFromDoc(washerDoc, 'washer');
     console.log("this is the washer id", washerDoc.id.valueOf());
-    let washer_block_raw_html = '<div class="washer-card" id="'+washerDoc.id.valueOf()+'" onclick="save_washer_id(this)">';
+    let washer_block_raw_html = '<div class="washer-card" id="'+washerDoc.id.valueOf()+'">';
     // creating html object
     washer_block_raw_html += '<div class="shadow-none card">';
     washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="'+washerDoc.data().name+'" image-rendering="crisp-edges"/>';
@@ -84,7 +88,7 @@ async function create_one_washer_block(washerDoc, day) {
     washer_block_raw_html += '<div class="card-profile-img-border"><img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"></div>\n</div>';
     // card text
     // name
-    washer_block_raw_html += '<div class="card-text col-9">\n<div class="row"><h5 class="card-title">'+washerDoc.data().name+'</h5></div>';
+    washer_block_raw_html += '<div class="card-text col-9">\n<div class="row"><button class = "unstyle_name" id="'+washerDoc.id.valueOf()+'" onclick="save_washer_id(this)"><h5 class="card-title">'+washerDoc.data().name+'</h5></button></div>';
     //opening hours
     var hours = washerDoc.data().opening_times[day][0]+ '-' + washerDoc.data().opening_times[day][1];
     washer_block_raw_html +='<div class="row">\n<div class="col-icon col-1"><i class="bi bi-clock"></i></div>\n<div class="col-11"><p class="card-text">'+hours+'</p></div>\n</div>';
@@ -99,7 +103,7 @@ async function create_one_washer_block(washerDoc, day) {
         washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">'+rating+'</p></div>';
     }
     
-    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" class="button1">Order now</button></div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="'+washerDoc.id.valueOf()+'" onclick="insertPlaceOrderBox(this)" class="button1">Order now</button></div>\n</div>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
     return washer_block_raw_html;
 
