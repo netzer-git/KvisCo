@@ -19,9 +19,9 @@ function save() {
     jsarray = [address, myDate, duration, myDay];
     sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     // JSON.stringify(jsArray) converts the jsArray into a string which can be stored in sessionStorage
-    if (window.location.pathname != "/html/welcome.html") {
-        on_load_page()
-    }
+    // if (window.location.pathname != "/html/welcome.html") {
+    //     on_load_page()
+    // }
 }
 
 function get_search_bar(tag) {

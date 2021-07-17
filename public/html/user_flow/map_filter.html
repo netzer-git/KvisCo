@@ -84,9 +84,11 @@
                 <!-- search button-->
                 <div class="col-2">
                     <div class="col-search-btn">
-                        <a class="search-btn-" href="#top">
+                        <button class="unstyle_name" onclick="on_load_page()">
+                        <a class="search-btn-">
                             <svg class="search-btn"><use xlink:href="#search-btn"></use></svg>
                         </a>
+                    </button>
                     </div> 
                 </div>
                 <!-- <div class="col"></div> -->
@@ -174,7 +176,7 @@
                         </div> -->
                         <!-- open-now filter -->
                         <div class="open-now-col-filter col-4">
-                            <button id="filter-btn" class="filter-btn">
+                            <button id="filter-btn" class="filter-btn" onclick="show_only_open_now()">
                                 <span class="filter-btn-text">Open now</span>
                             </button>
                         </div>
