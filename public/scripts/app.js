@@ -40,6 +40,7 @@ function getUserDisplayName() {
   return auth.currentUser.displayName;
 }
 
+// Returns the first name of the user
 function getUserFirstName() {
   return getUserDisplayName().split(' ')[0];
 }
