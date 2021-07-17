@@ -9,10 +9,11 @@ var myDay = DAYS[day];
 jsarray_basic = [address, myDate, duration, myDay];
 
 function save() {
-    console.log("now saving");
+    console.log("duration" , duration);
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
+    console.log("duration" , duration);
     day = new Date(myDate).getDay();
     myDay = DAYS[day];
     // Do whatever you want with the value here.
@@ -26,7 +27,7 @@ function save() {
 
 function get_search_bar(tag) {
     var jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
-    if (jsarray == null) {
+    if (jsarray == null || window.location.pathname == "/html/welcome.html") {
         jsarray = jsarray_basic;
     }
     address = jsarray[0];
@@ -39,7 +40,7 @@ function get_search_bar(tag) {
     search_bar += '<tr>';
     search_bar += '<td><input class="choose_location" type="text" id="where" value = "' + address + '" onchange ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
-    search_bar += '<td><div class="box" id="duration">';
+    search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
     switch (duration) {
         case '8':
@@ -48,12 +49,6 @@ function get_search_bar(tag) {
             search_bar += '<option value="48">48 hours</option>';
             search_bar += '<option value="72">72 hours</option></select>';
             break
-        case '24':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24" selected>24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
-            break;
         case '48':
             search_bar += '<option value="8">8 hours</option>';
             search_bar += '<option value="24">24 hours</option>';
@@ -65,6 +60,12 @@ function get_search_bar(tag) {
             search_bar += '<option value="24">24 hours</option>';
             search_bar += '<option value="48">48 hours</option>';
             search_bar += '<option value="72" selected>72 hours</option></select>';
+            break;
+        default:
+            search_bar += '<option value="8">8 hours</option>';
+            search_bar += '<option value="24" selected>24 hours</option>';
+            search_bar += '<option value="48">48 hours</option>';
+            search_bar += '<option value="72">72 hours</option></select>';
             break;
     }
     search_bar += '</div></td></tr></table>';

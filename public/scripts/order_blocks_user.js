@@ -101,18 +101,9 @@ function off() {
 
 
 async function load_quick_welcome_page() {
-    console.log(" Here is a big bug but no time now will do tomooroow")
     // var userID = sessionStorage.getItem("connected_userID");
     var userID = getUserToken();
     if (userID != null) {
         await insert_orders_blocks_of_user("welcome_orders_block", userID, "finished"); 
     }
-    // try {
-    //     var userID = sessionStorage.getItem("connected_userID");
-    // }
-    // catch {
-    //     return;
-    // }
-    // await insert_orders_blocks_of_user("finished_orders", userID, "finished"); 
-
 }
