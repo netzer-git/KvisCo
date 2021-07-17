@@ -1,10 +1,10 @@
 var block_num = 0;
 
-async function get_order_block_of_user(order_doc) {
+async function get_order_block_of_user(order_doc, blocks_gap = 5) {
     // const washer_doc = await order_doc.data().washer.get();
     const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
     block = "";
-    block += "<div class='col-5'>";
+    block += "<div class='col-"+blocks_gap+"'>";
     // block += "<div class='col_with_padd'>";
     block += "<div class='shadow frame'>";
     block += "<div class='center-order'>";
@@ -57,8 +57,6 @@ async function get_order_block_of_user(order_doc) {
 async function quick_place_order(washerID) {
     sessionStorage.setItem("pressed_washer", washerID); // washer that pressed in page map_filter.html
     window.location.href = "../../html/user_flow/place_order.html";
-
-
 }
 
 
@@ -70,13 +68,18 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
         var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     }
     let all_blocks = "<div class = 'row'>";
-    // all_orders = sortOrdersByCreatedAt(all_orders)
+    all_orders = sortOrdersByCreatedAt(all_orders)
     var max_orders = Math.min(2, all_orders.length);
     if (window.location.pathname == "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
+        for (var i = 0; i < max_orders; i++) {
+            all_blocks += await get_order_block_of_user(all_orders[i],blocks_gap = 4);
+        }
     }
-    for (var i = 0; i < max_orders; i++) {
-        all_blocks += await get_order_block_of_user(all_orders[i]);
+    else {
+        for (var i = 0; i < max_orders; i++) {
+            all_blocks += await get_order_block_of_user(all_orders[i]);
+        }
     }
     all_blocks += "</div>";
     document.getElementById(tag).innerHTML = all_blocks;
