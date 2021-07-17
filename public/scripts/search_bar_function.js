@@ -1,3 +1,5 @@
+// popup
+var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var address = "";
 var d = new Date()
 var myDate = formatDate(d);
