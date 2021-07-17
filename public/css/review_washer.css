@@ -1,4 +1,4 @@
-.review_pink{
+.review_pink {
     width: 654px;
     height: 500px;
     left: 393px;
@@ -21,33 +21,33 @@ table.leave_review_table tr {
     text-align: center;
 }
 
-.header_24{
-        margin-top: 5%;
-        margin-left: 7%;
-        text-align: center;
-        margin-bottom: -10%;
-    
+.header_24 {
+    margin-top: 5%;
+    margin-left: 7%;
+    text-align: center;
+    margin-bottom: -10%;
+
 }
 
-.small_headline_5{
+.small_headline_5 {
     width: 217px;
     height: 26px;
     left: 611px;
     top: 635px;
-    
+
     /* Text / Regular 18 */
-    
+
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 150%;
     /* or 27px */
-    
+
     letter-spacing: 0.45px;
-    
+
     /* Main / Gray */
-    
+
     color: #474A57;
     margin-top: -14%;
     margin-bottom: -15%;
@@ -55,7 +55,7 @@ table.leave_review_table tr {
 }
 
 
-.header_51{
+.header_51 {
     /* position: absolute; */
     width: 535px;
     height: 32px;
@@ -79,7 +79,7 @@ table.leave_review_table tr {
     margin-left: 5%;
 }
 
-#submitImage{
+#submitImage {
     width: 200px;
     height: 40px;
     left: 0%;
@@ -106,16 +106,16 @@ table.leave_review_table tr {
     font-size: 18px;
     line-height: 200%;
     /* Main / Black */
-    
+
     color: #1C1C1D;
     /* or 18px */
-    
+
     text-align: center;
     letter-spacing: 0.45px;
     margin-left: 5%;
 }
 
-.photo_button{
+.photo_button {
     left: 0%;
     right: 0%;
     top: 0%;
@@ -133,12 +133,12 @@ table.leave_review_table tr {
     height: 50px;
 }
 
-.pic_photo{
+.pic_photo {
     text-align: center;
 
 }
 
-#washer_review{
+#washer_review {
     left: 30.49%;
     right: 31.11%;
     top: 64.75%;
@@ -162,7 +162,7 @@ table.leave_review_table tr {
 }
 
 
-.yellow_button_4{
+.yellow_button_4 {
     width: 200px;
     height: 50px;
     left: 0%;
@@ -189,74 +189,81 @@ table.leave_review_table tr {
     font-size: 18px;
     line-height: 100%;
     /* Main / Black */
-    
+
     color: #1C1C1D;
     /* or 18px */
-    
+
     text-align: center;
     letter-spacing: 0.45px;
     margin-left: 37%;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
-    
+
 }
+
 .rate {
     float: left;
     height: 46px;
     padding: 0 10px;
     margin-left: 5%;
 }
-.rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+
+.rate:not(:checked)>input {
+    position: absolute;
+    top: -9999px;
 }
-.rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
 }
-.rate:not(:checked) > label:before {
+
+.rate:not(:checked)>label:before {
     content: '★ ';
 
-    
+
 }
-.rate > input:checked ~ label {
+
+.rate>input:checked~label {
     color: #19FFE3;
-        
+
 }
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
-    color: #19FFE3;  
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #19FFE3;
 }
-.rate > input:checked + label:hover,
-.rate > input:checked + label:hover ~ label,
-.rate > input:checked ~ label:hover,
-.rate > input:checked ~ label:hover ~ label,
-.rate > label:hover ~ input:checked ~ label {
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
     color: #19FFE3;
 }
 
 
-#indicator5{
-    display:none;
+#indicator5 {
+    display: none;
     margin-top: 2%;
     font-family: 'Montserrat';
     font-weight: normal;
     margin-left: 10%;
 }
 
-#submitImage:active{
+#submitImage:active {
     transform: translateY(4px);
 }
 
 
-.yellow_button_4:active{
+.yellow_button_4:active {
     transform: translateY(4px);
 }
