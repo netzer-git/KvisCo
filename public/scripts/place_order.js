@@ -129,7 +129,7 @@ async function create_order() {
         properties: property,
     }
     var orderID = await createNewOrder(cur_order);    
-    display_new_order_for_user(orderID); //orderID
+    display_new_order_for_user(orderID);
     document.getElementById("overlay_thank_you").style.display = "block";
 }
 
@@ -218,6 +218,9 @@ function getWasherFirstOpeningTime(washer_opening_times) {
         else {
             day_num++;
         }
+        if (day_num == 7) {
+            day_num = 0;
+        }
     }
     while (washer_opening_times[week_days[day_num]] === undefined) {
         day_num++;
@@ -228,14 +231,20 @@ function getWasherFirstOpeningTime(washer_opening_times) {
     return [week_days[day_num], washer_opening_times[week_days[day_num]][0]];
 }
 
-function insertPlaceOrderBox (tag) {
+async function insertPlaceOrderBox(e) { 
+    var washerID = e.id;
+    sessionStorage.setItem("pressed_washer", washerID);
+    const washer_doc = await promiseWasherLoaderById(washerID); 
     // The col-5 can be changed.
     //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
     // The SVG is neccessery to be included in the page, where the bodey begins.
-    po_block += '<svg><use xlink:href="#order-box-svg"></use></svg>';
+    po_block = '<svg><use xlink:href="#order-box-svg"></use></svg>';
     // Topic
     po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
     po_block += '<h7>PLACE ORDER</h7>';
+    po_block += '<div class="row">';
+    po_block += '<div class = "description" style="margin-left: 5%;"> from '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '</div>'
     // Start of input table zone
     po_block += '<table class="place_order_table">';
     // First row- labels of dropoff day and special services.
@@ -249,9 +258,9 @@ function insertPlaceOrderBox (tag) {
     po_block += '<script>document.getElementById("date").value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
     po_block += '</td><td><div class="box select">';
     po_block += '<select id="property" onchange="update_properties_and_price()">';
-    po_block += '<option value="Default" selected>Default</option><option value="ironing">Ironing(+25)</option>';
-    po_block += '<option value="door2door">Door-2-Door(+20)</option>';
-    po_block += '<option value="dryer">Hanging Drying(+12)</option></select></div></td></tr>';
+    po_block += '<option value="Default" selected>Default</option><option value="Ironing">Ironing(+25)</option>';
+    po_block += '<option value="Door2Door">Door-2-Door(+20)</option>';
+    po_block += '<option value="Dryer">Hanging Drying(+12)</option></select></div></td></tr>';
     // Labels of Drop off time and loads
     po_block += '<tr style="color: black;"><td style="padding-top: 3%;">Drop off time</td>';
     po_block += '<td style="margin-left: 0; padding-top: 3%;">Loads</td></tr>';
@@ -277,7 +286,19 @@ function insertPlaceOrderBox (tag) {
     po_block += '<div class="col-7"><div style="margin-left: 15%; margin-top: -3%;">';
     po_block += '<div id="overlay_register" onclick="off()">';
     po_block += '<div id="register_block"></div></div>';
+    po_block += '<div id="overlay_thank_you" onclick="off()">';
+    po_block += '<div id="user_order"></div></div>';
     po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
     po_block += '</div></div></div></div>';
-    document.getElementById(tag).innerHTML = po_block;
+    document.getElementById("place-order").innerHTML = po_block;
+    document.getElementById("place-order").hidden = false;
+
+    washer_opening_times = washer_doc.data().opening_times;
+    var first_opening_time = getWasherFirstOpeningTime(washer_opening_times);
+    document.getElementById("date").value =  nextDay(first_opening_time[0]);
+    document.getElementById("startTime").value = first_opening_time[1];
+    update_properties_and_price();
+    msg = "please order your laundry to an hour where " + washer_doc.data().name + " is working";
+
+
 }

@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;1,200&display=swap');
 
-.header{
-    background-color: #FA6648; /* temporary color for highlighting */
+.header {
+    background-color: #FA6648;
+    /* temporary color for highlighting */
     max-width: 100%;
-    height: 41px;  
+    height: 41px;
 }
 
-table.machine_details th{
+table.machine_details th {
     /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
@@ -18,7 +19,7 @@ table.machine_details th{
     font-size: 20px;
     line-height: 32px;
     /* identical to box height, or 160% */
-    
+
     letter-spacing: 0.625px;
 
     color: #1C1C1D;
@@ -30,7 +31,7 @@ table.machine_details th{
 }
 
 
-table.machine_details tr{
+table.machine_details tr {
     /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
@@ -53,8 +54,8 @@ table.machine_details tr{
     color: #1C1C1D;
 }
 
-.Background_box{
-    
+.Background_box {
+
     /* Rectangle 1256 */
     /* position: absolute; */
     left: 0%;
@@ -72,7 +73,7 @@ table.machine_details tr{
 
 
 
-table.Background_box th{
+table.Background_box th {
     /* position: absolute; */
     left: 19.78%;
     right: 19.78%;
@@ -96,69 +97,70 @@ table.Background_box th{
     color: #1C1C1D;
 }
 
-table.Background_box tr{
-/* position: absolute; */
-left: 9.71%;
-right: 7.55%;
-top: 53.74%;
-bottom: 34.8%;
-
-/* Text / Medium 18 */
-
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 145.4%;
-/* identical to box height, or 26px */
-
-text-align: center;
-letter-spacing: 0.5px;
-
-color: #000000;
-}
-
-table.Background_box td{
+table.Background_box tr {
     /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
     bottom: 34.8%;
-    
+
     /* Text / Medium 18 */
-    
+
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 145.4%;
     /* identical to box height, or 26px */
-    
+
     text-align: center;
     letter-spacing: 0.5px;
-    
+
     color: #000000;
-    }
+}
+
+table.Background_box td {
+    /* position: absolute; */
+    left: 9.71%;
+    right: 7.55%;
+    top: 53.74%;
+    bottom: 34.8%;
+
+    /* Text / Medium 18 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 145.4%;
+    /* identical to box height, or 26px */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #000000;
+}
 
 .testimonial-group {
     overflow-x: auto;
-    }
-      
+}
+
 /* The heart of the matter */
-.testimonial-group > .row {
+.testimonial-group>.row {
     display: flex;
     overflow-x: auto;
     /* white-space: nowrap; */
     flex-wrap: nowrap;
-  }
-.testimonial-group > .row > .col-xs-3 {
+}
+
+.testimonial-group>.row>.col-xs-3 {
     display: inline-block;
     float: none;
 }
 
 .col_with_padd {
-    margin-right:10px; 
-    padding-right:10px;
+    margin-right: 10px;
+    padding-right: 10px;
 }
 
 
@@ -171,9 +173,9 @@ table.Background_box td{
     width: 100%;
     height: 200px;
     overflow: scroll;
-  }
+}
 
-  h2 {
+h2 {
     font-family: 'Montserrat', sans-serif;
     font-size: 34px;
     font-style: normal;
@@ -186,6 +188,6 @@ table.Background_box td{
 }
 
 .with_padd {
-    margin:10px; 
-    padding:10px;
+    margin: 10px;
+    padding: 10px;
 }

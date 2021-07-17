@@ -1,4 +1,4 @@
-.order_pink{
+.order_pink {
     width: 40%;
     height: 87%;
 
@@ -15,26 +15,26 @@
     margin-top: 5%;
 }
 
-.order_white{
-    height: 97%;
+.order_white {
+    height: 85%;
     width: 100%;
-    margin-top: -15%;
     background: #FFFFFF;
     margin-bottom: 5%;
     border: 2px solid #1C1C1D;
     border-radius: 2%;
+    /* margin-top: 10%; */
 }
 
 
-table.order_pink th{
+table.order_pink th {
     text-align: center;
 }
 
-table.order_white th{
+table.order_white th {
     text-align: center;
 }
 
-.yellow_button_3{
+.yellow_button_3 {
     left: 0%;
     right: 0%;
     top: 0%;
@@ -70,7 +70,7 @@ table.order_white th{
     color: #1C1C1D;
 }
 
-.phone_number{
+.phone_number {
     left: 0%;
     right: 0%;
     top: 0%;
@@ -103,20 +103,20 @@ table.order_white th{
 
 }
 
-.header_24{
-  /* width: 558px; */
-  height: 130px;
-  font-family: 'Permanent Marker';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 250%;
-  letter-spacing: 1px;
-  color: #1C1C1D;
-  margin-left: 2%;
-  font-size: 29px;
+.header_24 {
+    /* width: 558px; */
+    height: 130px;
+    font-family: 'Permanent Marker';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 250%;
+    letter-spacing: 1px;
+    color: #1C1C1D;
+    margin-left: 2%;
+    font-size: 29px;
 }
 
-.header_61{
+.header_61 {
     margin-left: 10%;
     font-family: 'Montserrat';
     font-style: normal;
@@ -127,11 +127,11 @@ table.order_white th{
     color: #1C1C1D;
 }
 
-.header_44{
+.header_44 {
     font-size: 25px;
 }
 
-.small_headline_4{
+.small_headline_4 {
     left: 18.04%;
     right: 9.6%;
     top: 68.33%;
@@ -154,7 +154,7 @@ table.order_white th{
     margin-left: 7%;
 }
 
-.red_button{
+.red_button {
     left: 0%;
     right: 0%;
     top: 0%;
@@ -192,7 +192,7 @@ table.order_white th{
 }
 
 
-.small-box-2{
+.small-box-2 {
 
     /* Main / White */
 
@@ -220,7 +220,7 @@ table.order_white th{
     margin-bottom: 4%;
 }
 
-.phone_number{
+.phone_number {
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
@@ -239,8 +239,8 @@ table.order_white th{
 }
 
 
-.Background_box_open{
-    
+.Background_box_open {
+
     /* Rectangle 1256 */
     /* position: absolute; */
     left: 0%;
@@ -258,7 +258,7 @@ table.order_white th{
 }
 
 
-table.Background_box_open th{
+table.Background_box_open th {
     /* position: absolute; */
     left: 19.78%;
     right: 19.78%;
@@ -282,58 +282,60 @@ table.Background_box_open th{
     color: #1C1C1D;
 }
 
-table.Background_box_open tr{
-/* position: absolute; */
-left: 9.71%;
-right: 7.55%;
-top: 53.74%;
-bottom: 34.8%;
-
-/* Text / Medium 18 */
-
-font-family: 'Montserrat';
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 145.4%;
-/* identical to box height, or 26px */
-
-text-align: center;
-letter-spacing: 0.5px;
-
-color: #000000;
-}
-
-table.Background_box_open td{
+table.Background_box_open tr {
     /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
     bottom: 34.8%;
-    
+
     /* Text / Medium 18 */
-    
+
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 145.4%;
     /* identical to box height, or 26px */
-    
+
     text-align: center;
     letter-spacing: 0.5px;
-    
-    color: #000000;
-    }
 
-    .rounded-circle-2 {
+    color: #000000;
+}
+
+table.Background_box_open td {
+    /* position: absolute; */
+    left: 9.71%;
+    right: 7.55%;
+    top: 53.74%;
+    bottom: 34.8%;
+
+    /* Text / Medium 18 */
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 145.4%;
+    /* identical to box height, or 26px */
+
+    text-align: center;
+    letter-spacing: 0.5px;
+
+    color: #000000;
+}
+
+/* .rounded-circle-2 {
         border-radius: 50%!important;
-    }
-    .rounded-circle-2 {
-        padding-top: 5px;
-        display: inline-block;
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+    } */
+
+.rounded-circle-2 {
+    padding-top: 5px;
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border-radius: 50% !important;
+}

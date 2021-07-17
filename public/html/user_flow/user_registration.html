@@ -1,34 +1,37 @@
 <html>
-    <head>
-        <script scr="/js/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <!-- this tag connects the header-page to the appropriate css -->
-        <link rel="stylesheet" href="../../css/washer_regist.css">
-        <link rel="stylesheet" href="../../css/user_regist.css">
-        <link rel="stylesheet" href="../../css/welcome.css">
-        <link rel="stylesheet" href="../../css/header_style.css">
 
-        <script src="/__/firebase/8.6.1/firebase-app.js"></script>
-        <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
-        <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
-        <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
-        <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
-        <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
-        <script src="/__/firebase/init.js"></script>
+<head>
+    <script scr="/js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- this tag connects the header-page to the appropriate css -->
+    <link rel="stylesheet" href="../../css/washer_regist.css">
+    <link rel="stylesheet" href="../../css/user_regist.css">
+    <link rel="stylesheet" href="../../css/welcome.css">
+    <link rel="stylesheet" href="../../css/header_style.css">
 
-        <script src="../../scripts/app.js"></script>
-        <script src="../../scripts/tools.js"></script>
-        <script src="../../scripts/firestore_tools.js"></script>
-        <script src="../../scripts/header_bar.js"></script>
-        <script src="../../scripts/washer_registration.js"></script>
-        <script src="../../scripts/user_registresion.js"></script>
-    </head>
+    <script src="/__/firebase/8.6.1/firebase-app.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-auth.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-storage.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-messaging.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+    <script src="/__/firebase/init.js"></script>
+
+    <script src="../../scripts/app.js"></script>
+    <script src="../../scripts/tools.js"></script>
+    <script src="../../scripts/firestore_tools.js"></script>
+    <script src="../../scripts/header_bar.js"></script>
+    <script src="../../scripts/washer_registration.js"></script>
+    <script src="../../scripts/user_registresion.js"></script>
+</head>
 
 <body>
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
-        <div class= "regist_pink_2">
+    <div style="background-image: url('/images/background-bubbles.svg');">
+        <div class="regist_pink_2">
             <table>
                 <tr>
                     <h2 class="header_25">
@@ -37,22 +40,24 @@
                 </tr>
                 <tr>
                     <td>
-                            <form id="image-form" action="#">
-                                <input id="mediaCapture" onchange="save_photo(event)" type="file" accept="image/*" capture="camera" hidden>
-                                <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
-                                    Upload Profile Photo
-                                </button>
-                                <label id="indicator4">photo uploaded</label>
-                            </form>
+                        <form id="image-form" action="#">
+                            <input id="mediaCapture" onchange="save_photo(event)" type="file" accept="image/*"
+                                capture="camera" hidden>
+                            <button id="submitImage3" title="Add an image"
+                                onclick="document.getElementById('mediaCapture').click()">
+                                Upload Profile Photo
+                            </button>
+                            <label id="indicator4">photo uploaded</label>
+                        </form>
                         <!-- <img id="defualt_profile" class="user_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
-                        <div id= "checkmark"></div>
+                        <div id="checkmark"></div>
                     </td>
                 </tr>
                 <tr>
                     <th>
-                    <div class= "header_53">
-                        <img id="icons" src="/images/icons/location-icon.png"/> Your location
-                    </div>
+                        <div class="header_53">
+                            <img id="icons" src="/images/icons/location-icon.png" /> Your location
+                        </div>
                     </th>
                 </tr>
                 <tr>
@@ -61,45 +66,50 @@
                             <label class="labels" for="city">City: </label>
                             <label class="labels_2" for="street">Street: </label>
                             <label class="labels_3" for="number">Number: </label>
-                            <input class= "regist_input_3" type="text" id="city" name="city" value="" onchange="save_location()">
-                            <input class= "regist_input_3" type="text" id="street" name="street" value="" onchange="save_location()">
-                            <input class= "regist_input_3" type="text" id="number" name="number" value="" onchange="save_location()">
-                        </form>
-                        </th>
-                </tr>
-                <tr>
-                    <th>
-                        <form action="/action_page.php">
-                            <label class="header_53" for="phone"><img id="icons" src="/images/icons/phone-icon.png"> Phone number</label>
-                            <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
+                            <input class="regist_input_3" type="text" id="city" name="city" value=""
+                                onchange="save_location()">
+                            <input class="regist_input_3" type="text" id="street" name="street" value=""
+                                onchange="save_location()">
+                            <input class="regist_input_3" type="text" id="number" name="number" value=""
+                                onchange="save_location()">
                         </form>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <div class= "header_53">
-                            <img id="icons" src="/images/icons/tell-icon.png"/> Tell us about yourself
+                        <form action="/action_page.php">
+                            <label class="header_53" for="phone"><img id="icons" src="/images/icons/phone-icon.png">
+                                Phone number</label>
+                            <input class="regist_input" type="text" id="phone" name="phone" value=""
+                                onchange="save_phone_number()"><br>
+                        </form>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="header_53">
+                            <img id="icons" src="/images/icons/tell-icon.png" /> Tell us about yourself
                         </div>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <textarea id="user_description" class="user_details" name="user_details" rows="3" cols="50" placeholder=" ..." 
-                        onchange="save_description()"></textarea> <!-- Personal note--> <!--This onchange does not exist-->
-                            <br><br>
+                        <textarea id="user_description" class="user_details" name="user_details" rows="3" cols="50"
+                            placeholder=" ..." onchange="save_description()"></textarea> <!-- Personal note-->
+                        <!--This onchange does not exist-->
+                        <br><br>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                    <button class= "yellow_button_6" onclick="create_user()">Continue</button>
+                        <button class="yellow_button_6" onclick="create_user()">Continue</button>
                     </th>
                 </tr>
             </table>
-        
         </div>
+    </div>
 </body>
 
 <script>
     $("#includedContent").load("../includes/header.html");
 </script>
-

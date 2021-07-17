@@ -24,7 +24,6 @@ async function get_order_block_of_washer(order_doc) {
         case 'process':
             block += "<div class='actions'>";
             block += " <button id = block_num_" + block_num + " value='" + order_doc.id + "' class='btn-white' onclick= 'display_order_status(block_num_" + block_num + ".value)'>Open</button></div></div>";
-            // block += "</tr><th scope='col' colspan='2'><button id = block_num_" + block_num + " value='" + order_doc.id + "' onclick= 'display_order_status(block_num_" + block_num + ".value)' class='button1'> Open  </button></th></tr>";
             break;
         case 'finished':
             if (order_doc.data().review_user == null) {
@@ -68,6 +67,7 @@ async function insert_orders_blocks_of_washer(tag, washerID, status) {
     else {
         var all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, status);
     }
+    all_orders = sortOrdersByCreatedAt(all_orders)
     let all_blocks = "<div class = 'row'>";
     let max_orders = Math.min(2, all_orders.length);
     for (var i = 0; i < max_orders; i++) {

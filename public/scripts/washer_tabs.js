@@ -34,97 +34,6 @@ function toFullTimestamp(fullDate,time){
     return new Date(Date.UTC(year,month,day,hour-3,minute,second));
 }
 
-/**
- * return true if washer is open now and false if not
- * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
- * @returns 
- */
- function check_if_washer_open(opening_times, cur_date) {
-    var date = new Date(cur_date) 
-    var day = date.getDay();
-    switch (day) {
-        case 0:
-            try {
-                opening_time = opening_times.Sunday[0];
-                closing_time = opening_times.Sunday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 1:
-            try {
-                opening_time = opening_times.Monday[0];
-                closing_time = opening_times.Monday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 2:
-            try {
-                opening_time = opening_times.Tuesday[0];
-                closing_time = opening_times.Tuesday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 3:
-            try {
-                opening_time = opening_times.Wednesday[0];
-                closing_time = opening_times.Wednesday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 4:
-            try {
-                opening_time = opening_times.Thursday[0];
-                closing_time = opening_times.Thursday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 5:
-            try {
-                opening_time = opening_times.Friday[0];
-                closing_time = opening_times.Friday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 6:
-            try {
-                opening_time = opening_times.Saturday[0];
-                closing_time = opening_times.Saturday[1];
-            break;
-            }
-            catch {
-                return false;
-            }
-    }
-    opening_time = toFullTimestamp(date, opening_time);
-    closing_time = toFullTimestamp(date, closing_time);
-    if ((date >= opening_time) && (date <= closing_time)) {
-        return true;
-    }
-    return false;
-}
-
-/**
- * return true if washer is open now and false if not
- * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
- * @returns 
- */
- function check_if_washer_open_now(opening_times) {
-    var cur_date = new Date(); // current time
-    return check_if_washer_open(opening_times, cur_date);
-}
-
 
 /////////////////// functions that called into html by washer_details.js and place_order.js  ///////
 
@@ -136,12 +45,16 @@ function f_checkOpeningTimes(washer_doc) {
     if (check_if_washer_open_now(washer_doc.data().opening_times)) {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
         document.getElementById("openClosedColor").style.color = "green";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
+        document.getElementById("openClosedColor").style.fontSize = "20px";
+        document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
     }
     else {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
         document.getElementById("openClosedColor").style.color = "red";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
+        document.getElementById("openClosedColor").style.fontSize = "20px";
+        document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
+        
+
     }
 }
 
@@ -218,7 +131,7 @@ async function f_display_washer_reviews(washerID) {
             all_reviews += "<div class='col-1'>";
             all_reviews += "</div>";
             all_reviews += "<div class='col-2'>";
-            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + user_that_review.data().imageUrl + "></a></div>";
+            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-xs' src=" + user_that_review.data().imageUrl + "></a></div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
             all_reviews += "<div class='location'>" + user_that_review.data().name + "</div>";
@@ -245,7 +158,7 @@ async function f_display_washer_reviews(washerID) {
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4> there are no reviews yet </h4>";
+        all_reviews += "<h4> There are no reviews yet </h4>";
     }
     all_reviews += '</div>';
     document.getElementById("my_reviews").innerHTML = all_reviews;
