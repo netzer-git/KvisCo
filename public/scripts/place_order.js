@@ -228,9 +228,10 @@ function getWasherFirstOpeningTime(washer_opening_times) {
     return [week_days[day_num], washer_opening_times[week_days[day_num]][0]];
 }
 
-async function insertPlaceOrderBox (tag) {
-    var washerID = sessionStorage.getItem("pressed_washer"); // washer that pressed in page map_filter.html
-    var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
+async function insertPlaceOrderBox(ev) { 
+    var washerID = sessionStorage.getItem("pressed_washer");
+    console.log("insert washer place order block", washerID)
+    // var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
     const washer_doc = await promiseWasherLoaderById(washerID); 
 
     // The col-5 can be changed.
@@ -240,6 +241,9 @@ async function insertPlaceOrderBox (tag) {
     // Topic
     po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
     po_block += '<h7>PLACE ORDER</h7>';
+    po_block += '<div class="row">';
+    po_block += '<div class = "description" style="margin-left: 5%;"> from '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '</div>'
     // Start of input table zone
     po_block += '<table class="place_order_table">';
     // First row- labels of dropoff day and special services.
@@ -283,17 +287,14 @@ async function insertPlaceOrderBox (tag) {
     po_block += '<div id="register_block"></div></div>';
     po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
     po_block += '</div></div></div></div>';
-    document.getElementById(tag).innerHTML = po_block;
-    
-    opening_times = washer_doc.data().opening_times;
-    var first_opening_time = getWasherFirstOpeningTime(opening_times);
-    console.log(first_opening_time)
-    open_day = nextDay(first_opening_time[0]);
-    open_hour = first_opening_time[1];
-    // open_day = nextDay("Sunday");
-    // open_hour = "10:00"
-    document.getElementById("date").value =  open_day;
-    document.getElementById("startTime").value = open_hour;
+    document.getElementById("place-order").innerHTML = po_block;
+
+    washer_opening_times = washer_doc.data().opening_times;
+    var first_opening_time = getWasherFirstOpeningTime(washer_opening_times);
+    document.getElementById("date").value =  nextDay(first_opening_time[0]);
+    document.getElementById("startTime").value = first_opening_time[1];
     update_properties_and_price();
-    msg = "please order your laundry to an hour where " +washer_doc.data().name + " is working"
+    msg = "please order your laundry to an hour where " + washer_doc.data().name + " is working";
+
+
 }

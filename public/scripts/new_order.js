@@ -45,9 +45,9 @@
 
 
 async function display_new_order_for_user(orderID) {
-    sessionStorage.setItem("cur_order", orderID);
     const order_doc = await promiseOrderLoaderById(orderID);
     const washer_doc = await promiseWasherLoaderById(order_doc.data().washer);
+    sessionStorage.setItem("cur_order", orderID);
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {

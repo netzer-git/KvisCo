@@ -8,8 +8,6 @@ const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
-// popup
-var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "Whites Only", "Delicates", "Ironing"];
 // filters global variables
 let near_me_dist, rating, special_services;
@@ -27,6 +25,7 @@ async function create_washer_list(filters) {
      * creaete washer list from JSON
      */
     washerDoc_array = await getWasherFilterQuery(filters); // get all washers
+    console.log(washerDoc_array);
     return washerDoc_array;
     // washerDoc_array = getWasherFilterQuery({rating: 3.5}); // get washers with filters
 
@@ -100,7 +99,7 @@ async function create_one_washer_block(washerDoc, day) {
         washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">'+rating+'</p></div>';
     }
     
-    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" class="button1">Order now</button></div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" onclick="insertPlaceOrderBox(event)" class="button1">Order now</button></div>\n</div>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
     return washer_block_raw_html;
 
@@ -199,14 +198,14 @@ function open_popup(ind){
 /**
  * insert days options tags into days select tag (dropdown form)
  */
-function insert_days_options(){
-    let raw_html = '';
-    for(i=0; i<DAYS.length; i++){
-        raw_html += '<option>'+DAYS[i]+'</option>';
-    }
-    let select_day = document.getElementById("day");
-    select_day.innerHTML = raw_html;
-}
+// function insert_days_options(){
+//     let raw_html = '';
+//     for(i=0; i<DAYS.length; i++){
+//         raw_html += '<option>'+DAYS[i]+'</option>';
+//     }
+//     let select_day = document.getElementById("day");
+//     select_day.innerHTML = raw_html;
+// }
 
 /**
  * close active times popup and update day and time filters
@@ -246,8 +245,8 @@ async function on_load_page(){
     //insert washers cards
     await insert_washer_blocks(washerDoc, search_res["myDay"]);
     //initialize filters btn
-    insert_days_options();
-    init_near_me_range();
+    // insert_days_options();
+    // init_near_me_range();
 }
 
 

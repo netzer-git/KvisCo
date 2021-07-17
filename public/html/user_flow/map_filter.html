@@ -31,6 +31,7 @@
         <script src="../../scripts/firestore_tools.js"></script>
         <script src="../../scripts/map_filter.js"></script>
         <script src="../../scripts/search_bar_function.js"></script>
+        <script src="../../scripts/washer_tabs.js"></script>
         <script src="../../scripts/place_order.js"></script>
         <meta name=viewport content="initial-scale=1">
     </head>
@@ -94,6 +95,7 @@
                 <div class="col"></div>
                 <!-- Washer cards section -->
                 <div class="col-washers-cards col-5">
+                    <div class="overflow-auto">
                     <div id="washers-cards">
                         <!-- REMOVE IT! -->
                         <!-- <div class="washer-card">
@@ -130,6 +132,7 @@
                         </div> -->
                     </div>
                 </div>
+            </div>
                 <!-- filter section -->
                 <div class="col-filters col-5">
                     <div class="row-filters row">
@@ -205,7 +208,7 @@
                           
                     </div>
                     <div id="place-order" class="place-order row">
-                        <script>insertPlaceOrderBox("place-order")</script>
+                        <!-- <script>insertPlaceOrderBox("place-order")</script> -->
                     </div>
                 </div>
                 <div class="col"></div>

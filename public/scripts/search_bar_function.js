@@ -1,3 +1,5 @@
+// popup
+var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var address = "";
 var d = new Date()
 var myDate = formatDate(d);
@@ -7,10 +9,14 @@ var myDay = DAYS[day];
 jsarray_basic = [address, myDate, duration, myDay];
 
 function save() {
+    console.log("now saving");
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
-    day = d.getDay();
+    day = (d.getDay()++);
+    if (day == 7) {
+        day == 0;
+    }
     myDay = DAYS[day];
     // Do whatever you want with the value here.
     jsarray = [address, myDate, duration, myDay];
