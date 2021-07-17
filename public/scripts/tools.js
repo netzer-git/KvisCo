@@ -3,10 +3,20 @@ function arrangeAddress(address) {
 }
 
 const intersection = (arrayA, arrayB) => {
-  return arrayA.filter(function(n) {
-      return arrayA.indexOf(n) !== -1;
-  });
-};
+  interArray = [];
+
+  for (i of arrayA) {
+    loopJ:
+    for (j of arrayB) {
+      if (j.id === i.id) {
+        interArray.push(i);
+        break loopJ;
+      }
+    }
+  }
+
+  return interArray;
+}
 
 /**
  * the function takes latitude and longitude and 
