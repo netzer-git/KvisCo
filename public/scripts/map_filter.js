@@ -99,7 +99,7 @@ async function create_one_washer_block(washerDoc, day) {
         washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">'+rating+'</p></div>';
     }
     
-    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" class="button1">Order now</button></div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" onclick="insertPlaceOrderBox(event)" class="button1">Order now</button></div>\n</div>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
     return washer_block_raw_html;
 
