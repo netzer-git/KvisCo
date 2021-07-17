@@ -13,12 +13,15 @@ function save() {
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
-    day = d.getDay();
+    day = new Date(myDate).getDay();
     myDay = DAYS[day];
     // Do whatever you want with the value here.
     jsarray = [address, myDate, duration, myDay];
     sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     // JSON.stringify(jsArray) converts the jsArray into a string which can be stored in sessionStorage
+    if (window.location.pathname != "/html/welcome.html") {
+        on_load_page()
+    }
 }
 
 function get_search_bar(tag) {
@@ -34,7 +37,7 @@ function get_search_bar(tag) {
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" id="where" value = " ' + address + ' " onchange ="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" id="where" value = "' + address + '" onchange ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
     search_bar += '<td><div class="box" id="duration">';
     search_bar += '<select id="duration" onchange="save()">';
