@@ -10,13 +10,13 @@
         if (all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
             const washer_that_review = await promiseWasherLoaderById(all_orders[j].data().washer);
             // here start block of review
-            all_reviews += "<div class='row'>";
+            all_reviews += "<div class='row' style='margin-top: 2%;'>";
             all_reviews += "<div class='col-6'>";
             all_reviews += "<div class='row'>";
             all_reviews += "<div class='col-1'>";
             all_reviews += "</div>";
             all_reviews += "<div class='col-2'>";
-            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-small' src=" + washer_that_review.data().imageUrl + "></a></div>";
+            all_reviews += "<div class='profile_pic'><a href='#'><img class='rounded-circle-xs' src=" + washer_that_review.data().imageUrl + "></a></div>";
             all_reviews += '</div>';
             all_reviews += "<div class='col-6'>";
             all_reviews += "<div class='location'>" + washer_that_review.data().name + "</div>";
@@ -40,7 +40,7 @@
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4> there are no reviews yet </h4>";
+        all_reviews += "<h4> There are no reviews yet </h4>";
     }
     all_reviews += '</div>';
     document.getElementById("my_reviews").innerHTML = all_reviews;

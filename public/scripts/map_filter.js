@@ -8,15 +8,10 @@ const MAX_NUMBER_OF_BLOCKS = 5; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
-// popup
-const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const NEAR_ME = ["0", "5", "0.5", "0"];
-const RATING = new Array(5);
 const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "Whites Only", "Delicates", "Ironing"];
 // filters global variables
 let near_me_dist, rating, special_services;
 let active_times= new Array(2);
-const NUM_POPUP = 4
 let washerDoc_array;
 
 /* handle washers objects */
@@ -40,14 +35,15 @@ async function create_washer_list(filters) {
 /**
  * get all washers and create each of the washers in block and display them.
  * @param {*} washerDoc 
+ * @param {String} day - day field of the search result
  */
-function insert_washer_blocks(washerDoc) {
+async function insert_washer_blocks(washerDoc, day) {
     let whole_washers_html_block = '';
     // adjusting page height
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washerDoc.length);
 
     for (let i = 0; i < max_number_of_blocks; i++) {
-        // let washer_block_raw_html = create_one_washer_block(washerDoc[i]);
+        let washer_block_raw_html = await create_one_washer_block(washerDoc[i], day);
         whole_washers_html_block += washer_block_raw_html;
     }
     document.getElementById("washers-cards").innerHTML = whole_washers_html_block;
@@ -65,29 +61,57 @@ function insert_washer_blocks(washerDoc) {
     the content represents one wahser block.
 
     @param {Washer} washer - washer js
+    * @param {String} day - day field of the search result
     @return {void}
 */
-function create_one_washer_block(washerDoc) {
+/**
+ * takes wahser object and returns string of html tags and content.
+    the content represents one wahser block.
+ * @param {{Washer} washerDoc 
+ * @param {String} day - day field of the search result
+ * @returns washer card HTML element
+ */
+async function create_one_washer_block(washerDoc, day) {
+    rating = await getRatingFromDoc(washerDoc, 'washer');
     console.log("this is the washer id", washerDoc.id.valueOf());
-    // let washer_block_raw_html = '<a class="washer-card" id="'+washerDoc.id.valueOf()+'">';
     let washer_block_raw_html = '<div class="washer-card" id="'+washerDoc.id.valueOf()+'" onclick="save_washer_id(this)">';
     // creating html object
-    washer_block_raw_html += '<div class="card">';
-    washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="..." image-rendering="crisp-edges"/>';
-    // washer_block_raw_html += '<svg class="card-img"><use xlink:href="#filter-card"></use></svg>';
+    washer_block_raw_html += '<div class="shadow-none card">';
+    washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="'+washerDoc.data().name+'" image-rendering="crisp-edges"/>';
     // card profile pic & rating section
     washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
-    washer_block_raw_html += '<img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"/>';
-    washer_block_raw_html += '<div class="card-rating row">\n<div class="col-6" style="float: right;">\n<svg class="rating-star">\n<use xlink:href="#rating-star"></use>\n</svg>\n</div>\n<div class="col-6" style="float: left;">'+getRatingFromDoc(washerDoc, 'washer')+'</div>\n</div>\n</div>';
+    washer_block_raw_html += '<div class="card-profile-img-border"><img class="card-profile-img" src=\"'+washerDoc.data().imageUrl+'\"></div>\n</div>';
     // card text
-    washer_block_raw_html+= '<div class="card-text col-9">';
-    washer_block_raw_html+= '<h5 class="card-title">'+washerDoc.data().name+'</h5>';
-    washer_block_raw_html+= '<h6 class="card-subtitle mb-2 text-muted">'+washerDoc.data().description+'</h6>';
-    washer_block_raw_html+= '<p class="card-text">' + washerDoc.data().properties + '</p>';
+    // name
+    washer_block_raw_html += '<div class="card-text col-9">\n<div class="row"><h5 class="card-title">'+washerDoc.data().name+'</h5></div>';
+    //opening hours
+    var hours = washerDoc.data().opening_times[day][0]+ '-' + washerDoc.data().opening_times[day][1];
+    washer_block_raw_html +='<div class="row">\n<div class="col-icon col-1"><i class="bi bi-clock"></i></div>\n<div class="col-11"><p class="card-text">'+hours+'</p></div>\n</div>';
+    // distance
+    var dist = getDistanceFromLatLonInKm(current_user_location, washerDoc.data().location_cor).toFixed(1);
+    washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-geo-alt-fill" style="color:var(--color-4)"></i></div>\n<div class="col-3"><p class="card-text">'+dist+'</p></div>\n<div class="col-4"></div>\n</div>';
+    // add rating in case rating > 0
+    if (rating == 0){
+        washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2);visibility:hidden"></i></div>\n<div class="col-3" style="visibility:hidden"><p class="card-text">'+rating+'</p></div>';
+    }
+    else{
+        washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">'+rating+'</p></div>';
+    }
+    
+    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="order-now-btn" class="button1">Order now</button></div>\n</div>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
+    return washer_block_raw_html;
+
+
+    //old
+    // washer_block_raw_html+= '<div class="card-text col-9">';
+    // washer_block_raw_html+= '<h5 class="card-title">'+washerDoc.data().name+'</h5>';
+    // washer_block_raw_html+= '<h6 class="card-subtitle mb-2 text-muted">'+washerDoc.data().description+'</h6>';
+    // washer_block_raw_html+= '<p class="card-text">' + washerDoc.data().properties + '</p>';
+    // washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
     // washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</a>';
 
-    return washer_block_raw_html;
+    
 }
 
 /**
@@ -173,14 +197,14 @@ function open_popup(ind){
 /**
  * insert days options tags into days select tag (dropdown form)
  */
-function insert_days_options(){
-    let raw_html = '';
-    for(i=0; i<DAYS.length; i++){
-        raw_html += '<option>'+DAYS[i]+'</option>';
-    }
-    let select_day = document.getElementById("day");
-    select_day.innerHTML = raw_html;
-}
+// function insert_days_options(){
+//     let raw_html = '';
+//     for(i=0; i<DAYS.length; i++){
+//         raw_html += '<option>'+DAYS[i]+'</option>';
+//     }
+//     let select_day = document.getElementById("day");
+//     select_day.innerHTML = raw_html;
+// }
 
 /**
  * close active times popup and update day and time filters
@@ -215,14 +239,13 @@ async function on_load_page(){
 
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
-    search_res['myDay'] = search_res["myDate"].getDay();
     //initialize washers list
     washerDoc = await create_washer_list(search_res);
     //insert washers cards
-    insert_washer_blocks(washerDoc);
+    await insert_washer_blocks(washerDoc, search_res["myDay"]);
     //initialize filters btn
-    insert_days_options();
-    init_near_me_range();
+    // insert_days_options();
+    // init_near_me_range();
 }
 
 

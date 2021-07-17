@@ -129,7 +129,7 @@ async function create_order() {
         properties: property,
     }
     var orderID = await createNewOrder(cur_order);    
-    display_new_order_for_user(orderID); //orderID
+    display_new_order_for_user(orderID);
     document.getElementById("overlay_thank_you").style.display = "block";
 }
 
@@ -228,11 +228,15 @@ function getWasherFirstOpeningTime(washer_opening_times) {
     return [week_days[day_num], washer_opening_times[week_days[day_num]][0]];
 }
 
-function insertPlaceOrderBox (tag) {
+async function insertPlaceOrderBox (tag) {
+    var washerID = sessionStorage.getItem("pressed_washer"); // washer that pressed in page map_filter.html
+    var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
+    const washer_doc = await promiseWasherLoaderById(washerID); 
+
     // The col-5 can be changed.
     //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
     // The SVG is neccessery to be included in the page, where the bodey begins.
-    po_block += '<svg><use xlink:href="#order-box-svg"></use></svg>';
+    po_block = '<svg><use xlink:href="#order-box-svg"></use></svg>';
     // Topic
     po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
     po_block += '<h7>PLACE ORDER</h7>';
@@ -249,9 +253,9 @@ function insertPlaceOrderBox (tag) {
     po_block += '<script>document.getElementById("date").value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
     po_block += '</td><td><div class="box select">';
     po_block += '<select id="property" onchange="update_properties_and_price()">';
-    po_block += '<option value="Default" selected>Default</option><option value="ironing">Ironing(+25)</option>';
-    po_block += '<option value="door2door">Door-2-Door(+20)</option>';
-    po_block += '<option value="dryer">Hanging Drying(+12)</option></select></div></td></tr>';
+    po_block += '<option value="Default" selected>Default</option><option value="Ironing">Ironing(+25)</option>';
+    po_block += '<option value="Door2Door">Door-2-Door(+20)</option>';
+    po_block += '<option value="Dryer">Hanging Drying(+12)</option></select></div></td></tr>';
     // Labels of Drop off time and loads
     po_block += '<tr style="color: black;"><td style="padding-top: 3%;">Drop off time</td>';
     po_block += '<td style="margin-left: 0; padding-top: 3%;">Loads</td></tr>';
@@ -280,4 +284,16 @@ function insertPlaceOrderBox (tag) {
     po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
     po_block += '</div></div></div></div>';
     document.getElementById(tag).innerHTML = po_block;
+    
+    opening_times = washer_doc.data().opening_times;
+    var first_opening_time = getWasherFirstOpeningTime(opening_times);
+    console.log(first_opening_time)
+    open_day = nextDay(first_opening_time[0]);
+    open_hour = first_opening_time[1];
+    // open_day = nextDay("Sunday");
+    // open_hour = "10:00"
+    document.getElementById("date").value =  open_day;
+    document.getElementById("startTime").value = open_hour;
+    update_properties_and_price();
+    msg = "please order your laundry to an hour where " +washer_doc.data().name + " is working"
 }
