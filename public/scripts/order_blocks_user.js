@@ -17,9 +17,8 @@ async function get_order_block_of_user(order_doc) {
         case 'pending':
         case 'process':
             block += "<div class='actions'>";
-            block += "<div id='overlay' onclick='off()'>";
-            block += "<div id='user_order'></div></div>";
-            block += " <button class='btn-white' onclick='display_order()'>Details</button></div></div>";
+            block += "<button id = 'block_num_" + block_num + "' value='" + order_doc.id + "' onclick= 'display_order(block_num_" + block_num + ".value)' class='btn-white' style='margin-top:10%;'> Details </button></div>";
+            block += "</div>";
           break;
         case 'finished':
             if (window.location.pathname == "/html/welcome.html") {
@@ -51,13 +50,11 @@ async function get_order_block_of_user(order_doc) {
     // block += "</div>";
     block += "</div>";
     block += "</div>";
-    block_num ++;
+    block_num++;
     return block;
 }
 
 async function quick_place_order(washerID) {
-    // var order_doc = await promiseOrderLoaderById(orderID);
-    // var washerID = await promiseWasherLoaderById(washerID);
     sessionStorage.setItem("pressed_washer", washerID); // washer that pressed in page map_filter.html
     window.location.href = "../../html/user_flow/place_order.html";
 
@@ -73,6 +70,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
         var all_orders = await promiseOrderArrayByUserIdAndStatus(userID, status);
     }
     let all_blocks = "<div class = 'row'>";
+    // all_orders = sortOrdersByCreatedAt(all_orders)
     var max_orders = Math.min(2, all_orders.length);
     if (window.location.pathname == "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
@@ -85,26 +83,30 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
 }
 
 
-function display_order() {
-    display_new_order_for_user('u3HAO6QZ6S9i3hUAO7pJ'); // cur_order
-    document.getElementById("overlay").style.display = "block";
-    // add_to_firebase_order_df(order123);
-    // overlay thank you page
+function display_order(orderID) {
+    display_new_order_for_user(orderID); // cur_order
+    document.getElementById("overlay_thank_you").style.display = "block";
+
 }
 
   
 function off() {
-    document.getElementById("overlay").style.display = "none";
+    document.getElementById("overlay_thank_you").style.display = "none";
   }
 
 
 async function load_quick_welcome_page() {
-    try {
-        var userID = sessionStorage.getItem("connected_userID");
+    console.log(" Here is a big bug but no time now will do tomooroow")
+    var userID = sessionStorage.getItem("connected_userID");
+    if (userID != null) {
+        await insert_orders_blocks_of_user("finished_orders", userID, "finished"); 
     }
-    catch {
-        return;
-    }
-    // await insert_orders_blocks_of_user("in_process_orders", userID, "process"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
-    await insert_orders_blocks_of_user("finished_orders", userID, "finished"); // func 
+    // try {
+    //     var userID = sessionStorage.getItem("connected_userID");
+    // }
+    // catch {
+    //     return;
+    // }
+    // await insert_orders_blocks_of_user("finished_orders", userID, "finished"); 
+
 }

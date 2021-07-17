@@ -1,3 +1,15 @@
+:root{
+    --color-1: #F95A2C;
+    --color-2: #19FFE3;
+    --color-3: #FFB0BC;
+    --color-4: #FF785C;
+    --color-5: #FFBD12;
+    --font-color: #1C1C1D;
+    --secondary-font-color: #474A57;
+    --bg-color: #ffffffff;
+}
+
+
 .regist_pink{
     width: 800px;
     height: 1400px;
@@ -38,6 +50,17 @@
 }
 
 .regist_input{
+    background: #FFFFFF;
+    border: 1px solid #1C1C1D;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 0px #202020;
+    border-radius: 10px;
+    margin-left: 34%;
+    width: 24%;
+    margin-top: 1%;
+}
+
+.regist_input_2{
     left: 0%;
     right: 0%;
     top: -1.26%;
@@ -60,6 +83,11 @@
 .regist_input:focus {
     outline: none;
   }
+
+  .regist_input_2:focus {
+    outline: none;
+  }
+
 
 .regist_input_3{
     left: 0%;
@@ -473,6 +501,9 @@ transform: translateY(4px);
     margin-left: 1%;
 }
 
-#try_form{
-    margin: 0%;
+
+.try_form{
+    font-family: 'Montserrat';
 }
+
+

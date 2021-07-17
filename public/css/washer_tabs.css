@@ -81,11 +81,13 @@ h2 {
 .opening-hours-table tr td {
     padding:15px;
     font-size: 20px;
+    font-family: 'Montserrat';
 }
 
 .opening-hours-table tr td:nth-child(1) {
   background-size: cover;
   font-size: 20px;
+  font-family: 'Montserrat';
 }
 
 .active a {

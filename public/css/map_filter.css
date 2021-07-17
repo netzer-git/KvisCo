@@ -6,7 +6,7 @@
     --color-5: #FFBD12;
     --font-color: #1C1C1D;
     --secondary-font-color: #474A57;
-    --bg-color: #ffffffff;
+    --bg-color: #f5f5f5;
 }
 
 body{
@@ -106,7 +106,8 @@ h4 {
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
-    line-height: 32px;
+    line-height: 22px;
+    height: 32px;
     /* or 145% */
     letter-spacing: 0.625px;
     /* Main / Black */
@@ -134,6 +135,17 @@ svg{
     overflow: visible;
 }
 
+i{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.col-icon{
+    position: relative;
+}
 .container{
     /* overflow: auto; */
     margin-top: 4%;
@@ -224,7 +236,7 @@ hr.solid {
   padding: 7%;
 }
 
-.row-map-cards-filter{
+.row-cards-filter{
     margin-left: -12px;
     width: 100%;
     position: absolute;
@@ -244,7 +256,8 @@ hr.solid {
 .col-filters{
     padding-left: 30px !important;
     margin-top: 5px !important;
-    /* background-color: var(--color-5); */
+    padding-left: 6% !important;
+    padding-right: 0 !important;
 }
 
 .row-filters{
@@ -262,19 +275,18 @@ hr.solid {
     margin: 2% 0;
     z-index: 3;
 }
-.near-me-col-filter,
-.rating-col-filter,
+.better-closer-col-filter,
+.open-now-col-filter,
 .special-service-col-filter {
     position: static;
     text-align: center !important;
     margin: auto;
     display: inline-block;
     padding: 2% 0;
-    margin: 2% 0;
     z-index: 2;
 }
 
-#popup-btn{
+.filter-btn{
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
@@ -284,11 +296,6 @@ hr.solid {
     border-radius: 10px;
     text-align: left;
     padding-top: 0;
-    /* font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: bold; 
-    font-size: 20px;
-    line-height: 32px;*/
 }
 #popup-btn .popup-btn-text{
     float: left;
@@ -355,6 +362,15 @@ hr.solid {
     right: -60px;
     float: right;
 }
+
+.col-washers-cards{
+    /* background-color: var(--color-5); */
+    top: 1%;
+    /* border: 2px solid var(--font-color); */
+    margin-top: 1% !important;
+    /* border-radius: 10px; */
+}
+
 #washers-cards{
     z-index: -1 !important;
     /* margin-top: -170px !important; */
@@ -369,6 +385,7 @@ hr.solid {
 .card{
     margin-top: 10px;
     border: none !important;
+    background-color: transparent !important;
 }
 
 .card-subtitle{
@@ -379,27 +396,44 @@ hr.solid {
 /* .card .card-img-overlay .card-details .card-pic-rating{
     margin-left: 5px
 } */
-
-.card-details{
+.card-img-overlay{
     position: relative;
 }
+/* .card-body{
+    position: relative;
+} */
+.card-details{
+    box-sizing: border-box;
+    display: flex;
+}
 .card-profile-img-border{
-    width: 94px !important;
-    height: 94px;
+    width: 96px !important;
+    height: 96px;
     border: 1px solid #1C1C1D;
+    position:absolute;
+    border-radius: 100px;
 }
 
 .card-profile-img{
+    position: relative;
     object-fit: cover;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     width: 90px !important;
     height: 90px;
     /* Main / Black */
     /* border: 1px solid #1C1C1D; */
     border-radius: 100px;
+    margin: 2% !important;
     /* box-sizing: border-box; */
     /* Elements */
     /* box-shadow: 0px 3px 0px #202020; */
+}
+
+#order-now-btn{
+    height: fit-content;
+    width: fit-content;
+    float: right;
+    margin-top: -1%;
 }
 
 .rating-star{

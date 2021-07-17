@@ -1,17 +1,9 @@
-$(".checkbox-dropdown").click(function () {
-    $(this).toggleClass("is-active");
-});
-
-$(".checkbox-dropdown ul").click(function(e) {
-    e.stopPropagation();
-});
-
-
-
+/**
+ * checks if the user is signed in - either signIn or signOut
+ */
 function log_in_or_out() {
     if(!isUserSignedIn()) {
         signIn();
-        document.getElementById("log_in_out_msg").innerHTML = "Log Out";
     }
     else {
         var sPath = window.location.pathname;
@@ -20,23 +12,12 @@ function log_in_or_out() {
             window.location.href = "../../html/welcome.html"
         }
         signOut();
-        document.getElementById("log_in_out_msg").innerHTML = "Log In";
     }
 }
 
-document.getElementById("log_in_out_msg").addEventListener("load", display_log_in_or_out);
-
-
-function display_log_in_or_out() {
-    if(!isUserSignedIn()) {
-        document.getElementById("log_in_out_msg").innerHTML = "Log In";
-    }
-    else {
-        document.getElementById("log_in_out_msg").innerHTML = "Log Out";
-    }
-}
-
-
+/**
+ * checks if the user has washer profile - either signIn, create washer profile or go to washer profile
+ */
 async function become_a_washer() {
     if (!isUserSignedIn()) {
         signIn();
@@ -52,6 +33,9 @@ async function become_a_washer() {
     window.location.href = "../../html/washer_flow/washer_profile.html"
 }
 
+/**
+ * checks if the user has user profile - either signIn, create user profile or go to user profile
+ */
 async function become_a_user() {
     if (!isUserSignedIn()) {
         signIn();

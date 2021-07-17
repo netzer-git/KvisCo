@@ -29,50 +29,36 @@
 <body>
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
-        <div class= "regist_pink">
-            <table>
-                <tr>
-                    <h2 class="header_25">
-                        PERSONAL INFO
-                    </h2>
-                </tr>
-                <tr>
-                    <td>
-                        <form id="image-form" action="#">
-                            <input id="mediaCapture" onchange="save_profile_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
-                                Upload Profile Photo
-                            </button>
-                            <label id="indicator1" hidden>photo uploaded</label>
-                        </form>
-                        <!-- <img id="defualt_profile" class="washer_profile_2" src="../images/Profile-yellow.png" onclick=""> -->
-                        <h4 class="header_41">
-                            <div id ="washer_name"></div>
-                        </h4>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                    <div class= "header_53">
-                        <img id="icons" src="/images/icons/location-icon.png"/> Your location
-                    </div>
-                    </th>
-                </tr>
-                <tr>
-                        <!-- <form action="/action_page.php">
-                            <td>
-                            <label class="labels" for="city">City: </label>
-                            <input class= "regist_input" type="text" id="city" name="city" value="" onchange="save_location()"><br>
-                            </td>
-                            <td>
-                            <label  class="labels" for="street">Street: </label>
-                            <input class= "regist_input" type="text" id="street" name="street" value="" onchange="save_location()"><br>
-                            </td>
-                            <td>
-                            <label  class="labels" for="number">Number: </label>
-                            <input class= "regist_input" type="text" id="number" name="number" value="" onchange="save_location()"><br>
-                            </td>
-                        </form> -->
+        <div style="background-image: url('/images/background-bubbles.svg');">
+            <div class= "regist_pink">
+                <table>
+                    <tr>
+                        <h2 class="header_25">
+                            PERSONAL INFO
+                        </h2>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form id="image-form" action="#">
+                                <input id="mediaCapture" onchange="save_profile_pic(event)" type="file" accept="image/*" capture="camera" hidden>
+                                <button id="submitImage3" title="Add an image" onclick="document.getElementById('mediaCapture').click()">
+                                    Upload Profile Photo
+                                </button>
+                                <label id="indicator1" hidden>photo uploaded</label>
+                            </form>
+                            <h4 class="header_41">
+                                <div id ="washer_name"></div>
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                        <div class= "header_53">
+                            <img id="icons" src="/images/icons/location-icon.png"/> Your location
+                        </div>
+                        </th>
+                    </tr>
+                    <tr>
                         <th>
                         <form action="/action_page.php">
                             <label class="labels" for="city">City: </label>
@@ -83,109 +69,113 @@
                             <input class= "regist_input_3" type="text" id="number" name="number" value="" onchange="save_location()">
                         </form>
                         </th>
-                </tr>
-                <tr>
-                    <th>
-                    <div class= "header_53">
-                        <img id="machine-icon" src="/images/icons/maybe-icon.png"> Laundry machine details
-                    </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                    <form action="/action_page.php">
-                        <label  class="labels" for="module_name">Module Name: </label>
-                        <label  class="labels_2" for="capacity">Capacity (in KG): </label>
-                        <label  class="labels_3" for="year">Year Purchased: </label>
-                        <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
-                        <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
-                        <input class= "regist_input_3" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
-                      </form>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                    <div class= "header_55">
-                        How much time (in minutes) does it take for one load?</div>
-                        <form id="try_form" action="/action_page.php">
-                            <label class="labels" for="phone"></label>
-                            <input class= "regist_input" type="number" id="commit" name="commit" value="" onchange="save_commit()">
-                        </form>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <div class= "header_55">
-                            Add photos of your machine & environment
+                    </tr>
+                    <tr>
+                        <th>
+                        <div class= "header_53">
+                            <img id="machine-icon" src="/images/icons/maybe-icon.png"> Laundry machine details
                         </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <form id="image-form" action="#">
-                            <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden >
-                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
-                                Upload laundry photo
-                            </button>
-
-                            <input id="mediaCapture3" onchange="save_machine_pic(event)" type="file" accept="image/*" capture="camera" hidden>
-                            <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
-                                Upload machine photo
-                            </button>
-                        </form>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label id="indicator2">photo uploaded</label>
-                        <label id="indicator3">photo uploaded</label>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
                         <form action="/action_page.php">
-                            <label class="header_53" for="phone"><img id="icons" src="/images/icons/phone-icon.png"> Phone number</label>
-                            <input class= "regist_input" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
+                            <label  class="labels" for="module_name">Module Name: </label>
+                            <label  class="labels_2" for="capacity">Capacity (in KG): </label>
+                            <label  class="labels_3" for="year">Year Purchased: </label>
+                            <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
+                            <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
+                            <input class= "regist_input_3" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
                         </form>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <div class= "header_53">
-                            <img id="icons" src="/images/icons/tell-icon.png"/> Tell us about yourself
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <textarea id="washer_description" class="washer_details" name="washer_details" rows="3" cols="50" placeholder=" ..." 
-                        onchange="save_description()"></textarea> <!-- Personal note--> <!--This onchange does not exist-->
-                            <br><br>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <div class= "header_53">
-                            <img id="icons" src="/images/icons/special-icon.png"/> Do you provide special services?
-                        </div>
-                    <div class= "labels_1" >
-                        <form name="special_serve">
-                            <input class= "cbx" type="radio" name="special_serve" value="Ironing" onclick="save_special_service(this);">Ironing<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="Door2door" onclick="save_special_service(this);">Door 2 Door<br>  
-                            <input class= "cbx" type="radio" name="special_serve" value="Dryer" onclick="save_special_service(this);">Dryer<br>
-                            <input class= "cbx" type="radio" name="special_serve" value="None" onclick="save_special_service(this);">None<br>  
-                        </form>
-                    </th>
-                </form>  
-                </tr>
-                <tr>
-                    <th>
-                        <button class= "yellow_button_4" onclick="create_washer()">Continue</button>
-                    </th>
-                </tr>
-            </table>
-        
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                        <div class= "header_55">
+                            How much time will one order take you?</div>
+                            <form class="try_form" action="/action_page.php">
+                                <select class= "regist_input" type="number" id="commit" name="commit" value="" onchange="save_commit()">
+                                <option value="8_hours">8 Hours</option>
+                                <option value="24_hours">24 Hours</option>
+                                <option value="48_hours">48 Hours</option>
+                                <option value="72_hours">72 Hours</option>
+                                </select>
+                            </form>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class= "header_55">
+                                Add photos of your machine & environment
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <form id="image-form" action="#">
+                                <input id="mediaCapture2" onchange="save_laundry_pic(event)" type="file" accept="image/*" capture="camera" hidden >
+                                <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture2').click()">
+                                    Upload laundry photo
+                                </button>
+
+                                <input id="mediaCapture3" onchange="save_machine_pic(event)" type="file" accept="image/*" capture="camera" hidden>
+                                <button id="submitImage4" title="Add an image" onclick="document.getElementById('mediaCapture3').click()">
+                                    Upload machine photo
+                                </button>
+                            </form>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label id="indicator2">photo uploaded</label>
+                            <label id="indicator3">photo uploaded</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <form action="/action_page.php">
+                                <label class="header_53" for="phone"><img id="icons" src="/images/icons/phone-icon.png"> Phone number</label>
+                                <input class= "regist_input_2" type="text" id="phone" name="phone" value="" onchange="save_phone_number()"><br>
+                            </form>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class= "header_53">
+                                <img id="icons" src="/images/icons/tell-icon.png"/> Tell us about yourself
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <textarea id="washer_description" class="washer_details" name="washer_details" rows="3" cols="50" placeholder=" ..." 
+                            onchange="save_description()"></textarea> <!-- Personal note--> <!--This onchange does not exist-->
+                                <br><br>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class= "header_53">
+                                <img id="icons" src="/images/icons/special-icon.png"/> Do you provide special services?
+                            </div>
+                        <div class= "labels_1" >
+                            <form name="special_serve">
+                                <input class= "cbx" type="radio" name="special_serve" value="Ironing" onclick="save_special_service(this);">Ironing<br>  
+                                <input class= "cbx" type="radio" name="special_serve" value="Door2door" onclick="save_special_service(this);">Door 2 Door<br>  
+                                <input class= "cbx" type="radio" name="special_serve" value="Dryer" onclick="save_special_service(this);">Dryer<br>
+                                <input class= "cbx" type="radio" name="special_serve" value="None" onclick="save_special_service(this);">None<br>  
+                            </form>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <button class= "yellow_button_4" onclick="create_washer()">Continue</button>
+                        </th>
+                    </tr>
+                </table>
+            </div>
         </div>
+    </div>
 </body>
 
 <script>
