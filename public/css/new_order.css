@@ -326,9 +326,10 @@ table.Background_box_open td{
     color: #000000;
     }
 
-    .rounded-circle-2 {
+    /* .rounded-circle-2 {
         border-radius: 50%!important;
-    }
+    } */
+
     .rounded-circle-2 {
         padding-top: 5px;
         display: inline-block;
@@ -336,4 +337,5 @@ table.Background_box_open td{
         height: 90px;
         border-radius: 50%;
         object-fit: cover;
+        border-radius: 50%!important;
     }

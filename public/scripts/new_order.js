@@ -51,7 +51,7 @@ async function display_new_order_for_user(orderID) {
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {
-        order_header = "our washer recieved your order";
+        order_header = "Our washer recieved your order";
     }
     if (order_status == "process") {
         order_header = "Laundry is approved!";
@@ -60,9 +60,9 @@ async function display_new_order_for_user(orderID) {
         order_header = "Sorry...The washer can't take your laundry...";
     }
     order_block += "<div class='row'>"
-    order_block += "<div class='header_24'>"+order_header+"</div></div>";
+    order_block += "<div class='header_24' style='text-align: center;'>"+order_header+"</div></div>";
     order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white'><div class='col-1'></div>"; //row open div, col-10 open div, order white open div
-    order_block += "<table style='margin-left:2%; margin-top:2%;'><tr><td><img class='rounded-circle-2' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
+    order_block += "<table style='margin-left:15%; margin-top:2%;'><tr><td><img class='rounded-circle-2' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
     var date_not_format = order_doc.data().due_to;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
@@ -89,7 +89,7 @@ async function display_new_order_for_user(orderID) {
         order_block += '<tr><td style="text-align:center">Phone will be displayed after '+ washer_doc.data().name.split(" ")[0]+'\'s approval</td></tr>';
     }
     order_block += "</table>";
-    order_block += "<button style='margin-left: 27%; margin-top: 9%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
+    order_block += "<button style='margin-top: 20%; margin-left: 31%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
     order_block +="</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
     document.getElementById("user_order").innerHTML = order_block;
 }
@@ -109,8 +109,8 @@ async function display_new_order_for_washer(orderID) {
     }
     order_block += "<div class='row'>"
     order_block += "<div class='header_24' style='margin-left:-1%;'>"+order_header+"</div></div>";
-    order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white'>"; //row open div, col-10 open div, order white open div
-    order_block += "<table style='margin-left:2%; margin-top:-2%;'><tr><td><img class='rounded-circle-2' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+user_doc.data().name+"</h4></td></tr></table>";
+    order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white' style='margin-left: auto; margin-right:auto;'>"; //row open div, col-10 open div, order white open div
+    order_block += "<table style='margin-left:10%; margin-top:-2%;'><tr><td><img class='rounded-circle-2' style='margin-top: 15%;' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+user_doc.data().name+"</h4></td></tr></table>";
     var date_not_format = order_doc.data().due_to.seconds*1000;
     var date = new Date(date_not_format);
     var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
@@ -121,7 +121,7 @@ async function display_new_order_for_washer(orderID) {
         var minutes = date.getMinutes();
     }
     var time = date.getHours()+ ":" +minutes;
-    order_block += "<table style='margin-left:15%; margin-top:0%;'>";
+    order_block += "<table style='margin-left: auto; margin-right:auto; margin-top:0%;'>";
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+l_date+'</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+time+'</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">'+order_doc.data().loads+'<class= "header_61"> Loads</h6></td></tr>';
@@ -134,12 +134,14 @@ async function display_new_order_for_washer(orderID) {
     order_block += "</table></div>";
     order_block += "<div class='row'>"
     if (order_status == "pending") {
+        order_block += "<div class='col-1'></div>"
         order_block +=  "<div class='col-4'>"
         order_block += '<button id="process" value = "process" onclick = "change_status(process.value)" class= "button1">Confirm</button>';
         order_block += "</div>"
         order_block +=  "<div class='col-2'></div>"
         order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status(declined.value)" class= "button1">decline</button>';    
+        order_block += '<button id="declined" value = "declined" onclick = "change_status(declined.value)" class= "button1">decline</button>';
+        order_block += "<div class='col-1'></div>"
         order_block += "</div>"
     }
     else {

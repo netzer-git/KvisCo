@@ -399,7 +399,10 @@ h6{
     top: -0.6530606746673584px;
     border-radius: 10px;
     margin-right: -10px;
-
+    font-size: 14px;
+    font-family:'Montserrat';
+    text-align: center;
+    
 }
 
 .box select:focus {
