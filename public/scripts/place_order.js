@@ -218,6 +218,9 @@ function getWasherFirstOpeningTime(washer_opening_times) {
         else {
             day_num++;
         }
+        if (day_num == 7) {
+            day_num = 0;
+        }
     }
     while (washer_opening_times[week_days[day_num]] === undefined) {
         day_num++;
@@ -230,7 +233,7 @@ function getWasherFirstOpeningTime(washer_opening_times) {
 
 async function insertPlaceOrderBox(e) { 
     var washerID = e.id;
-    console.log("insert washer place order block", washerID)
+    sessionStorage.setItem("pressed_washer", washerID);
     const washer_doc = await promiseWasherLoaderById(washerID); 
     // The col-5 can be changed.
     //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
@@ -283,9 +286,12 @@ async function insertPlaceOrderBox(e) {
     po_block += '<div class="col-7"><div style="margin-left: 15%; margin-top: -3%;">';
     po_block += '<div id="overlay_register" onclick="off()">';
     po_block += '<div id="register_block"></div></div>';
+    po_block += '<div id="overlay_thank_you" onclick="off()">';
+    po_block += '<div id="user_order"></div></div>';
     po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
     po_block += '</div></div></div></div>';
     document.getElementById("place-order").innerHTML = po_block;
+    document.getElementById("place-order").hidden = false;
 
     washer_opening_times = washer_doc.data().opening_times;
     var first_opening_time = getWasherFirstOpeningTime(washer_opening_times);

@@ -4,7 +4,7 @@ current_location = {
 } // burger room
 ////////////////////////////////////////////////////
 
-const MAX_NUMBER_OF_BLOCKS = 10; // max number of blocks in the page
+const MAX_NUMBER_OF_BLOCKS = 15; // max number of blocks in the page
 // let current_list_of_washers = create_washer_list(); // the current list of washers, by filter.
 const current_user_location = current_location // the current location of the user by user settings
 
@@ -14,9 +14,28 @@ let near_me_dist, rating, special_services;
 let active_times= new Array(2);
 let washerDoc_array;
 
-// async function show_only_open_now() {
-
-// }
+async function show_only_open_now() {
+    if (document.getElementById("filter-btn").classList.contains("active")) {
+        document.getElementById("filter-btn").classList.remove("active");
+        document.getElementById("filter-btn").style.color = "black";
+        on_load_page();
+      } 
+    else {
+        document.getElementById("filter-btn").classList.add("active");
+        document.getElementById("filter-btn").style.color = "green";
+        washerDoc_array_temp = [];
+        for (i=0 ; i<washerDoc_array.length; i++) {
+            cur_opening_times = washerDoc_array[i].data().opening_times;
+            if (check_if_washer_open_now(cur_opening_times)) {
+                washerDoc_array_temp.push(washerDoc_array[i])
+            }
+        }
+        washerDoc_array = washerDoc_array_temp;
+        search_res = get_search_bar("search-bar");
+        await insert_washer_blocks(washerDoc_array, search_res["myDay"]);
+        document.getElementById("place-order").hidden = true;
+    } 
+}
 
 
 /* handle washers objects */
@@ -103,7 +122,7 @@ async function create_one_washer_block(washerDoc, day) {
         washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">'+rating+'</p></div>';
     }
     
-    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="'+washerDoc.id.valueOf()+'" onclick="insertPlaceOrderBox(this)" class="button1">Order now</button></div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washerDoc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="'+washerDoc.id.valueOf()+'" onclick="insertPlaceOrderBox(this)" class="button1">Quick order</button></div>\n</div>';
     washer_block_raw_html+= '\n</div>\n</div>\n</div>\n</div>\n</div>';
     return washer_block_raw_html;
 
@@ -248,6 +267,7 @@ async function on_load_page(){
     washerDoc = await create_washer_list(search_res);
     //insert washers cards
     await insert_washer_blocks(washerDoc, search_res["myDay"]);
+    document.getElementById("place-order").hidden = true;
     //initialize filters btn
     // insert_days_options();
     // init_near_me_range();
