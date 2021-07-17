@@ -499,3 +499,13 @@ hr.solid {
     height: 100%;
     width: 50%;
   }
+
+
+.unstyle_name {
+    outline: none;
+    border: none;
+    background-color: inherit;
+    text-align: left;
+    display:inline-block;    
+    margin: 0;    
+  }
