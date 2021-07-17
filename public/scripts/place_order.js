@@ -253,9 +253,9 @@ async function insertPlaceOrderBox (tag) {
     po_block += '<script>document.getElementById("date").value = new Date().toISOString().substring(0, 10);</script>'; // function that saves the inserted date
     po_block += '</td><td><div class="box select">';
     po_block += '<select id="property" onchange="update_properties_and_price()">';
-    po_block += '<option value="Default" selected>Default</option><option value="ironing">Ironing(+25)</option>';
-    po_block += '<option value="door2door">Door-2-Door(+20)</option>';
-    po_block += '<option value="dryer">Hanging Drying(+12)</option></select></div></td></tr>';
+    po_block += '<option value="Default" selected>Default</option><option value="Ironing">Ironing(+25)</option>';
+    po_block += '<option value="Door2Door">Door-2-Door(+20)</option>';
+    po_block += '<option value="Dryer">Hanging Drying(+12)</option></select></div></td></tr>';
     // Labels of Drop off time and loads
     po_block += '<tr style="color: black;"><td style="padding-top: 3%;">Drop off time</td>';
     po_block += '<td style="margin-left: 0; padding-top: 3%;">Loads</td></tr>';

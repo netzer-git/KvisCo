@@ -136,12 +136,16 @@ function f_checkOpeningTimes(washer_doc) {
     if (check_if_washer_open_now(washer_doc.data().opening_times)) {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">working now</p>';
         document.getElementById("openClosedColor").style.color = "green";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
+        document.getElementById("openClosedColor").style.fontSize = "20px";
+        document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
     }
     else {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
         document.getElementById("openClosedColor").style.color = "red";
-        document.getElementById("openClosedColor").style.fontSize = "18px";
+        document.getElementById("openClosedColor").style.fontSize = "20px";
+        document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
+        
+
     }
 }
 
