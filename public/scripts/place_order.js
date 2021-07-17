@@ -228,12 +228,10 @@ function getWasherFirstOpeningTime(washer_opening_times) {
     return [week_days[day_num], washer_opening_times[week_days[day_num]][0]];
 }
 
-async function insertPlaceOrderBox(ev) { 
-    var washerID = sessionStorage.getItem("pressed_washer");
+async function insertPlaceOrderBox(e) { 
+    var washerID = e.id;
     console.log("insert washer place order block", washerID)
-    // var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
     const washer_doc = await promiseWasherLoaderById(washerID); 
-
     // The col-5 can be changed.
     //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
     // The SVG is neccessery to be included in the page, where the bodey begins.
