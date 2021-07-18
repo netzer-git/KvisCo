@@ -139,7 +139,7 @@ const testNadavQuery = async () => {
 const test_rating = async () => {
     let id = [  
         '1LhDqVKzSkZdsnSC6wFrVG5jte93',
-        // '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
+        '2sQCBAeBQvdyAa18LDbOYOwHuOH2',
         // '59k1DZDLkmSnQqAwMu4hDxNJUhU2',
         // 'JaLY3KeIsSO8kSUr3Ks6kiJXkQ92',
         // 'VxbGFBQzipZf1rzyAAvr8uMp8nl1',
@@ -160,12 +160,13 @@ const test_rating = async () => {
     let washer1 = await promiseWasherLoaderById(id[0]);
     let washer2 = await promiseWasherLoaderById(id[1]);
     let washer3 = await promiseWasherLoaderById(id[2]);
+    let washer4 = await promiseWasherLoaderById(id[3]);
     currentPoint = {
         lat: 31.773610027001155,
         lng: 35.235351837826255
     }
-    let arr = await sortWashersByDistance([washer1, washer2, washer3], currentPoint);
-    console.log(arr[0].data().name);
-    console.log(arr[1].data().name);
-    console.log(arr[2].data().name);
+    let arr = await sortWashersByDistance([washer1, washer2, washer3, washer4], currentPoint);
+    for (w of arr) {
+        console.log(w.data().name);
+    }
 }
