@@ -243,7 +243,6 @@ async function get_current_user_location(search_res) {
     // TODO
     // 4 - take the burger room coordinates
     return current_location
-    
 }
 
 
