@@ -566,21 +566,21 @@ function sortOrdersByCreatedAt(orderArray) {
 async function getBetterCloserWashers(indicator, currentPoint) {
     let washerArray = []
     switch (indicator) {
-        case 1:
+        case "1":
             washerArray = await getWasherFilterQuery({
                 rating: 4.5,
             });
             break;
-        case 2:
+        case "2":
             washerArray = await getWasherFilterQuery({
                 rating: 3,
                 distance: 3,
                 current_cor: currentPoint,
             });
             break;
-        case 3:
+        case "3":
             washerArray = await getWasherFilterQuery({
-                distance: 1.5,
+                distance: 4,
                 current_cor: currentPoint,
             });
             break;
