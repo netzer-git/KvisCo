@@ -235,7 +235,7 @@ async function get_current_user_location(search_res) {
         };
     }
     // 2 - take the current user location
-    current_user = await promiseUserLoaderByCurrentUserID();
+    current_user = await promiseUserLoaderById(sessionStorage.getItem("connected_userID"));
     if (current_user) {
         return current_user.data().location_cor;
     }
