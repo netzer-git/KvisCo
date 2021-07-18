@@ -68,6 +68,7 @@ async function insert_washer_blocks(washer_doc, day) {
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washer_doc.length);
 
     for (let i = 0; i < max_number_of_blocks; i++) {
+        console.log(i)
         let washer_block_raw_html = await create_one_washer_block(washer_doc[i], day);
         whole_washers_html_block += washer_block_raw_html;
     }
@@ -270,9 +271,44 @@ async function on_load_page() {
     //insert washers cards
     await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
     document.getElementById("place-order").hidden = true;
+    document.getElementById("distanceSlider").value = "2";
     //initialize filters btn
     // insert_days_options();
     // init_near_me_range();
 }
 
 window.onload = on_load_page;
+
+async function go_closer() {
+    if (document.getElementById("distanceSlider").value == "1") {
+        document.getElementById("distanceSlider").value = "2";
+    }
+    else if (document.getElementById("distanceSlider").value == "2") {
+        document.getElementById("distanceSlider").value = "3";
+    }
+    else if (document.getElementById("distanceSlider").value == "3") {
+        return
+    }
+    await filter_by_slider();
+}
+
+async function go_better() {
+    if (document.getElementById("distanceSlider").value == "3") {
+        document.getElementById("distanceSlider").value = "2";
+    }
+    else if (document.getElementById("distanceSlider").value == "2") {
+        document.getElementById("distanceSlider").value = "1";
+    }
+    else if (document.getElementById("distanceSlider").value == "1") {
+        return
+    }
+    await filter_by_slider();
+}
+
+async function filter_by_slider() {
+    search_res = get_search_bar("search-bar");
+    current_user_location = await get_current_user_location(search_res);
+    washer_doc_array = await getBetterCloserWashers(document.getElementById("distanceSlider").value, current_user_location);
+    await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
+    document.getElementById("place-order").hidden = true;
+}
