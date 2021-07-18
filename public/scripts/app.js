@@ -54,6 +54,7 @@
      document.getElementById("log_in_indicator").innerHTML = 'Hi, ' + getUserFirstName();
      document.getElementById("log_in_indicator").hidden = false;
      document.getElementById("log_in_out_msg").innerHTML = "Log Out";
+     document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
      document.getElementById("welcome_orders_block").hidden = false;
      await load_quick_welcome_page()
@@ -64,7 +65,7 @@
      document.getElementById("log_in_indicator").hidden = true;
      document.getElementById("log_in_indicator").innerHTML = "Anonymous";
      document.getElementById("log_in_out_msg").innerHTML = "Log In";
-     sessionStorage.setItem("connected_userID", null);
+     document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
      document.getElementById("welcome_orders_block").hidden = true;
    }

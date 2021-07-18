@@ -588,3 +588,13 @@ async function getBetterCloserWashers(indicator, currentPoint) {
     console.log(washerArray);
     return sortWashersByDistance(washerArray, currentPoint);
 }
+
+async function getButtonAccordingToWasherStatus() {
+    let currentWasher = promiseWasherLoaderByCurrentUserID();
+    if (currentWasher) {
+        return "Washer Profile";
+    }
+    else {
+        return "Be A Washer";
+    }
+}
