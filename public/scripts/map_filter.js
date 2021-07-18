@@ -5,7 +5,7 @@ current_location = {
 ////////////////////////////////////////////////////
 
 const MAX_NUMBER_OF_BLOCKS = 15; // max number of blocks in the page
-const current_user_location = current_location // the current location of the user by user settings
+var current_user_location; // the current location of the user by user settings
 
 const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "Whites Only", "Delicates", "Ironing"];
 // filters global variables
@@ -222,11 +222,49 @@ function init_near_me_range() {
 
 /**
  * 
+ * @param {*} search_res takes the JSON of the search bar
+ * @returns the current user location by priority
+ */
+async function get_current_user_location(search_res) {
+    // 1 - take the place from the search bar
+    if (search_res.address !== undefined && search_res.address !== '') {
+        let data = await forwardGeocodePromise(search_res.address);
+        return {
+            lat: data.results[0].geometry.lat,
+            lng: data.results[0].geometry.lng
+        };
+    }
+    // 2 - take the current user location
+    current_user = await promiseUserLoaderByCurrentUserID();
+    if (current_user) {
+        return current_user.data().location_cor;
+    }
+    // 3 - take the current computer location from google
+    // TODO
+    // 4 - take the burger room coordinates
+    return current_location
+    
+}
+
+
+/**
+ * save washer id when click the washer card
+ * @param {Number} id 
+ */
+ function save_washer_id(e) {
+    console.log("this is the id in michal page:", e.id);
+    sessionStorage.setItem("pressed_washer", e.id);
+    window.location.href = "../user_flow/place_order.html"
+}
+
+/**
+ * 
  */
 async function on_load_page() {
 
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
+    current_user_location = await get_current_user_location(search_res);
     //initialize washers list
     washerDoc = await create_washer_list(search_res);
     //insert washers cards
@@ -235,17 +273,6 @@ async function on_load_page() {
     //initialize filters btn
     // insert_days_options();
     // init_near_me_range();
-}
-
-
-/**
- * save washer id when click the washer card
- * @param {Number} id 
- */
-function save_washer_id(e) {
-    console.log("this is the id in michal page:", e.id);
-    sessionStorage.setItem("pressed_washer", e.id);
-    window.location.href = "../user_flow/place_order.html"
 }
 
 window.onload = on_load_page;

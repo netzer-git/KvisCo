@@ -64,7 +64,7 @@ function promiseOrderLoaderById(documentID) {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('users', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('users', getUserToken()) : null;
 }
 
 /**
@@ -73,7 +73,7 @@ function promiseUserLoaderByCurrentUserID() {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseWasherLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('washers', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('washers', getUserToken()) : null;
 }
 
 /**
@@ -490,7 +490,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 3) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 5) {
                 filteredWashersWithAddress.push(doc);
             }
         });
