@@ -92,26 +92,30 @@ async function create_one_washer_block(washer_doc, day) {
     washer_block_raw_html += '<div class="shadow-none card">';
     washer_block_raw_html += '<img src="../../images/card.svg" class="card-img" alt="' + washer_doc.data().name + '" image-rendering="crisp-edges"/>';
     // card profile pic & rating section
-    washer_block_raw_html += '<div class="card-img-overlay">\n<div class="card-details row">\n<div class="card-pic-rating col-3">';
+    washer_block_raw_html += '<div class="card-img-overlay">\n';
+    washer_block_raw_html += '<div class="card-details row">\n';
+
+    washer_block_raw_html += '<div class="card-pic-rating col-3">';
     washer_block_raw_html += '<div class="card-profile-img-border"><img class="card-profile-img" src=\"' + washer_doc.data().imageUrl + '\"></div>\n</div>';
     // card text
     // name
-    washer_block_raw_html += '<div class="card-text col-9">\n<div class="row"><button class = "unstyle_name" id="' + washer_doc.id.valueOf() + '" onclick="save_washer_id(this)"><h5 class="card-title">' + washer_doc.data().name + '</h5></button></div>';
+    washer_block_raw_html += '<div class="card-text col-9">\n';
+    washer_block_raw_html += '<div class="row"><button class = "unstyle_name" id="' + washer_doc.id.valueOf() + '" onclick="save_washer_id(this)"><h5 class="card-title">' + washer_doc.data().name + '</h5></button></div>';
     //opening hours
     var hours = washer_doc.data().opening_times[day][0] + '-' + washer_doc.data().opening_times[day][1];
-    washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-clock"></i></div>\n<div class="col-11"><p class="card-text">' + hours + '</p></div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-clock"></i></div>\n<div class="col-10"><p class="card-text">' + hours + '</p></div>\n</div>';
     // distance
     var dist = getDistanceFromLatLonInKm(current_user_location, washer_doc.data().location_cor).toFixed(1);
-    washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-geo-alt-fill" style="color:var(--color-4)"></i></div>\n<div class="col-3"><p class="card-text">' + dist + '</p></div>\n<div class="col-4"></div>\n</div>';
+    washer_block_raw_html += '<div class="row"><div class="col-icon col-1"><i class="bi bi-geo-alt-fill" style="color:var(--color-4)"></i></div>\n<div class="col-2"><p class="card-text">' + dist + '</p></div>';
     // add rating in case rating > 0
     if (rating == 0) {
-        washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2);visibility:hidden"></i></div>\n<div class="col-3" style="visibility:hidden"><p class="card-text">' + rating + '</p></div>';
+        washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2);visibility:hidden"></i></div>\n<div class="col-2" style="visibility:hidden"><p class="card-text">' + rating + '</p></div>';
     } else {
-        washer_block_raw_html += '<div class="row">\n<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">' + rating + '</p></div>';
+        washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">' + rating + '</p></div>';
     }
-
-    washer_block_raw_html += '<div class="row">\n<div class="col-5"><p class="card-text">' + washer_doc.data().properties + '</p></div>\n<div class="col-3"></div>\n<div class="col-4"><button id="' + washer_doc.id.valueOf() + '" onclick="insertPlaceOrderBox(this)" class="button1">Quick order</button></div>\n</div>';
-    washer_block_raw_html += '\n</div>\n</div>\n</div>\n</div>\n</div>';
+    washer_block_raw_html += '<div class="row">\n<div class="col-7"><p class="card-text">' + washer_doc.data().properties + ' | ' + washer_doc.data().commitment + ' hours</p></div>\n';
+    washer_block_raw_html += '<div class="col-4"><button id="' + washer_doc.id.valueOf() + '" onclick="insertPlaceOrderBox(this)" class="button1" style="width: 120px;" >Quick Order</button></div>\n</div>';
+    washer_block_raw_html += '\n</div>\n</div>\n</div></div>\n</div></div>';
     return washer_block_raw_html;
 
 }
