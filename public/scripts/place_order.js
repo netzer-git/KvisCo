@@ -198,6 +198,9 @@ async function load_place_order_page() {
 
 
 function getWasherFirstOpeningTime(washer_opening_times) {  
+    if (Object.keys(washer_opening_times).length == 0) {
+        return ['Sunday', "08:00"];
+    }
     var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var cur_date = new Date();
     var day_num = cur_date.getDay();

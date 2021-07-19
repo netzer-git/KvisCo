@@ -84,8 +84,8 @@
                             <label  class="labels_2" for="capacity">Capacity (in KG): </label>
                             <label  class="labels_3" for="year">Year Purchased: </label>
                             <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
-                            <input class= "regist_input_3" type="text" id="capacity" name="capacity" onchange="save_laundry_details()">
-                            <input class= "regist_input_3" type="text" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
+                            <input class= "regist_input_3" type="number" id="capacity" name="capacity" onchange="save_laundry_details()">
+                            <input class= "regist_input_3" type="number" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
                         </form>
                         </th>
                     </tr>
@@ -95,10 +95,10 @@
                             How much time will one order take you?</div>
                             <form class="try_form" action="/action_page.php">
                                 <select class= "regist_input" type="number" id="commit" name="commit" value="" onchange="save_commit()">
-                                <option value="8_hours">8 Hours</option>
-                                <option value="24_hours">24 Hours</option>
-                                <option value="48_hours">48 Hours</option>
-                                <option value="72_hours">72 Hours</option>
+                                <option value="8">8 Hours</option>
+                                <option value="24">24 Hours</option>
+                                <option value="48">48 Hours</option>
+                                <option value="72">72 Hours</option>
                                 </select>
                             </form>
                         </th>
