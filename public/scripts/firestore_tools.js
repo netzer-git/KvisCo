@@ -567,17 +567,17 @@ async function getBetterCloserWashers(indicator, filters) {
     let washerArray = []
     switch (indicator) {
         case "1":
-            filters[rating] = 4.5;
+            filters['rating'] = 4.5;
             break;
         case "2":
-            filters[rating] = 3;
-            filters[distance] = 3
+            filters['rating'] = 3;
+            filters['distance'] = 3
             break;
         case "3":
-            filters[distance] = 1.5
+            filters['distance'] = 1.5
             break;
     }
-    filters[address] = null;
+    filters['address'] = null;
     washerArray = await getWasherFilterQuery(filters);
     console.log(washerArray);
     return sortWashersByDistance(washerArray, filters.currentPoint);
