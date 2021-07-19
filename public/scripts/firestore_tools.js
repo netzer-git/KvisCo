@@ -490,7 +490,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 10) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
                 filteredWashersWithAddress.push(doc);
             }
         });
