@@ -253,10 +253,17 @@ async function createNewWasher(washer) {
  * delete washer by Id
  */
 async function deleteCurrentWasher() {
-    await db.collection("washers").doc(getUserToken()).delete().then(() => {
+    let washer_id = getUserToken();
+    await db.collection("washers").doc(washer_id).delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
+    });
+    let orders = await db.collection("orders").where("washer", '==', washer_id).get()
+    await orders.forEach(async (order) => {
+        if (order.data().washer === washer_id) {
+            await db.collection("orders").doc(order.id).delete();
+        }
     });
 }
 
@@ -264,10 +271,15 @@ async function deleteCurrentWasher() {
  * delete user by Id
  */
  async function deleteCurrentUser() {
-    await db.collection("users").doc(getUserToken()).delete().then(() => {
+    let user_id = getUserToken();
+    await db.collection("users").doc(user_id).delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
+    });
+    let orders = await db.collection("orders").where("user", '==', user_id).get()
+    await orders.forEach(async (order) => {
+        await db.collection("orders").doc(order.id).delete();
     });
 }
 
