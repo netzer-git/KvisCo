@@ -173,7 +173,7 @@ async function f_display_washer_reviews(washerID) {
     details_table += "<tr><tr><th>Model Name</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
     details_table += "<tr><tr><th>Capacity</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().capacity + "</td></tr><tr>";
+    details_table += "<td>" + washer_doc.data().capacity + " KG</td></tr><tr>";
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
