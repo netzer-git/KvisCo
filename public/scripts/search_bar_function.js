@@ -39,7 +39,7 @@ function get_search_bar(tag) {
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" placeholder = "my current location" id="where" value = "' + address + '" onchange ="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" placeholder = "My current location" id="where" value = "' + address + '" onchange ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
     search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
