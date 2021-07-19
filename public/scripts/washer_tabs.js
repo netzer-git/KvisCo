@@ -34,97 +34,6 @@ function toFullTimestamp(fullDate,time){
     return new Date(Date.UTC(year,month,day,hour-3,minute,second));
 }
 
-/**
- * return true if washer is open now and false if not
- * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
- * @returns 
- */
- function check_if_washer_open(opening_times, cur_date) {
-    var date = new Date(cur_date) 
-    var day = date.getDay();
-    switch (day) {
-        case 0:
-            try {
-                opening_time = opening_times.Sunday[0];
-                closing_time = opening_times.Sunday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 1:
-            try {
-                opening_time = opening_times.Monday[0];
-                closing_time = opening_times.Monday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 2:
-            try {
-                opening_time = opening_times.Tuesday[0];
-                closing_time = opening_times.Tuesday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 3:
-            try {
-                opening_time = opening_times.Wednesday[0];
-                closing_time = opening_times.Wednesday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 4:
-            try {
-                opening_time = opening_times.Thursday[0];
-                closing_time = opening_times.Thursday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 5:
-            try {
-                opening_time = opening_times.Friday[0];
-                closing_time = opening_times.Friday[1];
-                break;
-            }
-            catch {
-                return false;
-            }
-        case 6:
-            try {
-                opening_time = opening_times.Saturday[0];
-                closing_time = opening_times.Saturday[1];
-            break;
-            }
-            catch {
-                return false;
-            }
-    }
-    opening_time = toFullTimestamp(date, opening_time);
-    closing_time = toFullTimestamp(date, closing_time);
-    if ((date >= opening_time) && (date <= closing_time)) {
-        return true;
-    }
-    return false;
-}
-
-/**
- * return true if washer is open now and false if not
- * @param {dict} opening_times map with opening_times by day - {Sunday: [8:00,12:00], Friday: [13:00,20:00]}
- * @returns 
- */
- function check_if_washer_open_now(opening_times) {
-    var cur_date = new Date(); // current time
-    return check_if_washer_open(opening_times, cur_date);
-}
-
 
 /////////////////// functions that called into html by washer_details.js and place_order.js  ///////
 
@@ -264,7 +173,7 @@ async function f_display_washer_reviews(washerID) {
     details_table += "<tr><tr><th>Model Name</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
     details_table += "<tr><tr><th>Capacity</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().capacity + "</td></tr><tr>";
+    details_table += "<td>" + washer_doc.data().capacity + " KG</td></tr><tr>";
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";

@@ -26,153 +26,146 @@
     <script src="../../scripts/firestore_tools.js"></script>
     <script src="../../scripts/search_bar_function.js"></script>
     <script scr="/js/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
-    <script type="text/javascript">
-        window.onpaint = load_quick_welcome_page();
-    </script>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 </head>
 
 <body>
     <svg style="display:none; ">
-        <symbol id="search-btn" width="59" height="61" viewBox="0 0 59 61" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <symbol id="search-btn" width="59" height="61" viewBox="0 0 59 61" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
             <g filter="url(#filter0_d)">
-            <circle cx="29.3107" cy="29.6496" r="29.2619" fill="white"/>
-            <circle cx="29.3107" cy="29.6496" r="28.7619" stroke="#1C1C1D"/>
+                <circle cx="29.3107" cy="29.6496" r="29.2619" fill="white" />
+                <circle cx="29.3107" cy="29.6496" r="28.7619" stroke="#1C1C1D" />
             </g>
-            <path d="M28.8611 36.4024C32.8392 36.4024 36.0641 33.1776 36.0641 29.1995C36.0641 25.2214 32.8392 21.9966 28.8611 21.9966C24.8831 21.9966 21.6582 25.2214 21.6582 29.1995C21.6582 33.1776 24.8831 36.4024 28.8611 36.4024Z" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M37.8639 38.2032L33.9473 34.2866" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+                d="M28.8611 36.4024C32.8392 36.4024 36.0641 33.1776 36.0641 29.1995C36.0641 25.2214 32.8392 21.9966 28.8611 21.9966C24.8831 21.9966 21.6582 25.2214 21.6582 29.1995C21.6582 33.1776 24.8831 36.4024 28.8611 36.4024Z"
+                stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M37.8639 38.2032L33.9473 34.2866" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
             <defs>
-            <filter id="filter0_d" x="0.0488281" y="0.387695" width="58.5238" height="60.5238" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-            <feOffset dy="2"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 1 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-            </filter>
+                <filter id="filter0_d" x="0.0488281" y="0.387695" width="58.5238" height="60.5238"
+                    filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                    <feOffset dy="2" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 1 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                </filter>
             </defs>
         </symbol>
     </svg>
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
-        <!-- <div class="container-fluid"> -->
+    <!-- <div class="container-fluid"> -->
     <div class="h-100 w-100 container d-flex justify-content-center">
         <div class="main-row row">
             <div class="red-section row">
-                <div class= "row-header row">
-                    <h1 class="header_11">LAUNDRY HAS NEVER<br/>BEEN EASIER</h1>
-                </div>                          
+                <div class="row-header row">
+                    <h1 class="header_11">LAUNDRY HAS NEVER<br />BEEN EASIER</h1>
+                </div>
                 <div class="row-search w-50 row">
                     <!-- Search Bar starts here-->
-                    <div id="search-bar" class="col-10"> 
-                        <script>get_search_bar("search-bar")</script>
+                    <div id="search-bar" class="col-10">
+                        <script>
+                            get_search_bar("search-bar")
+                        </script>
                     </div>
                     <!-- search button-->
                     <div class="col-2">
                         <div class="col-search-btn">
                             <a class="search-btn-" href="./user_flow/map_filter.html">
-                                <svg class="search-btn"><use xlink:href="#search-btn"></use></svg>
+                                <svg class="search-btn">
+                                    <use xlink:href="#search-btn"></use>
+                                </svg>
                             </a>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <!-- Search Bar ends here-->
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">
-                        <div id="finished_orders"></div>
+                        <div id="welcome_orders_block"></div>
                     </div>
                     <div class="col-2"></div>
-                    <!-- <div class="col-1">
-                        <div class="col-8">
-                        </div>
-                        <div class="col-2">
-                        </div>
-                        <div class="row">
-                            <div id="finished_orders"></div>
-                        </div>            
-                    </div> -->
                 </div>
-    
+
                 <div class="row">
                     <img class="rope_img" src="../images/rope.png">
                 </div>
             </div>
-    
-            <!-- <div class= "pink-section"> -->
-                <div class="white-section row">
-                    <table class="white-section-info">
+
+            <div class="white-section row">
+                <table class="white-section-info">
+                    <tr>
+                        <th>
+                            <h2 class="header_21">
+                                THE SOCIAL LAUNDRY <br /> SERVICES ARE NOW <br /> IN TOWN!
+                            </h2>
+                        </th>
+                        <td>
+                            <div class="col-md-4" class="float-right">
+                                <img class="orange_machine" src="../images/washing-machine.gif" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="small_headline">
+                                Try one of the best washers from your area,
+                                <br /> they are ready to give your clothes the perfect care!
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="pink-section row">
+                <img class="cards" src="../images/Cards.svg" />
+            </div>
+            <div class="white-section-2 row">
+                <table>
+                    <div class="col-md-8">
                         <tr>
                             <th>
-                                <h2 class="header_21">
-                                    THE SOCIAL LAUNDRY <br /> SERVICES ARE NOW <br /> IN TOWN!
+                                <h2 class="header_22">
+                                    BECOME A WASHER
                                 </h2>
                             </th>
                             <td>
                                 <div class="col-md-4" class="float-right">
-                                    <img class="orange_machine" src="../images/washing-machine.gif" />
+                                    <img class="leptop" src="../images/leptop.png" />
                                 </div>
                             </td>
                         </tr>
+                    </div>
+                    <div class="row">
                         <tr>
                             <th>
-                                <div class="small_headline">
-                                    Try one of the best washers from your area,
-                                    <br /> they are ready to give your clothes the perfect care!
+                                <div class="small_headline_2">
+                                    Clean other’s clothes and become
+                                    <br /> part of an awesome sharing community.
+                                    <br /> Thanks to your help, people around you will have
+                                    better smelling clothes and a much better hygiene
                                 </div>
                             </th>
                         </tr>
-                    </table>
-                </div>
-                <div class="pink-section row">
-                    <img class="cards" src="../images/Cards.svg" />
-                </div>
-                <div class="white-section-2 row">
-                    <!-- <div class="white-section-2"> -->
-                        <table>
-                            <div class="col-md-8">
-                                <tr>
-                                    <th>
-                                        <h2 class="header_22">
-                                            BECOME A WASHER
-                                        </h2>
-                                    </th>
-                                    <td>
-                                        <div class="col-md-4" class="float-right">
-                                            <img class="leptop" src="../images/leptop.png" />
-                                        </div>
-                                    </td>
-                                </tr>
-                            </div>
-                            <div class="row">
-                                <tr>
-                                    <th>
-                                        <div class="small_headline_2">
-                                            Clean other’s clothes and become
-                                            <br /> part of an awesome sharing community.
-                                            <br /> Thanks to your help, people around you will have
-                                            better smelling clothes and a much better hygiene
-                                        </div>
-                                    </th>
-                                </tr>
-                                <div class="row">
-                                    <tr>
-                                        <th>
-                                            <button onclick = "become_a_washer()" class="red_button">Let's Start</button>
-                                        </th>
-                                    </tr>
-                                </div>
-                            </div>
+                        <div class="row">
+                            <tr>
+                                <th>
+                                    <button onclick="become_a_washer()" class="red_button">Let's Start</button>
+                                </th>
+                            </tr>
                         </div>
-                    </table>
-                <!-- </div> -->
+                    </div>
+                </table>
             </div>
         </div>
     </div>
-    </body>
-    
-    <script>
-        $("#includedContent").load("includes/header.html");
-    </script>
+    </div>
+</body>
+
+<script>
+    $("#includedContent").load("includes/header.html");
+</script>

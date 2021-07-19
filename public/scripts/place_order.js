@@ -113,11 +113,6 @@ async function create_order() {
         return;
     }
     var userID = getUserToken();
-    if (!await promiseUserLoaderById(userID)) {
-        window.location.href="../../html/user_flow/user_registration.html";
-        return;
-    }
-    sessionStorage.setItem("current_user_id", userID);
     cur_order = {
         comments: comments,
         washer: washerID,
@@ -129,6 +124,11 @@ async function create_order() {
         properties: property,
     }
     var orderID = await createNewOrder(cur_order);    
+    if (!await promiseUserLoaderById(userID)) {
+        window.location.href="../../html/user_flow/user_registration.html";
+        return;
+    }
+    sessionStorage.setItem("current_user_id", userID);
     display_new_order_for_user(orderID);
     document.getElementById("overlay_thank_you").style.display = "block";
 }
@@ -218,6 +218,9 @@ function getWasherFirstOpeningTime(washer_opening_times) {
         else {
             day_num++;
         }
+        if (day_num == 7) {
+            day_num = 0;
+        }
     }
     while (washer_opening_times[week_days[day_num]] === undefined) {
         day_num++;
@@ -228,11 +231,10 @@ function getWasherFirstOpeningTime(washer_opening_times) {
     return [week_days[day_num], washer_opening_times[week_days[day_num]][0]];
 }
 
-async function insertPlaceOrderBox (tag) {
-    var washerID = sessionStorage.getItem("pressed_washer"); // washer that pressed in page map_filter.html
-    var washerID = "1LhDqVKzSkZdsnSC6wFrVG5jte93";
+async function insertPlaceOrderBox(e) { 
+    var washerID = e.id;
+    sessionStorage.setItem("pressed_washer", washerID);
     const washer_doc = await promiseWasherLoaderById(washerID); 
-
     // The col-5 can be changed.
     //po_block = '<div class="place-order col-5" style="margin-top: 2%;">';
     // The SVG is neccessery to be included in the page, where the bodey begins.
@@ -240,6 +242,9 @@ async function insertPlaceOrderBox (tag) {
     // Topic
     po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
     po_block += '<h7>PLACE ORDER</h7>';
+    po_block += '<div class="row">';
+    po_block += '<div class = "description" style="margin-left: 5%;"> from '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '</div>'
     // Start of input table zone
     po_block += '<table class="place_order_table">';
     // First row- labels of dropoff day and special services.
@@ -281,19 +286,19 @@ async function insertPlaceOrderBox (tag) {
     po_block += '<div class="col-7"><div style="margin-left: 15%; margin-top: -3%;">';
     po_block += '<div id="overlay_register" onclick="off()">';
     po_block += '<div id="register_block"></div></div>';
+    po_block += '<div id="overlay_thank_you" onclick="off()">';
+    po_block += '<div id="user_order"></div></div>';
     po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
     po_block += '</div></div></div></div>';
-    document.getElementById(tag).innerHTML = po_block;
-    
-    opening_times = washer_doc.data().opening_times;
-    var first_opening_time = getWasherFirstOpeningTime(opening_times);
-    console.log(first_opening_time)
-    open_day = nextDay(first_opening_time[0]);
-    open_hour = first_opening_time[1];
-    // open_day = nextDay("Sunday");
-    // open_hour = "10:00"
-    document.getElementById("date").value =  open_day;
-    document.getElementById("startTime").value = open_hour;
+    document.getElementById("place-order").innerHTML = po_block;
+    document.getElementById("place-order").hidden = false;
+
+    washer_opening_times = washer_doc.data().opening_times;
+    var first_opening_time = getWasherFirstOpeningTime(washer_opening_times);
+    document.getElementById("date").value =  nextDay(first_opening_time[0]);
+    document.getElementById("startTime").value = first_opening_time[1];
     update_properties_and_price();
-    msg = "please order your laundry to an hour where " +washer_doc.data().name + " is working"
+    msg = "please order your laundry to an hour where " + washer_doc.data().name + " is working";
+
+
 }
