@@ -313,6 +313,7 @@
     width: 500px;
     height: 70px;
     margin-left: 5%;
+    font-family: 'Montserrat';
 }
 
 #washer_description:focus {

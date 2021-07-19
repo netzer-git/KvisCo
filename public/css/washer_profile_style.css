@@ -77,3 +77,13 @@ select {
     /* for Chrome */
     -webkit-appearance: none;
 }
+
+.working-hours{
+    font-family: 'Montserrat';
+
+}
+
+.btn-white{
+    font-family: 'Montserrat';
+
+}

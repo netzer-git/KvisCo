@@ -15,12 +15,14 @@ let washer_doc_array;
 
 async function show_only_open_now() {
     if (document.getElementById("filter-btn").classList.contains("active")) {
+        document.getElementById("filter-btn").style.backgroundColor = "white";
         document.getElementById("filter-btn").classList.remove("active");
         document.getElementById("filter-btn").style.color = "black";
         on_load_page();
     } else {
         document.getElementById("filter-btn").classList.add("active");
-        document.getElementById("filter-btn").style.color = "green";
+        document.getElementById("filter-btn").style.backgroundColor = "green";
+        document.getElementById("filter-btn").style.color = "white";
         washer_doc_array_temp = [];
         for (i = 0; i < washer_doc_array.length; i++) {
             cur_opening_times = washer_doc_array[i].data().opening_times;
@@ -62,7 +64,8 @@ async function create_washer_list(filters, current_user_location) {
 async function insert_washer_blocks(washer_doc, day) {
     let whole_washers_html_block = '';
     if (washer_doc.length == 0) {
-        whole_washers_html_block += "<h5>There are no washers working this day,</h5>\n<h5>please try other one :)</h5>"
+        whole_washers_html_block += "<h5>No washers are working now,</h5>\n<h5>please try again</h5>"
+        whole_washers_html_block += '<img class= "ironing-person" src="/images/ironing_person.svg">'
     }
     // adjusting page height
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washer_doc.length);
