@@ -86,7 +86,7 @@ async function display_new_order_for_user(orderID) {
         order_block += '<tr><td style="text-align:center"><button class="phone_number">'+washer_doc.data().phone+'</button></td></tr>';
     }
     else {
-        order_block += '<tr><td style="text-align:center">Phone will be displayed after '+ washer_doc.data().name.split(" ")[0]+'\'s approval</td></tr>';
+        order_block += '<tr><td style="text-align:center; font-family:"Montserrat"">Phone will be displayed after '+ washer_doc.data().name.split(" ")[0]+'\'s approval</td></tr>';
     }
     order_block += "</table>";
     order_block += "<button style='margin-top: 20%; margin-left: 31%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
@@ -102,10 +102,10 @@ async function display_new_order_for_washer(orderID) {
     order_block = '<div class= "order_pink">';
     var order_status = order_doc.data().status;
     if (order_status == "pending") {
-        order_header = "You recieved new order!";
+        order_header = "You received new order!";
     }
     if (order_status == "process") {
-        order_header = "This laundry in process";
+        order_header = "laundry in process";
     }
     order_block += "<div class='row'>"
     order_block += "<div class='header_24' style='margin-left:-1%;'>"+order_header+"</div></div>";
