@@ -52,7 +52,7 @@
      sessionStorage.setItem("connected_userID", getUserToken());
      // header elements
      document.getElementById("log_in_indicator").innerHTML = 'Hi, ' + getUserFirstName();
-     document.getElementById("log_in_indicator").hidden = false;
+     document.getElementById("user_profile_button").hidden = false;
      document.getElementById("log_in_out_msg").innerHTML = "Log Out";
      document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
@@ -62,8 +62,7 @@
      console.log("out " + getUserToken());
      sessionStorage.setItem("connected_userID", null);
      // header elements
-     document.getElementById("log_in_indicator").hidden = true;
-     document.getElementById("log_in_indicator").innerHTML = "Anonymous";
+     document.getElementById("user_profile_button").hidden = true;
      document.getElementById("log_in_out_msg").innerHTML = "Log In";
      document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
