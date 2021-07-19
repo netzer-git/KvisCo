@@ -72,7 +72,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     let all_blocks = "<div class = 'row'>";
     all_orders = sortOrdersByCreatedAt(all_orders)
     var max_orders = Math.min(2, all_orders.length);
-    if (window.location.pathname == "/html/welcome.html") {
+    if (window.location.pathname === "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
         for (var i = 0; i < max_orders; i++) {
             all_blocks += await get_order_block_of_user(all_orders[i],blocks_gap = 4);
@@ -83,6 +83,13 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
             all_blocks += await get_order_block_of_user(all_orders[i]);
         }
     }
+
+    if (max_orders < 2 && window.location.pathname !== "/html/welcome.html") {
+        for (var i = max_orders; i < 2; i++) {
+            all_blocks += get_order_block_of_empty_washer();
+        }
+    }
+
     all_blocks += "</div>";
     document.getElementById(tag).innerHTML = all_blocks;
 }
@@ -115,4 +122,26 @@ async function load_quick_welcome_page() {
  function redirect_specific_washer(washer_id) {
     sessionStorage.setItem('pressed_washer', washer_id);
     location.href = "./place_order.html";
+}
+
+
+function get_order_block_of_empty_washer() {
+    block = "<div class='col-5'>";
+    block += "<div class='shadow frame'>";
+    block += "<div class='center-order'>";
+    block += "<div class='profile'>";
+    block += "<div class='image-order'>";
+    block += "<div class='circle-1'></div> <div class='circle-2'></div>";
+    block += "<img src='../../images/Profile-yellow.png' class='rounded-circle-xs' alt='profile_pic'></div>";
+    block += "<div class='name'>Your Next Order</div>";
+    block += "<div class='actions'>";
+    block += "<button class='btn-white' onclick='location.href=map_filter.html'>Order</button></div></div>";
+    block += "<div class='stats'><div class='box-price'>";
+    block += "<span class='value'>TBD</span><span class='parameter'>Due to</span></div>";
+    block += "<div class='box-price'><span class='value'>0 &#8362</span><span class='parameter'>Price</span></div></div>";
+    block += "</div>";
+    block += "</div>";
+    block += "</div>";
+    block_num++;
+    return block;
 }
