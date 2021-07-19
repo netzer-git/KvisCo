@@ -35,7 +35,7 @@ async function get_order_block_of_user(order_doc, blocks_gap = 5) {
             break;
     }
     // Date and Price blocks 
-    var date = new Date(order_doc.data().due_to*1000);
+    var date = new Date(order_doc.data().due_to);
     var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
     if (date.getMinutes().toString().length <= 1) {
         var minutes = "0" +date.getMinutes();

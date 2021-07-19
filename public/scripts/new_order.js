@@ -63,9 +63,8 @@ async function display_new_order_for_user(orderID) {
     order_block += "<div class='header_24' style='text-align: center;'>"+order_header+"</div></div>";
     order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white'><div class='col-1'></div>"; //row open div, col-10 open div, order white open div
     order_block += "<table style='margin-left:15%; margin-top:2%;'><tr><td><img class='rounded-circle-2' src='" + washer_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+washer_doc.data().name+"</h4></td></tr></table>";
-    var date_not_format = order_doc.data().due_to;
-    var date = new Date(date_not_format);
-    var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
+    var date = new Date(order_doc.data().due_to);
+    var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
     if (date.getMinutes().toString().length <= 1) {
         var minutes = "0" + date.getMinutes();
     }
@@ -111,9 +110,8 @@ async function display_new_order_for_washer(orderID) {
     order_block += "<div class='header_24' style='margin-left:-1%;'>"+order_header+"</div></div>";
     order_block += "<div class='row'><div class='col-1'></div><div class='col-10'><div class= 'order_white' style='margin-left: auto; margin-right:auto;'>"; //row open div, col-10 open div, order white open div
     order_block += "<table style='margin-left:10%; margin-top:-2%;'><tr><td><img class='rounded-circle-2' style='margin-top: 15%;' src='" + user_doc.data().imageUrl + "' alt='profile_pic'></td><td><h4 class='header_44' style='margin-left: 10%;'>"+user_doc.data().name+"</h4></td></tr></table>";
-    var date_not_format = order_doc.data().due_to.seconds*1000;
-    var date = new Date(date_not_format);
-    var l_date = date.getDate()+"/"+(date.getMonth())+"/"+date.getFullYear();
+    var date = new Date(order_doc.data().due_to);
+    var l_date = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
     if (date.getMinutes().toString().length <= 1) {
         var minutes = "0" + date.getMinutes();
     }
