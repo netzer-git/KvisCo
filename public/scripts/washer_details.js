@@ -18,3 +18,13 @@ async function load_washer_profile_page() {
     get_washer_working_hours(washer_doc) // in working_hours_table.js.
 
 }
+
+
+async function delete_washer() {
+    const delete_message = confirm("Are you sure you want to delete the account ? This action is final!");
+    if (delete_message) {
+        deleteCurrentWasher().then(() =>{
+            location.href = "../user_flow/map_filter.html";
+        });
+    }
+}
