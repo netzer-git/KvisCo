@@ -5,7 +5,7 @@
     width: 1000px;
     height: 380px;
     overflow: scroll;
-  }
+}
 
 h2 {
     font-family: 'Montserrat', sans-serif;
@@ -20,43 +20,43 @@ h2 {
 }
 
 .with_padd {
-    margin:10px; 
-    padding:10px;
+    margin: 10px;
+    padding: 10px;
 }
 
 /* opening hours section  */
 
 .openClosed {
-    font-family:Lucida Console;
-    text-align:center;
-    float:center;
-    display:block;
+    font-family: Lucida Console;
+    text-align: center;
+    float: center;
+    display: block;
     color: rgba(28, 28, 29, 1);
     ;
 }
 
 .openorclosed {
-    text-align:center;
+    text-align: center;
 }
 
 
 .openinghours {
-    padding:10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     overflow: hidden;
     display: inline-block;
     text-align: left;
-    padding:5px;
+    padding: 5px;
     font-size: 20px;
 }
 
 .openinghourscontent {
     /* float; */
-    text-align:center;
+    text-align: center;
     font-size: 20px;
-} 
+}
 
 .reviews_text {
-    
+
     height: 54px;
     width: 585px;
     left: 758px;
@@ -68,26 +68,26 @@ h2 {
 }
 
 .opening-hours--le {
-    margin-left:auto;
-    margin-right:auto;
-    padding:5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
 }
 
 .opening-hours-table tr {
-  padding:15px;
-  font-size: 20px;
+    padding: 15px;
+    font-size: 20px;
 }
 
 .opening-hours-table tr td {
-    padding:15px;
+    padding: 15px;
     font-size: 20px;
     font-family: 'Montserrat';
 }
 
 .opening-hours-table tr td:nth-child(1) {
-  background-size: cover;
-  font-size: 20px;
-  font-family: 'Montserrat';
+    background-size: cover;
+    font-size: 20px;
+    font-family: 'Montserrat';
 }
 
 .active a {
@@ -96,7 +96,7 @@ h2 {
 }
 
 
-table.machine_details th{
+table.machine_details th {
     /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
@@ -108,14 +108,14 @@ table.machine_details th{
     font-size: 20px;
     line-height: 32px;
     /* identical to box height, or 160% */
-    
+
     letter-spacing: 0.625px;
 
     color: #1C1C1D;
 }
 
 
-table.machine_details tr{
+table.machine_details tr {
     /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
@@ -135,11 +135,11 @@ table.machine_details tr{
 
     /* Main / Black */
 
-    color:rgba(28, 28, 29, 1);
+    color: rgba(28, 28, 29, 1);
     ;
 }
 
 .col_with_padd {
-    margin:10px; 
-    padding:10px;
+    margin: 10px;
+    padding: 10px;
 }

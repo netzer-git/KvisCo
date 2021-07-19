@@ -64,7 +64,7 @@ function promiseOrderLoaderById(documentID) {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('users', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('users', getUserToken()) : null;
 }
 
 /**
@@ -73,7 +73,7 @@ function promiseUserLoaderByCurrentUserID() {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseWasherLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('washers', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('washers', getUserToken()) : null;
 }
 
 /**
@@ -88,27 +88,27 @@ async function getCurrentUserLocation() {
  * @param {*} doc user or washer document
  */
 async function getRatingFromDoc(doc, field) {
-    let ratingSum = 0, ratingNum = 0, rating = 0; 
+    let ratingSum = 0,
+        ratingNum = 0,
+        rating = 0;
     const docOrderArray = await promiseOrderArrayByFieldIdAndStatus(field, doc.id, "finished");
     if (field === 'user') {
         docOrderArray.forEach((order) => {
             rating = order.data().rating_user;
             if (rating) {
                 ratingSum += rating;
-                ratingNum ++;
+                ratingNum++;
             }
         });
-    }
-    else if (field === 'washer') {
+    } else if (field === 'washer') {
         docOrderArray.forEach((order) => {
             rating = order.data().rating_washer;
             if (rating) {
                 ratingSum += rating;
-                ratingNum ++;
+                ratingNum++;
             }
-            });
-    }
-    else {
+        });
+    } else {
         console.error("Error in getRatingFromDoc, check the field requirement.");
     }
     return (ratingNum !== 0) ? (ratingSum / ratingNum).toFixed(1) : 0;
@@ -130,7 +130,7 @@ async function getWashersWithRatingOverNumber(ratingNum) {
         }
     });
     ratingDict.filter((washer) => {
-        
+
     });
 }
 
@@ -220,7 +220,10 @@ async function setOrderDetails(orderDetails, orderId) {
  */
 async function createNewWasher(washer) {
     let data = await forwardGeocodePromise(washer.location_str);
-    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+    let geoPoint = {
+        lat: data.results[0].geometry.lat,
+        lng: data.results[0].geometry.lng
+    };
     await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         imageUrl: washer.imageUrl,
@@ -308,7 +311,10 @@ async function setWasherOpenTimes(openTimes, washerId) {
  */
 async function createNewUser(user) {
     let data = await forwardGeocodePromise(user.location_str);
-    let geoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+    let geoPoint = {
+        lat: data.results[0].geometry.lat,
+        lng: data.results[0].geometry.lng
+    };
     await db.collection("users").doc(getUserToken()).set({
         name: user.name,
         location_str: user.location_str,
@@ -346,8 +352,7 @@ async function addWasherToFavorites(userId, washerId) {
 async function saveImageToUser(file) {
     if (!isUserSignedIn()) {
         console.error("You are trying to upload a picture to undefined user");
-    }
-    else {
+    } else {
         if (file === null) {
             console.error("You are trying to upload an empty file");
             return null;
@@ -357,7 +362,7 @@ async function saveImageToUser(file) {
         let url = await fileSnapshot.ref.getDownloadURL();
         return url;
     }
-    
+
 }
 
 /**
@@ -384,15 +389,15 @@ async function saveImageToWasher(file, washerId) {
  * @param {string} orderId the id of the current order
  * @return {string} image url path to firebase storage
  */
- async function saveImageToOrder(file, orderId) {
-        if (file === null) {
-            console.error("You are trying to upload an empty file");
-            return null;
-        }
-        let filePath = orderId + '/' + file.name;
-        let fileSnapshot = await storage.ref(filePath).put(file);
-        let url = await fileSnapshot.ref.getDownloadURL();
-        return url;
+async function saveImageToOrder(file, orderId) {
+    if (file === null) {
+        console.error("You are trying to upload an empty file");
+        return null;
+    }
+    let filePath = orderId + '/' + file.name;
+    let fileSnapshot = await storage.ref(filePath).put(file);
+    let url = await fileSnapshot.ref.getDownloadURL();
+    return url;
 }
 
 /**
@@ -479,10 +484,13 @@ async function getWasherFilterQuery(filters) {
 
     if (filters.address !== undefined && filters.address !== null && filters.address !== "") {
         let data = await forwardGeocodePromise(filters.address);
-        let addressGeoPoint = {lat: data.results[0].geometry.lat, lng: data.results[0].geometry.lng};
+        let addressGeoPoint = {
+            lat: data.results[0].geometry.lat,
+            lng: data.results[0].geometry.lng
+        };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 2) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 10) {
                 filteredWashersWithAddress.push(doc);
             }
         });
@@ -495,6 +503,10 @@ async function getWasherFilterQuery(filters) {
         washersArray.forEach((doc) => {
             filteredWashers.push(doc);
         })
+    }
+
+    if (filters.currentPoint !== undefined) {
+        filteredWashers = await sortWashersByDistance(filteredWashers, filters.currentPoint);
     }
 
     return filteredWashers;
@@ -523,7 +535,7 @@ async function sortWashersByDistance(washerArray, currentPoint) {
     washerArray.sort((a, b) => {
         let aDistance = getDistanceFromLatLonInKm(a.data().location_cor, currentPoint);
         let bDistance = getDistanceFromLatLonInKm(b.data().location_cor, currentPoint);
-        return bDistance - aDistance;
+        return aDistance - bDistance;
     });
     return washerArray;
 }
@@ -553,26 +565,36 @@ function sortOrdersByCreatedAt(orderArray) {
  */
 async function getBetterCloserWashers(indicator, currentPoint) {
     let washerArray = []
-    switch(indicator) {
-        case 1:
+    switch (indicator) {
+        case "1":
             washerArray = await getWasherFilterQuery({
                 rating: 4.5,
             });
             break;
-        case 2:
+        case "2":
             washerArray = await getWasherFilterQuery({
                 rating: 3,
                 distance: 3,
                 current_cor: currentPoint,
             });
             break;
-        case 3:
+        case "3":
             washerArray = await getWasherFilterQuery({
-                distance: 1.5,
+                distance: 4,
                 current_cor: currentPoint,
             });
             break;
     }
     console.log(washerArray);
     return sortWashersByDistance(washerArray, currentPoint);
+}
+
+async function getButtonAccordingToWasherStatus() {
+    let currentWasher = promiseWasherLoaderByCurrentUserID();
+    if (currentWasher) {
+        return "Washer Profile";
+    }
+    else {
+        return "Be A Washer";
+    }
 }

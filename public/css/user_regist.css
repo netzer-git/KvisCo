@@ -1,24 +1,24 @@
-.regist_pink_2{
+.regist_pink_2 {
     width: 800px;
     height: 800px;
     left: 393px;
     top: 135px;
-    
+
     /* Palet 1 / 3 */
-    
+
     background: #FFB0BC;
     /* Main / Black */
-    
+
     border: 2px solid #1C1C1D;
     box-sizing: border-box;
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
-    
+
 }
 
-#user_description{
+#user_description {
     left: 0%;
     right: 0%;
     top: -1.26%;
@@ -72,14 +72,14 @@
 
 }
 
-#indicator4{
-    display:none;
+#indicator4 {
+    display: none;
     margin-left: 15%;
     margin-top: 2%;
     font-family: 'Montserrat';
- }
+}
 
 
- .yellow_button_6:active{
+.yellow_button_6:active {
     transform: translateY(4px);
 }
