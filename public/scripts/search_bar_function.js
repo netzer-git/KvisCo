@@ -43,10 +43,10 @@ function get_search_bar(tag) {
     search_bar += '<select id="duration" onchange="save()">';
     switch (duration) {
         case '8':
-            search_bar += '<option value="8" selected>8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="8" selected>8 Hours</option>';
+            search_bar += '<option value="24">24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
             break
         case '48':
             search_bar += '<option value="8">8 hours</option>';
