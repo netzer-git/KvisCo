@@ -162,7 +162,6 @@ function CreateDayDictionary() {
 
 function open_indicator(washer_opening_times,full_date) {
     icon_text = ""
-    console.log(washer_opening_times,full_date);
     if (check_if_washer_open(washer_opening_times, full_date)) {
         icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/open_ind.svg">Open</div>'
     }

@@ -96,7 +96,7 @@
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
     <div class="h-100 w-100 container d-flex justify-content-center">
-        <div class="row-search w-50 row">
+        <div class="row-search w-75 row">
             <!-- Search Bar starts here-->
             <div id="search-bar" class="col-10">
                 <script>
@@ -156,31 +156,36 @@
                         </div> -->
                     <!-- better-closer filter -->
                     <div class="better-closer-col-filter col-6">
-                        <div class="range col-12">
-                            <div class="distance-slider-container">
-                                <button class="distance-slider-text better" data-value="1" onclick="go_better()">better</button>
-                                <input id="distanceSlider" type="range" min="1" max="3" value="2" step="1" tabindex="-1" onchange="filter_by_slider()">
-                                <button class="distance-slider-text closer" data-value="3" onclick="go_closer()">closer</button>
-                            </div>
-                            <!-- <input type="range" class="form-range" min="1" max="3" step="1" id="dist-range" /> -->
-                            <!-- <ul class="range-labels">
+                        <div class="better-closer-btn">
+                            <div class="range">
+                                <div class="distance-slider-container">
+                                    <button class="distance-slider-text better" data-value="1"
+                                        onclick="go_better()">Better</button>
+                                    <input id="distanceSlider" type="range" min="1" max="3" value="2" step="1"
+                                        tabindex="-1" onchange="filter_by_slider()">
+                                    <button class="distance-slider-text closer" data-value="3"
+                                        onclick="go_closer()">Closer</button>
+                                </div>
+                                <!-- <input type="range" class="form-range" min="1" max="3" step="1" id="dist-range" /> -->
+                                <!-- <ul class="range-labels">
                                 <li class="active selected">Better</li>
                                 <li></li>
                                 <li>Closer</li>
                             </ul> -->
+                            </div>
                         </div>
                     </div>
                     <!-- open-now filter -->
-                    <div class="open-now-col-filter col-3">
+                    <div class="open-now-col-filter col-2">
                         <button id="filter-btn" class="filter-btn" onclick="show_only_open_now()">
-                            <span class="filter-btn-text">Open now</span>
+                            <span class="filter-btn-text">Open Now</span>
                         </button>
                     </div>
-
+                    <div class="col-1"></div>
                     <!-- special-services filter -->
                     <div class="special-service-col-filter col-3">
                         <button id="popup-btn" class="filter-btn">
-                            <span class="popup-btn-text">Special services</span>
+                            <span class="popup-btn-text">Services</span>
                             <svg class="popup-btn-icon">
                                 <use xlink:href="#popup-btn-icon"></use>
                             </svg>
