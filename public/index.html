@@ -67,17 +67,6 @@
         <button onclick="location.href='./html/washer_flow/washer_registration.html'" type="button">
             washer_registration
         </button>
-        <!-- form for uploading pictures and more fields -->
-        <div class="container-fluid" style="margin: 50px">
-            <textarea rows="1" cols="30" id="hello" onchange="updateFormFields()" placeholder="hello!"></textarea>
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden onchange="updateFormFields(event)">
-            <button title="Add an image" onclick="document.getElementById('mediaCapture').click()">
-                image
-            </button>
-            <button onclick="submitPhotoForm()">
-                Lets RUN!--
-            </button>
-        </div>
         
         <button onclick="displayImage()">
             display image
@@ -88,13 +77,6 @@
         <button onclick="test_rating()" style="background-color: lightblue;">
             RATING
         </button>
-        <div id="only-one">
-            Hey!
-        </div>
-        
-        <div id="img-area">
-            image area
-        </div>
 
         <!-- connecting to review washer page
         <button id="moveButton">review page</button>
