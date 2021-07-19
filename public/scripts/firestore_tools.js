@@ -421,9 +421,10 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    if (filters.commitment !== undefined) {
+    if (filters.duration !== undefined) {
+        filters.duration = Number(filters.duration);
         let filteredWashersWithCommitment = [];
-        await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
+        await db.collection('washers').where(commitment, "<=", filters.duration).get().forEach(doc => {
             filteredWashersWithCommitment.push(doc);
         });
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
