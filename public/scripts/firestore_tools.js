@@ -563,30 +563,24 @@ function sortOrdersByCreatedAt(orderArray) {
  * @param {*} indicator 1-3, indicates the wanted filter
  * @returns array of washer as dictated by the control number
  */
-async function getBetterCloserWashers(indicator, currentPoint) {
+async function getBetterCloserWashers(indicator, filters) {
     let washerArray = []
     switch (indicator) {
         case "1":
-            washerArray = await getWasherFilterQuery({
-                rating: 4.5,
-            });
+            filters[rating] = 4.5;
             break;
         case "2":
-            washerArray = await getWasherFilterQuery({
-                rating: 3,
-                distance: 3,
-                current_cor: currentPoint,
-            });
+            filters[rating] = 3;
+            filters[distance] = 3
             break;
         case "3":
-            washerArray = await getWasherFilterQuery({
-                distance: 4,
-                current_cor: currentPoint,
-            });
+            filters[distance] = 1.5
             break;
     }
+    filters[address] = null;
+    washerArray = await getWasherFilterQuery(filters);
     console.log(washerArray);
-    return sortWashersByDistance(washerArray, currentPoint);
+    return sortWashersByDistance(washerArray, filters.currentPoint);
 }
 
 async function getButtonAccordingToWasherStatus() {
