@@ -64,7 +64,7 @@ async function create_washer_list(filters, current_user_location) {
 async function insert_washer_blocks(washer_doc, day) {
     let whole_washers_html_block = '';
     if (washer_doc.length == 0) {
-        whole_washers_html_block += "<h5>No washers are working now,</h5>\n<h5>please try again</h5>"
+        whole_washers_html_block += "<h5>No washers are working,</h5>\n<h5>please try again</h5>"
         whole_washers_html_block += '<img class= "ironing-person" src="/images/ironing_person.svg">'
     }
     // adjusting page height
@@ -117,7 +117,7 @@ async function create_one_washer_block(washer_doc, day) {
         washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">' + rating + '</p></div>';
     }
     washer_block_raw_html += '<div class="row">\n<div class="col-7"><p class="card-text">' + washer_doc.data().properties + ' | ' + washer_doc.data().commitment + ' hours</p></div>\n';
-    washer_block_raw_html += '<div class="col-4"><button id="' + washer_doc.id.valueOf() + '" onclick="insertPlaceOrderBox(this)" class="button1" style="width: 120px;" >Quick Order</button></div>\n</div>';
+    washer_block_raw_html += '<div class="col-4"><button id="' + washer_doc.id.valueOf() + '" onclick="insertPlaceOrderBox(this)" class="button1" style="width: 120px; margin-top: -10%;" >Quick Order</button></div>\n</div>';
     washer_block_raw_html += '\n</div>\n</div>\n</div></div>\n</div></div>';
     return washer_block_raw_html;
 
