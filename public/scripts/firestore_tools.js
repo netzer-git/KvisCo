@@ -251,15 +251,26 @@ async function createNewWasher(washer) {
 
 /**
  * delete washer by Id
- * @param {} washerid the id of the washer to delete
  */
 async function deleteCurrentWasher() {
-    db.collection("washers").doc(getUserToken()).delete().then(() => {
+    await db.collection("washers").doc(getUserToken()).delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
 }
+
+/**
+ * delete user by Id
+ */
+ async function deleteCurrentUser() {
+    await db.collection("users").doc(getUserToken()).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+
 
 /**
  * @param {*} washerDoc washer doc
@@ -587,7 +598,7 @@ async function getBetterCloserWashers(indicator, filters) {
  * @returns the button text
  */
 async function getButtonAccordingToWasherStatus() {
-    let currentWasher = promiseWasherLoaderByCurrentUserID();
+    let currentWasher = await promiseWasherLoaderByCurrentUserID();
     if (currentWasher) {
         return "Washer Profile";
     }
