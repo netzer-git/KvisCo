@@ -26,9 +26,10 @@ function save() {
 }
 
 function get_search_bar(tag) {
-    var jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
+    jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
     if (jsarray == null || window.location.pathname == "/html/welcome.html") {
         jsarray = jsarray_basic;
+        sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     }
     address = jsarray[0];
     myDate = jsarray[1];
@@ -38,7 +39,7 @@ function get_search_bar(tag) {
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" id="where" value = "' + address + '" onchange ="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" placeholder = "my current location" id="where" value = "' + address + '" onchange ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
     search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
