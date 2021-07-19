@@ -29,8 +29,8 @@ async function show_only_open_now() {
             }
         }
         washer_doc_array = washer_doc_array_temp;
-        search_res = get_search_bar("search-bar");
-        await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
+        // search_res = get_search_bar("search-bar");
+        await insert_washer_blocks(washer_doc_array, new Date().toLocaleString('en-us', {  weekday: 'long' }));
         document.getElementById("place-order").hidden = true;
     }
 }
