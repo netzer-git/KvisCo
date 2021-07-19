@@ -102,7 +102,7 @@ h4 {
 
 .card-title {
     /* Headline/Title/Bold 24 */
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
@@ -115,11 +115,15 @@ h4 {
     padding-left: 0%;
     margin-bottom: 0px !important;
 }
+.card-text{
+    font-family: 'Montserrat';
+}
 
 h6 {
-    margin-top: -20px !important;
+
+    /* margin-top: -20px !important; * This causes problems!!!/
     /* Text / Medium 18 */
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -207,6 +211,12 @@ hr.solid {
     top: -0.6530606746673584px;
     border-radius: 10px;
     font-size: 100%;
+    font-family: 'Montserrat';
+
+}
+
+.choose_location:focus {
+    outline: none;
 
 }
 
@@ -226,6 +236,7 @@ hr.solid {
     height: 26px;
     /* width: 68px; */
     border-radius: nullpx;
+    font-family: 'Montserrat';
 }
 
 .table-search td,
@@ -321,6 +332,7 @@ th {
     border-radius: 10px;
     text-align: left;
     padding-top: 0;
+    font-family: 'Montserrat';
 }
 
 #popup-btn .popup-btn-text {
@@ -566,6 +578,8 @@ th {
     text-align: left;
     display: inline-block;
     margin: 0;
+    font-family: 'Montserrat';
+
 }
 
 
@@ -580,6 +594,17 @@ th {
     overflow: visible;
 }
 
+.filter-btn-text{
+    font-family: 'Montserrat';
+}
+
+.ironing-person{
+    width: 70%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: 5%;
+
 .button1 .smaller {
     width: 100px;
+
 }
