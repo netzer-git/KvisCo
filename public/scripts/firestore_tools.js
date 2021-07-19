@@ -431,10 +431,10 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined && filters.current_cor !== undefined) {
+    if (filters.distance !== undefined && filters.currentPoint !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.currentPoint, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -490,7 +490,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 10) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
                 filteredWashersWithAddress.push(doc);
             }
         });
@@ -568,21 +568,24 @@ async function getBetterCloserWashers(indicator, filters) {
     switch (indicator) {
         case "1":
             filters['rating'] = 4.5;
+            filters['address'] = null;
             break;
         case "2":
-            filters['rating'] = 3;
-            filters['distance'] = 3
             break;
         case "3":
             filters['distance'] = 1.5
+            filters['address'] = null;
             break;
     }
-    filters['address'] = null;
     washerArray = await getWasherFilterQuery(filters);
     console.log(washerArray);
     return sortWashersByDistance(washerArray, filters.currentPoint);
 }
 
+/**
+ * sets the header button according to the user status as washer
+ * @returns the button text
+ */
 async function getButtonAccordingToWasherStatus() {
     let currentWasher = promiseWasherLoaderByCurrentUserID();
     if (currentWasher) {

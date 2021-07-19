@@ -73,5 +73,38 @@ async function insert_orders_blocks_of_washer(tag, washerID, status) {
     for (var i = 0; i < max_orders; i++) {
         all_blocks += await get_order_block_of_washer(all_orders[i]);
     }
+
+    if (max_orders < 2) {
+        for (var i = max_orders; i < 2; i++) {
+            all_blocks += get_order_block_of_empty_user();
+        }
+    }
+
     document.getElementById(tag).innerHTML = all_blocks;
+}
+
+function get_order_block_of_empty_user() {
+    block = "<div class='col-5'>";
+    block += "<div class='shadow frame'>";
+    block += "<div class='center-order'>";
+
+    block += "<div class='profile'>";
+
+    block += "<div class='image-order'>";
+    block += "<div class='circle-1'></div> <div class='circle-2'></div>";
+    block += "<img src='../../images/Profile-yellow.png' class='rounded-circle-xs' alt='profile_pic'></div>";
+    block += "<div class='name'>Your Next Client</div>";
+
+    block += "<div class='actions'>";
+    block += "<button class='btn-white'>Closed</button></div></div>";
+    
+    block += "<div class='stats'><div class='box-price'>";
+    block += "<span class='value'>TBD</span><span class='parameter'>Due to</span></div>";
+    block += "<div class='box-price'><span class='value'>0 &#8362</span><span class='parameter'>Price</span></div></div>";
+
+    block += "</div>";
+    block += "</div>";
+    block += "</div>";
+    block_num++;
+    return block;
 }
