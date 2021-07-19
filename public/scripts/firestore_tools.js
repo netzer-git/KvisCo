@@ -251,15 +251,26 @@ async function createNewWasher(washer) {
 
 /**
  * delete washer by Id
- * @param {} washerid the id of the washer to delete
  */
 async function deleteCurrentWasher() {
-    db.collection("washers").doc(getUserToken()).delete().then(() => {
+    await db.collection("washers").doc(getUserToken()).delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
 }
+
+/**
+ * delete user by Id
+ */
+ async function deleteCurrentUser() {
+    await db.collection("users").doc(getUserToken()).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+}
+
 
 /**
  * @param {*} washerDoc washer doc
@@ -410,9 +421,10 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    if (filters.commitment !== undefined) {
+    if (filters.duration !== undefined) {
+        filters.duration = Number(filters.duration);
         let filteredWashersWithCommitment = [];
-        await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
+        await db.collection('washers').where(commitment, "<=", filters.duration).get().forEach(doc => {
             filteredWashersWithCommitment.push(doc);
         });
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
@@ -431,10 +443,10 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined && filters.current_cor !== undefined) {
+    if (filters.distance !== undefined && filters.currentPoint !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.currentPoint, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -490,7 +502,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 10) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
                 filteredWashersWithAddress.push(doc);
             }
         });
@@ -567,24 +579,27 @@ async function getBetterCloserWashers(indicator, filters) {
     let washerArray = []
     switch (indicator) {
         case "1":
-            filters[rating] = 4.5;
+            filters['rating'] = 4.5;
+            filters['address'] = null;
             break;
         case "2":
-            filters[rating] = 3;
-            filters[distance] = 3
             break;
         case "3":
-            filters[distance] = 1.5
+            filters['distance'] = 1.5
+            filters['address'] = null;
             break;
     }
-    filters[address] = null;
     washerArray = await getWasherFilterQuery(filters);
     console.log(washerArray);
     return sortWashersByDistance(washerArray, filters.currentPoint);
 }
 
+/**
+ * sets the header button according to the user status as washer
+ * @returns the button text
+ */
 async function getButtonAccordingToWasherStatus() {
-    let currentWasher = promiseWasherLoaderByCurrentUserID();
+    let currentWasher = await promiseWasherLoaderByCurrentUserID();
     if (currentWasher) {
         return "Washer Profile";
     }

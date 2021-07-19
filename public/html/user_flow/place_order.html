@@ -124,9 +124,9 @@
                                     <!-- Special Services dropdwn-->
                                     <select id="property" onchange="update_properties_and_price()">
                                         <option value="Default" selected>Default</option>
-                                        <option value="ironing">Ironing(+25)</option>
-                                        <option value="door2door">Door-2-Door(+20)</option>
-                                        <option value="dryer">Hanging Drying(+12)</option>
+                                        <option value="Ironing">Ironing(+25)</option>
+                                        <option value="Door2Door">Door-2-Door(+20)</option>
+                                        <option value="Dryer">Hanging Drying(+12)</option>
                                     </select>
                                 </div>
                             </td>
@@ -239,13 +239,15 @@
                     <div class="window-border shadow">
                         <div class="tab-content">
                             <div class="tab-pane active" id="1">
+                                <div class="overflow-auto">
                                 <section class="openinghours">
                                     <div class="openinghourscontent section">
-                                        <div id="openorclosed"></div>
+                                        <div id="openorclosed" style="margin-left: 10%;"></div>
                                         <div id="openorclosedTable"></div>
                                         <!-- <script>get_opening_hours_table("openorclosedTable2", washer1)</script> -->
                                     </div>
                                 </section>
+                                </div>
                             </div>
                             <div class="tab-pane" id="2">
                                 <div class="with_padd">

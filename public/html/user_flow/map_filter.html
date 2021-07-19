@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../css/place_order.css">
     <link rel="stylesheet" href="../../css/washer_properties.css">
     <link rel="stylesheet" href="../../css/overlay.css">
+    <link rel="stylesheet" href="../../css/header_style.css">
     <link rel="stylesheet" href="../../css/new_order.css">
     <!-- <link rel="stylesheet" href="../../css/welcome.css"> -->
     <!-- Font Awesome -->
@@ -84,7 +85,7 @@
                 </filter>
             </defs>
         </symbol>
-        <symbol id="order-box-svg" width="551.28325" height="505" viewBox="0 0 667 611" fill="none"
+        <symbol id="order-box-svg" width="590.324" height="620" viewBox="0 0 667 611" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M1 14.3657C1 9.28755 5.32618 5.19618 10.4355 5.36304C139.339 9.57295 231.648 6.87975 322.51 4.22876C326.28 4.11878 330.047 4.00888 333.814 3.89954C428.376 1.15487 522.957 -1.2318 657.297 4.57934C662.116 4.7878 666 8.76674 666 13.5641V596.539C666 601.61 661.709 605.695 656.612 605.543C531.554 601.82 435.458 604.42 342.404 606.937C337.464 607.071 332.532 607.204 327.606 607.337C229.877 609.96 133.993 612.114 9.63979 606.326C4.83853 606.103 1 602.135 1 597.346V14.3657Z"
@@ -155,31 +156,36 @@
                         </div> -->
                     <!-- better-closer filter -->
                     <div class="better-closer-col-filter col-6">
-                        <div class="range col-12">
-                            <div class="distance-slider-container">
-                                <button class="distance-slider-text better" data-value="1" onclick="go_better()">better</button>
-                                <input id="distanceSlider" type="range" min="1" max="3" value="2" step="1" tabindex="-1" onchange="filter_by_slider()">
-                                <button class="distance-slider-text closer" data-value="3" onclick="go_closer()">closer</button>
-                            </div>
-                            <!-- <input type="range" class="form-range" min="1" max="3" step="1" id="dist-range" /> -->
-                            <!-- <ul class="range-labels">
+                        <div class="better-closer-btn">
+                            <div class="range">
+                                <div class="distance-slider-container">
+                                    <button class="distance-slider-text better" data-value="1"
+                                        onclick="go_better()">Better</button>
+                                    <input id="distanceSlider" type="range" min="1" max="3" value="2" step="1"
+                                        tabindex="-1" onchange="filter_by_slider()">
+                                    <button class="distance-slider-text closer" data-value="3"
+                                        onclick="go_closer()">Closer</button>
+                                </div>
+                                <!-- <input type="range" class="form-range" min="1" max="3" step="1" id="dist-range" /> -->
+                                <!-- <ul class="range-labels">
                                 <li class="active selected">Better</li>
                                 <li></li>
                                 <li>Closer</li>
                             </ul> -->
+                            </div>
                         </div>
                     </div>
                     <!-- open-now filter -->
-                    <div class="open-now-col-filter col-3">
+                    <div class="open-now-col-filter col-2">
                         <button id="filter-btn" class="filter-btn" onclick="show_only_open_now()">
-                            <span class="filter-btn-text">Open now</span>
+                            <span class="filter-btn-text">Open Now</span>
                         </button>
                     </div>
-
+                    <div class="col-1"></div>
                     <!-- special-services filter -->
                     <div class="special-service-col-filter col-3">
                         <button id="popup-btn" class="filter-btn">
-                            <span class="popup-btn-text">Special services</span>
+                            <span class="popup-btn-text">Services</span>
                             <svg class="popup-btn-icon">
                                 <use xlink:href="#popup-btn-icon"></use>
                             </svg>

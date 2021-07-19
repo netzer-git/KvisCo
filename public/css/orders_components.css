@@ -120,6 +120,22 @@
     color: #1C1C1D;
 }
 
+.btn-white-big {
+    display: block;
+    width: 125px;
+    height: 35px;
+    margin-left: 10%;
+    background: none;
+    border: 1px solid #1C1C1D;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    box-sizing: border-box;
+    transition: all .3s ease-in-out;
+    color: #1C1C1D;
+    background-color: #f5f5f5;
+}
+
 .btn-white:hover {
     background: #19FFE3;
     color: #1C1C1D;
