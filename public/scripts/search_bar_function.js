@@ -3,7 +3,7 @@ var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var address = "";
 var d = new Date()
 var myDate = formatDate(d);
-var duration = '24';
+var duration = '72';
 var day = d.getDay();
 var myDay = DAYS[day];
 jsarray_basic = [address, myDate, duration, myDay];
@@ -54,17 +54,17 @@ function get_search_bar(tag) {
             search_bar += '<option value="48" selected>48 hours</option>';
             search_bar += '<option value="72">72 hours</option></select>';
             break;
-        case '72':
+        case '24':
             search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
+            search_bar += '<option value="24" selected>24 hours</option>';
             search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72" selected>72 hours</option></select>';
+            search_bar += '<option value="72">72 hours</option></select>';
             break;
         default:
             search_bar += '<option value="8">8 hours</option>';
             search_bar += '<option value="24" selected>24 hours</option>';
             search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="72" selected>72 hours</option></select>';
             break;
     }
     search_bar += '</div></td></tr></table>';
