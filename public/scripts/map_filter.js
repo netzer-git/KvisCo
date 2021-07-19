@@ -15,12 +15,14 @@ let washer_doc_array;
 
 async function show_only_open_now() {
     if (document.getElementById("filter-btn").classList.contains("active")) {
+        document.getElementById("filter-btn").style.backgroundColor = "white";
         document.getElementById("filter-btn").classList.remove("active");
         document.getElementById("filter-btn").style.color = "black";
         on_load_page();
     } else {
         document.getElementById("filter-btn").classList.add("active");
-        document.getElementById("filter-btn").style.color = "green";
+        document.getElementById("filter-btn").style.backgroundColor = "green";
+        document.getElementById("filter-btn").style.color = "white";
         washer_doc_array_temp = [];
         for (i = 0; i < washer_doc_array.length; i++) {
             cur_opening_times = washer_doc_array[i].data().opening_times;
