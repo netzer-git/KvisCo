@@ -11,7 +11,7 @@ async function get_order_block_of_user(order_doc, blocks_gap = 5) {
     block += "<div class='profile'>";
     block += "<div class='image-order'><div class='circle-1'></div><div class='circle-2'></div>";
     block += "<img src=" + washer_doc.data().imageUrl + " class='rounded-circle-xs' alt='profile_pic'></div>";
-    block += "<div class='name'>"+ washer_doc.data().name +"</div>";
+    block += "<div id = 'w_ref' value='" + washer_doc.id + "' onclick= 'redirect_specific_washer(w_ref.value)' class='name'>"+ washer_doc.data().name +"</div>";
     // Button - changing
     switch (order_doc.data().status) {
         case 'pending':
@@ -106,4 +106,13 @@ async function load_quick_welcome_page() {
     if (userID != null) {
         await insert_orders_blocks_of_user("welcome_orders_block", userID, "finished"); 
     }
+}
+
+/**
+ * FIXME: please
+ * @param {*} washer_id 
+ */
+ function redirect_specific_washer(washer_id) {
+    sessionStorage.setItem('pressed_washer', washer_id);
+    location.href = "./place_order.html";
 }
