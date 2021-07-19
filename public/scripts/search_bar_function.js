@@ -9,11 +9,9 @@ var myDay = DAYS[day];
 jsarray_basic = [address, myDate, duration, myDay];
 
 function save() {
-    console.log("duration" , duration);
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
-    console.log("duration" , duration);
     day = new Date(myDate).getDay();
     myDay = DAYS[day];
     // Do whatever you want with the value here.
