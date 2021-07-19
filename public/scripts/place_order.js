@@ -242,7 +242,7 @@ async function insertPlaceOrderBox(e) {
     po_block += '<div class="row" style="z-index: 1; margin-top: -290px;">';
     po_block += '<h7>PLACE ORDER</h7>';
     po_block += '<div class="row">';
-    po_block += '<div class = "description" style="margin-left: 5%; margin-top: -5%;"> from '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '<div class = "description" style="margin-left: 5%;"> To '+ washer_doc.data().name.split(" ")[0] + "</div>";
     po_block += '</div>'
     // Start of input table zone
     po_block += '<table style="margin-top: -5%; margin-left: 8%;" class="place_order_table">';
