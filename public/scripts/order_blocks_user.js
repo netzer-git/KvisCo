@@ -124,6 +124,9 @@ async function load_quick_welcome_page() {
     location.href = "./place_order.html";
 }
 
+function redirect_to_map() {
+    location.href = "./map_filter.html";
+}
 
 function get_order_block_of_empty_washer() {
     block = "<div class='col-5'>";
@@ -135,7 +138,7 @@ function get_order_block_of_empty_washer() {
     block += "<img src='../../images/Profile-yellow.png' class='rounded-circle-xs' alt='profile_pic'></div>";
     block += "<div class='name'>Your Next Order</div>";
     block += "<div class='actions'>";
-    block += "<button class='btn-white' onclick='location.href=map_filter.html'>Order</button></div></div>";
+    block += "<button class='btn-white' onclick='redirect_to_map()'>Order</button></div></div>";
     block += "<div class='stats'><div class='box-price'>";
     block += "<span class='value'>TBD</span><span class='parameter'>Due to</span></div>";
     block += "<div class='box-price'><span class='value'>0 &#8362</span><span class='parameter'>Price</span></div></div>";
