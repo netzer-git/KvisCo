@@ -198,6 +198,9 @@ async function load_place_order_page() {
 
 
 function getWasherFirstOpeningTime(washer_opening_times) {  
+    if (Object.keys(washer_opening_times).length == 0) {
+        return ['Sunday', "08:00"];
+    }
     var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var cur_date = new Date();
     var day_num = cur_date.getDay();
@@ -239,10 +242,10 @@ async function insertPlaceOrderBox(e) {
     // The SVG is neccessery to be included in the page, where the bodey begins.
     po_block = '<svg><use xlink:href="#order-box-svg"></use></svg>';
     // Topic
-    po_block += '<div class="row" style="z-index: 1; margin-top: -290px;">';
+    po_block += '<div class="row" style="z-index: 1; margin-top: -260px;">';
     po_block += '<h7>PLACE ORDER</h7>';
     po_block += '<div class="row">';
-    po_block += '<div class = "description" style="margin-left: 5%;"> To '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '<div class = "description" style="margin-left: 5%; margin-top: -5%;"> To '+ washer_doc.data().name.split(" ")[0] + "</div>";
     po_block += '</div>'
     // Start of input table zone
     po_block += '<table style="margin-top: -5%; margin-left: 8%;" class="place_order_table">';
@@ -281,7 +284,7 @@ async function insertPlaceOrderBox(e) {
     po_block += '<div class="row" style="margin-top:-5%;">';
     // po_block += '<div class="col-1"></div>';
     po_block += '<div class="col-6">';
-    po_block += '<label class="cont" style="padding-left: 10%; margin-left:10%;"> I agree to terms and conditions<input type="checkbox" id="terms"><span class="checkmark"></span></label></div>';
+    po_block += '<label class="cont" style="padding-left: 10%; margin-left:10%; font-size: 12px"> I agree to terms and conditions<input type="checkbox" id="terms"><span class="checkmark"></span></label></div>';
     // po_block += '<div class="col-5"></div>';
     po_block += '<script>update_properties_and_price()</script>';
     po_block += '<div class="col-6">';

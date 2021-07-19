@@ -75,6 +75,7 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     if (window.location.pathname === "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
         for (var i = 0; i < max_orders; i++) {
+            console.log(all_orders[i].id)
             all_blocks += await get_order_block_of_user(all_orders[i],blocks_gap = 4);
         }
     }
