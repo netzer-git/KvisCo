@@ -327,7 +327,7 @@ th {
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
     height: 40px;
-    width: 110px;
+    width: 120px;
     left: 0px;
     border-radius: 10px;
     text-align: left;
@@ -603,8 +603,5 @@ th {
     height: auto;
     margin-left: 10%;
     margin-top: 5%;
-
-.button1 .smaller {
-    width: 100px;
 
 }
