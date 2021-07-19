@@ -7,3 +7,11 @@ async function load_user_profile_page() {
     await f_display_user_reviews(userID); // in user_tabs.js
 }
 
+async function delete_user() {
+    const delete_message = confirm("Are you sure you want to delete the account ? This action is final!");
+    if (delete_message) {
+        deleteCurrentUser().then(() => {
+            location.href = "map_filter.html";
+        });
+    }
+}

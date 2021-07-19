@@ -31,8 +31,8 @@ async function show_only_open_now() {
             }
         }
         washer_doc_array = washer_doc_array_temp;
-        search_res = get_search_bar("search-bar");
-        await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
+        // search_res = get_search_bar("search-bar");
+        await insert_washer_blocks(washer_doc_array, new Date().toLocaleString('en-us', {  weekday: 'long' }));
         document.getElementById("place-order").hidden = true;
     }
 }
@@ -64,7 +64,8 @@ async function create_washer_list(filters, current_user_location) {
 async function insert_washer_blocks(washer_doc, day) {
     let whole_washers_html_block = '';
     if (washer_doc.length == 0) {
-        whole_washers_html_block += "<h5>There are no washers working this day,</h5>\n<h5>please try other one :)</h5>"
+        whole_washers_html_block += "<h5>No washers are working now,</h5>\n<h5>please try again</h5>"
+        whole_washers_html_block += '<img class= "ironing-person" src="/images/ironing_person.svg">'
     }
     // adjusting page height
     const max_number_of_blocks = Math.min(MAX_NUMBER_OF_BLOCKS, washer_doc.length);

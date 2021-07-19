@@ -191,7 +191,8 @@ h5 {
 
 .navbar-brand img {
   height: 40;
-  padding-left: 100;
+  padding-left: 70;
+  padding-top: 4;
 }
 
 /* Logo button/*
@@ -737,6 +738,7 @@ select:focus {
   background: rgba(255, 255, 255, 1);
   border: 1px solid rgba(28, 28, 29, 1);
   box-shadow: 0px 2px 0px 0px rgba(32, 32, 32, 1);
+  font-family: 'Montserrat';
 }
 
 .note:focus {
@@ -752,6 +754,7 @@ select:focus {
   margin-left: 5%;
   cursor: pointer;
   font-size: 100%;
+  font-family: 'Montserrat';
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
