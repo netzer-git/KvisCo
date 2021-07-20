@@ -6,11 +6,11 @@ var washer_profile_pic;
 var washer_location_str;
 var washer_machine_type;
 var washer_description;
-var washer_commitment; //// add bar
+var washer_commitment; 
 var washer_properties;
 var washer_phone_number;
-var washer_capacity; /////add netzer
-var washer_year_purchased; //// add netzer
+var washer_capacity; 
+var washer_year_purchased; 
 var is_profile_loaded = false;
 var is_land_loaded = false;
 var is_mach_loaded = false;
@@ -47,6 +47,7 @@ function save_phone_number() {
 
 function save_commit() {
     washer_commitment = document.getElementById("commit").value;
+    console.log("new commit ",document.getElementById("commit").value);
 }
 
 function save_laundry_details() {
@@ -60,12 +61,10 @@ function save_description() {
 }
 
 function save_profile_pic(event) {
-    // if (event != null) {
     washer_profile_pic = event.target.files[0];
     document.getElementById("indicator1").style.display = "block";
     document.getElementById("indicator1").hidden = false;
-        // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
-    // }
+
 }
 
 function save_laundry_pic(event) {
@@ -85,12 +84,14 @@ function save_machine_pic(event) {
 }
 
 function save_special_service(choise) {  
-    // washer_properties = document.getElementsByName("special_serve").value; 
     washer_properties = choise.value; 
 }  
 
 
 async function create_washer() {
+    if (washer_commitment == null) {
+        washer_commitment = document.getElementById("commit").value;
+    }
     try {
         profile_pic_url = await saveImageToUser(washer_profile_pic);
     }
@@ -102,7 +103,6 @@ async function create_washer() {
         alert("PLEASE FILL ALL FIELDS");
         return;
     }
-    // profile_pic_url = "";
     try {
         first_pic = await saveImageToUser(washer_laundry_pic)
     }
@@ -116,6 +116,7 @@ async function create_washer() {
         second_pic = ""
     }
     pics_urls =[first_pic, second_pic];
+    console.log("final commit ",washer_commitment)
     new_washer = {
         name: getUserDisplayName(),
         imageUrl: profile_pic_url,
@@ -123,13 +124,12 @@ async function create_washer() {
         location_str: washer_location_str,
         model_name: washer_machine_type,
         description: washer_description,
-        commitment: washer_commitment,
+        commitment: Number(washer_commitment),
         properties: washer_properties,
         phone: washer_phone_number,
         capacity: washer_capacity,
         year_purchased: washer_year_purchased,
     }
-    console.log(new_washer);
     await createNewWasher(new_washer);
     window.location.href = "../../html/washer_flow/washer_profile.html";
 }
