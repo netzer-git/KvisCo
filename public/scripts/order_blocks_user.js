@@ -11,7 +11,7 @@ async function get_order_block_of_user(order_doc, blocks_gap = 5) {
     block += "<div class='profile'>";
     block += "<div class='image-order'><div class='circle-1'></div><div class='circle-2'></div>";
     block += "<img src=" + washer_doc.data().imageUrl + " class='rounded-circle-xs' alt='profile_pic'></div>";
-    block += "<div class='name'>"+ washer_doc.data().name +"</div>";
+    block += "<div id = 'w_ref' value='" + washer_doc.id + "' onclick= 'redirect_specific_washer(w_ref.value)' class='name'>"+ washer_doc.data().name +"</div>";
     // Button - changing
     switch (order_doc.data().status) {
         case 'pending':
@@ -35,7 +35,7 @@ async function get_order_block_of_user(order_doc, blocks_gap = 5) {
             break;
     }
     // Date and Price blocks 
-    var date = new Date(order_doc.data().due_to*1000);
+    var date = new Date(order_doc.data().due_to);
     var formattedTime = date.getDate() + '/' + (date.getMonth()+1);
     if (date.getMinutes().toString().length <= 1) {
         var minutes = "0" +date.getMinutes();
@@ -72,9 +72,10 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
     let all_blocks = "<div class = 'row'>";
     all_orders = sortOrdersByCreatedAt(all_orders)
     var max_orders = Math.min(2, all_orders.length);
-    if (window.location.pathname == "/html/welcome.html") {
+    if (window.location.pathname === "/html/welcome.html") {
         var max_orders = Math.min(3, all_orders.length);
         for (var i = 0; i < max_orders; i++) {
+            console.log(all_orders[i].id)
             all_blocks += await get_order_block_of_user(all_orders[i],blocks_gap = 4);
         }
     }
@@ -83,6 +84,13 @@ async function insert_orders_blocks_of_user(tag, userID, status) {
             all_blocks += await get_order_block_of_user(all_orders[i]);
         }
     }
+
+    if (max_orders < 2 && window.location.pathname !== "/html/welcome.html") {
+        for (var i = max_orders; i < 2; i++) {
+            all_blocks += get_order_block_of_empty_washer();
+        }
+    }
+
     all_blocks += "</div>";
     document.getElementById(tag).innerHTML = all_blocks;
 }
@@ -101,18 +109,43 @@ function off() {
 
 
 async function load_quick_welcome_page() {
-    console.log(" Here is a big bug but no time now will do tomooroow")
     // var userID = sessionStorage.getItem("connected_userID");
     var userID = getUserToken();
     if (userID != null) {
         await insert_orders_blocks_of_user("welcome_orders_block", userID, "finished"); 
     }
-    // try {
-    //     var userID = sessionStorage.getItem("connected_userID");
-    // }
-    // catch {
-    //     return;
-    // }
-    // await insert_orders_blocks_of_user("finished_orders", userID, "finished"); 
+}
 
+/**
+ * FIXME: please
+ * @param {*} washer_id 
+ */
+ function redirect_specific_washer(washer_id) {
+    sessionStorage.setItem('pressed_washer', washer_id);
+    location.href = "./place_order.html";
+}
+
+function redirect_to_map() {
+    location.href = "./map_filter.html";
+}
+
+function get_order_block_of_empty_washer() {
+    block = "<div class='col-5'>";
+    block += "<div class='shadow frame'>";
+    block += "<div class='center-order'>";
+    block += "<div class='profile'>";
+    block += "<div class='image-order'>";
+    block += "<div class='circle-1'></div> <div class='circle-2'></div>";
+    block += "<img src='../../images/Profile-yellow.png' class='rounded-circle-xs' alt='profile_pic'></div>";
+    block += "<div class='name'>Your Next Order</div>";
+    block += "<div class='actions'>";
+    block += "<button class='btn-white' onclick='redirect_to_map()'>Order</button></div></div>";
+    block += "<div class='stats'><div class='box-price'>";
+    block += "<span class='value'>TBD</span><span class='parameter'>Due to</span></div>";
+    block += "<div class='box-price'><span class='value'>0 &#8362</span><span class='parameter'>Price</span></div></div>";
+    block += "</div>";
+    block += "</div>";
+    block += "</div>";
+    block_num++;
+    return block;
 }

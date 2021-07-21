@@ -7,6 +7,27 @@
     object-fit: cover;
 }
 
+.rounded-circle-xxs {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    outline: none;
+    background-color: inherit;
+    margin-top: -0.5%;
+}
+
+.unstyle_name {
+    outline: none;
+    border: none;
+    background-color: inherit;
+    text-align: left;
+    display: inline-block;
+    margin: 0;
+    width: 150px;
+}
+
 
 .rounded-circle {
     padding-top: 5px;

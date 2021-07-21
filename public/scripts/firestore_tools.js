@@ -64,7 +64,7 @@ function promiseOrderLoaderById(documentID) {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseUserLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('users', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('users', getUserToken()) : null;
 }
 
 /**
@@ -73,7 +73,7 @@ function promiseUserLoaderByCurrentUserID() {
  * USAGE: promiseWasherLoaderById(docID).then(doc => { // do something with.doc.data })
  */
 function promiseWasherLoaderByCurrentUserID() {
-    return promiseLoaderByCollectionAndId('washers', getUserToken());
+    return getUserToken() ? promiseLoaderByCollectionAndId('washers', getUserToken()) : null;
 }
 
 /**
@@ -232,7 +232,7 @@ async function createNewWasher(washer) {
         location_cor: geoPoint,
         model_name: washer.model_name,
         description: washer.description,
-        commitment: Number(washer.commitment),
+        commitment: washer.commitment,
         opening_times: {},
         price: 0,
         properties: washer.properties,
@@ -251,15 +251,38 @@ async function createNewWasher(washer) {
 
 /**
  * delete washer by Id
- * @param {} washerid the id of the washer to delete
  */
 async function deleteCurrentWasher() {
-    db.collection("washers").doc(getUserToken()).delete().then(() => {
+    let washer_id = getUserToken();
+    await db.collection("washers").doc(washer_id).delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
+    let orders = await db.collection("orders").where("washer", '==', washer_id).get()
+    await orders.forEach(async (order) => {
+        if (order.data().washer === washer_id) {
+            await db.collection("orders").doc(order.id).delete();
+        }
+    });
 }
+
+/**
+ * delete user by Id
+ */
+ async function deleteCurrentUser() {
+    let user_id = getUserToken();
+    await db.collection("users").doc(user_id).delete().then(() => {
+        console.log("Document successfully deleted!");
+    }).catch((error) => {
+        console.error("Error removing document: ", error);
+    });
+    let orders = await db.collection("orders").where("user", '==', user_id).get()
+    await orders.forEach(async (order) => {
+        await db.collection("orders").doc(order.id).delete();
+    });
+}
+
 
 /**
  * @param {*} washerDoc washer doc
@@ -410,10 +433,13 @@ async function getWasherFilterQuery(filters) {
     let washersArray = await db.collection('washers').get();
     let firstQuery = true;
 
-    if (filters.commitment !== undefined) {
+    if (filters.duration !== undefined) {
+        filters.duration = Number(filters.duration);
         let filteredWashersWithCommitment = [];
-        await db.collection('washers').where(commitment, "<=", filters.commitment).get().forEach(doc => {
-            filteredWashersWithCommitment.push(doc);
+        washersArray.forEach(doc => {
+            if (doc.data().commitment <= filters.duration) {
+                filteredWashersWithCommitment.push(doc);
+            }
         });
         filteredWashers = firstQuery ? filteredWashersWithCommitment : intersection(filteredWashers, filteredWashersWithCommitment);
         firstQuery = false;
@@ -431,10 +457,10 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.distance !== undefined && filters.current_cor !== undefined) {
+    if (filters.distance !== undefined && filters.currentPoint !== undefined) {
         let filteredWashersWithDistance = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(filters.current_cor, doc.data().location_cor) <= filters.distance) {
+            if (getDistanceFromLatLonInKm(filters.currentPoint, doc.data().location_cor) <= filters.distance) {
                 filteredWashersWithDistance.push(doc);
             }
         });
@@ -490,7 +516,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 3) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
                 filteredWashersWithAddress.push(doc);
             }
         });
@@ -506,7 +532,7 @@ async function getWasherFilterQuery(filters) {
     }
 
     if (filters.currentPoint !== undefined) {
-        filteredWashers = sortWashersByDistance(filteredWashers, filters.currentPoint);
+        filteredWashers = await sortWashersByDistance(filteredWashers, filters.currentPoint);
     }
 
     return filteredWashers;
@@ -563,28 +589,35 @@ function sortOrdersByCreatedAt(orderArray) {
  * @param {*} indicator 1-3, indicates the wanted filter
  * @returns array of washer as dictated by the control number
  */
-async function getBetterCloserWashers(indicator, currentPoint) {
+async function getBetterCloserWashers(indicator, filters) {
     let washerArray = []
     switch (indicator) {
-        case 1:
-            washerArray = await getWasherFilterQuery({
-                rating: 4.5,
-            });
+        case "1":
+            filters['rating'] = 4.5;
+            filters['address'] = null;
             break;
-        case 2:
-            washerArray = await getWasherFilterQuery({
-                rating: 3,
-                distance: 3,
-                current_cor: currentPoint,
-            });
+        case "2":
             break;
-        case 3:
-            washerArray = await getWasherFilterQuery({
-                distance: 1.5,
-                current_cor: currentPoint,
-            });
+        case "3":
+            filters['distance'] = 1.5
+            filters['address'] = null;
             break;
     }
+    washerArray = await getWasherFilterQuery(filters);
     console.log(washerArray);
-    return sortWashersByDistance(washerArray, currentPoint);
+    return sortWashersByDistance(washerArray, filters.currentPoint);
+}
+
+/**
+ * sets the header button according to the user status as washer
+ * @returns the button text
+ */
+async function getButtonAccordingToWasherStatus() {
+    let currentWasher = await promiseWasherLoaderByCurrentUserID();
+    if (currentWasher) {
+        return "Washer Profile";
+    }
+    else {
+        return "Be A Washer";
+    }
 }

@@ -158,7 +158,8 @@ async function f_display_washer_reviews(washerID) {
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4> There are no reviews yet </h4>";
+        all_reviews += "<h4 class='header_49'> You have no reviews yet </h4>";
+        all_reviews += '<img class= "ironing-person-2" src="/images/ironing_person.svg">'
     }
     all_reviews += '</div>';
     document.getElementById("my_reviews").innerHTML = all_reviews;
@@ -173,17 +174,17 @@ async function f_display_washer_reviews(washerID) {
     details_table += "<tr><tr><th>Model Name</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
     details_table += "<tr><tr><th>Capacity</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().capacity + "</td></tr><tr>";
+    details_table += "<td>" + washer_doc.data().capacity + " KG</td></tr><tr>";
     details_table += "<tr><tr><th>Purchasing Year</th></tr><tr>";
-    details_table += "<td>" + washer_doc.data().purchasing_year + "</td></tr><tr>";
+    details_table += "<td>" + washer_doc.data().year_purchased + "</td></tr><tr>";
     details_table += "<tr><tr><th>Special Services</th></tr><tr>";
-    if (washer_doc.data().properties == "ironing") {
+    if (washer_doc.data().properties == "Ironing") {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
-    if (washer_doc.data().properties == "door2door") {
+    if (washer_doc.data().properties == "Door2Door") {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
-    if (washer_doc.data().properties == "dryer") {
+    if (washer_doc.data().properties == "Dryer") {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
     }
     details_table += "</tr></table>";

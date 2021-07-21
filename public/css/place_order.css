@@ -23,7 +23,7 @@ h7 {
     font-family: 'Permanent Marker', cursive;
     font-style: normal;
     font-weight: 900;
-    font-size: 350%;
+    font-size: 42;
     line-height: 48px;
     /* identical to box height, or 108% */
 
@@ -51,6 +51,7 @@ h8 {
     margin-left: 7%;
     margin-top: 2%;
     margin-bottom: 2%;
+    font-family: 'Montserrat';
 }
 
 .close_ind {
@@ -119,8 +120,14 @@ h8 {
 
 .cute-washer {
     width: 30%;
-    margin-top: -27%;
+    margin-top: -22%;
     margin-left: 50%;
+}
+
+.cute-hanger{
+    width: 35%;
+    margin-top: -12%;
+    margin-left: 55%;
 }
 
 selected {

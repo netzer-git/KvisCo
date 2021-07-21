@@ -49,20 +49,22 @@
  async function authStateObserver(user) {
    if (user) { // User is signed-in
      console.log("in " + getUserToken());
-     // user_doc = await promiseUserLoaderByCurrentUserID();
-     // document.getElementById("log_in_indicator").innerHTML = user_doc.data().name;
+     sessionStorage.setItem("connected_userID", getUserToken());
+     // header elements
      document.getElementById("log_in_indicator").innerHTML = 'Hi, ' + getUserFirstName();
-     document.getElementById("log_in_indicator").hidden = false;
+     document.getElementById("user_profile_button").hidden = false;
      document.getElementById("log_in_out_msg").innerHTML = "Log Out";
+     document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
      document.getElementById("welcome_orders_block").hidden = false;
      await load_quick_welcome_page()
    } else { // User is signed out!
      console.log("out " + getUserToken());
-     document.getElementById("log_in_indicator").hidden = true;
-     document.getElementById("log_in_indicator").innerHTML = "Anonymous";
-     document.getElementById("log_in_out_msg").innerHTML = "Log In";
      sessionStorage.setItem("connected_userID", null);
+     // header elements
+     document.getElementById("user_profile_button").hidden = true;
+     document.getElementById("log_in_out_msg").innerHTML = "Log In";
+     document.getElementById("washer-header-button").innerHTML = await getButtonAccordingToWasherStatus()
      // specific page Ids
      document.getElementById("welcome_orders_block").hidden = true;
    }

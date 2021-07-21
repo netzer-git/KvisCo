@@ -179,6 +179,7 @@
                                 <div class="with_padd">
                                     <!-- function to get washer details -->
                                     <div id="washer_details"></div>
+                                    <img class="cute-washer" src="/images/cute_washer.svg">
                                 </div>
                             </div>
                             <div class="tab-pane" id="3">
@@ -193,10 +194,12 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <button class="btn" style="background: #FF785C; font-family: 'Montserrat';" onclick="delete_washer()">Delete Account</button>
+    </div>
 </body>
 
 <script type="text/javascript">
-    // $(document).ready();
     window.onpaint = load_washer_profile_page();
     $("#includedContent").load("./../includes/header.html");
 </script>

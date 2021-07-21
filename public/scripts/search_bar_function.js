@@ -3,13 +3,12 @@ var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 var address = "";
 var d = new Date()
 var myDate = formatDate(d);
-var duration = '24';
+var duration = '72';
 var day = d.getDay();
 var myDay = DAYS[day];
 jsarray_basic = [address, myDate, duration, myDay];
 
 function save() {
-    console.log("now saving");
     address = document.getElementById("where").value;
     myDate = document.getElementById("myDate").value;
     duration = document.getElementById("duration").value;
@@ -25,9 +24,10 @@ function save() {
 }
 
 function get_search_bar(tag) {
-    var jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
-    if (jsarray == null) {
+    jsarray = JSON.parse(sessionStorage.getItem("searchBarArray"));
+    if (jsarray == null || window.location.pathname == "/html/welcome.html") {
         jsarray = jsarray_basic;
+        sessionStorage.setItem("searchBarArray", JSON.stringify(jsarray));
     }
     address = jsarray[0];
     myDate = jsarray[1];
@@ -37,34 +37,34 @@ function get_search_bar(tag) {
 
     search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" id="where" value = "' + address + '" onchange ="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" placeholder = "My current location" id="where" value = "' + address + '" onchange ="save()"></td>';
     search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
-    search_bar += '<td><div class="box" id="duration">';
+    search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
     switch (duration) {
         case '8':
-            search_bar += '<option value="8" selected>8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="8" selected>8 Hours</option>';
+            search_bar += '<option value="24">24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
             break
-        case '24':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24" selected>24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
-            break;
         case '48':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
-            search_bar += '<option value="48" selected>48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24">24 Hours</option>';
+            search_bar += '<option value="48" selected>48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
             break;
-        case '72':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72" selected>72 hours</option></select>';
+        case '24':
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24" selected>24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
+            break;
+        default:
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24" selected>24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72" selected>72 Hours</option></select>';
             break;
     }
     search_bar += '</div></td></tr></table>';

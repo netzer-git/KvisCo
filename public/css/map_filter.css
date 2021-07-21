@@ -102,7 +102,7 @@ h4 {
 
 .card-title {
     /* Headline/Title/Bold 24 */
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: bold;
     font-size: 22px;
@@ -115,11 +115,15 @@ h4 {
     padding-left: 0%;
     margin-bottom: 0px !important;
 }
+.card-text{
+    font-family: 'Montserrat';
+}
 
 h6 {
-    margin-top: -20px !important;
+
+    /* margin-top: -20px !important; * This causes problems!!!/
     /* Text / Medium 18 */
-    font-family: Montserrat;
+    font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -176,13 +180,14 @@ hr.solid {
 }
 
 .row-search {
-    position: fixed !important;
+    /* position: fixed !important; */
     height: 80px;
     border-radius: 20px;
     background: var(--color-3);
     border: 2px solid var(--font-color);
     box-shadow: 0px 8px 0px 0px var(--font-color);
     z-index: 2;
+    margin-top: 5px;
 }
 
 .input-box {
@@ -206,6 +211,12 @@ hr.solid {
     top: -0.6530606746673584px;
     border-radius: 10px;
     font-size: 100%;
+    font-family: 'Montserrat';
+
+}
+
+.choose_location:focus {
+    outline: none;
 
 }
 
@@ -225,6 +236,7 @@ hr.solid {
     height: 26px;
     /* width: 68px; */
     border-radius: nullpx;
+    font-family: 'Montserrat';
 }
 
 .table-search td,
@@ -259,9 +271,9 @@ th {
 }
 
 .col-filters {
-    padding-left: 30px !important;
+    /* padding-left: 30px !important; */
     margin-top: 5px !important;
-    padding-left: 6% !important;
+    /* padding-left: 6% !important; */
     padding-right: 0 !important;
 }
 
@@ -292,16 +304,35 @@ th {
     z-index: 2;
 }
 
+.better-closer-btn {
+    position: static;
+    text-align: center !important;
+    margin: auto;
+    display: inline-block;
+    padding: 2% 0;
+    z-index: 2;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(28, 28, 29, 1);
+    box-shadow: 0px 2px 0px 0px rgb(32 32 32);
+    height: 40px;
+    width: 100%;
+    left: 0px;
+    border-radius: 10px;
+    text-align: left;
+    padding-top: 0;
+}
+
 .filter-btn {
     background: rgba(255, 255, 255, 1);
     border: 1px solid rgba(28, 28, 29, 1);
     box-shadow: 0px 2px 0px 0px rgb(32 32 32);
     height: 40px;
-    width: 160px;
+    width: 120px;
     left: 0px;
     border-radius: 10px;
     text-align: left;
     padding-top: 0;
+    font-family: 'Montserrat';
 }
 
 #popup-btn .popup-btn-text {
@@ -397,9 +428,9 @@ th {
     /* border-radius: 20px; */
     /* padding: 40px; */
     width: 100%;
-    height: 700px;
+    height: 600px;
     overflow: scroll;
-    direction: ltr;
+    /* direction: rtl; */
 }
 
 .card {
@@ -518,4 +549,58 @@ th {
     text-align: left;
     display: inline-block;
     margin: 0;
+}
+
+
+.distance-slider-container {
+    /* min-height: 37px; */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    /* margin: 20px 8px 0px 8px; */
+}
+
+.distance-slider-container .distance-slider-text {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 34px;
+    font-size: 1em;
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    background-color: inherit;
+    text-align: left;
+    display: inline-block;
+    margin: 0;
+    font-family: 'Montserrat';
+
+}
+
+
+.distance-slider-container input[type=range], .page-list-new .textResizeSlider-container input[type=range] {
+    /* -webkit-appearance: none; */
+    margin: 0px 10px;
+    width: 100%;
+    border: 0px;
+    height: 37px;
+    background: transparent;
+    direction: ltr;
+    overflow: visible;
+}
+
+.filter-btn-text{
+    font-family: 'Montserrat';
+}
+
+.ironing-person{
+    width: 70%;
+    height: auto;
+    margin-left: 10%;
+    margin-top: 5%;
 }

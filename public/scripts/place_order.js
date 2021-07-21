@@ -55,13 +55,13 @@ function toTimestamp(date,time){
  */
 function compute_price(loads, property, wash_settings) {
     var pricing = loads*DEAFULT_PRICE;
-    if (property == "door2door") {
+    if (property == "Door2Door") {
         pricing += DOOR2DOOR_PRICE;
     }
-    if (property == "ironing") {
+    if (property == "Ironing") {
         pricing += IRONING_PRICE;
     }
-    if (property == "dryer") {
+    if (property == "Dryer") {
         pricing += DRYER_PRICE;
     }
     if (wash_settings == "Fast Wash") {
@@ -113,11 +113,6 @@ async function create_order() {
         return;
     }
     var userID = getUserToken();
-    if (!await promiseUserLoaderById(userID)) {
-        window.location.href="../../html/user_flow/user_registration.html";
-        return;
-    }
-    sessionStorage.setItem("current_user_id", userID);
     cur_order = {
         comments: comments,
         washer: washerID,
@@ -129,6 +124,11 @@ async function create_order() {
         properties: property,
     }
     var orderID = await createNewOrder(cur_order);    
+    if (!await promiseUserLoaderById(userID)) {
+        window.location.href="../../html/user_flow/user_registration.html";
+        return;
+    }
+    sessionStorage.setItem("current_user_id", userID);
     display_new_order_for_user(orderID);
     document.getElementById("overlay_thank_you").style.display = "block";
 }
@@ -162,12 +162,11 @@ function CreateDayDictionary() {
 
 function open_indicator(washer_opening_times,full_date) {
     icon_text = ""
-    console.log(washer_opening_times,full_date);
     if (check_if_washer_open(washer_opening_times, full_date)) {
-        icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="../../images/open_ind.svg">Open</div>'
+        icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/open_ind.svg">Open</div>'
     }
     else {
-        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 2%;" src="../../images/closed_ind.svg">Close</div>';
+        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/closed_ind.svg">Close</div>';
     }
     document.getElementById("open_ind").innerHTML = icon_text;
 }
@@ -199,6 +198,9 @@ async function load_place_order_page() {
 
 
 function getWasherFirstOpeningTime(washer_opening_times) {  
+    if (Object.keys(washer_opening_times).length == 0) {
+        return ['Sunday', "08:00"];
+    }
     var week_days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     var cur_date = new Date();
     var day_num = cur_date.getDay();
@@ -240,13 +242,13 @@ async function insertPlaceOrderBox(e) {
     // The SVG is neccessery to be included in the page, where the bodey begins.
     po_block = '<svg><use xlink:href="#order-box-svg"></use></svg>';
     // Topic
-    po_block += '<div class="row" style="z-index: 1; margin-top: -135px;">';
+    po_block += '<div class="row" style="z-index: 1; margin-top: -260px;">';
     po_block += '<h7>PLACE ORDER</h7>';
     po_block += '<div class="row">';
-    po_block += '<div class = "description" style="margin-left: 5%;"> from '+ washer_doc.data().name.split(" ")[0] + "</div>";
+    po_block += '<div class = "description" style="margin-left: 5%; margin-top: -5%;"> To '+ washer_doc.data().name.split(" ")[0] + "</div>";
     po_block += '</div>'
     // Start of input table zone
-    po_block += '<table class="place_order_table">';
+    po_block += '<table style="margin-top: -5%; margin-left: 8%;" class="place_order_table">';
     // First row- labels of dropoff day and special services.
     po_block += '<tr style="color: black;">';
     po_block += '<td>Drop off day</td>';
@@ -270,7 +272,7 @@ async function insertPlaceOrderBox(e) {
     po_block += '<td style="margin-left: 0;"><input class="choose_location" type="number" id="loads"value="1" onchange="update_properties_and_price()"></td></tr>';
     po_block += '<tr style="color: black;"><td><div id="open_ind"></div></td>';
     po_block += '<td style="padding-top: 3%;">Wash settings</td>';
-    po_block += '</tr><tr><td></td>';
+    po_block += '</tr><tr><td><div class="small-box" style="width: 90px" id="price"></td>';
     po_block += '<td><div class="box select"><select id="wash_settings" onchange="update_properties_and_price()">';
     po_block += '<option value="Default" selected>Default</option>';
     po_block += '<option value="30°C Wash">30°C Wash</option><option value="60°C Wash">60°C Wash</option>';
@@ -278,17 +280,19 @@ async function insertPlaceOrderBox(e) {
     po_block += '<option value="Whites Only">Whites Only</option>';
     po_block += '<option value="Delicates">Delicates</option>';
     po_block += '</select></div></td></tr></table>'
-    po_block += '<textarea class="note" id="notes_for_laundry" name="note" rows="4" cols="50" placeholder="Special requests and comments..."onchange="update_properties_and_price()"></textarea>';
-    po_block += '<label class="cont">I agree to terms and conditions<input type="checkbox" id="terms"><span class="checkmark"></span></label>';
-    po_block += '<div class="row"><div class="col-5">';
-    po_block += '<div class="col-5"><tr><td><div class="small-box" id="price"></div>';
-    po_block += '<script>update_properties_and_price()</script></td></tr></table></div>';
-    po_block += '<div class="col-7"><div style="margin-left: 15%; margin-top: -3%;">';
+    po_block += '<textarea class="note" style="margin-top: -1%; height: 15%; width: 72%; margin-left: 8%;" id="notes_for_laundry" name="note" rows="4" cols="50" placeholder="Special requests and comments..."onchange="update_properties_and_price()"></textarea>';
+    po_block += '<div class="row" style="margin-top:-5%;">';
+    // po_block += '<div class="col-1"></div>';
+    po_block += '<div class="col-6">';
+    po_block += '<label class="cont" style="padding-left: 10%; margin-left:10%; font-size: 12px"> I agree to terms and conditions<input type="checkbox" id="terms"><span class="checkmark"></span></label></div>';
+    // po_block += '<div class="col-5"></div>';
+    po_block += '<script>update_properties_and_price()</script>';
+    po_block += '<div class="col-6">';
     po_block += '<div id="overlay_register" onclick="off()">';
     po_block += '<div id="register_block"></div></div>';
     po_block += '<div id="overlay_thank_you" onclick="off()">';
     po_block += '<div id="user_order"></div></div>';
-    po_block += '<div><button onclick="create_order()"class="button1">Send Request</button></div>';
+    po_block += '<button style="margin-left: 8%;" onclick="create_order()"class="button1">Send Request</button></div></div>';
     po_block += '</div></div></div></div>';
     document.getElementById("place-order").innerHTML = po_block;
     document.getElementById("place-order").hidden = false;

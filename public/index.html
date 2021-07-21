@@ -13,21 +13,11 @@
 
 </head>
 <body>
-    <!-- READ ME FIRST PLEASSSEEEEE!!! -->
-    <!-- 
-        going through the example:
-        1. look at lines 34-40 in index.html. easy lines.
-        2. look at lines 42-55 in index.html. we are importing firebase packs - we will need this imports in the header or in each page.
-        3. look at scripts/index.js at the function exampleGettingUserDataIntoHTML. please please read every line carefully
-        
-        running the example:
-        1. open \TheMoneyLaundry folder, open cmd in the folder (type 'cmd' in the path area).
-        2. run the command 'firebase serve --only hosting' in the cmd in the folder! open the link to the site (probably http://localhost:5000)
-        3. press the example button
-        4. the data that you are seeing - its from the firestore collection
-        if you have any questions, contact me. this example suppose to be the back bone of front-back integration.
-        :)
-     -->
+    <!-- For Deployment:: -->
+    <!-- <script>
+        window.location.href='./html/welcome.html';
+    </script> -->
+
 
     <!-- DON'T MIND ME I'M JUST PLAYING HERE -->
     <div id="includedContent"></div>
@@ -40,9 +30,6 @@
         </button>
         <button type="button" onclick="exampleGettingUserDataIntoHTML()">
             press here to start the example!
-        </button>
-        <button type="button" onclick="testNadavQuery()">
-            Lets Geo Yo!
         </button>
         <button onclick="location.href='../html/components/profile_header.html'" type="button">
             profile_header</button>
@@ -70,27 +57,13 @@
                 console.log(sessionStorage.getItem("connected_userID"));
             }
             location.href='./html/welcome.html';
-        }</script>
+        }
+        </script>
         <button onclick="location.href='./html/user_flow/user_registration.html'" type="button">
             user_registresion
         </button>
         <button onclick="location.href='./html/washer_flow/washer_registration.html'" type="button">
             washer_registration
-        </button>
-        <!-- form for uploading pictures and more fields -->
-        <div class="container-fluid" style="margin: 50px">
-            <textarea rows="1" cols="30" id="hello" onchange="updateFormFields()" placeholder="hello!"></textarea>
-            <input id="mediaCapture" type="file" accept="image/*" capture="camera" hidden onchange="updateFormFields(event)">
-            <button title="Add an image" onclick="document.getElementById('mediaCapture').click()">
-                image
-            </button>
-            <button onclick="submitPhotoForm()">
-                Lets RUN!--
-            </button>
-        </div>
-        
-        <button onclick="displayImage()">
-            display image
         </button>
         <button onclick="location.href='./html/user_flow/map_filter.html'" style="background-color: blueviolet;">
             map-filter
@@ -98,21 +71,6 @@
         <button onclick="test_rating()" style="background-color: lightblue;">
             RATING
         </button>
-        <div id="only-one">
-            Hey!
-        </div>
-        
-        <div id="img-area">
-            image area
-        </div>
-
-        <!-- connecting to review washer page
-        <button id="moveButton">review page</button>
-        <script type="text/javascript">
-            document.getElementById("moveButton").onclick = function () {
-                location.href = "../html/review_washer.html"
-            }
-        </script> -->
     </div>
 
     <!-- Import and configure the Firebase SDK -->

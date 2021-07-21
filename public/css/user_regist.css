@@ -38,6 +38,7 @@
     width: 500px;
     height: 70px;
     margin-left: 5%;
+    font-family: 'Montserrat';
 }
 
 
@@ -67,7 +68,6 @@
     line-height: 100%;
     text-align: center;
     letter-spacing: 0.45px;
-    margin-top: 5%;
     color: #1C1C1D;
 
 }
