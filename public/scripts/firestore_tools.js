@@ -281,7 +281,7 @@ async function createNewUser(user) {
  */
 async function deleteCurrentWasher() {
     let washerId = getUserToken();
-    let washerRef = db.collection("users").doc(washerId);
+    let washerRef = db.collection("washers").doc(washerId);
     let imgPath = await washerRef.get()
     imgPath = imgPath.data().imagePath;
     await washerRef.delete().then(() => {
@@ -297,9 +297,9 @@ async function deleteCurrentWasher() {
         }
     });
     // delete washer images
-    for (path of imgPath) {
+    for (let path of imgPath) {
         // Create a reference to the file to delete
-        var desertRef = storage.ref().child(imgPath);
+        var desertRef = storage.ref().child(path);
         // Delete the file
         await desertRef.delete().then(() => {
         console.log("Img successfully deleted!");
@@ -325,12 +325,17 @@ async function deleteCurrentUser() {
         await db.collection("orders").doc(order.id).delete();
     });
 
-    // Create a reference to the file to delete
-    var desertRef = storage.ref().child(imgPath);
-    // Delete the file
-    await desertRef.delete().then(() => {
-        console.log("Img successfully deleted!");
-    });
+    try {
+        // Create a reference to the file to delete
+        var desertRef = storage.ref().child(imgPath);
+        // Delete the file
+        await desertRef.delete().then(() => {
+            console.log("Img successfully deleted!");
+        });
+    } catch {
+        console.log("Coudln't find the Image");
+    }
+
 }
 
 

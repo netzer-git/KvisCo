@@ -76,9 +76,9 @@ async function create_washer() {
     } catch {
         profile_pic_url_details = [null, null]
     }
-    if (profile_pic_url == null || washer_location_str == null || washer_phone_number == null || washer_description == null ||
+    if (profile_pic_url_details == null || washer_location_str == null || washer_phone_number == null || washer_description == null ||
         washer_properties == null || washer_capacity == null || washer_machine_type == null || washer_year_purchased == null) {
-        alert("PLEASE FILL ALL FIELDS");
+        alert("Please Fill All The Fields");
         return;
     }
     try {
