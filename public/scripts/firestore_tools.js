@@ -227,6 +227,7 @@ async function createNewWasher(washer) {
     await db.collection("washers").doc(getUserToken()).set({
         name: washer.name,
         imageUrl: washer.imageUrl,
+        imagePath: washer.imagePath,
         pics: washer.pics,
         location_str: washer.location_str,
         location_cor: geoPoint,
@@ -244,8 +245,34 @@ async function createNewWasher(washer) {
         name: washer.name,
         location_str: washer.location_str,
         imageUrl: washer.imageUrl,
+        imagePath: washer.imagePath,
         phone: washer.phone,
         description: washer.description,
+    });
+}
+
+/**
+ * create new user from the current user (on auth) and basic user object
+ * please notice: the user needs to be signed in (in auth) while creating new user (on firestore)
+ * @param {object} user : basic user object (from auth)
+ */
+async function createNewUser(user) {
+    let data = await forwardGeocodePromise(user.location_str);
+    let geoPoint = {
+        lat: data.results[0].geometry.lat,
+        lng: data.results[0].geometry.lng
+    };
+    await db.collection("users").doc(getUserToken()).set({
+        name: user.name,
+        location_str: user.location_str,
+        location_cor: geoPoint,
+        saved_washers: [],
+        imageUrl: user.imageUrl,
+        imagePath: user.imagePath[0],
+        phone: user.phone,
+        description: user.description,
+    }).then((docRef) => {
+        console.log("New User added: " + docRef);
     });
 }
 
@@ -253,34 +280,62 @@ async function createNewWasher(washer) {
  * delete washer by Id
  */
 async function deleteCurrentWasher() {
-    let washer_id = getUserToken();
-    await db.collection("washers").doc(washer_id).delete().then(() => {
+    let washerId = getUserToken();
+    let washerRef = db.collection("washers").doc(washerId);
+    let imgPath = await washerRef.get()
+    imgPath = imgPath.data().imagePath;
+    await washerRef.delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
-    let orders = await db.collection("orders").where("washer", '==', washer_id).get()
+    // delete washer orders
+    let orders = await db.collection("orders").where("washer", '==', washerId).get()
     await orders.forEach(async (order) => {
-        if (order.data().washer === washer_id) {
+        if (order.data().washer === washerId) {
             await db.collection("orders").doc(order.id).delete();
         }
     });
+    // delete washer images
+    for (let path of imgPath) {
+        // Create a reference to the file to delete
+        var desertRef = storage.ref().child(path);
+        // Delete the file
+        await desertRef.delete().then(() => {
+        console.log("Img successfully deleted!");
+    });
+    }
 }
 
 /**
  * delete user by Id
  */
- async function deleteCurrentUser() {
-    let user_id = getUserToken();
-    await db.collection("users").doc(user_id).delete().then(() => {
+async function deleteCurrentUser() {
+    let userId = getUserToken();
+    let userRef = db.collection("users").doc(userId);
+    let imgPath = await userRef.get()
+    imgPath = imgPath.data().imagePath;
+    await userRef.delete().then(() => {
         console.log("Document successfully deleted!");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
-    let orders = await db.collection("orders").where("user", '==', user_id).get()
+    let orders = await db.collection("orders").where("user", '==', userId).get()
     await orders.forEach(async (order) => {
         await db.collection("orders").doc(order.id).delete();
     });
+
+    try {
+        // Create a reference to the file to delete
+        var desertRef = storage.ref().child(imgPath);
+        // Delete the file
+        await desertRef.delete().then(() => {
+            console.log("Img successfully deleted!");
+        });
+    } catch {
+        console.log("Coudln't find the Image");
+    }
+
 }
 
 
@@ -328,30 +383,6 @@ async function setWasherOpenTimes(openTimes, washerId) {
 }
 
 /**
- * create new user from the current user (on auth) and basic user object
- * please notice: the user needs to be signed in (in auth) while creating new user (on firestore)
- * @param {object} user : basic user object (from auth)
- */
-async function createNewUser(user) {
-    let data = await forwardGeocodePromise(user.location_str);
-    let geoPoint = {
-        lat: data.results[0].geometry.lat,
-        lng: data.results[0].geometry.lng
-    };
-    await db.collection("users").doc(getUserToken()).set({
-        name: user.name,
-        location_str: user.location_str,
-        location_cor: geoPoint,
-        saved_washers: [],
-        imageUrl: user.imageUrl,
-        phone: user.phone,
-        description: user.description,
-    }).then((docRef) => {
-        console.log("New User added: " + docRef);
-    });
-}
-
-/**
  * adds new entry to user favorite washers.
  * @param {*} userId the current user id
  * @param {*} washerId the wanted washer id
@@ -373,19 +404,19 @@ async function addWasherToFavorites(userId, washerId) {
  * @return {string} image url path to firebase storage
  */
 async function saveImageToUser(file) {
-    if (!isUserSignedIn()) {
-        console.error("You are trying to upload a picture to undefined user");
-    } else {
-        if (file === null) {
-            console.error("You are trying to upload an empty file");
-            return null;
-        }
-        let filePath = getUserToken() + '/' + file.name;
-        let fileSnapshot = await storage.ref(filePath).put(file);
-        let url = await fileSnapshot.ref.getDownloadURL();
-        return url;
+    if (file === null) {
+        console.error("You are trying to upload an empty file");
+        return null;
     }
-
+    let userId = sessionStorage.getItem("connected_userID");
+    if (userId === null) {
+        console.error("You are trying to upload a picture to undefined user");
+        return null;
+    }
+    let filePath = 'users/' + userId + '/' + file.name;
+    let fileSnapshot = await storage.ref(filePath).put(file);
+    let url = await fileSnapshot.ref.getDownloadURL();
+    return [url, filePath];
 }
 
 /**
@@ -395,15 +426,20 @@ async function saveImageToUser(file) {
  * @param {*} washerId the id of the current washer
  * @returns image url path to firebase storage
  */
-async function saveImageToWasher(file, washerId) {
+async function saveImageToWasher(file) {
     if (file === null) {
         console.error("You are trying to upload an empty file");
         return null;
     }
-    let filePath = washerId + '/' + file.name;
+    let washerId = sessionStorage.getItem("connected_userID");
+    if (washerId === null) {
+        console.error("You are trying to upload a picture to undefined user");
+        return null;
+    }
+    let filePath = 'washers/' + washerId + '/' + file.name;
     let fileSnapshot = await storage.ref(filePath).put(file);
     let url = await fileSnapshot.ref.getDownloadURL();
-    return url;
+    return [url, filePath];
 }
 
 /**
@@ -616,8 +652,7 @@ async function getButtonAccordingToWasherStatus() {
     let currentWasher = await promiseWasherLoaderByCurrentUserID();
     if (currentWasher) {
         return "Washer Profile";
-    }
-    else {
+    } else {
         return "Be A Washer";
     }
 }
