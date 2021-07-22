@@ -50,6 +50,7 @@ async function add_review_to_order() {
     var washerID = sessionStorage.getItem("signed_in_washer");
     await insert_orders_blocks_of_washer("in_process_orders", washerID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
     await insert_orders_blocks_of_washer("finished_orders", washerID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
+    await f_display_washer_reviews(washerID)
 }
 
 
