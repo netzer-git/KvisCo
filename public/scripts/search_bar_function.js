@@ -49,22 +49,22 @@ function get_search_bar(tag) {
             search_bar += '<option value="72">72 Hours</option></select>';
             break
         case '48':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24">24 hours</option>';
-            search_bar += '<option value="48" selected>48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24">24 Hours</option>';
+            search_bar += '<option value="48" selected>48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
             break;
         case '24':
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24" selected>24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72">72 hours</option></select>';
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24" selected>24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72">72 Hours</option></select>';
             break;
         default:
-            search_bar += '<option value="8">8 hours</option>';
-            search_bar += '<option value="24" selected>24 hours</option>';
-            search_bar += '<option value="48">48 hours</option>';
-            search_bar += '<option value="72" selected>72 hours</option></select>';
+            search_bar += '<option value="8">8 Hours</option>';
+            search_bar += '<option value="24" selected>24 Hours</option>';
+            search_bar += '<option value="48">48 Hours</option>';
+            search_bar += '<option value="72" selected>72 Hours</option></select>';
             break;
     }
     search_bar += '</div></td></tr></table>';

@@ -233,7 +233,7 @@ async function createNewWasher(washer) {
         location_cor: geoPoint,
         model_name: washer.model_name,
         description: washer.description,
-        commitment: Number(washer.commitment),
+        commitment: washer.commitment,
         opening_times: {},
         price: 0,
         properties: washer.properties,
