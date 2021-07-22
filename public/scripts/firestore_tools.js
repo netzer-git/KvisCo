@@ -268,7 +268,7 @@ async function createNewUser(user) {
         location_cor: geoPoint,
         saved_washers: [],
         imageUrl: user.imageUrl,
-        imagePath: user.imagePath,
+        imagePath: user.imagePath[0],
         phone: user.phone,
         description: user.description,
     }).then((docRef) => {
@@ -281,7 +281,7 @@ async function createNewUser(user) {
  */
 async function deleteCurrentWasher() {
     let washerId = getUserToken();
-    let washerRef = db.collection("users").doc(userId);
+    let washerRef = db.collection("users").doc(washerId);
     let imgPath = await washerRef.get()
     imgPath = imgPath.data().imagePath;
     await washerRef.delete().then(() => {

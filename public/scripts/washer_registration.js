@@ -106,13 +106,8 @@ async function create_washer() {
     } catch {
         second_pic_details = [null, null]
     }
-<<<<<<< HEAD
     pics_urls = [first_pic_details[0], second_pic_details[0]];
     image_path = [profile_pic_url_details[1], first_pic_details[1], second_pic_details[1]]
-=======
-    pics_urls =[first_pic, second_pic];
-    console.log("final commit ",washer_commitment)
->>>>>>> 28edf2380014eb8d3bc6200a5c033d23c4050834
     new_washer = {
         name: getUserDisplayName(),
         imageUrl: profile_pic_url_details[0],
