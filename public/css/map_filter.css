@@ -280,7 +280,7 @@ th {
 .row-filters {
     width: 100%;
     z-index: 2;
-    margin-top: -5px !important;
+    /* margin-top: -5px !important; */
 }
 
 .active-time-col-filter {
