@@ -4,19 +4,11 @@ var washer_profile_pic;
 var washer_location_str;
 var washer_machine_type;
 var washer_description;
-<<<<<<< HEAD
 var washer_commitment;
 var washer_properties;
 var washer_phone_number;
 var washer_capacity;
 var washer_year_purchased;
-=======
-var washer_commitment; 
-var washer_properties;
-var washer_phone_number;
-var washer_capacity; 
-var washer_year_purchased; 
->>>>>>> 28edf2380014eb8d3bc6200a5c033d23c4050834
 var is_profile_loaded = false;
 var is_land_loaded = false;
 var is_mach_loaded = false;
@@ -49,18 +41,11 @@ function save_description() {
 }
 
 function save_profile_pic(event) {
-<<<<<<< HEAD
     if (event != null) {
         washer_profile_pic = event.target.files[0];
         document.getElementById("indicator1").style.display = "block";
         document.getElementById("indicator1").hidden = false;
     }
-=======
-    washer_profile_pic = event.target.files[0];
-    document.getElementById("indicator1").style.display = "block";
-    document.getElementById("indicator1").hidden = false;
-
->>>>>>> 28edf2380014eb8d3bc6200a5c033d23c4050834
 }
 
 function save_laundry_pic(event) {
