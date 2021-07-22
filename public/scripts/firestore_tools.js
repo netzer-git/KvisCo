@@ -373,19 +373,19 @@ async function addWasherToFavorites(userId, washerId) {
  * @return {string} image url path to firebase storage
  */
 async function saveImageToUser(file) {
-    if (!isUserSignedIn()) {
-        console.error("You are trying to upload a picture to undefined user");
-    } else {
-        if (file === null) {
-            console.error("You are trying to upload an empty file");
-            return null;
-        }
-        let filePath = getUserToken() + '/' + file.name;
-        let fileSnapshot = await storage.ref(filePath).put(file);
-        let url = await fileSnapshot.ref.getDownloadURL();
-        return url;
+    if (file === null) {
+        console.error("You are trying to upload an empty file");
+        return null;
     }
-
+    userId = sessionStorage.getItem("connected_userID");
+    if (userId === null) {
+        console.error("You are trying to upload a picture to undefined user");
+        return null;
+    }
+    let filePath = userId + '/' + file.name;
+    let fileSnapshot = await storage.ref(filePath).put(file);
+    let url = await fileSnapshot.ref.getDownloadURL();
+    return url;
 }
 
 /**
