@@ -105,7 +105,7 @@ async function display_new_order_for_washer(orderID) {
         order_block += "</div>"
         order_block +=  "<div class='col-2'></div>"
         order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">decline</button>';
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';
         order_block += "<div class='col-1'></div>"
         order_block += "</div>"
     } else {
@@ -115,7 +115,7 @@ async function display_new_order_for_washer(orderID) {
         order_block += "</div>"
         order_block +=  "<div class='col-2'></div>"
         order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">decline</button>';  
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';  
         order_block += "<div class='col-1'></div>"
         order_block += "</div>"
     }
