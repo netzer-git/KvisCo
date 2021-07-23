@@ -99,25 +99,25 @@ async function display_new_order_for_washer(orderID) {
     order_block += "</table></div>";
     order_block += "<div class='row'>"
     if (order_status == "pending") {
-        order_block += "<div class='col-1'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "<div class='col-1'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="process" value = "process" onclick = "change_status_for_washer(process.value)" class= "button1">Confirm</button>';
-        order_block += "</div>"
-        order_block +=  "<div class='col-2'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "</div>";
+        order_block +=  "<div class='col-2'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>';
-        order_block += "<div class='col-1'></div>"
-        order_block += "</div>"
+        order_block += "<div class='col-1'></div>";
+        order_block += "</div>";
     } else {
-        order_block += "<div class='col-1'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "<div class='col-1'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="finished" value = "finished" onclick = "change_status_for_washer(finished.value)" class= "button1">Finish</button>';
-        order_block += "</div>"
-        order_block +=  "<div class='col-2'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "</div>";
+        order_block +=  "<div class='col-2'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>'; 
-        order_block += "<div class='col-1'></div>"
-        order_block += "</div>"
+        order_block += "<div class='col-1'></div>";
+        order_block += "</div>";
     }
     // order_block += "<button style='margin-left: 27%; margin-top: 9%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
     order_block += "</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.

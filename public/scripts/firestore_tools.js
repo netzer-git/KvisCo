@@ -320,9 +320,11 @@ async function deleteCurrentUser() {
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
-    let orders = await db.collection("orders").where("user", '==', userId).get()
+    let orders = await db.collection("orders").get()
     await orders.forEach(async (order) => {
-        await db.collection("orders").doc(order.id).delete();
+        if (order.data().user === userId) {
+            await db.collection("orders").doc(order.id).delete();
+        }
     });
 
     try {
