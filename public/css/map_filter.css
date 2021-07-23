@@ -279,8 +279,9 @@ th {
 
 .row-filters {
     width: 100%;
-    z-index: 2;
+    z-index: 1;
     margin-top: -5px !important;
+    
 }
 
 .active-time-col-filter {
@@ -301,7 +302,7 @@ th {
     margin: auto;
     display: inline-block;
     padding: 2% 0;
-    z-index: 2;
+    z-index: 1;
 }
 
 .better-closer-btn {
