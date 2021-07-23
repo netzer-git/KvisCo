@@ -13,65 +13,19 @@
 
 </head>
 <body>
-    <!-- For Deployment:: -->
-    <!-- <script>
-        window.location.href='./html/welcome.html';
-    </script> -->
-
-
-    <!-- DON'T MIND ME I'M JUST PLAYING HERE -->
-    <div id="includedContent"></div>
-    <div class="container">
-        <button type="button" onclick="signIn()">
-            Sign In!
-        </button>
-        <button type="button" onclick="signOut()">
-            Sign Out!
-        </button>
-        <button type="button" onclick="exampleGettingUserDataIntoHTML()">
-            press here to start the example!
-        </button>
-        <button onclick="location.href='../html/components/profile_header.html'" type="button">
-            profile_header</button>
-        <button onclick="location.href='../html/components/order_blocks_for_washer.html'" type="button">
-                order_blocks_washer</button>
-        <button onclick="location.href='../html/components/order_blocks_for_user.html'" type="button">
-            order_blocks_user</button>
-        <button onclick="location.href='../html/user_flow/user_profile_final.html'" type="button">
-            user_profile_final</button>
-        <button onclick="location.href='./html/user_flow/new_order_block.html'" type="button">
-            new_order_block</button>
-        <button onclick="location.href='./html/user_flow/place_order.html'" type="button">
-                place-order</button>
-        <button onclick="location.href='./html/washer_flow/flip_block.html'" type="button">
-            place-order</button>
-        <button onclick="location.href='./html/washer_flow/washer_profile.html'" type="button">
-            washer-profile</button>
-        <button onclick="gotowelcome();" type="button" style="background-color: aquamarine;">
-            Welcome
-        </button>
-        <script> 
-            async function gotowelcome() {
-            if (isUserSignedIn) {
-                sessionStorage.setItem("connected_userID", await getUserToken());
-                console.log(sessionStorage.getItem("connected_userID"));
-            }
-            location.href='./html/welcome.html';
+    <script> 
+        async function gotowelcome() {
+        if (isUserSignedIn) {
+            sessionStorage.setItem("connected_userID", await getUserToken());
+            console.log(sessionStorage.getItem("connected_userID"));
         }
-        </script>
-        <button onclick="location.href='./html/user_flow/user_registration.html'" type="button">
-            user_registresion
-        </button>
-        <button onclick="location.href='./html/washer_flow/washer_registration.html'" type="button">
-            washer_registration
-        </button>
-        <button onclick="location.href='./html/user_flow/map_filter.html'" style="background-color: blueviolet;">
-            map-filter
-        </button>
-        <button onclick="test_rating()" style="background-color: lightblue;">
-            RATING
-        </button>
-    </div>
+        location.href='./html/welcome.html';
+    }
+    </script>
+    <!-- For Deployment:: -->
+    <script>
+        window.location.href='./html/welcome.html';
+    </script>
 
     <!-- Import and configure the Firebase SDK -->
     <!-- These scripts are made available when the app is served or deployed on Firebase Hosting -->
@@ -92,9 +46,5 @@
 
     <!-- JS for this specific page -->
     <script src="scripts/index.js"></script>
-    
-    <!-- <script>
-        $("#includedContent").load("./html/includes/header.html");
-    </script> -->
 </body>
 </html>
