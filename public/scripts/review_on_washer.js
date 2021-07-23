@@ -91,6 +91,7 @@ function save_review_change() {
     var userID = sessionStorage.getItem("current_user_id");
     await insert_orders_blocks_of_user("in_process_orders", userID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
     await insert_orders_blocks_of_user("finished_orders", userID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
+    await f_display_user_reviews(userID)
 }
 
 async function display_review_on_washer_overlay(orderID) {
