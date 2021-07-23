@@ -39,7 +39,7 @@ function get_search_bar(tag) {
     search_bar += '<tr>';
     search_bar += '<td><input class="choose_location" type="text" placeholder = "My current location" id="where" value = "' + address + '" onchange ="save()"><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkDJzPLDJTncDPsoN5nL5qtG59v7QHV0&libraries=places&callback=initAutocomplete" async defer></script></td>';
     search_bar += '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkDJzPLDJTncDPsoN5nL5qtG59v7QHV0&libraries=places&callback=initAutocomplete" async defer></script>';
-    // search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
     search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
     switch (duration) {
