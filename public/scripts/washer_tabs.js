@@ -182,7 +182,7 @@ async function f_display_washer_reviews(washerID) {
     if (washer_doc.data().properties == "Ironing") {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Ironing</td></tr>";
     }
-    if (washer_doc.data().properties == "Door2Door") {
+    if (washer_doc.data().properties == "Door2door") {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "Dryer") {

@@ -108,6 +108,8 @@ async function create_washer() {
         year_purchased: washer_year_purchased,
     }
     await createNewWasher(new_washer);
+    var washerID = getUserToken();
+    sessionStorage.setItem("signed_in_washer", washerID);
     window.location.href = "../../html/washer_flow/washer_profile.html";
 }
 
