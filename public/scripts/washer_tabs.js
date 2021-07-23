@@ -186,7 +186,7 @@ async function f_display_washer_reviews(washerID) {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "Dryer") {
-        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Hanging Drying</td></tr>";
     }
     details_table += "</tr></table>";
     document.getElementById("washer_details").innerHTML = details_table;

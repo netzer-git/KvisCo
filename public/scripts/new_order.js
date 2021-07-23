@@ -48,7 +48,7 @@ async function display_new_order_for_user(orderID) {
     order_block += "</div>"
     order_block +=  "<div class='col-2'></div>"
     order_block +=  "<div class='col-4'>"
-    order_block += '<button id="declined" value = "declined" onclick = "change_status_for_user(declined.value)" class= "button1">Cancel Order</button>';
+    order_block += '<button id="declined" value = "declined" onclick = "change_status_for_user(declined.value)" class= "red-btn">Cancel Order</button>';
     order_block += "<div class='col-1'></div>"
     order_block +="</div></div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
     document.getElementById("user_order").innerHTML = order_block;
@@ -104,8 +104,8 @@ async function display_new_order_for_washer(orderID) {
         order_block += '<button id="process" value = "process" onclick = "change_status_for_washer(process.value)" class= "button1">Confirm</button>';
         order_block += "</div>"
         order_block +=  "<div class='col-2'></div>"
-        order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';
+        order_block +=  "<div class='col-4'>
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>';
         order_block += "<div class='col-1'></div>"
         order_block += "</div>"
     } else {
@@ -115,7 +115,7 @@ async function display_new_order_for_washer(orderID) {
         order_block += "</div>"
         order_block +=  "<div class='col-2'></div>"
         order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';  
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>'; 
         order_block += "<div class='col-1'></div>"
         order_block += "</div>"
     }
