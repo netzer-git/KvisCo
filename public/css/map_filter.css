@@ -180,7 +180,7 @@ hr.solid {
 }
 
 .row-search {
-    /* position: fixed !important; */
+    position: relative;
     height: 80px;
     border-radius: 20px;
     background: var(--color-3);
@@ -232,25 +232,28 @@ hr.solid {
 
 }
 
+.search-bar,
+.col-search-btn{
+    position: relative;
+    height: 80px;
+}
+
 .table-search {
-    height: 26px;
-    /* width: 68px; */
-    border-radius: nullpx;
+    margin: 10px 0 10px 0;
     font-family: 'Montserrat';
 }
 
 .table-search td,
 th {
     text-align: left;
-    padding: 4px;
+    padding: 0 15px 0 15px;;
 }
 
-
-.col-search-btn {
-    margin: 0 auto;
-    /* width: 50%; */
-    padding: 7%;
+.search-btn {
+    margin: 10px 0 10px 0;
+    height: 80px;
 }
+
 
 .row-cards-filter {
     margin-left: -12px;
@@ -350,31 +353,30 @@ th {
 
 
 /* The actual popup */
-#popup-text1,
-#popup-text2 {
-    visibility: hidden;
-    overflow: hidden;
-    text-align: center;
+#popup-text1{
+    /* visibility: hidden; */
+    /* overflow: hidden; */
     border-radius: 6px;
-    margin-top: -15px;
 }
 
-#popup-text1 svg,
-#popup-text2 svg {
+#popup-text1 svg{
+    position: relative;
     /* top: -20px; */
-    height: 50px;
-    width: 343px;
+    /* height: 50px;
+    width: 343px; */
 }
 
-#popup-text1 .popup-text1-row1,
-#popup-text1 .popup-text2-row2 {
-    margin: auto;
-    width: 343px;
-
+#filter-card{
+    margin-left: -100px;
 }
 
-#popup-text1 .popup-text1-row1 .text,
-#popup-text2 .popup-text2-row1 .text {
+#popup-text1 .popup-text1-row1{
+    z-index: 2;
+    /* margin: auto;
+    width: 343px; */
+}
+
+#popup-text1 .popup-text1-row1 .text {
     text-align: center;
 }
 
@@ -393,8 +395,7 @@ th {
     float: right;
 }
 
-#popup-text1 .popup-text1-row2,
-#popup-text2 .popup-text2-row2 {
+#popup-text1 .popup-text1-row2{
     position: relative;
     width: 100px;
     top: 120px;

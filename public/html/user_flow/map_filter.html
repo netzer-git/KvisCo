@@ -38,15 +38,16 @@
     <script src="../../scripts/washer_tabs.js"></script>
     <script src="../../scripts/place_order.js"></script>
     <script src="../../scripts/new_order.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <meta name=viewport content="initial-scale=1">
 </head>
 
 <body>
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
-
+    <!-- svg library -->
     <svg style="display:none; ">
-        <symbol id="filter-card" width="616" height="149" viewBox="0 0 343 252" fill="none"
+        <symbol id="filter-card" width="300" height="200" viewBox="0 0 343 252" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M10.3443 1.35057C92.2536 4.00407 152.09 3.12163 218.67 2.13974C253.207 1.63041 289.558 1.09431 331.746 1.01112C337.134 1.0005 341.338 5.68585 340.754 11.0436C339.018 26.9487 335.97 56.609 334.9 77.9751C332.161 132.641 338.415 211.915 340.974 240.912C341.447 246.28 337.093 250.879 331.683 250.774C230.797 248.824 176.754 249.464 116.58 250.177C85.2279 250.548 52.2113 250.939 10.0377 250.994C5.06343 251 1 246.966 1 242V10.3588C1 5.2678 5.2459 1.1854 10.3443 1.35057Z"
@@ -97,22 +98,20 @@
     <!-- ======= Header ======= -->
     <div id="includedContent"></div>
     <div class="h-100 w-100 container d-flex justify-content-center">
-        <div class="row-search w-50 row">
+        <div class="row-search w-60 row">
             <!-- Search Bar starts here-->
             <div id="search-bar" class="col-10">
-                <script>
+                <!-- <script>
                     get_search_bar("search-bar")
-                </script>
+                </script> -->
             </div>
             <!-- search button-->
-            <div class="col-2">
-                <div class="col-search-btn">
+            <div class="col-search-btn col-2">
+                <div class="search-btn">
                     <button class="unstyle_name" onclick="on_load_page()">
-                        <a class="search-btn-">
-                            <svg class="search-btn">
-                                <use xlink:href="#search-btn"></use>
-                            </svg>
-                        </a>
+                        <svg class="search-btn-svg">
+                            <use xlink:href="#search-btn"></use>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -131,30 +130,6 @@
             <!-- filter section -->
             <div class="col-filters col-5">
                 <div class="row-filters row">
-                    <!-- Active times filter -->
-                    <!-- <div class="active-time-col-filter col-3">
-                            <button id="popup-btn" onclick="open_popup(1)">
-                                <span class="popup-btn-text">Active Times</span>
-                                <svg class="popup-btn-icon">
-                                    <use xlink:href="#popup-btn-icon"></use>
-                                </svg>
-                            </button>
-                            <div id="popup-text1" style="visibility: hidden; overflow: hidden">
-                                <svg><use xlink:href="#filter-card"></use></svg>
-                                <div class="popup-text1-row1 row">
-                                    <span class="text">Search by day and time</span>
-                                    <div class="choose-day col-6"> // Date //
-                                        <select id="day"></select>
-                                    </div>
-                                    <div class="choose-time col-4"> // Start time //
-                                        <input class="choose-time" type="time" id="startTime" value="08:00">
-                                    </div>
-                                </div>
-                                <div class="popup-text1-row2 row">
-                                    <button class="button1" onclick="update_active_times()">Save</button>
-                                </div> 
-                            </div>
-                        </div> -->
                     <!-- better-closer filter -->
                     <div class="better-closer-col-filter col-6">
                         <div class="better-closer-btn">
@@ -167,22 +142,15 @@
                                     <button class="distance-slider-text closer" data-value="3"
                                         onclick="go_closer()">Closer</button>
                                 </div>
-                                <!-- <input type="range" class="form-range" min="1" max="3" step="1" id="dist-range" /> -->
-                                <!-- <ul class="range-labels">
-                                <li class="active selected">Better</li>
-                                <li></li>
-                                <li>Closer</li>
-                            </ul> -->
                             </div>
                         </div>
                     </div>
                     <!-- open-now filter -->
-                    <div class="open-now-col-filter col-2">
+                    <div class="open-now-col-filter col-3">
                         <button id="filter-btn" class="filter-btn" onclick="show_only_open_now()">
                             <span class="filter-btn-text">Open Now</span>
                         </button>
                     </div>
-                    <div class="col-1"></div>
                     <!-- special-services filter -->
                     <div class="special-service-col-filter col-3">
                         <button id="popup-btn" class="filter-btn">
@@ -191,28 +159,34 @@
                                 <use xlink:href="#popup-btn-icon"></use>
                             </svg>
                         </button>
-                    </div>
-                    <!-- <div class="near-me-col-filter col-3">
-                            <button id="popup-btn" onclick="open_popup(2)">
-                                <span class="popup-btn-text">Near me</span>
-                                <svg class="popup-btn-icon"><use xlink:href="#popup-btn-icon"></use></svg>
-                            </button>
-                            <div id="popup-text2" style="visibility: hidden; overflow: hidden">
-                                <svg>
-                                    <use xlink:href="#filter-card"></use>
-                                </svg>
-                                <div class="popup-text2-row1 row">
-                                    <span class="text">Search by washer's distance</span>
-                                    <div class="range col-12">
-                                        <input type="range" class="form-range" min="0" max="5" step="0.5" id="dist-range"/>
-                                    </div>
-                                </div>
-                                <div class="popup-text2-row2 row">
-                                    <button class="button1" onclick="update_active_times()">Save</button>
-                                </div> 
+                        <div id="popup-text1" style="visibility: hidden; overflow: hidden">
+                        <!-- <div id="popup-text1"> -->
+                            <svg><use xlink:href="#filter-card"></use></svg>
+                            <div class="popup-text1-row1 row">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        Ironing
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        Door2Door 
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                                    <label class="form-check-label" for="exampleRadios3">
+                                        Dryer
+                                    </label>
+                                  </div>
                             </div>
-                        </div> -->
-
+                            <div class="popup-text1-row2 row">
+                                <button class="button1" onclick="update_services()">Save</button>
+                            </div> 
+                        </div>
+                    </div>
                 </div>
                 <div id="place-order" class="place-order row">
                     <!-- <script>insertPlaceOrderBox("place-order")</script> -->

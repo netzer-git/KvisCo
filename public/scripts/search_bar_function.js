@@ -35,10 +35,11 @@ function get_search_bar(tag) {
     myDay = jsarray[3]
     search_res = {address:address, myDate:myDate, duration:duration, myDay:myDay};
 
-    search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
+    var search_bar = '<table class="table-search"><tr><td>Where?</td><td>When?</td><td>Duration</td></tr>';
     search_bar += '<tr>';
-    search_bar += '<td><input class="choose_location" type="text" placeholder = "My current location" id="where" value = "' + address + '" onchange ="save()"></td>';
-    search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
+    search_bar += '<td><input class="choose_location" type="text" placeholder = "My current location" id="where" value = "' + address + '" onchange ="save()"><script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkDJzPLDJTncDPsoN5nL5qtG59v7QHV0&libraries=places&callback=initAutocomplete" async defer></script></td>';
+    search_bar += '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJkDJzPLDJTncDPsoN5nL5qtG59v7QHV0&libraries=places&callback=initAutocomplete" async defer></script>';
+    // search_bar += '<td><input class="choose_location" type="date" id="myDate" value= ' + myDate + ' onchange="save()"></td>';
     search_bar += '<td><div class="box" id="duration_box">';
     search_bar += '<select id="duration" onchange="save()">';
     switch (duration) {
@@ -84,4 +85,46 @@ function formatDate(date) {
         day = '0' + day;
 
     return [year, month, day].join('-');
+}
+
+/* google maps API auto-complete of address*/
+var placeSearch, autocomplete, geocoder;
+
+/**
+ * initalize google maps autocomplete input field
+ */
+function initAutocomplete() {
+  geocoder = new google.maps.Geocoder();
+  autocomplete = new google.maps.places.Autocomplete(
+    (document.getElementById('where')), {
+      types: ['geocode']
+    });
+
+  autocomplete.addListener('place_changed', fillInAddress);
+}
+
+/**
+ * update new address in sessionStorage
+ * @param {*} address geocode 
+ */
+function codeAddress(address) {
+  geocoder.geocode({
+    'address': address
+  }, function(results, status) {
+    if (status == 'OK') {
+      // This is the lat and lng results[0].geometry.location
+      alert(results[0].geometry.location);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+/**
+ * update new address in input field
+ */
+function fillInAddress() {
+  var place = autocomplete.getPlace();
+
+  codeAddress(document.getElementById('where').value);
 }
