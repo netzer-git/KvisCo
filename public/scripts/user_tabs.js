@@ -7,7 +7,8 @@
     const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null 
+        && all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
             const washer_that_review = await promiseWasherLoaderById(all_orders[j].data().washer);
             // here start block of review
             all_reviews += "<div class='row' style='margin-top: 2%;'>";
@@ -40,7 +41,8 @@
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4> There are no reviews yet </h4>";
+        all_reviews += "<h4 class='header_49'> You have no reviews yet </h4>";
+        all_reviews += '<img class= "ironing-person-2" src="/images/ironing_person.svg">'
     }
     all_reviews += '</div>';
     document.getElementById("my_reviews").innerHTML = all_reviews;

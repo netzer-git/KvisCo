@@ -78,7 +78,7 @@ function save_review_change() {
  async function add_review_to_order() {
   console.log(review, rating);
     var orderID = sessionStorage.getItem("order that get review now");
-    if (review == "" || rating == null) {
+    if (review == null || rating == null) {
         alert("PLEASE RATE AND REVIEW");
         return;
     }
@@ -91,6 +91,7 @@ function save_review_change() {
     var userID = sessionStorage.getItem("current_user_id");
     await insert_orders_blocks_of_user("in_process_orders", userID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
     await insert_orders_blocks_of_user("finished_orders", userID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
+    await f_display_user_reviews(userID)
 }
 
 async function display_review_on_washer_overlay(orderID) {
