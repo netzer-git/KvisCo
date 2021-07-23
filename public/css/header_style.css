@@ -195,8 +195,10 @@ h5 {
 
 
 .navbar-brand img {
-  /* height: 95%; */
-  width: 95% !important;
+  /* height: 95%;
+  width: 95% !important; */
+  height: 34px;
+  /* width: 164px; */
   display: inline-block;
   padding-left: 70 !important;
   padding-top: 4 !important;
