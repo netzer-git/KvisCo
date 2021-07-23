@@ -22,25 +22,45 @@
 </head>
 
 <body>
+    <svg style="display:none; ">
+        <symbol width="25" height="25" viewBox="0 0 83 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d)">
+            <ellipse cx="41.5" cy="40" rx="41.5" ry="40" fill="#FFBD12"/>
+            <path d="M82.5 40C82.5 61.7981 64.1612 79.5 41.5 79.5C18.8388 79.5 0.5 61.7981 0.5 40C0.5 18.2019 18.8388 0.5 41.5 0.5C64.1612 0.5 82.5 18.2019 82.5 40Z" stroke="#1C1C1D"/>
+            </g>
+            <path d="M53.8434 53.3845V50.4101C53.8434 48.8324 53.1932 47.3194 52.0358 46.2038C50.8783 45.0882 49.3085 44.4614 47.6716 44.4614H35.328C33.6912 44.4614 32.1214 45.0882 30.9639 46.2038C29.8065 47.3194 29.1562 48.8324 29.1562 50.4101V53.3845" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M41.4999 38.5127C44.9085 38.5127 47.6717 35.8493 47.6717 32.564C47.6717 29.2786 44.9085 26.6152 41.4999 26.6152C38.0913 26.6152 35.3281 29.2786 35.3281 32.564C35.3281 35.8493 38.0913 38.5127 41.4999 38.5127Z" stroke="#1C1C1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+            <filter id="filter0_d" x="0" y="0" width="83" height="82" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+            <feOffset dy="2"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 0 0.12549 0 0 0 1 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+            </filter>
+            </defs>   
+        </symbol>
+    </svg>
     <!--Header starts here-->
-    <header id="header" class="fixed-top  header-transparent ">
+    <header id="header" class="fixed-top">
         <div class="header" class="fixed-top">
-            <div class="row">
+            <div class="header-row row">
                 <div class="col-2">
                     <a class="navbar-brand" href="../../html/welcome.html"><img src="../../images/KvisCo-icon.png"></a>
                     <!--The logo button-->
                 </div>
-                <div class="col-2">
+                <div class="header-btn-col col-2">
                     <div id="user_profile_button" hidden>
                         <button class="button1-white" onclick="become_a_user();"><img src="../../images/Profile-yellow.png" class="rounded-circle-xxs"><div style="display: inline-block; padding-left: 4%; margin-top: 0%;" id="log_in_indicator"></div></button>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="header-btn-col col-5">
                 </div>
-                <div class="col-1">
+                <div class="header-btn-col col-1">
                     <button id="log_in_out_msg" onclick="log_in_or_out();" class="button1">
                 </div>
-                <div class="col-2">
+                <div class="header-btn-col col-2">
                     <button onclick="become_a_washer()" class="button1" id="washer-header-button"></button>
                 </div>
             </div>
