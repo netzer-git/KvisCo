@@ -21,6 +21,9 @@ async function get_order_block_of_washer(order_doc) {
     
     switch (order_doc.data().status) {
         case 'pending':
+            block += "<div class='actions'>";
+            block += " <button id = block_num_" + block_num + " value='" + order_doc.id + "' class='btn-white' onclick= 'display_order_status(block_num_" + block_num + ".value)'>Pending</button></div></div>";
+            break;
         case 'process':
             block += "<div class='actions'>";
             block += " <button id = block_num_" + block_num + " value='" + order_doc.id + "' class='btn-white' onclick= 'display_order_status(block_num_" + block_num + ".value)'>Open</button></div></div>";

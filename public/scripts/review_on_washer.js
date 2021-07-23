@@ -78,7 +78,7 @@ function save_review_change() {
  async function add_review_to_order() {
   console.log(review, rating);
     var orderID = sessionStorage.getItem("order that get review now");
-    if (review == "" || rating == null) {
+    if (review == null || rating == null) {
         alert("PLEASE RATE AND REVIEW");
         return;
     }
