@@ -339,3 +339,26 @@ table.Background_box_open td {
     object-fit: cover;
     border-radius: 50% !important;
 }
+
+.red-btn {
+    /* Bg  */
+    margin-top: 5px;
+    margin-bottom: 10px;
+    /* Palet 2 / 4 */
+    background: #F95A2C;
+    /* Main / Black */
+    border: 1px solid #1C1C1D;
+    box-sizing: border-box;
+    /* Button */
+    box-shadow: 0px 4px 0px #202020;
+    border-radius: 15px;
+    height: 30px;
+    width: 180px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 25px;
+    letter-spacing: 0.44999998807907104px;
+    text-align: center;
+  }

@@ -87,7 +87,7 @@
                             <label  class="labels_3" for="year">Year Purchased: </label>
                             <input class= "regist_input_3" type="text" id="mudule" name="module" onchange="save_laundry_details()">
                             <input class= "regist_input_3" type="number" id="capacity" name="capacity" onchange="save_laundry_details()">
-                            <input class= "regist_input_3" type="number" id="purchasing_year" name="purchasing_year" onchange="save_laundry_details()">
+                            <input class= "regist_input_3" type="number" id="purchasing_year" name="purchasing_year" min="2000" max="2021" onchange="save_laundry_details()">
                         </form>
                         </th>
                     </tr>
@@ -164,8 +164,8 @@
                             <form name="special_serve">
                                 <input class= "cbx" type="radio" name="special_serve" value="Ironing" onclick="save_special_service(this);">Ironing<br>  
                                 <input class= "cbx" type="radio" name="special_serve" value="Door2door" onclick="save_special_service(this);">Door 2 Door<br>  
-                                <input class= "cbx" type="radio" name="special_serve" value="Dryer" onclick="save_special_service(this);">Dryer<br>
-                                <input class= "cbx" type="radio" name="special_serve" value="None" onclick="save_special_service(this);">None<br>  
+                                <input class= "cbx" type="radio" name="special_serve" value="Dryer" onclick="save_special_service(this);">Hanging Drying<br>
+                                <input class= "cbx" type="radio" name="special_serve" value="None" onclick="save_special_service(this);">None<br>
                             </form>
                         </th>
                     </tr>
