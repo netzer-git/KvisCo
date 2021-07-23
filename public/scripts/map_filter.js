@@ -4,8 +4,8 @@ current_location = {
 } // burger room
 
 current_location_from_navigator_geolocation ={
-    lat: 0,
-    lng: 0
+    lat: 31.773610027001155,
+    lng: 35.235351837826255
 }
 ////////////////////////////////////////////////////
 
