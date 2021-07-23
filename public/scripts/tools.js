@@ -100,11 +100,12 @@ async function forwardGeocodePromise(location_str) {
 
       if (request.status === 200) {
         var data = JSON.parse(request.responseText);
-        if (data != null) {
+        if (data.results[0] != null) {
           console.log(data.results[0].formatted);
         }
         else {
           console.log("There Has been Error parsing the input");
+          alert("Geocoder could not find the address, please fill the address field");
         }
         resolve(data);
       } else if (request.status <= 500) {
