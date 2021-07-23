@@ -126,8 +126,13 @@ h8 {
 
 .cute-hanger{
     width: 35%;
-    margin-top: -12%;
+    /* margin-top: -12%; */
     margin-left: 55%;
+}
+
+.ironing-person-2{
+    width: auto;
+    height: 80%;
 }
 
 selected {
