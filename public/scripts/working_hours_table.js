@@ -1,7 +1,7 @@
 clicks = 0
 function get_washer_working_hours(washer_doc) {
     washerOpenTimes = getWasherOpenTimes(washer_doc);
-    oldDays = "<table class='working-hours' id='working-hours'><tr><td>Day</td><td>From</td><td>To</td><td>Keep weekly</td></tr>"
+    oldDays = "<table class='working-hours' id='working-hours'><tr><td>Day</td><td>From</td><td>To</td><td>Keep Weekly</td></tr>"
     if (Object.keys(washerOpenTimes).length == 0) {
         clicks = 1
         oldDays += "<tr><td><div class='set-date'><select id='day" + clicks + "'>"

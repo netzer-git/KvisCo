@@ -133,6 +133,10 @@ h5 {
   white-space: nowrap;
 }
 
+/* #header{
+  height: 100%;
+} */
+
 .header {
   position: relative;
   background-color: #FA6648;
@@ -189,10 +193,13 @@ h5 {
   color: var(--font-color);
 }
 
+
 .navbar-brand img {
-  height: 40;
-  padding-left: 70;
-  padding-top: 4;
+  /* height: 95%; */
+  width: 95% !important;
+  display: inline-block;
+  padding-left: 70 !important;
+  padding-top: 4 !important;
 }
 
 /* Logo button/*
@@ -880,4 +887,28 @@ select:focus {
   object-fit: cover;
   border-radius: 50%;
   transition: all 1.5s ease-in-out;
+}
+
+.header-row{
+  position: relative;
+}
+
+.header-btn-col{
+  /* margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); */
+  position: relative;
+}
+
+#log_in_out_msg,
+#washer-header-button,
+#user_profile_button{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  
 }

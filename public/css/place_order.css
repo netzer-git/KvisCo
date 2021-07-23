@@ -120,14 +120,19 @@ h8 {
 
 .cute-washer {
     width: 30%;
-    margin-top: -22%;
+    margin-top: -27%;
     margin-left: 50%;
 }
 
 .cute-hanger{
     width: 35%;
-    margin-top: -12%;
+    /* margin-top: -12%; */
     margin-left: 55%;
+}
+
+.ironing-person-2{
+    width: auto;
+    height: 80%;
 }
 
 selected {
@@ -196,4 +201,11 @@ select::-ms-expand {
     line-height: 25px;
     letter-spacing: 0.44999998807907104px;
     text-align: center;
+}
+
+
+.header_49{
+    font-size: 25px;
+    text-align: center;
+    margin-right: 5%;
 }
