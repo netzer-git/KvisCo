@@ -2,6 +2,11 @@ current_location = {
     lat: 31.773610027001155,
     lng: 35.235351837826255
 } // burger room
+
+current_location_from_navigator_geolocation ={
+    lat: 0,
+    lng: 0
+}
 ////////////////////////////////////////////////////
 
 const MAX_NUMBER_OF_BLOCKS = 15; // max number of blocks in the page
@@ -12,31 +17,6 @@ const SPECIAL_SERVICES = ["Default", "30°C Wash", "60°C Wash", "Fast Wash", "W
 let near_me_dist, rating, special_services;
 let active_times = new Array(2);
 let washer_doc_array;
-
-async function show_only_open_now() {
-    if (document.getElementById("filter-btn").classList.contains("active")) {
-        document.getElementById("filter-btn").style.backgroundColor = "white";
-        document.getElementById("filter-btn").classList.remove("active");
-        document.getElementById("filter-btn").style.color = "black";
-        on_load_page();
-    } else {
-        document.getElementById("filter-btn").classList.add("active");
-        document.getElementById("filter-btn").style.backgroundColor = "green";
-        document.getElementById("filter-btn").style.color = "white";
-        washer_doc_array_temp = [];
-        for (i = 0; i < washer_doc_array.length; i++) {
-            cur_opening_times = washer_doc_array[i].data().opening_times;
-            if (check_if_washer_open_now(cur_opening_times)) {
-                washer_doc_array_temp.push(washer_doc_array[i])
-            }
-        }
-        washer_doc_array = washer_doc_array_temp;
-        // search_res = get_search_bar("search-bar");
-        await insert_washer_blocks(washer_doc_array, new Date().toLocaleString('en-us', {  weekday: 'long' }));
-        document.getElementById("place-order").hidden = true;
-    }
-}
-
 
 /* handle washers objects */
 
@@ -116,7 +96,7 @@ async function create_one_washer_block(washer_doc, day) {
     } else {
         washer_block_raw_html += '<div class="col-icon col-1"><i class="bi bi-star-fill" style="color:var(--color-2)"></i></div>\n<div class="col-3"><p class="card-text">' + rating + '</p></div>';
     }
-    washer_block_raw_html += '<div class="row">\n<div class="col-7"><p class="card-text">' + washer_doc.data().properties + ' | ' + washer_doc.data().commitment + ' hours</p></div>\n';
+    washer_block_raw_html += '<div class="row">\n<div class="col-8"><p class="card-text">' + washer_doc.data().properties + ' | ' + washer_doc.data().commitment + ' hours</p></div>\n';
     washer_block_raw_html += '<div class="col-4"><button id="' + washer_doc.id.valueOf() + '" onclick="insertPlaceOrderBox(this)" class="button1" style="width: 120px; margin-top: -10%;" >Quick Order</button></div>\n</div>';
     washer_block_raw_html += '\n</div>\n</div>\n</div></div>\n</div></div>';
     return washer_block_raw_html;
@@ -140,7 +120,7 @@ function update_drop_off_time(e) {
 }
 
 
-/* handle filters (&update the map section) */
+/* handle filters */
 
 /**
  * refresh all of the filters
@@ -191,44 +171,6 @@ function open_popup(ind) {
 }
 
 /**
- * insert days options tags into days select tag (dropdown form)
- */
-// function insert_days_options(){
-//     let raw_html = '';
-//     for(i=0; i<DAYS.length; i++){
-//         raw_html += '<option>'+DAYS[i]+'</option>';
-//     }
-//     let select_day = document.getElementById("day");
-//     select_day.innerHTML = raw_html;
-// }
-
-/**
- * close active times popup and update day and time filters
- */
-function update_active_times() {
-    //close popup section
-    open_popup(1);
-
-    //update day & time filter
-    let select_day = document.getElementById("day");
-    active_times[0] = select_day.value;
-
-    let select_time = document.getElementById("startTime");
-    active_times[1] = select_time.value;
-
-    //TODO: update changes on search results
-}
-
-/**
- * init near me range (slider)
- */
-function init_near_me_range() {
-    range_elm = document.getElementById('dist-range');
-    const range = new mdb.Range(range_elm);
-    x = 0
-}
-
-/**
  * 
  * @param {*} search_res takes the JSON of the search bar
  * @returns the current user location by priority
@@ -247,10 +189,25 @@ async function get_current_user_location(search_res) {
     if (current_user) {
         return current_user.data().location_cor;
     }
-    // 3 - take the current computer location from google
-    // TODO
+    // 3 - take the current computer location from HTML Geolocation API (in case the user doesn't connect with registered user)
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+        return current_location_from_navigator_geolocation
+    } else { 
+        console.log("Geolocation is not supported by this browser.");
+    }
     // 4 - take the burger room coordinates
     return current_location
+}
+
+/**
+ * update user navigator.geolocation
+ * @param {*} position navigator.geolocation object 
+ */
+function showPosition(position)
+{
+    current_location_from_navigator_geolocation["lat"] = position.coords.latitude;
+    current_location_from_navigator_geolocation["lng"] = position.coords.longitude;
 }
 
 
@@ -265,9 +222,88 @@ async function get_current_user_location(search_res) {
 }
 
 /**
- * 
+ * show only search results that the current search time is included in their openning times
  */
-async function on_load_page() {
+async function show_only_open_now() {
+    if (document.getElementById("filter-btn").classList.contains("active")) {
+        document.getElementById("filter-btn").style.backgroundColor = "white";
+        document.getElementById("filter-btn").classList.remove("active");
+        document.getElementById("filter-btn").style.color = "black";
+        on_load_page();
+    } else {
+        document.getElementById("filter-btn").classList.add("active");
+        document.getElementById("filter-btn").style.backgroundColor = "green";
+        document.getElementById("filter-btn").style.color = "white";
+        washer_doc_array_temp = [];
+        for (i = 0; i < washer_doc_array.length; i++) {
+            cur_opening_times = washer_doc_array[i].data().opening_times;
+            if (check_if_washer_open_now(cur_opening_times)) {
+                washer_doc_array_temp.push(washer_doc_array[i])
+            }
+        }
+        washer_doc_array = washer_doc_array_temp;
+        // search_res = get_search_bar("search-bar");
+        await insert_washer_blocks(washer_doc_array, new Date().toLocaleString('en-us', {  weekday: 'long' }));
+        document.getElementById("place-order").hidden = true;
+    }
+}
+
+/**
+ * change visibility of slider and filter the search results by closer distance
+ * @returns 
+ */
+async function go_closer() {
+    if (document.getElementById("distanceSlider").value == "1") {
+        document.getElementById("distanceSlider").value = "2";
+    }
+    else if (document.getElementById("distanceSlider").value == "2") {
+        document.getElementById("distanceSlider").value = "3";
+    }
+    else if (document.getElementById("distanceSlider").value == "3") {
+        return
+    }
+    await filter_by_slider();
+}
+
+/**
+ * change visibility of slider and filter the search results by high rating
+ * @returns 
+ */
+async function go_better() {
+    if (document.getElementById("distanceSlider").value == "3") {
+        document.getElementById("distanceSlider").value = "2";
+    }
+    else if (document.getElementById("distanceSlider").value == "2") {
+        document.getElementById("distanceSlider").value = "1";
+    }
+    else if (document.getElementById("distanceSlider").value == "1") {
+        return
+    }
+    await filter_by_slider();
+}
+
+/**
+ * filter search results by better-closer function
+ */
+async function filter_by_slider() {
+    search_res = get_search_bar("search-bar");
+    search_res.currentPoint = current_user_location
+    washer_doc_array = await getBetterCloserWashers(document.getElementById("distanceSlider").value, search_res);
+    await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
+    document.getElementById("place-order").hidden = true;
+}
+
+/**
+ * update service filter
+ */
+function update_services(){
+
+}
+
+/**
+ * initialize map-filter page when it is loaded
+ */
+ async function on_load_page() {
 
     //initialize search bar and get set results
     search_res = get_search_bar("search-bar");
@@ -284,37 +320,3 @@ async function on_load_page() {
 }
 
 window.onload = on_load_page;
-
-async function go_closer() {
-    if (document.getElementById("distanceSlider").value == "1") {
-        document.getElementById("distanceSlider").value = "2";
-    }
-    else if (document.getElementById("distanceSlider").value == "2") {
-        document.getElementById("distanceSlider").value = "3";
-    }
-    else if (document.getElementById("distanceSlider").value == "3") {
-        return
-    }
-    await filter_by_slider();
-}
-
-async function go_better() {
-    if (document.getElementById("distanceSlider").value == "3") {
-        document.getElementById("distanceSlider").value = "2";
-    }
-    else if (document.getElementById("distanceSlider").value == "2") {
-        document.getElementById("distanceSlider").value = "1";
-    }
-    else if (document.getElementById("distanceSlider").value == "1") {
-        return
-    }
-    await filter_by_slider();
-}
-
-async function filter_by_slider() {
-    search_res = get_search_bar("search-bar");
-    search_res.currentPoint = current_user_location
-    washer_doc_array = await getBetterCloserWashers(document.getElementById("distanceSlider").value, search_res);
-    await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
-    document.getElementById("place-order").hidden = true;
-}
