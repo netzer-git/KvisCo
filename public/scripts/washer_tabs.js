@@ -159,7 +159,7 @@ async function f_display_washer_reviews(washerID) {
         }
     }
     if (all_reviews == "") {
-        all_reviews += "<h4 class='header_49'> You have no reviews yet </h4>";
+        all_reviews += "<h4 class='header_49'> There are no reviews yet </h4>";
         all_reviews += '<img class= "ironing-person-2" src="/images/ironing_person.svg">'
     }
     all_reviews += '</div>';
