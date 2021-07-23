@@ -122,7 +122,8 @@ async function f_display_washer_reviews(washerID) {
     const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); //get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null 
+        && all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
             const user_that_review = await promiseUserLoaderById(all_orders[j].data().user);
             // here start block of review
             all_reviews += "<div class='row'>";

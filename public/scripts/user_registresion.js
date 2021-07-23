@@ -43,7 +43,6 @@ function save_photo(event) {
         user_cover_photo = event.target.files[0];
         is_user_profile_loaded = true
         document.getElementById("indicator4").style.display = "block";
-        // document.getElementById("checkmark").innerHTML = "<i class='bi bi-check'></i>";
     }
 }
 
@@ -53,7 +52,9 @@ function save_photo(event) {
  * @returns move to user_profile_final.html
  */
 async function create_user() {
-    url = await saveImageToUser(user_cover_photo);
+    imgDetails = await saveImageToUser(user_cover_photo);
+    url = imgDetails[0];
+    path = imgDetails[1];
     if (url == null || user_location_str == null || user_phone_number == null || user_description == null) {
         alert("PLEASE FILL ALL FIELDS");
         return;
@@ -62,6 +63,7 @@ async function create_user() {
         name: getUserDisplayName(),
         location_str: user_location_str,
         imageUrl: url,
+        imagePath: path,
         phone: user_phone_number,
         description: user_description
     }
