@@ -161,12 +161,20 @@ function dist(washer, middle_point) {
  */
 function open_popup(ind) {
     const targetDiv = document.getElementById("popup-text" + ind);
+    var container = $("popup-text" + ind);
     if (targetDiv.style.visibility != "hidden") {
         targetDiv.style.visibility = "hidden";
         targetDiv.style.overflow = "hidden";
     } else {
         targetDiv.style.visibility = "visible";
         targetDiv.style.overflow = "visible";
+
+        document.addEventListener('mouseup', function(e) {
+            if (!targetDiv.contains(e.target)) {
+                targetDiv.style.visibility = "hidden";
+        targetDiv.style.overflow = "hidden";
+            }
+        });
     }
 }
 
@@ -287,17 +295,32 @@ async function go_better() {
  */
 async function filter_by_slider() {
     search_res = get_search_bar("search-bar");
-    search_res.currentPoint = current_user_location
+    search_res.currentPoint = current_user_location;
     washer_doc_array = await getBetterCloserWashers(document.getElementById("distanceSlider").value, search_res);
     await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
     document.getElementById("place-order").hidden = true;
 }
 
 /**
- * update service filter
+ * close active times popup and update day and time filters
  */
-function update_services(){
+ async function update_services() {
+    //close popup section
+    open_popup(1);
 
+    //update day & time filter
+    var filteredService = $('#filter-service input:checked').val();
+
+    //update changes on search results
+    search_res = get_search_bar("search-bar");
+    //update current user location
+    search_res.currentPoint = current_user_location;
+    //update new service choice (properties)
+    search_res.properties = filteredService;
+    //get the filtered washer's list
+    washer_doc_array = await getWasherFilterQuery(search_res);
+    //add updated washer blocks
+    await insert_washer_blocks(washer_doc_array, search_res["myDay"]);
 }
 
 /**

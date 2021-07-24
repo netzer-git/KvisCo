@@ -304,7 +304,7 @@ th {
     margin: auto;
     display: inline-block;
     padding: 2% 0;
-    z-index: 2;
+    z-index: 1;
 }
 
 .better-closer-btn {
@@ -354,55 +354,52 @@ th {
 
 /* The actual popup */
 #popup-text1{
-    /* visibility: hidden; */
-    /* overflow: hidden; */
+    visibility: hidden;
+    overflow: hidden;
     border-radius: 6px;
+    /* padding: 6px 0 0 0; */
+    margin-top: 15px;
+    width: 250px;
 }
 
 #popup-text1 svg{
-    position: relative;
-    /* top: -20px; */
-    /* height: 50px;
-    width: 343px; */
+    /* padding: 0 6px 0 6px;
+    position: relative; */
+    padding: 0 6px 0 6px;
+    top: -20px;
+    height: 50px;
+    width: 250px;
 }
 
 #filter-card{
-    margin-left: -100px;
+    position: absolute;
 }
 
 #popup-text1 .popup-text1-row1{
     z-index: 2;
-    /* margin: auto;
-    width: 343px; */
+    margin: -20px auto;
+    width: 250px;
+    padding-left: 30px;
 }
 
-#popup-text1 .popup-text1-row1 .text {
-    text-align: center;
-}
-
-#popup-text1 .popup-text1-row1 .choose-day {
+#popup-text1 .popup-text1-row1 .form-check {
     position: relative;
-    top: 50px;
     z-index: 3;
     float: left;
-}
-
-#popup-text1 .popup-text1-row1 .choose-time {
-    position: relative;
-    top: 25px;
-    right: -10px;
-    z-index: 3;
-    float: right;
+    padding-bottom: 15px;
+    text-align: left;
 }
 
 #popup-text1 .popup-text1-row2{
     position: relative;
     width: 100px;
-    top: 120px;
-    right: -60px;
+    left: -50px;
     float: right;
 }
 
+.row-place-order{
+    margin-top: -200px;
+}
 .col-washers-cards {
     /* background-color: var(--color-5); */
     top: 1%;
