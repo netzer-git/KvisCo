@@ -507,7 +507,6 @@ async function getWasherFilterQuery(filters) {
     }
 
     if (filters.rating !== undefined) {
-        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
         let docArray = [];
         washersArray.forEach((doc) => {
             docArray.push(doc);
@@ -523,11 +522,11 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.specialService !== undefined) {
+    if (filters.properties !== undefined) {
         let filteredWashersWithSpecialService = [];
         washersArray.forEach(doc => {
             // need to fix in case of adding multiple properties
-            if (doc.data().properties == filters.specialService[0]) {
+            if (doc.data().properties == filters.properties) {
                 filteredWashersWithSpecialService.push(doc);
             }
         });
