@@ -18,11 +18,8 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
-                // doc.data() will be undefined in this case
-                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -180,8 +177,6 @@ function promiseOrderArrayByUserIdAndStatus(userId, status) {
  * @param {*} order : basic order object
  */
 async function createNewOrder(order) {
-    // let user = await db.doc('users/' + order.userID);
-    // let washer = await db.doc('washers/' + order.washerID);
     let newOrderRef = await db.collection("orders").add({
         user: order.user,
         washer: order.washer,
@@ -302,8 +297,8 @@ async function deleteCurrentWasher() {
         var desertRef = storage.ref().child(path);
         // Delete the file
         await desertRef.delete().then(() => {
-        console.log("Img successfully deleted!");
-    });
+            console.log("Img successfully deleted!");
+        });
     }
 }
 
@@ -553,7 +548,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1 _000) {
                 filteredWashersWithAddress.push(doc);
             }
         });

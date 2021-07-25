@@ -67,7 +67,6 @@ var block_num = 0;
 async function get_order_block_of_washer(order) {
     const user_doc = await promiseUserLoaderById(order.data().user);
     block = "<div class='col-lg-4'>";
-    // block += '<div class="overlay_review"><div id="user_review_block"></div></div>';
     block += "<div class='col_with_padd'>";
     block += "<div class='flip_box' onclick='flip(event)'>"
     block += '<div class="front" id="front"></div>';
@@ -126,7 +125,6 @@ async function insert_orders_blocks_of_washer(tag, washerID, status) {
 
 
 async function flip(event) {
-    // sessionStorage.setItem("cur_order", orderID)
     var orderID = 'S9QrV8c1QihaP76iFrIW';
     const order_doc = await promiseOrderLoaderById(orderID);
     var element = event.currentTarget;

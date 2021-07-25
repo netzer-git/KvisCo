@@ -27,7 +27,7 @@ function save_phone_number() {
 
 function save_commit() {
     washer_commitment = document.getElementById("commit").value;
-    console.log("new commit ",document.getElementById("commit").value);
+    console.log("new commit ", document.getElementById("commit").value);
 }
 
 function save_laundry_details() {

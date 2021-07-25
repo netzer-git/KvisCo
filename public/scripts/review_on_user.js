@@ -26,7 +26,7 @@ var review;
 
 function save_rating(rateID) {
   rating = rateID.value;
-  console.log("" ,rating);
+  console.log("", rating);
 }
 
 function save_review_change() {
@@ -36,21 +36,21 @@ function save_review_change() {
 
 async function add_review_to_order() {
   console.log(review, rating);
-    var orderID = sessionStorage.getItem("order that get review now");
-    if (review == "" || rating == null) {
-        alert("PLEASE RATE AND REVIEW");
-        return;
-    }
-    new_order = {
-        review_user: review,
-        rating_user: Number(rating),
-    }
-    document.getElementById("overlay_review").style.display = "none";
-    await setOrderDetails(new_order,orderID);  
-    var washerID = sessionStorage.getItem("signed_in_washer");
-    await insert_orders_blocks_of_washer("in_process_orders", washerID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
-    await insert_orders_blocks_of_washer("finished_orders", washerID, "finished");   // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
-    await f_display_washer_reviews(washerID)
+  var orderID = sessionStorage.getItem("order that get review now");
+  if (review == "" || rating == null) {
+    alert("PLEASE RATE AND REVIEW");
+    return;
+  }
+  new_order = {
+    review_user: review,
+    rating_user: Number(rating),
+  }
+  document.getElementById("overlay_review").style.display = "none";
+  await setOrderDetails(new_order, orderID);
+  var washerID = sessionStorage.getItem("signed_in_washer");
+  await insert_orders_blocks_of_washer("in_process_orders", washerID, "processing"); // function in order_blocks_user.js that insert all "pending+process" into div "in_process_orders"
+  await insert_orders_blocks_of_washer("finished_orders", washerID, "finished"); // function in order_blocks_user.js that insert all "finished" into div "finished_orders" 
+  await f_display_washer_reviews(washerID)
 }
 
 
@@ -61,13 +61,11 @@ async function display_review_on_user_overlay(orderID) {
   review_on_user_overlay = '<div class="cardo"><div class="row">';
   review_on_user_overlay += '<div class="col-1"></div>';
   review_on_user_overlay += '<div class="col-11">';
-  // review_on_user_overlay += '<div class="comment-box ml-2">';
   review_on_user_overlay += '<div class="row">';
   review_on_user_overlay += '<div class="col-11">';
   review_on_user_overlay += '<h7 style="margin-left:0%;">Add a comment</h7></div>';
   review_on_user_overlay += '<div class="col-1"><button type="button" class="btn-close" aria-label="Close" onclick="off_review()"></button></div></div>';
   review_on_user_overlay += '<div class="row" style="margin-left: -2%; margin-top: 0%;">';
-  // review_on_user_overlay += '<div class="col-2" style="font-size: 16px"></div>';
   review_on_user_overlay += '<div class="col-6">';
   review_on_user_overlay += '<div class="rating" style="margin-right: 100px;"><input type="radio" name="rating" value="5" id="5" onchange="save_rating(this)"><label for="5">☆</label><input type="radio" name="rating" value="4" id="4" onchange="save_rating(this)"><label for="4">☆</label><input type="radio" name="rating" value="3" id="3" onchange="save_rating(this)"><label for="3">☆</label><input type="radio" name="rating" value="2" id="2" onchange="save_rating(this)"><label for="2">☆</label><input type="radio" name="rating" value="1" id="1" onchange="save_rating(this)"><label for="1">☆</label></div></div></div>';
   review_on_user_overlay += '<div class="col-6"></div>';
