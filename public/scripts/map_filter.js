@@ -44,7 +44,7 @@ async function create_washer_list(filters, current_user_location) {
 async function insert_washer_blocks(washer_doc, day) {
     let whole_washers_html_block = '';
     if (washer_doc.length == 0) {
-        whole_washers_html_block += "<h5>No washers are working,</h5>\n<h5>please try other search</h5>"
+        whole_washers_html_block += "<h5>No washers are working,</h5>\n<h5>please try another search</h5>"
         whole_washers_html_block += '<img class= "ironing-person" src="/images/ironing_person.svg">'
     }
     // adjusting page height
