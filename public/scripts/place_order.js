@@ -166,7 +166,7 @@ function open_indicator(washer_opening_times,full_date) {
         icon_text +='<div class="open_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/open_ind.svg">Open</div>'
     }
     else {
-        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/closed_ind.svg">Close</div>';
+        icon_text += '<div class="close_ind"><img style="margin-left: 10%; margin-right: 5%; margin-bottom: 1%;" src="../../images/closed_ind.svg">Closed</div>';
     }
     document.getElementById("open_ind").innerHTML = icon_text;
 }
