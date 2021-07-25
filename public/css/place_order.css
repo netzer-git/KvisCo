@@ -124,13 +124,12 @@ h8 {
     margin-left: 50%;
 }
 
-.cute-hanger{
+.cute-hanger {
     width: 35%;
-    /* margin-top: -12%; */
     margin-left: 55%;
 }
 
-.ironing-person-2{
+.ironing-person-2 {
     width: auto;
     height: 80%;
 }
@@ -204,7 +203,7 @@ select::-ms-expand {
 }
 
 
-.header_49{
+.header_49 {
     font-size: 25px;
     text-align: center;
     margin-right: 5%;

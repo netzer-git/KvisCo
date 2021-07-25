@@ -10,13 +10,7 @@
 }
 
 body {
-    /* overflow: hidden; */
     color: var(--font-color);
-    /* width: 100%;
-    height: 100%;
-    min-height: 100%;
-    padding-top: 44px;
-    padding-bottom: 25px; */
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -43,7 +37,6 @@ h1 {
 }
 
 h2 {
-    /* position: absolute; */
     width: 558px;
     height: 146px;
     left: 120px;
@@ -115,13 +108,13 @@ h4 {
     padding-left: 0%;
     margin-bottom: 0px !important;
 }
-.card-text{
+
+.card-text {
     font-family: 'Montserrat';
 }
 
 h6 {
 
-    /* margin-top: -20px !important; * This causes problems!!!/
     /* Text / Medium 18 */
     font-family: 'Montserrat';
     font-style: normal;
@@ -152,7 +145,6 @@ i {
 }
 
 .container {
-    /* overflow: auto; */
     margin-top: 4%;
     height: 100%;
     width: 100%;
@@ -233,7 +225,7 @@ hr.solid {
 }
 
 .search-bar,
-.col-search-btn{
+.col-search-btn {
     position: relative;
     height: 80px;
 }
@@ -246,7 +238,8 @@ hr.solid {
 .table-search td,
 th {
     text-align: left;
-    padding: 0 15px 0 15px;;
+    padding: 0 15px 0 15px;
+    ;
 }
 
 .search-btn {
@@ -265,25 +258,19 @@ th {
     top: 170px;
 }
 
-/* margin-top: 20px; */
-/* margin-left: -6%; */
 .col-map {
     position: relative;
-    /* background-color: rgba(230, 230, 230, 0.623); */
     margin-top: 10px !important;
 }
 
 .col-filters {
-    /* padding-left: 30px !important; */
     margin-top: 5px !important;
-    /* padding-left: 6% !important; */
     padding-right: 0 !important;
 }
 
 .row-filters {
     width: 100%;
     z-index: 1;
-    /* margin-top: -5px !important; */
 }
 
 .active-time-col-filter {
@@ -353,29 +340,26 @@ th {
 
 
 /* The actual popup */
-#popup-text1{
+#popup-text1 {
     visibility: hidden;
     overflow: hidden;
     border-radius: 6px;
-    /* padding: 6px 0 0 0; */
     margin-top: 15px;
     width: 250px;
 }
 
-#popup-text1 svg{
-    /* padding: 0 6px 0 6px;
-    position: relative; */
+#popup-text1 svg {
     padding: 0 6px 0 6px;
     top: -20px;
     height: 50px;
     width: 250px;
 }
 
-#filter-card{
+#filter-card {
     position: absolute;
 }
 
-#popup-text1 .popup-text1-row1{
+#popup-text1 .popup-text1-row1 {
     z-index: 2;
     margin: -20px auto;
     width: 250px;
@@ -390,40 +374,30 @@ th {
     text-align: left;
 }
 
-#popup-text1 .popup-text1-row2{
+#popup-text1 .popup-text1-row2 {
     position: relative;
     width: 100px;
     left: -50px;
     float: right;
 }
 
-.row-place-order{
+.row-place-order {
     margin-top: -200px;
 }
+
 .col-washers-cards {
-    /* background-color: var(--color-5); */
     top: 1%;
-    /* border: 2px solid var(--font-color); */
     margin-top: 1% !important;
-    /* border-radius: 10px; */
 }
 
 #washers-cards {
     z-index: -1 !important;
-    /* margin-top: -170px !important; */
 }
-
-/* .overflow-auto{
-    overflow: auto;
-    margin-top: -170px !important;
-    height: 100%;
-} */
 
 .overflow-auto {
     width: 100%;
     height: 630px;
     overflow: scroll;
-    /* direction: rtl; */
 }
 
 .card {
@@ -437,16 +411,10 @@ th {
     margin-top: 10%;
 }
 
-/* .card .card-img-overlay .card-details .card-pic-rating{
-    margin-left: 5px
-} */
 .card-img-overlay {
     position: relative;
 }
 
-/* .card-body{
-    position: relative;
-} */
 .card-details {
     box-sizing: border-box;
     display: flex;
@@ -463,16 +431,10 @@ th {
 .card-profile-img {
     position: relative;
     object-fit: cover;
-    /* margin-left: 10px; */
     width: 90px !important;
     height: 90px;
-    /* Main / Black */
-    /* border: 1px solid #1C1C1D; */
     border-radius: 100px;
     margin: 2% !important;
-    /* box-sizing: border-box; */
-    /* Elements */
-    /* box-shadow: 0px 3px 0px #202020; */
 }
 
 #order-now-btn {
@@ -501,14 +463,8 @@ th {
 }
 
 .washer_img {
-    /* TODO: manage images..... */
-    /* height: 100%; */
-    /* width: 50%; */
     height: 200px;
     width: 200px;
-    /* position: static; */
-    /* object-fit: cover; */
-    /* vertical-align: bottom; */
     display: inline-block;
 
     border-radius: 10px;
@@ -527,8 +483,6 @@ th {
 
 #map {
     position: fixed !important;
-    /* position: relative; */
-    /* height: 100vh; */
     margin-left: 0;
     height: 100%;
     width: 50%;
@@ -546,14 +500,12 @@ th {
 
 
 .distance-slider-container {
-    /* min-height: 37px; */
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: center;
     align-content: center;
     -ms-flex-pack: center;
     justify-content: center;
-    /* margin: 20px 8px 0px 8px; */
 }
 
 .distance-slider-container .distance-slider-text {
@@ -576,8 +528,8 @@ th {
 }
 
 
-.distance-slider-container input[type=range], .page-list-new .textResizeSlider-container input[type=range] {
-    /* -webkit-appearance: none; */
+.distance-slider-container input[type=range],
+.page-list-new .textResizeSlider-container input[type=range] {
     margin: 0px 10px;
     width: 100%;
     border: 0px;
@@ -587,11 +539,11 @@ th {
     overflow: visible;
 }
 
-.filter-btn-text{
+.filter-btn-text {
     font-family: 'Montserrat';
 }
 
-.ironing-person{
+.ironing-person {
     width: 70%;
     height: auto;
     margin-left: 10%;

@@ -8,7 +8,6 @@
 }
 
 table.machine_details th {
-    /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
     top: 51.63%;
@@ -21,7 +20,6 @@ table.machine_details th {
     /* identical to box height, or 160% */
 
     letter-spacing: 0.625px;
-
     color: #1C1C1D;
 }
 
@@ -32,14 +30,12 @@ table.machine_details th {
 
 
 table.machine_details tr {
-    /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
     top: 47.75%;
     bottom: 51.48%;
 
     /* Text / Medium 18 */
-
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 500;
@@ -50,14 +46,12 @@ table.machine_details tr {
     letter-spacing: 0.5px;
 
     /* Main / Black */
-
     color: #1C1C1D;
 }
 
 .Background_box {
 
     /* Rectangle 1256 */
-    /* position: absolute; */
     left: 0%;
     right: 0%;
     top: 0%;
@@ -74,7 +68,6 @@ table.machine_details tr {
 
 
 table.Background_box th {
-    /* position: absolute; */
     left: 19.78%;
     right: 19.78%;
     top: 39.21%;
@@ -93,12 +86,10 @@ table.Background_box th {
     letter-spacing: 0.625px;
 
     /* Main / Black */
-
     color: #1C1C1D;
 }
 
 table.Background_box tr {
-    /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
@@ -120,7 +111,6 @@ table.Background_box tr {
 }
 
 table.Background_box td {
-    /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
@@ -149,7 +139,6 @@ table.Background_box td {
 .testimonial-group>.row {
     display: flex;
     overflow-x: auto;
-    /* white-space: nowrap; */
     flex-wrap: nowrap;
 }
 
