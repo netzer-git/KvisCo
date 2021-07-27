@@ -8,8 +8,7 @@ puclic:
     - header_style.css - main css file for colors, headers and more.
     - more style files.
   - html:
-    - components - ?
-    - includes - ?
+    - includes - header.html, the site header (included in all pages).
     - user_flow - all of the pages linked to the user expirience
     - washer_flow - all of the pages linked to the washer expirience
     - welcome.html: landing page
