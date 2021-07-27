@@ -13,7 +13,8 @@ async function load_profile_header_of_washer(washer_doc) {
     washer_header += '</table></div></div>';
     washer_header += '<div class="row">';
     // washer_header += '<div class="col-2"><img id="icons" src="/images/icons/location-icon.png"/><div>';
-    washer_header += '<div class="col-9"><div class="location">' + washer_doc.data().location_str + '</div></div>';
+    location_str = washer_doc.data().location_str.replace(/[0-9]/g, '');
+    washer_header += '<div class="col-9"><div class="location">' + location_str + '</div></div>';
     washer_header += '<div class="col-3"><div class="location"><img class="rating-star" src="../../images/Star_yellow.png">' + rating + '</div></div>';
     washer_header += '</div></div></div>';
     washer_header += '<div class="row"><div class="col-2"></div><div class="col-10">';

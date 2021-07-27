@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="../../css/overlay.css">
     <link rel="stylesheet" href="../../css/header_style.css">
     <link rel="stylesheet" href="../../css/new_order.css">
-    <!-- <link rel="stylesheet" href="../../css/welcome.css"> -->
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -47,7 +46,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"></script>
     <!-- svg library -->
     <svg style="display:none; ">
-        <symbol id="filter-card" width="300" height="200" viewBox="0 0 343 252" fill="none"
+        <symbol id="filter-card" width="250" height="200" viewBox="0 0 343 252" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
                 d="M10.3443 1.35057C92.2536 4.00407 152.09 3.12163 218.67 2.13974C253.207 1.63041 289.558 1.09431 331.746 1.01112C337.134 1.0005 341.338 5.68585 340.754 11.0436C339.018 26.9487 335.97 56.609 334.9 77.9751C332.161 132.641 338.415 211.915 340.974 240.912C341.447 246.28 337.093 250.879 331.683 250.774C230.797 248.824 176.754 249.464 116.58 250.177C85.2279 250.548 52.2113 250.939 10.0377 250.994C5.06343 251 1 246.966 1 242V10.3588C1 5.2678 5.2459 1.1854 10.3443 1.35057Z"
@@ -101,9 +100,6 @@
         <div class="row-search w-60 row">
             <!-- Search Bar starts here-->
             <div id="search-bar" class="col-10">
-                <!-- <script>
-                    get_search_bar("search-bar")
-                </script> -->
             </div>
             <!-- search button-->
             <div class="col-search-btn col-2">
@@ -115,7 +111,6 @@
                     </button>
                 </div>
             </div>
-            <!-- <div class="col"></div> -->
         </div>
         <hr class="solid">
         <div class="h-100 row-cards-filter row">
@@ -153,43 +148,49 @@
                     </div>
                     <!-- special-services filter -->
                     <div class="special-service-col-filter col-3">
-                        <button id="popup-btn" class="filter-btn">
+                        <button id="popup-btn" class="filter-btn" onclick="open_popup(1)">
                             <span class="popup-btn-text">Services</span>
                             <svg class="popup-btn-icon">
                                 <use xlink:href="#popup-btn-icon"></use>
                             </svg>
                         </button>
                         <div id="popup-text1" style="visibility: hidden; overflow: hidden">
-                        <!-- <div id="popup-text1"> -->
-                            <svg><use xlink:href="#filter-card"></use></svg>
+                            <!-- <div id="popup-text1"> -->
+                            <svg>
+                                <use xlink:href="#filter-card"></use>
+                            </svg>
                             <div class="popup-text1-row1 row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                <div class="form-check" id="filter-service">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                        id="exampleRadios1" value="Ironing" checked>
                                     <label class="form-check-label" for="exampleRadios1">
                                         Ironing
                                     </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                </div>
+                                <div class="form-check" id="filter-service">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                        id="exampleRadios2" value="Door2Door">
                                     <label class="form-check-label" for="exampleRadios2">
-                                        Door2Door 
+                                        Door2Door
                                     </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                                </div>
+                                <div class="form-check" id="filter-service">
+                                    <input class="form-check-input" type="radio" name="exampleRadios"
+                                        id="exampleRadios3" value="Dryer">
                                     <label class="form-check-label" for="exampleRadios3">
                                         Dryer
                                     </label>
-                                  </div>
+                                </div>
                             </div>
                             <div class="popup-text1-row2 row">
                                 <button class="button1" onclick="update_services()">Save</button>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div id="place-order" class="place-order row">
-                    <!-- <script>insertPlaceOrderBox("place-order")</script> -->
+                <div class="row-place-order">
+                    <div id="place-order" class="place-order row">
+                    </div>
                 </div>
             </div>
             <div class="col"></div>

@@ -1,17 +1,4 @@
-
-//////////////////////// inner js help functions  ////////////////////////////////
-
-
-/**
- * color the row of today in the opening hours table *****not in use*******
- */
- function color_today() {
-    let date = new Date(); // current time
-    let day = date.getDay();
-    let table = document.getElementById("opening-hours-table")
-    let rows = table.getElementsByTagName("tr");
-    rows[day].style.color = '#FFC636';
-}
+//*************** inner js help functions  ***************//
 
 /**
  * return new time stamp of the currect date and hour
@@ -19,23 +6,22 @@
  * @param {String} time time in format "hh:mm"-"10:00"
  * @returns 
  */
-function toFullTimestamp(fullDate,time){
+function toFullTimestamp(fullDate, time) {
     year = fullDate.getFullYear();
     month = fullDate.getMonth();
     day = fullDate.getDate();
     if (time.length == 4) {
-        hour = time.substring(0,1);
+        hour = time.substring(0, 1);
+    } else {
+        hour = time.substring(0, 2);
     }
-    else {
-        hour = time.substring(0,2);
-    }
-    minute = time.substring(3,5);
+    minute = time.substring(3, 5);
     second = "00";
-    return new Date(Date.UTC(year,month,day,hour-3,minute,second));
+    return new Date(Date.UTC(year, month, day, hour - 3, minute, second));
 }
 
 
-/////////////////// functions that called into html by washer_details.js and place_order.js  ///////
+//*************** functions that called into html by washer_details.js and place_order.js  ***************//
 
 /**
  * check if the washer is open now, and return green "working now" if he is and red "closed now" if not
@@ -47,13 +33,12 @@ function f_checkOpeningTimes(washer_doc) {
         document.getElementById("openClosedColor").style.color = "green";
         document.getElementById("openClosedColor").style.fontSize = "20px";
         document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
-    }
-    else {
+    } else {
         document.getElementById("openorclosed").innerHTML = '<p id="openClosedColor">closed now</p>';
         document.getElementById("openClosedColor").style.color = "red";
         document.getElementById("openClosedColor").style.fontSize = "20px";
         document.getElementById("openClosedColor").style.fontFamily = "Montserrat";
-        
+
 
     }
 }
@@ -63,7 +48,7 @@ function f_checkOpeningTimes(washer_doc) {
  * display all the opening times table of the washer
  * @param {washer object} washer_doc the washer 
  */
- function f_get_opening_hours_table(washer_doc) {
+function f_get_opening_hours_table(washer_doc) {
     opening_times = '<table style="font-size: 20px;" class="opening-hours-table" id="opening-hours-table">';
     if (washer_doc.data().opening_times.Sunday !== undefined) {
         opening_times += '<tr id="Sunday" itemprop="openingHours" title="Open Sunday"><td>Sunday</td>';
@@ -86,7 +71,7 @@ function f_checkOpeningTimes(washer_doc) {
     if (washer_doc.data().opening_times.Wednesday !== undefined) {
         opening_times += '<tr id="Wednesday" itemprop="openingHours" title="Open Wednesday"><td>Wednesday</td>';
         opening_times += '<td class="opens">' + washer_doc.data().opening_times.Wednesday[0] + '</td><td>-</td>';
-        opening_times += '<td class="closes">' + washer_doc.data().opening_times.Wednesday[1] + '</td>';       
+        opening_times += '<td class="closes">' + washer_doc.data().opening_times.Wednesday[1] + '</td>';
         opening_times += '</tr>';
     }
 
@@ -110,7 +95,6 @@ function f_checkOpeningTimes(washer_doc) {
     }
     opening_times += '</table>';
     document.getElementById("openorclosedTable").innerHTML = opening_times;
-    // color_today();
 }
 
 
@@ -119,11 +103,11 @@ function f_checkOpeningTimes(washer_doc) {
  * @param {array of orders objects} all_orders all reviews on specific washer with status "finished"
  */
 async function f_display_washer_reviews(washerID) {
-    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); //get all the people that reviewed this washer from orders
+    const all_orders = await promiseOrderArrayByWasherIdAndStatus(washerID, "finished"); // get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null 
-        && all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null &&
+            all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
             const user_that_review = await promiseUserLoaderById(all_orders[j].data().user);
             // here start block of review
             all_reviews += "<div class='row'>";
@@ -170,7 +154,7 @@ async function f_display_washer_reviews(washerID) {
  * return the washer details block - as model name, capacity and more
  * @param {washer object} washer_doc the washer 
  */
- function f_display_washer_details(washer_doc) {
+function f_display_washer_details(washer_doc) {
     let details_table = "<table class = machine_details>";
     details_table += "<tr><tr><th>Model Name</th></tr><tr>";
     details_table += "<td>" + washer_doc.data().model_name + "</td></tr><tr>";
@@ -186,7 +170,7 @@ async function f_display_washer_reviews(washerID) {
         details_table += "<tr><td><img src='../../images/check.png' alt=''>Door 2 Door</td></tr>";
     }
     if (washer_doc.data().properties == "Dryer") {
-        details_table += "<tr><td><img src='../../images/check.png' alt=''>Dryer</td></tr>";
+        details_table += "<tr><td><img src='../../images/check.png' alt=''>Hanging Drying</td></tr>";
     }
     details_table += "</tr></table>";
     document.getElementById("washer_details").innerHTML = details_table;

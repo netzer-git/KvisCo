@@ -19,7 +19,6 @@ body {
 }
 
 h1 {
-  /* position: absolute; */
   width: 778px;
   height: 151px;
   left: 330px;
@@ -43,7 +42,6 @@ h1 {
 }
 
 h2 {
-  /* position: absolute; */
   width: 558px;
   height: 146px;
   left: 120px;
@@ -133,26 +131,19 @@ h5 {
   white-space: nowrap;
 }
 
-/* #header{
-  height: 100%;
-} */
 
 .header {
   position: relative;
   background-color: #FA6648;
   /* temporary color for highlighting */
   max-width: 100%;
-  height: 3%;
-  /* margin: auto 0; */
-  /* padding: auto !important; */
+  height: 44px;
 }
 
 #new_header {
   background-color: var(--secondary-color);
   /* temporary color for highlighting */
   color: var(--secondary-font-color);
-  /* position: sticky;
-    top: 0; */
   text-align: center;
   font-family: sans-serif, sans-serif;
 }
@@ -195,8 +186,7 @@ h5 {
 
 
 .navbar-brand img {
-  /* height: 95%; */
-  width: 95% !important;
+  height: 34px;
   display: inline-block;
   padding-left: 70 !important;
   padding-top: 4 !important;
@@ -330,12 +320,11 @@ h5 {
 a {
   color: inherit;
 }
-
 /* removing the awful blue color of the links */
+
 a:hover {
   color: inherit;
 }
-
 /* remove the awful blue color on hovernig */
 
 .shrink {
@@ -362,7 +351,6 @@ a:hover {
   left: 0px;
   top: 90px;
   border-radius: 0px;
-  /* background: #FFB0BC; */
 }
 
 .profile_pic {
@@ -376,7 +364,6 @@ a:hover {
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  /* line-height: 10%; */
   letter-spacing: 0.5px;
   text-align: left;
   color: rgba(71, 74, 87, 1);
@@ -710,7 +697,6 @@ select:focus {
   height: 490px;
   width: 90%;
   left: 718px;
-  /* top: 164px; */
   margin-top: 5%;
   border-radius: 10px;
   background: rgba(255, 176, 188, 1);
@@ -869,8 +855,6 @@ select:focus {
 
 #indicator {
   position: fixed;
-  /* width: 10%; */
-  /* height: 10%; */
   background-color: green;
   border: 1px solid #dddddd;
 }
@@ -891,15 +875,12 @@ select:focus {
 
 .header-row{
   position: relative;
+  height: 40px;
 }
 
 .header-btn-col{
-  /* margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); */
   position: relative;
+  height: 40px;
 }
 
 #log_in_out_msg,

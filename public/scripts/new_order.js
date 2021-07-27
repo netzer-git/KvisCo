@@ -31,7 +31,6 @@ async function display_new_order_for_user(orderID) {
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().loads + '<class= "header_61"> Loads</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().wash_settings + '<class= "header_61"> Setting</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().properties + '<class= "header_61"> Service</h6></td></tr>';
-    // order_block += '<tr><td style="text-align:center"><h6 class= "header_61"></h6><div class="small_headline_4">'+order_doc.data().comments+'<br/></div></tr>';
     cur_price = order_doc.data().price.toString() + " &#8362";
     order_block += '<tr><td><div class="small-box-2" style="margin-left: 40%; margin-top: 5%;">' + cur_price + '</div></td></tr>';
     if (order_doc.data().status != "pending") {
@@ -40,7 +39,6 @@ async function display_new_order_for_user(orderID) {
         order_block += '<tr><td style="text-align:center; font-family:"Montserrat"">Phone will be displayed after ' + washer_doc.data().name.split(" ")[0] + '\'s approval</td></tr>';
     }
     order_block += "</table>";
-    // order_block += "<button style='margin-top: 20%; margin-left: 31%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
     order_block += "<div class='row'>"
     order_block += "<div class='col-1'></div>"
     order_block +=  "<div class='col-4'>"
@@ -48,9 +46,9 @@ async function display_new_order_for_user(orderID) {
     order_block += "</div>"
     order_block +=  "<div class='col-2'></div>"
     order_block +=  "<div class='col-4'>"
-    order_block += '<button id="declined" value = "declined" onclick = "change_status_for_user(declined.value)" class= "button1">Cancel Order</button>';
+    order_block += '<button id="declined" value = "declined" onclick = "change_status_for_user(declined.value)" class= "red-btn">Cancel Order</button>';
     order_block += "<div class='col-1'></div>"
-    order_block +="</div></div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
+    order_block +="</div></div></div><div class='col-1'></div></div></div>"; // close of col-10, close of order white, close of all overlay div.
     document.getElementById("user_order").innerHTML = order_block;
 }
 
@@ -92,35 +90,33 @@ async function display_new_order_for_washer(orderID) {
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().loads + '<class= "header_61"> Loads</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().wash_settings + '<class= "header_61"> Setting</h6></td></tr>';
     order_block += '<tr><td style="text-align:center"><h6 class= "header_61">' + order_doc.data().properties + '<class= "header_61"> Service</h6></td></tr>';
-    // order_block += '<tr><td style="text-align:center"><h6 class= "header_61"></h6><div class="small_headline_4">'+order_doc.data().comments+'<br/></div></tr>';
     cur_price = order_doc.data().price.toString() + " &#8362";
     order_block += '<tr><td><div class="small-box-2" style="margin-left: 40%; margin-top: 5%;">' + cur_price + '</div></td></tr>';
     order_block += '<tr><td style="text-align:center"><button class="phone_number">' + user_doc.data().phone + '</button></td></tr>';
     order_block += "</table></div>";
     order_block += "<div class='row'>"
     if (order_status == "pending") {
-        order_block += "<div class='col-1'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "<div class='col-1'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="process" value = "process" onclick = "change_status_for_washer(process.value)" class= "button1">Confirm</button>';
-        order_block += "</div>"
-        order_block +=  "<div class='col-2'></div>"
-        order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';
-        order_block += "<div class='col-1'></div>"
-        order_block += "</div>"
+        order_block += "</div>";
+        order_block +=  "<div class='col-2'></div>";
+        order_block +=  "<div class='col-4'>";
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>';
+        order_block += "<div class='col-1'></div>";
+        order_block += "</div>";
     } else {
-        order_block += "<div class='col-1'></div>"
-        order_block +=  "<div class='col-4'>"
+        order_block += "<div class='col-1'></div>";
+        order_block +=  "<div class='col-4'>";
         order_block += '<button id="finished" value = "finished" onclick = "change_status_for_washer(finished.value)" class= "button1">Finish</button>';
-        order_block += "</div>"
-        order_block +=  "<div class='col-2'></div>"
-        order_block +=  "<div class='col-4'>"
-        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "button1">Decline</button>';  
-        order_block += "<div class='col-1'></div>"
-        order_block += "</div>"
+        order_block += "</div>";
+        order_block +=  "<div class='col-2'></div>";
+        order_block +=  "<div class='col-4'>";
+        order_block += '<button id="declined" value = "declined" onclick = "change_status_for_washer(declined.value)" class= "red-btn">Decline</button>'; 
+        order_block += "<div class='col-1'></div>";
+        order_block += "</div>";
     }
-    // order_block += "<button style='margin-left: 27%; margin-top: 9%;' class='button1' onclick='back_to_profile()'>Back to profile</button>";  
-    order_block += "</div></div><div class='col-1'></div></div></div>"; //close of col-10, close of order white, close of all overlay div.
+    order_block += "</div></div><div class='col-1'></div></div></div>"; // close of col-10, close of order white, close of all overlay div.
     document.getElementById("washer_order").innerHTML = order_block;
 }
 
@@ -155,7 +151,6 @@ async function change_status_for_user(new_status) {
     }
 }
 
-// TO FIX - sent the value (orderID) to the block - and not the blockID 
 // currently the value come with the famous tab problem
 async function display_order_status(orderID) {
     display_new_order_for_washer(orderID);

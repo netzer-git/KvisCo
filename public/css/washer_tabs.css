@@ -43,15 +43,12 @@ h2 {
 .openinghours {
     padding: 10px 10px 10px 10px;
     overflow: hidden;
-    /* display: inline-block; */
     text-align: left;
     padding: 5px;
     font-size: 20px;
 }
 
 .openinghourscontent {
-    /* float; */
-    /* text-align: center; */
     font-size: 20px;
 }
 
@@ -116,7 +113,6 @@ table.machine_details th {
 
 
 table.machine_details tr {
-    /* position: absolute; */
     left: 77.68%;
     right: 12.33%;
     top: 47.75%;
@@ -134,9 +130,7 @@ table.machine_details tr {
     letter-spacing: 0.5px;
 
     /* Main / Black */
-
     color: rgba(28, 28, 29, 1);
-    ;
 }
 
 .col_with_padd {

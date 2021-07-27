@@ -1,7 +1,16 @@
+/**
+ * @param {*} address full address str
+ * @returns  the address split to parts by commas and spaces.
+ */
 function arrangeAddress(address) {
   return address.split(/[ ,]+/).join('+');
 }
 
+/**
+ * @param {*} arrayA array A
+ * @param {*} arrayB array B
+ * @returns array of the elements that are both in A and B
+ */
 const intersection = (arrayA, arrayB) => {
   interArray = [];
 
@@ -95,12 +104,16 @@ async function forwardGeocodePromise(location_str) {
     var request = new XMLHttpRequest();
     request.open('GET', request_url, true);
 
-    // request.onload = callback;
     request.onload = () => {
 
       if (request.status === 200) {
         var data = JSON.parse(request.responseText);
-        console.log(data.results[0].formatted);
+        if (data.results[0] != null) {
+          console.log(data.results[0].formatted);
+        } else {
+          console.log("There Has been Error parsing the input");
+          alert("Geocoder could not find the address, please fill the address field");
+        }
         resolve(data);
       } else if (request.status <= 500) {
         console.error("unable to geocode! Response code: " + request.status);
@@ -177,13 +190,7 @@ function getHourAsNumber(hourMinTime) {
   return [Number(wantedHour[1]), Number(wantedHour[2])]
 }
 
-/**
- * 
- * @param {*} openTime 
- * @param {*} wantedTime 
- * @param {*} closeTime
- * @returns 
- */
+
 function checkIfOpenNow(openTime, closeTime, wantedTime) {
   if (!openTime || !closeTime || !wantedTime) {
     return false;

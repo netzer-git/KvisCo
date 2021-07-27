@@ -9,7 +9,6 @@
 
 .Background_box {
     /* Rectangle 1256 */
-    /* position: absolute; */
     left: 0%;
     margin-left: 10%;
     right: 0%;
@@ -28,7 +27,6 @@
 
 
 table.Background_box th {
-    /* position: absolute; */
     left: 19.78%;
     right: 19.78%;
     top: 39.21%;
@@ -52,7 +50,6 @@ table.Background_box th {
 }
 
 table.Background_box tr {
-    /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
@@ -74,7 +71,6 @@ table.Background_box tr {
 }
 
 table.Background_box td {
-    /* position: absolute; */
     left: 9.71%;
     right: 7.55%;
     top: 53.74%;
@@ -103,7 +99,6 @@ table.Background_box td {
 .testimonial-group>.row {
     display: flex;
     overflow-x: auto;
-    /* white-space: nowrap; */
     flex-wrap: nowrap;
 }
 
@@ -115,5 +110,4 @@ table.Background_box td {
 .col_with_padd {
     margin-left: 10%;
     padding: 10%;
-    /* padding:10px; */
 }

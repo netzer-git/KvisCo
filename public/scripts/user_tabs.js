@@ -1,14 +1,13 @@
-// TO FIXXXXXXXX
 /**
  * display inner blocks of reviews on user
  * @param {string} userID userID to get all the reviews on him
  */
- async function f_display_user_reviews(userID) {
-    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); //get all the people that reviewed this washer from orders
+async function f_display_user_reviews(userID) {
+    const all_orders = await promiseOrderArrayByUserIdAndStatus(userID, "finished"); // get all the people that reviewed this washer from orders
     all_reviews = "";
     for (var j = 0; j < all_orders.length; j++) {
-        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null 
-        && all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
+        if (all_orders[j].data().review_washer != null && all_orders[j].data().rating_washer != null &&
+            all_orders[j].data().review_user != null && all_orders[j].data().rating_user != null) {
             const washer_that_review = await promiseWasherLoaderById(all_orders[j].data().washer);
             // here start block of review
             all_reviews += "<div class='row' style='margin-top: 2%;'>";

@@ -1,4 +1,5 @@
 clicks = 0
+
 function get_washer_working_hours(washer_doc) {
     washerOpenTimes = getWasherOpenTimes(washer_doc);
     oldDays = "<table class='working-hours' id='working-hours'><tr><td>Day</td><td>From</td><td>To</td><td>Keep Weekly</td></tr>"
@@ -16,8 +17,7 @@ function get_washer_working_hours(washer_doc) {
         oldDays += "<td><input class='set-time' type='time' id='startTime" + clicks + "' value='09:00'></td>"
         oldDays += "<td><input class='set-time' type='time' id='endTime" + clicks + "' value='17:00'></td>"
         oldDays += "<td><input id='cbx" + clicks + "' type='checkbox'/><label class='cbx" + clicks + "' for='cbx" + clicks + "'><div class='flip'><div class='front'></div><div class='back'><svg width='16' height='14' viewBox='0 0 16 14'><path d='M2 8.5L6 12.5L14 1.5'></path></svg></div></div></label></td></tr></tables>"
-    }
-    else {
+    } else {
         for (const [day, hours] of Object.entries(washerOpenTimes)) {
             clicks += 1
             oldDays += "<tr><td><div class='set-date'><select id='day" + clicks + "'>"
@@ -104,6 +104,5 @@ async function saveHour() {
     }
     console.log(working_times);
     var washerID = sessionStorage.getItem("signed_in_washer");
-    // await setOrderDetails(working_times, washerID); // TO FIX - what does it mean?
     await setWasherOpenTimes(working_times, washerID);
 }

@@ -2,13 +2,12 @@
  * checks if the user is signed in - either signIn or signOut
  */
 function log_in_or_out() {
-    if(!isUserSignedIn()) {
+    if (!isUserSignedIn()) {
         signIn();
-    }
-    else {
+    } else {
         var sPath = window.location.pathname;
         var sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-        if(sPage != "../../html/welcome.html")  {
+        if (sPage != "../../html/welcome.html") {
             window.location.href = "../../html/welcome.html"
         }
         signOut();
@@ -48,5 +47,5 @@ async function become_a_user() {
     }
     sessionStorage.setItem("current_user_id", userID);
     window.location.href = "../../html/user_flow/user_profile_final.html"
-    
+
 }

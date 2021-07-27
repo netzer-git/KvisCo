@@ -18,11 +18,8 @@ function promiseLoaderByCollectionAndId(collection, documentID) {
 
         query.get().then((doc) => {
             if (doc.exists) {
-                // debug: console.log("Document found: ", doc.id);
                 resolve(doc);
             } else {
-                // doc.data() will be undefined in this case
-                // debug: console.log("No such document!");
                 resolve(null);
             }
         }).catch((error) => {
@@ -180,8 +177,6 @@ function promiseOrderArrayByUserIdAndStatus(userId, status) {
  * @param {*} order : basic order object
  */
 async function createNewOrder(order) {
-    // let user = await db.doc('users/' + order.userID);
-    // let washer = await db.doc('washers/' + order.washerID);
     let newOrderRef = await db.collection("orders").add({
         user: order.user,
         washer: order.washer,
@@ -302,8 +297,8 @@ async function deleteCurrentWasher() {
         var desertRef = storage.ref().child(path);
         // Delete the file
         await desertRef.delete().then(() => {
-        console.log("Img successfully deleted!");
-    });
+            console.log("Img successfully deleted!");
+        });
     }
 }
 
@@ -320,9 +315,11 @@ async function deleteCurrentUser() {
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
-    let orders = await db.collection("orders").where("user", '==', userId).get()
+    let orders = await db.collection("orders").get()
     await orders.forEach(async (order) => {
-        await db.collection("orders").doc(order.id).delete();
+        if (order.data().user === userId) {
+            await db.collection("orders").doc(order.id).delete();
+        }
     });
 
     try {
@@ -505,7 +502,6 @@ async function getWasherFilterQuery(filters) {
     }
 
     if (filters.rating !== undefined) {
-        // let filteredWashersWithRating = getWashersWithRatingOverNumber(filters.rating);
         let docArray = [];
         washersArray.forEach((doc) => {
             docArray.push(doc);
@@ -521,11 +517,11 @@ async function getWasherFilterQuery(filters) {
         firstQuery = false;
     }
 
-    if (filters.specialService !== undefined) {
+    if (filters.properties !== undefined) {
         let filteredWashersWithSpecialService = [];
         washersArray.forEach(doc => {
             // need to fix in case of adding multiple properties
-            if (doc.data().properties == filters.specialService[0]) {
+            if (doc.data().properties == filters.properties) {
                 filteredWashersWithSpecialService.push(doc);
             }
         });
@@ -552,7 +548,7 @@ async function getWasherFilterQuery(filters) {
         };
         let filteredWashersWithAddress = [];
         washersArray.forEach(doc => {
-            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1_000) {
+            if (getDistanceFromLatLonInKm(addressGeoPoint, doc.data().location_cor) <= 1 _000) {
                 filteredWashersWithAddress.push(doc);
             }
         });

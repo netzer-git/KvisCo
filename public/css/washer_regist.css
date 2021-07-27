@@ -20,7 +20,6 @@
 
     background: #FFB0BC;
     /* Main / Black */
-
     border: 2px solid #1C1C1D;
     box-sizing: border-box;
     border-radius: 10px;
@@ -70,11 +69,9 @@
 
     background: #FFFFFF;
     /* Main / Black */
-
     border: 1px solid #1C1C1D;
     box-sizing: border-box;
     /* Elements */
-
     box-shadow: 0px 2px 0px #202020;
     border-radius: 10px;
     margin-left: 4%;
@@ -96,14 +93,11 @@
     bottom: 3.85%;
 
     /* Main / White */
-
     background: #FFFFFF;
     /* Main / Black */
-
     border: 1px solid #1C1C1D;
     box-sizing: border-box;
     /* Elements */
-
     box-shadow: 0px 2px 0px #202020;
     border-radius: 10px;
     margin-left: 5%;
@@ -119,7 +113,6 @@
     top: 326px;
 
     /* Headline/Title/Bold 24 */
-
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 900;
@@ -130,7 +123,6 @@
     letter-spacing: 0.625px;
 
     /* Main / Black */
-
     color: #1C1C1D;
     margin-top: 2%;
     margin-left: 4%;
@@ -143,7 +135,6 @@
     top: 326px;
 
     /* Headline/Title/Bold 24 */
-
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 900;
@@ -154,7 +145,6 @@
     letter-spacing: 0.625px;
 
     /* Main / Black */
-
     color: #1C1C1D;
     margin-top: 2%;
     margin-left: 5%;
@@ -170,10 +160,8 @@
     bottom: 7.41%;
 
     /* Palet 2 / 4 */
-
     background: #FFFFFF;
     /* Main / Black */
-
     border: 1px solid #1C1C1D;
     box-sizing: border-box;
     /* Button */

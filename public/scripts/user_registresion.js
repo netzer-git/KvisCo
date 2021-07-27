@@ -1,4 +1,3 @@
-
 /*
 All variables for user to register, start empty and filled in the form with the other functions in this page
 */
@@ -72,4 +71,3 @@ async function create_user() {
     sessionStorage.setItem("current_user_id", userID);
     window.location.href = "../../html/user_flow/user_profile_final.html";
 }
-
