@@ -1,4 +1,4 @@
-# TheMoneyLaundry
+# KvisCo
 Our Cooperative Laundry Application.
 A full deployed site with user mangemant (for clients and washers), location base filtered web app.
 ## Frontend Architecture
